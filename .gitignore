@@ -1,0 +1,32 @@
+# Covers JetBrains IDEs: IntelliJ
+
+*.iml
+
+## Directory-based project format:
+.idea/
+
+## File-based project format:
+*.ipr
+*.iws
+
+## Plugin-specific files:
+
+# IntelliJ
+/out/
+
+# mpeltonen/sbt-idea plugin
+.idea_modules/
+
+# Java
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+# virtual machine (JVM) crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+
+# Project specific
+originalSpec.md
