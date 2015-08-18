@@ -11,7 +11,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 /**
- *Feature: Posting to a personal timeline
+ * Feature: Posting to a personal timeline
  */
 
 public class PostToTimeLineUTest {
@@ -24,14 +24,14 @@ public class PostToTimeLineUTest {
     }
 
     /**
-     * Scenario: Alice can publish a message to a personal timeline
+     * Scenario: Alice's message is added to Alice's timeline
      */
     @Test
-    public void givenNoPostsExitsOnTimeLineWhenAliceEntersAMessageAtTheTwitterLikePromptThenMessageIsAddedToTimeLine() {
-        // Given Alice is at the TwitterLike command prompt ">"
-        // And Alice's timeline is empty
-        // When Alice types "Alice -> I love the weather today" at the prompt
-        List<String> actualMessagesOnTimeLine = executeCommandsAtThePrompt("Alice", "Alice -> I love the weather today");
+    public void givenAlicesTimeLineIsEmpty_WhenANewMessageIsPassedToTheEngine_ThenMessageIsAddedToAlicesTimeLine() {
+        // Given Alice's timeline is empty
+        // And a new message "Alice -> I love the weather today" is available
+        // When the message is passed to the engine for Alice
+        List<String> actualMessagesOnTimeLine = processMessagesReceivedFor("Alice", "Alice -> I love the weather today");
 
         // Then the message is added to Alice's timeline
         verifyThatTheTimeLineHasBeenUpdated(
@@ -42,20 +42,19 @@ public class PostToTimeLineUTest {
     }
 
     /**
-     * Scenario: Bob can publish multiple messages to a personal timeline
+     * Scenario: Bob's messages are added to Bob's timeline
      */
     @Test
-    public void givenNoPostsExitsOnTimeLineWhenBobEntersMessagesAtTheTwitterLikePromptThenTheMessagesAreAddedToTimeLine() {
-        // Given Bob is at the TwitterLike command prompt ">"
-        // And Bob's timeline is empty
-        // When Bob types "Bob -> Damn! We lost!" at the prompt
-        // And then types "Bob -> Good game though."  at the prompt
-        List<String> actualMessagesOnTimeLine = executeCommandsAtThePrompt(
+    public void givenBobsTimeLineIsEmpty_WhenNewMessagesArePassedToTheEngine_ThenMessagesAreAddedToBobsTimeLine() {
+        // Given Bob's timeline is empty
+        // And new messages like "Bob -> Damn! We lost!" and "Bob -> Good game though." are available
+        // When the messages are passed to the engine for Bob
+        List<String> actualMessagesOnTimeLine = processMessagesReceivedFor(
                 "Bob",
                 "Bob -> Damn! We lost!",
                 "Bob -> Good game though.");
 
-        // Then the messages are added to Bob's timeline, in reverse order
+        // Then the messages are added to Bob's timeline, in the reverse order of entry
         verifyThatTheTimeLineHasBeenUpdated(
                 "Should have contained the expected messages on the timeline for Bob",
                 actualMessagesOnTimeLine,
@@ -65,7 +64,7 @@ public class PostToTimeLineUTest {
         );
     }
 
-    private List<String> executeCommandsAtThePrompt(String userName,
+    private List<String> processMessagesReceivedFor(String userName,
                                                     String... userTypedMessages) {
         for (String eachUserTypedMessage: userTypedMessages) {
             twitterLikeEngine.executeCommand(eachUserTypedMessage);
