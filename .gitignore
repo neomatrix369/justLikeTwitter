@@ -19,6 +19,7 @@
 
 # Java
 *.class
+/target/
 
 # Package Files #
 *.jar
