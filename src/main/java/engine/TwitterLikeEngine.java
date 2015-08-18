@@ -1,6 +1,6 @@
 package engine;
 
-import controller.CommandLineController;
+import parser.CommandLineParser;
 import domain.CommandLineEntry;
 
 import java.util.ArrayList;
@@ -13,7 +13,7 @@ public class TwitterLikeEngine {
     private static final int BEFORE_FIRST_MESSAGE = 0;
     private Map<String, List<String>> timeline = new HashMap<>();
 
-    private CommandLineController commandLineController = new CommandLineController();
+    private CommandLineParser commandLineParser = new CommandLineParser();
 
     public List<String> getMessagesFor(String userName) {
         List<String> listOfMessages = timeline.get(userName);
@@ -25,7 +25,7 @@ public class TwitterLikeEngine {
     }
 
     private void postMessageToTimeline(String userTypedMessage) {
-        CommandLineEntry commandLineEntry = commandLineController.parse(userTypedMessage);
+        CommandLineEntry commandLineEntry = commandLineParser.parse(userTypedMessage);
         List<String> existingMessages = getExistingMessagesFor(commandLineEntry.getUserName());
         combineMessages(existingMessages, commandLineEntry);
     }

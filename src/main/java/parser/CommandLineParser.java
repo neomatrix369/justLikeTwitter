@@ -1,8 +1,8 @@
-package controller;
+package parser;
 
 import domain.CommandLineEntry;
 
-public class CommandLineController {
+public class CommandLineParser {
     private static final String POST_MESSAGE_SEPARATOR = "->";
 
     private static final int USERNAME_INDEX = 0;
