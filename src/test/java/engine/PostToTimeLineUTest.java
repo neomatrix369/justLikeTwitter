@@ -24,16 +24,16 @@ public class PostToTimeLineUTest {
     }
 
     /**
-     * Scenario: Alice's message is added to Alice's timeline
+     * Scenario: a user's message is added to the timeline
      */
     @Test
-    public void givenAlicesTimeLineIsEmpty_WhenANewMessageIsPassedToTheEngine_ThenMessageIsAddedToAlicesTimeLine() {
-        // Given Alice's timeline is empty
+    public void givenUsersTimeLineIsEmpty_WhenANewMessageIsPassedToTheEngine_ThenMessageIsAddedToTheUsersTimeLine() {
+        // Given a user's timeline is empty
         // And a new message "Alice -> I love the weather today" is available
-        // When the message is passed to the engine for Alice
+        // When the message is passed to the engine for the user
         List<String> actualMessagesOnTimeLine = processMessagesReceivedFor("Alice", "Alice -> I love the weather today");
 
-        // Then the message is added to Alice's timeline
+        // Then the message is added to the user's timeline
         verifyThatTheTimeLineHasBeenUpdated(
                 "Should have contained the expected message on the timeline for Alice",
                 actualMessagesOnTimeLine,
@@ -42,19 +42,19 @@ public class PostToTimeLineUTest {
     }
 
     /**
-     * Scenario: Bob's messages are added to Bob's timeline
+     * Scenario: multiple messages from a user are added to the timeline
      */
     @Test
-    public void givenBobsTimeLineIsEmpty_WhenNewMessagesArePassedToTheEngine_ThenMessagesAreAddedToBobsTimeLine() {
-        // Given Bob's timeline is empty
+    public void givenUsersTimeLineIsEmpty_WhenNewMessagesArePassedToTheEngine_ThenMessagesAreAddedToTheUsersTimeLine() {
+        // Given user's timeline is empty
         // And new messages like "Bob -> Damn! We lost!" and "Bob -> Good game though." are available
-        // When the messages are passed to the engine for Bob
+        // When the messages are passed to the engine for the user
         List<String> actualMessagesOnTimeLine = processMessagesReceivedFor(
                 "Bob",
                 "Bob -> Damn! We lost!",
                 "Bob -> Good game though.");
 
-        // Then the messages are added to Bob's timeline, in the reverse order of entry
+        // Then the messages are added to the user's timeline, in the reverse order of entry
         verifyThatTheTimeLineHasBeenUpdated(
                 "Should have contained the expected messages on the timeline for Bob",
                 actualMessagesOnTimeLine,
