@@ -15,7 +15,7 @@ public class TwitterLikeEngine {
 
     private CommandLineController commandLineController = new CommandLineController();
 
-    public List<String> getTimelineFor(String userName) {
+    public List<String> getMessagesFor(String userName) {
         List<String> listOfMessages = timeline.get(userName);
         return listOfMessages;
     }
