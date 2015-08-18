@@ -1,6 +1,7 @@
 package engine;
 
 import controller.CommandLineController;
+import domain.CommandLineEntry;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,6 +13,8 @@ public class TwitterLikeEngine {
     private static final int BEFORE_FIRST_MESSAGE = 0;
     private Map<String, List<String>> timeline = new HashMap<>();
 
+    private CommandLineController commandLineController = new CommandLineController();
+
     public List<String> getTimelineFor(String userName) {
         List<String> listOfMessages = timeline.get(userName);
         return listOfMessages;
@@ -22,15 +25,15 @@ public class TwitterLikeEngine {
     }
 
     private void postMessageToTimeline(String userTypedMessage) {
-        CommandLineController commandLineController = CommandLineController.parse(userTypedMessage);
-        List<String> existingMessages = getExistingMessagesFor(commandLineController.getUserName());
-        combineMessages(existingMessages, commandLineController);
+        CommandLineEntry commandLineEntry = commandLineController.parse(userTypedMessage);
+        List<String> existingMessages = getExistingMessagesFor(commandLineEntry.getUserName());
+        combineMessages(existingMessages, commandLineEntry);
     }
 
     private void combineMessages(List<String> existingMessages,
-                                 CommandLineController newCommandLineController) {
-        existingMessages.add(BEFORE_FIRST_MESSAGE, newCommandLineController.getMessage());
-        timeline.put(newCommandLineController.getUserName(), existingMessages);
+                                 CommandLineEntry newCommandLineEntry) {
+        existingMessages.add(BEFORE_FIRST_MESSAGE, newCommandLineEntry.getMessage());
+        timeline.put(newCommandLineEntry.getUserName(), existingMessages);
     }
 
     private List<String> getExistingMessagesFor(String userName) {
