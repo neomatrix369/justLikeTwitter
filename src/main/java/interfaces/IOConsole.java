@@ -29,4 +29,8 @@ public class IOConsole {
         Scanner scanner = new Scanner(inputStream);
         return scanner.nextLine();
     }
+
+    public void display(String output) throws IOException {
+        outputStream.write(output.getBytes());
+    }
 }

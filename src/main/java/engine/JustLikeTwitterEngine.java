@@ -1,7 +1,9 @@
 package engine;
 
-import parser.CommandLineParser;
 import domain.CommandLineEntry;
+import processors.DateTimeStampProvider;
+import domain.TimeLineMessage;
+import processors.CommandLineParser;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,33 +13,55 @@ import java.util.Map;
 public class JustLikeTwitterEngine {
 
     private static final int BEFORE_FIRST_MESSAGE = 0;
-    private Map<String, List<String>> timeline = new HashMap<>();
+    private static final String SPACE_DELIMITER = " ";
 
-    private CommandLineParser commandLineParser = new CommandLineParser();
+    private Map<String, List<TimeLineMessage>> dataStoreForAllUsers = new HashMap<>();
 
-    public List<String> getMessagesFor(String userName) {
-        List<String> listOfMessages = timeline.get(userName);
-        return listOfMessages;
+    private CommandLineParser commandLineParser;
+
+    public JustLikeTwitterEngine(DateTimeStampProvider dateTimeStampProvider) {
+        this.commandLineParser = new CommandLineParser(dateTimeStampProvider);
     }
 
-    public void executeCommand(String userTypedMessage) {
-        postMessageToTimeline(userTypedMessage);
+    public List<TimeLineMessage> getMessagesFor(String userName) {
+        return dataStoreForAllUsers.get(userName);
+    }
+
+    public String executeCommand(String userTypedCommands) {
+        String result = "";
+
+        if (userTypedCommands.contains(SPACE_DELIMITER)) {
+            postMessageToTimeline(userTypedCommands);
+        } else {
+            result = getTimeLineFor(userTypedCommands);
+        }
+
+        return result;
+    }
+
+    public String getTimeLineFor(String userName) {
+        String result = "";
+        List<TimeLineMessage> usersMessages = dataStoreForAllUsers.get(userName);
+        for (TimeLineMessage usersMessage: usersMessages) {
+            result += usersMessage.toString() + System.lineSeparator();
+        }
+        return result;
     }
 
     private void postMessageToTimeline(String userTypedMessage) {
         CommandLineEntry commandLineEntry = commandLineParser.parse(userTypedMessage);
-        List<String> existingMessages = getExistingMessagesFor(commandLineEntry.getUserName());
+        List<TimeLineMessage> existingMessages = getExistingMessagesFor(commandLineEntry.getUserName());
         combineMessages(existingMessages, commandLineEntry);
     }
 
-    private void combineMessages(List<String> existingMessages,
+    private void combineMessages(List<TimeLineMessage> existingMessages,
                                  CommandLineEntry newCommandLineEntry) {
-        existingMessages.add(BEFORE_FIRST_MESSAGE, newCommandLineEntry.getMessage());
-        timeline.put(newCommandLineEntry.getUserName(), existingMessages);
+        existingMessages.add(BEFORE_FIRST_MESSAGE, newCommandLineEntry.getTimeLineMessage());
+        dataStoreForAllUsers.put(newCommandLineEntry.getUserName(), existingMessages);
     }
 
-    private List<String> getExistingMessagesFor(String userName) {
-        List<String> messages = timeline.get(userName);
+    private List<TimeLineMessage> getExistingMessagesFor(String userName) {
+        List<TimeLineMessage> messages = dataStoreForAllUsers.get(userName);
         if (messages == null) {
             messages = new ArrayList<>();
         }

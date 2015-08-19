@@ -1,14 +1,17 @@
 package engine;
 
+import processors.DateTimeStampProvider;
+import domain.TimeLineMessage;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.mock;
 
 /**
  * Feature: Adding messages to user's message list
@@ -17,10 +20,11 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class AddingUserMessagesToMessageListUTest {
 
     private JustLikeTwitterEngine justLikeTwitterEngine;
+    private DateTimeStampProvider dateTimeStampProvider = mock(DateTimeStampProvider.class);
 
     @Before
     public void setUp() {
-        justLikeTwitterEngine = new JustLikeTwitterEngine();
+        justLikeTwitterEngine = new JustLikeTwitterEngine(dateTimeStampProvider);
     }
 
     /**
@@ -31,7 +35,7 @@ public class AddingUserMessagesToMessageListUTest {
         // Given a user's message list is empty
         // And a new message "Alice -> I love the weather today" is available
         // When the message is passed to the engine for the user
-        List<String> actualMessagesToAdd = processMessagesReceivedFor("Alice", "Alice -> I love the weather today");
+        List<TimeLineMessage> actualMessagesToAdd = processMessagesReceivedFor("Alice", "Alice -> I love the weather today");
 
         // Then the message is added to the user's message list
         verifyThatTheMessagesHaveBeenAdded(
@@ -49,7 +53,7 @@ public class AddingUserMessagesToMessageListUTest {
         // Given user's message list is empty
         // And new messages like "Bob -> Damn! We lost!" and "Bob -> Good game though." are available
         // When the messages are passed to the engine for the user
-        List<String> actualMessagesToAdd = processMessagesReceivedFor(
+        List<TimeLineMessage> actualMessagesToAdd = processMessagesReceivedFor(
                 "Bob",
                 "Bob -> Damn! We lost!",
                 "Bob -> Good game though.");
@@ -64,7 +68,7 @@ public class AddingUserMessagesToMessageListUTest {
         );
     }
 
-    private List<String> processMessagesReceivedFor(String userName,
+    private List<TimeLineMessage> processMessagesReceivedFor(String userName,
                                                     String... userTypedMessages) {
         for (String eachUserTypedMessage: userTypedMessages) {
             justLikeTwitterEngine.executeCommand(eachUserTypedMessage);
@@ -74,17 +78,12 @@ public class AddingUserMessagesToMessageListUTest {
     }
 
     private List<String> expectedMessagesToAdd(String... expectedMessages) {
-        List<String> expectedMessagesList = new ArrayList<>();
-
-        for (String eachExpectedMessage: expectedMessages) {
-            expectedMessagesList.add(eachExpectedMessage);
-        }
-
-        return  expectedMessagesList;
+        return Arrays.asList(expectedMessages);
     }
+
     private void verifyThatTheMessagesHaveBeenAdded(String reason,
-                                                    List<String> actualMessages,
+                                                    List<TimeLineMessage> actualMessages,
                                                     List<String> expectedMessages) {
-        assertThat(reason, actualMessages, is(equalTo(expectedMessages)));
+        assertThat(reason, actualMessages.size(), is(equalTo(expectedMessages.size())));
     }
 }
