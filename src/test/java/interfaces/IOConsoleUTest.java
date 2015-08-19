@@ -17,7 +17,7 @@ public class IOConsoleUTest {
     private static final String INPUT_FROM_ALICE = "Alice -> I love the weather today";
 
     @Test
-    public void givenAnInput_whenConsoleIsLoadedUsingBufferedInputStreamAndPrintStream_thenTheSameInputIsVisible() throws IOException {
+    public void givenALineOfInputIsPassedIn_whenConsoleIsLoadedUsingBufferedInputStreamAndPrintStream_thenTheSameInputIsReturned() throws IOException {
         // given
         PrintStream printStreamAsOutputStream = new PrintStream(new ByteArrayOutputStream());
 
@@ -30,7 +30,7 @@ public class IOConsoleUTest {
         String actualOutputString = IOConsole.showPrompt();
 
         // then
-        assertThat("The expected input string should have been returned.",
+        assertThat("The expected line of input should have been returned.",
                 actualOutputString,
                 is(equalTo(INPUT_FROM_ALICE)));
     }
