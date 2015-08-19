@@ -103,7 +103,7 @@ public class FullLifeCycleAcceptanceTest {
      * Scenario: I can view Harry's timeline
      */
     @Test
-    public void givenHarryHasAPost_whenHarryIsTypedAtThePrompt_thenHarrysTimeLineIsShown() throws IOException, InterruptedException {
+    public void givenHarryHasAPost_whenHarryIsTypedAtThePrompt_thenHarrysTimeLineIsShown() throws IOException {
         // Given I am at the JustLikeTwitter command prompt ">"
         // And Harry's timeline contains the required posts
         Date currentDateTimeStamp = setupJustLikeTwitterWith();
@@ -125,7 +125,7 @@ public class FullLifeCycleAcceptanceTest {
      * Scenario: I can view Alice's timeline
      */
     @Test
-    public void givenAliceHasAPost_whenAliceIsTypedAtThePrompt_thenAlicesTimeLineIsShown() throws IOException, InterruptedException {
+    public void givenAliceHasAPost_whenAliceIsTypedAtThePrompt_thenAlicesTimeLineIsShown() throws IOException {
         // Given I am at the JustLikeTwitter command prompt ">"
         // And Alice's timeline contains the required posts
         Date currentDateTimeStamp = setupJustLikeTwitterWith();
@@ -147,7 +147,7 @@ public class FullLifeCycleAcceptanceTest {
      * Scenario: I can view Bob's timeline
      */
     @Test
-    public void givenBobHasPosts_whenBobIsTypedAtThePrompt_thenBobsTimeLineIsShown() throws IOException, InterruptedException {
+    public void givenBobHasPosts_whenBobIsTypedAtThePrompt_thenBobsTimeLineIsShown() throws IOException {
         // Given I am at the JustLikeTwitter command prompt ">"
         // And Bob's timeline contains the required posts
         Date currentDateTimeStamp = setupJustLikeTwitterWith();
