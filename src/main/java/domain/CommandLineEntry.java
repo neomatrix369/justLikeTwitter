@@ -5,7 +5,8 @@ import processors.DateTimeStampProvider;
 public class CommandLineEntry {
     private String userName;
     private TimeLineMessage timeLineMessage;
-    private DateTimeStampProvider dateTimeStampProvider;
+
+    private final DateTimeStampProvider dateTimeStampProvider;
 
     public CommandLineEntry(DateTimeStampProvider dateTimeStampProvider) {
         this.dateTimeStampProvider = dateTimeStampProvider;

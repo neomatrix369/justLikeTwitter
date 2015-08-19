@@ -20,7 +20,8 @@ import static org.mockito.Mockito.mock;
 public class AddingUserMessagesToMessageListUTest {
 
     private JustLikeTwitterEngine justLikeTwitterEngine;
-    private DateTimeStampProvider dateTimeStampProvider = mock(DateTimeStampProvider.class);
+
+    private final DateTimeStampProvider dateTimeStampProvider = mock(DateTimeStampProvider.class);
 
     @Before
     public void setUp() {

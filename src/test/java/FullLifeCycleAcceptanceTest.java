@@ -41,7 +41,8 @@ public class FullLifeCycleAcceptanceTest {
     private IOConsole ioConsole;
 
     private JustLikeTwitter justLikeTwitter;
-    private DateTimeStampProvider dateTimeStampProvider = mock(DateTimeStampProvider.class);
+
+    private final DateTimeStampProvider dateTimeStampProvider = mock(DateTimeStampProvider.class);
 
     @Before
     public void setUp() {
@@ -83,9 +84,7 @@ public class FullLifeCycleAcceptanceTest {
         justLikeTwitter.run(TWICE);
 
         // Then action is taken to add the messages to Bob's timeline
-        verifyThatActionIsTakenToRecordTheMessage(
-                justLikeTwitterEngine,
-                COMMANDS_TYPED_BY_BOB);
+        verifyThatActionIsTakenToRecordTheMessage(justLikeTwitterEngine, COMMANDS_TYPED_BY_BOB);
     }
 
     private void verifyThatActionIsTakenToRecordTheMessage(
@@ -181,22 +180,20 @@ public class FullLifeCycleAcceptanceTest {
         justLikeTwitter = new JustLikeTwitter(justLikeTwitterEngine, ioConsole);
     }
 
-    private String getTimelineFor(String userName,
+    private String getTimelineFor(String userNameAsCommand,
                                   Date currentDateTimeStamp,
-                                  long delayInMilliSeconds) throws InterruptedException, IOException {
-        simulateDelayUsing(currentDateTimeStamp, delayInMilliSeconds);
-        when(ioConsole.showPrompt()).thenReturn(userName);
-        justLikeTwitter.run(ONCE_ONLY);
-        return justLikeTwitter.showTimeLineFor(userName);
+                                  long delayInMilliSeconds) throws IOException {
+        userTypesAtThePrompt(userNameAsCommand, currentDateTimeStamp, delayInMilliSeconds);
+        return justLikeTwitter.showTimeLineFor(userNameAsCommand);
     }
 
-    private Date simulateDelayUsing(Date currentDateTimeStamp, long timeInMilliSeconds) throws InterruptedException {
+    private Date simulateDelayUsing(Date currentDateTimeStamp, long timeInMilliSeconds) {
         Date newDateTimeStamp = new Date(currentDateTimeStamp.getTime() + timeInMilliSeconds);
         when(dateTimeStampProvider.getCurrentDateTimeStamp()).thenReturn(newDateTimeStamp);
         return newDateTimeStamp;
     }
 
-    private Date setupJustLikeTwitterWith() throws InterruptedException, IOException {
+    private Date setupJustLikeTwitterWith() {
         Date currentDateTimeStamp = new Date();
         justLikeTwitterEngine = new JustLikeTwitterEngine(dateTimeStampProvider);
         justLikeTwitter = new JustLikeTwitter(justLikeTwitterEngine, ioConsole);
@@ -206,7 +203,7 @@ public class FullLifeCycleAcceptanceTest {
 
     private Date userTypesAtThePrompt(String userTypedCommand,
                                       Date currentDateTimeStamp,
-                                      long delayInMilliseconds) throws InterruptedException, IOException {
+                                      long delayInMilliseconds) throws IOException {
         currentDateTimeStamp = simulateDelayUsing(currentDateTimeStamp, delayInMilliseconds);
         when(ioConsole.showPrompt()).thenReturn(userTypedCommand);
         justLikeTwitter.run(ONCE_ONLY);

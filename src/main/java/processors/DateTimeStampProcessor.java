@@ -13,7 +13,7 @@ public class DateTimeStampProcessor {
     private static final String SECOND_SINGULAR = "second";
     private static final String SUFFIX_S = "s";
 
-    private DateTimeStampProvider dateTimeStampProvider;
+    private final DateTimeStampProvider dateTimeStampProvider;
 
     public DateTimeStampProcessor(DateTimeStampProvider dateTimeStampProvider) {
         this.dateTimeStampProvider = dateTimeStampProvider;

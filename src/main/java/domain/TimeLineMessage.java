@@ -5,13 +5,15 @@ import processors.DateTimeStampProvider;
 
 import java.util.Date;
 
-public class TimeLineMessage {
+public final class TimeLineMessage {
 
-    public static final String MESSAGE_ON_TIMELINE_PATTERN = "%s %s";
+    private static final String MESSAGE_ON_TIMELINE_PATTERN = "%s %s";
+
     private Date dateTimeStamp;
     private String message;
-    private DateTimeStampProvider dateTimeStampProvider;
-    private DateTimeStampProcessor dateTimeStampProcessor;
+
+    private final DateTimeStampProvider dateTimeStampProvider;
+    private final DateTimeStampProcessor dateTimeStampProcessor;
 
     public TimeLineMessage(DateTimeStampProvider dateTimeStampProvider) {
         this.dateTimeStampProvider = dateTimeStampProvider;

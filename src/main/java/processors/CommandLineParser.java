@@ -7,7 +7,7 @@ public class CommandLineParser {
     private static final int USERNAME_INDEX = 0;
     private static final int MESSAGE_INDEX = 1;
 
-    private DateTimeStampProvider dateTimeStampProvider;
+    private final DateTimeStampProvider dateTimeStampProvider;
 
     public CommandLineParser(DateTimeStampProvider dateTimeStampProvider) {
         this.dateTimeStampProvider = dateTimeStampProvider;

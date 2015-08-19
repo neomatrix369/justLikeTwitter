@@ -18,11 +18,17 @@ public class JustLikeTwitter {
     }
 
     public static void main(String[] args) throws IOException {
+        JustLikeTwitter justLikeTwitter = setupJustLikeTwitter();
+
+        justLikeTwitter.run(FOREVER);
+    }
+
+    private static JustLikeTwitter setupJustLikeTwitter() {
         DateTimeStampProvider dateTimeStampProvider = new DateTimeStampProvider();
         JustLikeTwitterEngine justLikeTwitterEngine = new JustLikeTwitterEngine(dateTimeStampProvider);
         IOConsole ioConsole = new IOConsole(System.in, System.out);
-        JustLikeTwitter justLikeTwitter = new JustLikeTwitter(justLikeTwitterEngine, ioConsole);
-        justLikeTwitter.run(FOREVER);
+
+        return new JustLikeTwitter(justLikeTwitterEngine, ioConsole);
     }
 
     public void run(int maxTimesToRun) throws IOException {

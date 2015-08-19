@@ -15,9 +15,9 @@ public class JustLikeTwitterEngine {
     private static final int BEFORE_FIRST_MESSAGE = 0;
     private static final String SPACE_DELIMITER = " ";
 
-    private Map<String, List<TimeLineMessage>> dataStoreForAllUsers = new HashMap<>();
+    private final Map<String, List<TimeLineMessage>> dataStoreForAllUsers = new HashMap<>();
 
-    private CommandLineParser commandLineParser;
+    private final CommandLineParser commandLineParser;
 
     public JustLikeTwitterEngine(DateTimeStampProvider dateTimeStampProvider) {
         this.commandLineParser = new CommandLineParser(dateTimeStampProvider);
