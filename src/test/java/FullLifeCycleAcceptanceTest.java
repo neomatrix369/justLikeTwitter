@@ -84,6 +84,7 @@ public class FullLifeCycleAcceptanceTest {
 
     private void setupJustLikeTwitterPromptUsing(String... userTypedCommands) throws IOException {
         List<String> userTypedCommandsList = Arrays.asList(userTypedCommands);
+
         for (String userTypedCommand: userTypedCommands) {
             when(consoleUI.showPrompt())
                     .thenAnswer(
