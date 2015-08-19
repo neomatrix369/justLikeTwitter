@@ -6,7 +6,7 @@ import java.io.OutputStream;
 import java.util.Scanner;
 
 public class IOConsole {
-    private static final String COMMAND_PROMPT_INDICATOR = "> ";
+    public static final String COMMAND_PROMPT_INDICATOR = "> ";
 
     private final InputStream inputStream;
     private final OutputStream outputStream;
