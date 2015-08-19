@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+echo ""
 echo "Running JustLikeTwitter console app"
 echo "Use Ctrl-C to exit the program."
 echo "Only sunny path cases have been covered."
@@ -23,7 +24,7 @@ echo "  - Display user's wall : <user name> wall"
 echo "  for e.g."
 echo "     > Alice wall"
 echo "     Bob - I'm in New York today! Anyone want to have a coffee? (2 seconds ago)"
-echo "     Alice - I love the weather today (5 minutes ago)"
+echo "     Alice - I'm having a great time (5 minutes ago)"
 echo ""
 echo ""
 echo ""
