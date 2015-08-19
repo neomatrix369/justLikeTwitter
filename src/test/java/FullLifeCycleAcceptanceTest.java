@@ -1,5 +1,5 @@
 import engine.JustLikeTwitterEngine;
-import interfaces.ConsoleUI;
+import interfaces.IOConsole;
 import interfaces.JustLikeTwitter;
 import org.junit.After;
 import org.junit.Before;
@@ -32,14 +32,14 @@ public class FullLifeCycleAcceptanceTest {
     };
 
     private JustLikeTwitterEngine justLikeTwitterEngine;
-    private ConsoleUI consoleUI;
+    private IOConsole IOConsole;
 
     private JustLikeTwitter justLikeTwitter;
 
     @Before
     public void setUp() {
         justLikeTwitterEngine = mock(JustLikeTwitterEngine.class);
-        consoleUI = mock(ConsoleUI.class);
+        IOConsole = mock(IOConsole.class);
     }
 
     @After
@@ -86,12 +86,12 @@ public class FullLifeCycleAcceptanceTest {
         List<String> userTypedCommandsList = Arrays.asList(userTypedCommands);
 
         for (String userTypedCommand: userTypedCommands) {
-            when(consoleUI.showPrompt())
+            when(IOConsole.showPrompt())
                     .thenAnswer(
                             AdditionalAnswers.returnsElementsOf(userTypedCommandsList));
         }
 
-        justLikeTwitter = new JustLikeTwitter(justLikeTwitterEngine, consoleUI);
+        justLikeTwitter = new JustLikeTwitter(justLikeTwitterEngine, IOConsole);
     }
 
     private void verifyThatActionIsTakenToRecordTheMessage(
