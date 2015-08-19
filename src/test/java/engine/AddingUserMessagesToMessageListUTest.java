@@ -1,7 +1,7 @@
 package engine;
 
 import processors.DateTimeStampProvider;
-import domain.TimeLineMessage;
+import elements.TimeLineMessage;
 import org.junit.Before;
 import org.junit.Test;
 

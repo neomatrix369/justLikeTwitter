@@ -1,6 +1,6 @@
 package processors;
 
-import domain.CommandLineEntry;
+import elements.CommandLineEntry;
 
 public class CommandLineParser {
     private static final String POST_MESSAGE_SEPARATOR = "->";

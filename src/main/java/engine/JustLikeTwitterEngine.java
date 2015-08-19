@@ -1,8 +1,8 @@
 package engine;
 
-import domain.CommandLineEntry;
+import elements.CommandLineEntry;
 import processors.DateTimeStampProvider;
-import domain.TimeLineMessage;
+import elements.TimeLineMessage;
 import processors.CommandLineParser;
 
 import java.util.ArrayList;
