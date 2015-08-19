@@ -16,11 +16,11 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class AddingUserMessagesToMessageListUTest {
 
-    private TwitterLikeEngine twitterLikeEngine;
+    private JustLikeTwitterEngine justLikeTwitterEngine;
 
     @Before
     public void setUp() {
-        twitterLikeEngine = new TwitterLikeEngine();
+        justLikeTwitterEngine = new JustLikeTwitterEngine();
     }
 
     /**
@@ -67,10 +67,10 @@ public class AddingUserMessagesToMessageListUTest {
     private List<String> processMessagesReceivedFor(String userName,
                                                     String... userTypedMessages) {
         for (String eachUserTypedMessage: userTypedMessages) {
-            twitterLikeEngine.executeCommand(eachUserTypedMessage);
+            justLikeTwitterEngine.executeCommand(eachUserTypedMessage);
         }
 
-        return twitterLikeEngine.getMessagesFor(userName);
+        return justLikeTwitterEngine.getMessagesFor(userName);
     }
 
     private List<String> expectedMessagesToAdd(String... expectedMessages) {

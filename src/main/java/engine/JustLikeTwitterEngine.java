@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class TwitterLikeEngine {
+public class JustLikeTwitterEngine {
 
     private static final int BEFORE_FIRST_MESSAGE = 0;
     private Map<String, List<String>> timeline = new HashMap<>();

@@ -1,6 +1,6 @@
-import engine.TwitterLikeEngine;
+import engine.JustLikeTwitterEngine;
 import interfaces.ConsoleUI;
-import interfaces.TwitterLike;
+import interfaces.JustLikeTwitter;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -31,58 +31,58 @@ public class FullLifeCycleAcceptanceTest {
             "Bob -> Good game though."
     };
 
-    private TwitterLikeEngine twitterLikeEngine;
+    private JustLikeTwitterEngine justLikeTwitterEngine;
     private ConsoleUI consoleUI;
 
-    private TwitterLike twitterLike;
+    private JustLikeTwitter justLikeTwitter;
 
     @Before
     public void setUp() {
-        twitterLikeEngine = mock(TwitterLikeEngine.class);
+        justLikeTwitterEngine = mock(JustLikeTwitterEngine.class);
         consoleUI = mock(ConsoleUI.class);
     }
 
     @After
     public void tearDown() {
-        reset(twitterLikeEngine);
+        reset(justLikeTwitterEngine);
     }
 
     /**
      * Scenario: Alice can publish a message to a personal timeline
      */
     @Test
-    public void givenNoPostsExitsOnTimeLineWhenAliceEntersAMessageAtTheTwitterLikePromptThenMessageIsAddedToTimeLine() throws IOException {
-        // Given Alice is at the TwitterLike command prompt ">"
+    public void givenNoPostsExitsOnTimeLineWhenAliceEntersAMessageAtTheJustLikeTwitterPromptThenMessageIsAddedToTimeLine() throws IOException {
+        // Given Alice is at the JustLikeTwitter command prompt ">"
         // And Alice's timeline is empty
-        setupTwitterLikeUsing(commandTypedByAlice);
+        setupJustLikeTwitterPromptUsing(commandTypedByAlice);
 
         // When Alice types "Alice -> I love the weather today" at the prompt
-        twitterLike.run(ONCE_ONLY);
+        justLikeTwitter.run(ONCE_ONLY);
 
         // Then action is taken to add the message to Alice's timeline
-        verifyThatActionIsTakenToRecordTheMessage(twitterLikeEngine, commandTypedByAlice);
+        verifyThatActionIsTakenToRecordTheMessage(justLikeTwitterEngine, commandTypedByAlice);
     }
 
     /**
      * Scenario: Bob can publish messages to a personal timeline
      */
     @Test
-    public void givenNoPostsExitsOnTimeLineWhenBobEntersMessagesAtTheTwitterLikePromptThenTheMessagesAreAddedToTimeLine() throws IOException {
-        // Given Bob is at the TwitterLike command prompt ">"
+    public void givenNoPostsExitsOnTimeLineWhenBobEntersMessagesAtTheJustLikeTwitterPromptThenTheMessagesAreAddedToTimeLine() throws IOException {
+        // Given Bob is at the JustLikeTwitter command prompt ">"
         // And Bob's timeline is empty
-        setupTwitterLikeUsing(commandsTypedByBob);
+        setupJustLikeTwitterPromptUsing(commandsTypedByBob);
 
         // When Bob types "Bob -> Damn! We lost!" at the prompt
         // And then types "Bob -> Good game though."  at the prompt
-        twitterLike.run(TWICE);
+        justLikeTwitter.run(TWICE);
 
         // Then action is taken to add the messages to Bob's timeline
         verifyThatActionIsTakenToRecordTheMessage(
-                twitterLikeEngine,
+                justLikeTwitterEngine,
                 commandsTypedByBob);
     }
 
-    private void setupTwitterLikeUsing(String... userTypedCommands) throws IOException {
+    private void setupJustLikeTwitterPromptUsing(String... userTypedCommands) throws IOException {
         List<String> userTypedCommandsList = Arrays.asList(userTypedCommands);
         for (String userTypedCommand: userTypedCommands) {
             when(consoleUI.showPrompt())
@@ -90,14 +90,14 @@ public class FullLifeCycleAcceptanceTest {
                             AdditionalAnswers.returnsElementsOf(userTypedCommandsList));
         }
 
-        twitterLike = new TwitterLike(twitterLikeEngine, consoleUI);
+        justLikeTwitter = new JustLikeTwitter(justLikeTwitterEngine, consoleUI);
     }
 
     private void verifyThatActionIsTakenToRecordTheMessage(
-            TwitterLikeEngine twitterLikeEngine,
+            JustLikeTwitterEngine justLikeTwitterEngine,
             String... userTypedCommands) {
         for (String userTypedCommand: userTypedCommands) {
-            verify(twitterLikeEngine).executeCommand(eq(userTypedCommand));
+            verify(justLikeTwitterEngine).executeCommand(eq(userTypedCommand));
         }
     }
 }

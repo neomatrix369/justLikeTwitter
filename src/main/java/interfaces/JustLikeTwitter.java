@@ -1,17 +1,17 @@
 package interfaces;
 
-import engine.TwitterLikeEngine;
+import engine.JustLikeTwitterEngine;
 
 import java.io.IOException;
 
-public class TwitterLike {
+public class JustLikeTwitter {
     private static final int START_FROM_ONE = 1;
 
-    private final TwitterLikeEngine twitterLikeEngine;
+    private final JustLikeTwitterEngine justLikeTwitterEngine;
     private final ConsoleUI consoleUI;
 
-    public TwitterLike(TwitterLikeEngine twitterLikeEngine, ConsoleUI consoleUI) {
-        this.twitterLikeEngine = twitterLikeEngine;
+    public JustLikeTwitter(JustLikeTwitterEngine justLikeTwitterEngine, ConsoleUI consoleUI) {
+        this.justLikeTwitterEngine = justLikeTwitterEngine;
         this.consoleUI = consoleUI;
     }
 
@@ -19,7 +19,7 @@ public class TwitterLike {
         int runCount = START_FROM_ONE;
         do {
             String userTypedCommand = consoleUI.showPrompt();
-            twitterLikeEngine.executeCommand(userTypedCommand);
+            justLikeTwitterEngine.executeCommand(userTypedCommand);
             runCount++;
         } while (runCount <= maxTimesToRun);
     }
