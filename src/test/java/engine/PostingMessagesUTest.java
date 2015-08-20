@@ -1,4 +1,5 @@
-import engine.JustLikeTwitterEngine;
+package engine;
+
 import interfaces.IOConsole;
 import interfaces.JustLikeTwitter;
 import org.junit.Before;
