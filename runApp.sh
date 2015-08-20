@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 
-echo ""
+echo "---------------------------------------------------------------------------------------"
 echo "Running JustLikeTwitter console app"
 echo "Use Ctrl-C to exit the program."
 echo "Only sunny path cases have been covered."
+echo "---------------------------------------------------------------------------------------"
 echo ""
 echo "Command-line help (usage with examples):"
 echo ""

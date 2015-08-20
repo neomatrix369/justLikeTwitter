@@ -24,9 +24,10 @@ public class DisplayingUserWallUTest {
     private static final int ONCE_ONLY = 1;
 
     private static final long ZERO_MINUTES = 0;
-    private static final long AFTER_ONE_MINUTE = 60 * 1000;
+    private static final long THOUSAND_MILLISECONDS = 1000;
+    private static final long AFTER_ONE_MINUTE = 60 * THOUSAND_MILLISECONDS;
     private static final long AFTER_FIVE_MINUTES = 5 * AFTER_ONE_MINUTE;
-    private static final long ONE_SECOND = 1000;
+    private static final long ONE_SECOND = THOUSAND_MILLISECONDS;
     private static final long AFTER_TWO_SECONDS = 2 * ONE_SECOND;
     private static final long AFTER_FIFTEEN_SECONDS = 15 * ONE_SECOND;
     private static final long AFTER_THREE_MINUTES = 3 * AFTER_ONE_MINUTE;
@@ -72,7 +73,7 @@ public class DisplayingUserWallUTest {
         // And Alice's timeline contains the required posts
         // And he enters "Charlie -> I'm in New York today! Anyone wants to have a coffee?" at the prompt
         // And then he enters "Charlie follows Alice" at the prompt
-        setupJustLikeTwitterWith();
+        setupJustLikeTwitter();
         userTypesAtThePrompt(COMMANDS_TYPED_BY_ALICE[0], ZERO_MINUTES);
         userTypesAtThePrompt(COMMANDS_TYPED_BY_CHARLIE[0], AFTER_FIVE_MINUTES);
         userTypesAtThePrompt(COMMANDS_TYPED_BY_CHARLIE[1], AFTER_TWO_SECONDS);
@@ -102,7 +103,7 @@ public class DisplayingUserWallUTest {
         // And he enters "Charlie -> I'm in New York today! Anyone wants to have a coffee?" at the prompt
         // And then he enters "Charlie follows Alice" at the prompt
         // And then he enters "Charlie follows Bob" at the prompt
-        setupJustLikeTwitterWith();
+        setupJustLikeTwitter();
         userTypesAtThePrompt(COMMANDS_TYPED_BY_ALICE[0], ZERO_MINUTES);
         userTypesAtThePrompt(COMMANDS_TYPED_BY_BOB[0], AFTER_THREE_MINUTES);
         userTypesAtThePrompt(COMMANDS_TYPED_BY_BOB[1], AFTER_ONE_MINUTE);
@@ -139,7 +140,7 @@ public class DisplayingUserWallUTest {
         // And Bob's timeline contains the required posts
         // And he enters "Charlie -> I'm in New York today! Anyone wants to have a coffee?" at the prompt
         // And then he enters "Charlie follows Bob" at the prompt
-        setupJustLikeTwitterWith();
+        setupJustLikeTwitter();
         userTypesAtThePrompt(COMMANDS_TYPED_BY_BOB[0], ZERO_MINUTES);
         userTypesAtThePrompt(COMMANDS_TYPED_BY_BOB[1], AFTER_ONE_MINUTE);
         userTypesAtThePrompt(COMMANDS_TYPED_BY_CHARLIE[0], AFTER_ONE_MINUTE);
@@ -174,7 +175,7 @@ public class DisplayingUserWallUTest {
         return currentDateTime;
     }
 
-    private void setupJustLikeTwitterWith() {
+    private void setupJustLikeTwitter() {
         justLikeTwitterEngine = new JustLikeTwitterEngine(dateTimeCentral);
         justLikeTwitter = new JustLikeTwitter(justLikeTwitterEngine, ioConsole);
     }

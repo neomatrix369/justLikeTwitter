@@ -1,17 +1,24 @@
 package elements;
 
 public enum CommandType {
-    POST_MESSAGE (" -> "),
-    FOLLOWS_USER (" follows "),
-    DISPLAY_WALL(" wall");
+    POST_MESSAGE ("(\\w+) -> (.*)"        , " -> "     ),
+    READ_POST    ("(\\w+)"                , " "        ),
+    FOLLOWS_USER ("(\\w+) follows (\\w+)" , " follows "),
+    DISPLAY_WALL ("(\\w+) wall"           , " wall"    );
 
-    private final String token;
+    private final String matchingPattern;
+    private String tokenSeparator;
 
-    CommandType(String token) {
-        this.token = token;
+    CommandType(String matchingPattern, String tokenSeparator) {
+        this.matchingPattern = matchingPattern;
+        this.tokenSeparator = tokenSeparator;
     }
 
-    public String getToken() {
-        return token;
+    public String getMatchingPattern() {
+        return matchingPattern;
+    }
+
+    public String getTokenSeparator() {
+        return tokenSeparator;
     }
 }

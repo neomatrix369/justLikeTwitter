@@ -13,6 +13,10 @@ public class MessageStore {
             sortByDateTimeInDescendingOrder = new Comparator<TimeLineMessage>() {
         @Override
         public int compare(TimeLineMessage first, TimeLineMessage second) {
+            return compareToYieldResultsInDescendingOrder(first, second);
+        }
+
+        private int compareToYieldResultsInDescendingOrder(TimeLineMessage first, TimeLineMessage second) {
             return second.getDateTime().compareTo(first.getDateTime());
         }
     };

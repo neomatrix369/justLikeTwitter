@@ -20,9 +20,10 @@ public class ReadingUserTimeLineUTest {
     private static final int ONCE_ONLY = 1;
 
     private static final long ZERO_MINUTES = 0;
-    private static final long AFTER_ONE_MINUTE = 60 * 1000;
+    private static final long THOUSAND_MILLISECONDS = 1000;
+    private static final long AFTER_ONE_MINUTE = 60 * THOUSAND_MILLISECONDS;
     private static final long AFTER_FIVE_MINUTES = 5 * AFTER_ONE_MINUTE;
-    private static final long ONE_SECOND = 1000;
+    private static final long ONE_SECOND = THOUSAND_MILLISECONDS;
     private static final long AFTER_FIFTY_SECONDS = 50 * ONE_SECOND;
 
     private static final String COMMAND_TYPED_BY_HARRY = "Harry -> I like this idea";
@@ -58,7 +59,7 @@ public class ReadingUserTimeLineUTest {
     public void givenHarryHasAPost_whenHarryIsTypedAtThePrompt_thenHarrysTimeLineIsShown() throws IOException {
         // Given I am at the JustLikeTwitter command prompt ">"
         // And Harry's timeline contains the required posts
-        setupJustLikeTwitterWith();
+        setupJustLikeTwitter();
         currentDateTime =
                 userTypesAtThePrompt(COMMAND_TYPED_BY_HARRY, currentDateTime, ZERO_MINUTES);
 
@@ -80,7 +81,7 @@ public class ReadingUserTimeLineUTest {
     public void givenAliceHasAPost_whenAliceIsTypedAtThePrompt_thenAlicesTimeLineIsShown() throws IOException {
         // Given I am at the JustLikeTwitter command prompt ">"
         // And Alice's timeline contains the required posts
-        setupJustLikeTwitterWith();
+        setupJustLikeTwitter();
         currentDateTime =
                 userTypesAtThePrompt(COMMAND_TYPED_BY_ALICE, currentDateTime, ZERO_MINUTES);
 
@@ -102,7 +103,7 @@ public class ReadingUserTimeLineUTest {
     public void givenBobHasPosts_whenBobIsTypedAtThePrompt_thenBobsTimeLineIsShown() throws IOException {
         // Given I am at the JustLikeTwitter command prompt ">"
         // And Bob's timeline contains the required posts
-        setupJustLikeTwitterWith();
+        setupJustLikeTwitter();
         currentDateTime = userTypesAtThePrompt(COMMANDS_TYPED_BY_BOB[0], currentDateTime, ZERO_MINUTES);
         currentDateTime = userTypesAtThePrompt(COMMANDS_TYPED_BY_BOB[1], currentDateTime, AFTER_ONE_MINUTE);
 
@@ -133,7 +134,7 @@ public class ReadingUserTimeLineUTest {
         return newDateTime;
     }
 
-    private void setupJustLikeTwitterWith() {
+    private void setupJustLikeTwitter() {
         justLikeTwitterEngine = new JustLikeTwitterEngine(dateTimeCentral);
         justLikeTwitter = new JustLikeTwitter(justLikeTwitterEngine, ioConsole);
     }
