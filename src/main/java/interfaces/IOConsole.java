@@ -26,7 +26,7 @@ public class IOConsole {
     }
 
     private String gatherWhatTheUserTypesAtThePrompt(InputStream inputStream) {
-        Scanner scanner = new Scanner(inputStream);
+        Scanner scanner = new Scanner(inputStream, "UTF-8");
         return scanner.nextLine();
     }
 

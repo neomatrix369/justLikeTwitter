@@ -88,12 +88,13 @@ public class JustLikeTwitterEngine {
     }
 
     public String getTimeLineFor(String userName) {
-        String result = "";
+        StringBuilder result = new StringBuilder();
         List<TimeLineMessage> usersMessages = messagesStoreForAllUsers.get(userName);
         for (TimeLineMessage usersMessage: usersMessages) {
-            result += usersMessage.toString() + System.lineSeparator();
+            result.append(usersMessage.toString())
+                  .append(System.lineSeparator());
         }
-        return result;
+        return result.toString();
     }
 
     public List<String> getFollowsListFor(String userName) {
