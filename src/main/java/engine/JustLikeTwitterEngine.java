@@ -10,10 +10,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static elements.CommandType.FOLLOWS_USER;
 import static elements.CommandType.POST_MESSAGE;
-import static processors.CommandLineParser.FOLLOWS_USER_TOKEN;
-import static processors.CommandLineParser.POST_MESSAGE_TOKEN;
+import static elements.CommandType.FOLLOWS_USER;
 
 public class JustLikeTwitterEngine {
 
@@ -35,9 +33,9 @@ public class JustLikeTwitterEngine {
     public String executeCommand(String userTypedCommands) {
         String result = "";
 
-        if (userTypedCommands.contains(POST_MESSAGE_TOKEN)) {
+        if (userTypedCommands.contains(POST_MESSAGE.getToken())) {
             postMessageToTimeline(userTypedCommands);
-        } else if (userTypedCommands.contains(FOLLOWS_USER_TOKEN)) {
+        } else if (userTypedCommands.contains(FOLLOWS_USER.getToken())) {
             addToFollowsList(userTypedCommands);
         } else {
             result = getTimeLineFor(userTypedCommands);
