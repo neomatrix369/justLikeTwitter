@@ -1,6 +1,6 @@
 package engine;
 
-import processors.DateTimeStampProvider;
+import processors.DateTimeCentral;
 import elements.TimeLineMessage;
 import org.junit.Before;
 import org.junit.Test;
@@ -21,11 +21,11 @@ public class AddingUserMessagesToMessageListUTest {
 
     private JustLikeTwitterEngine justLikeTwitterEngine;
 
-    private final DateTimeStampProvider dateTimeStampProvider = mock(DateTimeStampProvider.class);
+    private final DateTimeCentral dateTimeCentral = mock(DateTimeCentral.class);
 
     @Before
     public void setUp() {
-        justLikeTwitterEngine = new JustLikeTwitterEngine(dateTimeStampProvider);
+        justLikeTwitterEngine = new JustLikeTwitterEngine(dateTimeCentral);
     }
 
     /**

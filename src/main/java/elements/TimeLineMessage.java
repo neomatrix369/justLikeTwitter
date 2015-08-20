@@ -1,7 +1,7 @@
 package elements;
 
-import processors.DateTimeStampProcessor;
-import processors.DateTimeStampProvider;
+import processors.DateTimeProcessor;
+import processors.DateTimeCentral;
 
 import java.util.Date;
 
@@ -9,19 +9,19 @@ public final class TimeLineMessage {
 
     private static final String MESSAGE_ON_TIMELINE_PATTERN = "%s %s";
 
-    private Date dateTimeStamp;
+    private Date dateTime;
     private String message;
 
-    private final DateTimeStampProvider dateTimeStampProvider;
-    private final DateTimeStampProcessor dateTimeStampProcessor;
+    private final DateTimeCentral dateTimeCentral;
+    private final DateTimeProcessor dateTimeProcessor;
 
-    public TimeLineMessage(DateTimeStampProvider dateTimeStampProvider) {
-        this.dateTimeStampProvider = dateTimeStampProvider;
-        dateTimeStampProcessor = new DateTimeStampProcessor(dateTimeStampProvider);
+    public TimeLineMessage(DateTimeCentral dateTimeCentral) {
+        this.dateTimeCentral = dateTimeCentral;
+        dateTimeProcessor = new DateTimeProcessor(dateTimeCentral);
     }
 
     public void setMessage(String message) {
-        this.dateTimeStamp = dateTimeStampProvider.getCurrentDateTimeStamp();
+        this.dateTime = dateTimeCentral.getCurrentDateTime();
         this.message = message;
     }
 
@@ -30,6 +30,6 @@ public final class TimeLineMessage {
         return String.format(
                 MESSAGE_ON_TIMELINE_PATTERN,
                 message,
-                dateTimeStampProcessor.whenMessageWasPosted(dateTimeStamp));
+                dateTimeProcessor.whenMessageWasPosted(dateTime));
     }
 }

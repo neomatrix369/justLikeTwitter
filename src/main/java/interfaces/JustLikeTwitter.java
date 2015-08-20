@@ -1,7 +1,7 @@
 package interfaces;
 
 import engine.JustLikeTwitterEngine;
-import processors.DateTimeStampProvider;
+import processors.DateTimeCentral;
 
 import java.io.IOException;
 
@@ -24,8 +24,8 @@ public class JustLikeTwitter {
     }
 
     private static JustLikeTwitter setupJustLikeTwitter() {
-        DateTimeStampProvider dateTimeStampProvider = new DateTimeStampProvider();
-        JustLikeTwitterEngine justLikeTwitterEngine = new JustLikeTwitterEngine(dateTimeStampProvider);
+        DateTimeCentral dateTimeCentral = new DateTimeCentral();
+        JustLikeTwitterEngine justLikeTwitterEngine = new JustLikeTwitterEngine(dateTimeCentral);
         IOConsole ioConsole = new IOConsole(System.in, System.out);
 
         return new JustLikeTwitter(justLikeTwitterEngine, ioConsole);

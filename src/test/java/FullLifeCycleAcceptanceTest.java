@@ -1,4 +1,4 @@
-import processors.DateTimeStampProvider;
+import processors.DateTimeCentral;
 import engine.JustLikeTwitterEngine;
 import interfaces.IOConsole;
 import interfaces.JustLikeTwitter;
@@ -41,11 +41,13 @@ public class FullLifeCycleAcceptanceTest {
     private IOConsole ioConsole;
 
     private JustLikeTwitter justLikeTwitter;
+    private Date currentDateTime;
 
-    private final DateTimeStampProvider dateTimeStampProvider = mock(DateTimeStampProvider.class);
+    private final DateTimeCentral dateTimeCentral = mock(DateTimeCentral.class);
 
     @Before
     public void setUp() {
+        currentDateTime = new Date();
         justLikeTwitterEngine = mock(JustLikeTwitterEngine.class);
         ioConsole = mock(IOConsole.class);
     }
@@ -106,13 +108,13 @@ public class FullLifeCycleAcceptanceTest {
     public void givenHarryHasAPost_whenHarryIsTypedAtThePrompt_thenHarrysTimeLineIsShown() throws IOException {
         // Given I am at the JustLikeTwitter command prompt ">"
         // And Harry's timeline contains the required posts
-        Date currentDateTimeStamp = setupJustLikeTwitterWith();
-        currentDateTimeStamp =
-                userTypesAtThePrompt(COMMAND_TYPED_BY_HARRY, currentDateTimeStamp, ZERO_MINUTES);
+        setupJustLikeTwitterWith();
+        currentDateTime =
+                userTypesAtThePrompt(COMMAND_TYPED_BY_HARRY, currentDateTime, ZERO_MINUTES);
 
         // When I type "Harry" at the prompt after fifty seconds
         String actualTimeLine =
-                getTimelineFor("Harry", currentDateTimeStamp, AFTER_FIFTY_SECONDS);
+                getTimelineFor("Harry", currentDateTime, AFTER_FIFTY_SECONDS);
 
         // Then I see "I like this idea (50 seconds ago)" at the prompt
         String expectedTimeline = "I like this idea (50 seconds ago)" + System.lineSeparator();
@@ -128,13 +130,13 @@ public class FullLifeCycleAcceptanceTest {
     public void givenAliceHasAPost_whenAliceIsTypedAtThePrompt_thenAlicesTimeLineIsShown() throws IOException {
         // Given I am at the JustLikeTwitter command prompt ">"
         // And Alice's timeline contains the required posts
-        Date currentDateTimeStamp = setupJustLikeTwitterWith();
-        currentDateTimeStamp =
-                userTypesAtThePrompt(COMMAND_TYPED_BY_ALICE, currentDateTimeStamp, ZERO_MINUTES);
+        setupJustLikeTwitterWith();
+        currentDateTime =
+                userTypesAtThePrompt(COMMAND_TYPED_BY_ALICE, currentDateTime, ZERO_MINUTES);
 
         // When I type "Alice" at the prompt after five minutes
         String actualTimeLine =
-                getTimelineFor("Alice", currentDateTimeStamp, AFTER_FIVE_MINUTES);
+                getTimelineFor("Alice", currentDateTime, AFTER_FIVE_MINUTES);
 
         // Then I see "I love the weather today (5 minutes ago)" at the prompt
         String expectedTimeline = "I love the weather today (5 minutes ago)" + System.lineSeparator();
@@ -150,12 +152,12 @@ public class FullLifeCycleAcceptanceTest {
     public void givenBobHasPosts_whenBobIsTypedAtThePrompt_thenBobsTimeLineIsShown() throws IOException {
         // Given I am at the JustLikeTwitter command prompt ">"
         // And Bob's timeline contains the required posts
-        Date currentDateTimeStamp = setupJustLikeTwitterWith();
-        currentDateTimeStamp = userTypesAtThePrompt(COMMANDS_TYPED_BY_BOB[0], currentDateTimeStamp, ZERO_MINUTES);
-        currentDateTimeStamp = userTypesAtThePrompt(COMMANDS_TYPED_BY_BOB[1], currentDateTimeStamp, AFTER_ONE_MINUTE);
+        setupJustLikeTwitterWith();
+        currentDateTime = userTypesAtThePrompt(COMMANDS_TYPED_BY_BOB[0], currentDateTime, ZERO_MINUTES);
+        currentDateTime = userTypesAtThePrompt(COMMANDS_TYPED_BY_BOB[1], currentDateTime, AFTER_ONE_MINUTE);
 
         // When I type "Bob" at the prompt after a minute
-        String actualTimeLine = getTimelineFor("Bob", currentDateTimeStamp, AFTER_ONE_MINUTE);
+        String actualTimeLine = getTimelineFor("Bob", currentDateTime, AFTER_ONE_MINUTE);
 
         // Then I see the below messages in the console:
         // "Good game though. (1 minute ago)"
@@ -181,33 +183,30 @@ public class FullLifeCycleAcceptanceTest {
     }
 
     private String getTimelineFor(String userNameAsCommand,
-                                  Date currentDateTimeStamp,
+                                  Date currentDateTime,
                                   long delayInMilliSeconds) throws IOException {
-        userTypesAtThePrompt(userNameAsCommand, currentDateTimeStamp, delayInMilliSeconds);
+        userTypesAtThePrompt(userNameAsCommand, currentDateTime, delayInMilliSeconds);
         return justLikeTwitter.showTimeLineFor(userNameAsCommand);
     }
 
-    private Date simulateDelayUsing(Date currentDateTimeStamp, long timeInMilliSeconds) {
-        Date newDateTimeStamp = new Date(currentDateTimeStamp.getTime() + timeInMilliSeconds);
-        when(dateTimeStampProvider.getCurrentDateTimeStamp()).thenReturn(newDateTimeStamp);
-        return newDateTimeStamp;
+    private Date simulateDelayUsing(Date currentDateTime, long timeInMilliSeconds) {
+        Date newDateTime = new Date(currentDateTime.getTime() + timeInMilliSeconds);
+        when(dateTimeCentral.getCurrentDateTime()).thenReturn(newDateTime);
+        return newDateTime;
     }
 
-    private Date setupJustLikeTwitterWith() {
-        Date currentDateTimeStamp = new Date();
-        justLikeTwitterEngine = new JustLikeTwitterEngine(dateTimeStampProvider);
+    private void setupJustLikeTwitterWith() {
+        justLikeTwitterEngine = new JustLikeTwitterEngine(dateTimeCentral);
         justLikeTwitter = new JustLikeTwitter(justLikeTwitterEngine, ioConsole);
-
-        return currentDateTimeStamp;
     }
 
     private Date userTypesAtThePrompt(String userTypedCommand,
-                                      Date currentDateTimeStamp,
+                                      Date currentDateTime,
                                       long delayInMilliseconds) throws IOException {
-        currentDateTimeStamp = simulateDelayUsing(currentDateTimeStamp, delayInMilliseconds);
+        currentDateTime = simulateDelayUsing(currentDateTime, delayInMilliseconds);
         when(ioConsole.showPrompt()).thenReturn(userTypedCommand);
         justLikeTwitter.run(ONCE_ONLY);
 
-        return currentDateTimeStamp;
+        return currentDateTime;
     }
 }

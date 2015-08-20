@@ -2,9 +2,9 @@ package processors;
 
 import java.util.Date;
 
-public class DateTimeStampProvider {
+public class DateTimeCentral {
 
-    public Date getCurrentDateTimeStamp() {
+    public Date getCurrentDateTime() {
         return new Date();
     }
 }

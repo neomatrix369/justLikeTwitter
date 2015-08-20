@@ -1,15 +1,16 @@
 package elements;
 
-import processors.DateTimeStampProvider;
+import processors.DateTimeCentral;
 
 public class CommandLineEntry {
     private String userName;
+    private String otherUsersName;
     private TimeLineMessage timeLineMessage;
 
-    private final DateTimeStampProvider dateTimeStampProvider;
+    private final DateTimeCentral dateTimeCentral;
 
-    public CommandLineEntry(DateTimeStampProvider dateTimeStampProvider) {
-        this.dateTimeStampProvider = dateTimeStampProvider;
+    public CommandLineEntry(DateTimeCentral dateTimeCentral) {
+        this.dateTimeCentral = dateTimeCentral;
     }
 
     public String getUserName() {
@@ -25,7 +26,15 @@ public class CommandLineEntry {
     }
 
     public void setTimeLineMessage(String message) {
-        timeLineMessage = new TimeLineMessage(dateTimeStampProvider);
+        timeLineMessage = new TimeLineMessage(dateTimeCentral);
         timeLineMessage.setMessage(message);
+    }
+
+    public String getOtherUsersName() {
+        return otherUsersName;
+    }
+
+    public void setOtherUsersName(String otherUsersName) {
+        this.otherUsersName = otherUsersName;
     }
 }
