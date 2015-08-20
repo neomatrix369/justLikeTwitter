@@ -33,6 +33,9 @@ public class JustLikeTwitter {
 
     public void run(int maxTimesToRun) throws IOException {
         int runCount = START_FROM_ONE;
+
+        showUsageText();
+        
         do {
             String userTypedCommand = ioConsole.showPrompt();
 
@@ -40,6 +43,39 @@ public class JustLikeTwitter {
             ioConsole.display(result);
             runCount++;
         } while ((maxTimesToRun == FOREVER) || (runCount <= maxTimesToRun));
+    }
+
+    private void showUsageText() throws IOException {
+        String usageText =
+        "---------------------------------------------------------------------------------------" + System.lineSeparator() +
+        "Running JustLikeTwitter console app" + System.lineSeparator() +
+        "Use Ctrl-C to exit the program." + System.lineSeparator() +
+        "Only sunny path cases have been covered." + System.lineSeparator() +
+        "---------------------------------------------------------------------------------------" + System.lineSeparator() +
+        "" + System.lineSeparator() +
+        "Command-line help (usage with examples):" + System.lineSeparator() +
+        "" + System.lineSeparator() + 
+        "  - Posting to personal timeline: <user name> -> <message>" + System.lineSeparator() + 
+        "  for e.g." + System.lineSeparator() + 
+        "     > Alice -> I'm having a great time" + System.lineSeparator() + 
+        "" + System.lineSeparator() + 
+        "  - Reading any user's timeline: <user name>" + System.lineSeparator() + 
+        "  for e.g." + System.lineSeparator() + 
+        "     > Alice " + System.lineSeparator() + 
+        "     I'm having a great time (2 seconds ago)" + System.lineSeparator() + 
+        "" + System.lineSeparator() + 
+        "  - Following another user: <user name> follows <another user>" + System.lineSeparator() + 
+        "  for e.g." + System.lineSeparator() + 
+        "     > Alice follows Bob" + System.lineSeparator() + 
+        "" + System.lineSeparator() + 
+        "  - Display user's wall : <user name> wall" + System.lineSeparator() + 
+        "  for e.g." + System.lineSeparator() + 
+        "     > Alice wall" + System.lineSeparator() + 
+        "     Bob - I'm in New York today! Anyone wants to have a coffee? (2 seconds ago)" + System.lineSeparator() + 
+        "     Alice - I'm having a great time (5 minutes ago)" + System.lineSeparator() + 
+        "" + System.lineSeparator();
+
+        ioConsole.display(usageText);
     }
 
     public String getTimeLineFor(String userName) {
