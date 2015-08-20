@@ -9,7 +9,7 @@ import java.util.List;
 public class DisplayWallCommand extends CommandExecutor {
 
     @Override
-    public String getResults() {
+    public String execute() {
         CommandLineEntry commandLineEntry = new CommandLineEntry(dateTimeCentral);
         commandLineEntry.setUserName(tokens[USERNAME_INDEX].trim());
         return getWallFor(commandLineEntry.getUserName());

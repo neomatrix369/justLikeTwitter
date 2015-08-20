@@ -12,7 +12,7 @@ import java.util.Map;
 public class JustLikeTwitterEngine {
     private final MessageStore messageStore = new MessageStore();
     private final Map<String, List<String>> followsList = new HashMap<>();
-    private DateTimeCentral dateTimeCentral;
+    private final DateTimeCentral dateTimeCentral;
 
     public JustLikeTwitterEngine(DateTimeCentral dateTimeCentral) {
         this.dateTimeCentral = dateTimeCentral;
@@ -23,10 +23,10 @@ public class JustLikeTwitterEngine {
     }
 
     public String executeCommand(String userTypedCommand) {
-        ExecuteCommandFactory executeCommandFactory =
-                new ExecuteCommandFactory(dateTimeCentral, messageStore, followsList);
-        CommandExecutor command = executeCommandFactory.getCommand(userTypedCommand);
-        return command.getResults();
+        CommandExecutorFactory commandExecutorFactory =
+                new CommandExecutorFactory(dateTimeCentral, messageStore, followsList);
+        CommandExecutor command = commandExecutorFactory.getCommand(userTypedCommand);
+        return command.execute();
     }
 
     public String getTimeLineFor(String userName) {

@@ -7,7 +7,7 @@ import java.util.List;
 
 public class ReadPostCommand extends CommandExecutor {
     @Override
-    public String getResults() {
+    public String execute() {
         StringBuilder result = new StringBuilder();
         String userName = tokens[USERNAME_INDEX];
         List<TimeLineMessage> usersMessages = messageStore.getMessagesFor(userName);

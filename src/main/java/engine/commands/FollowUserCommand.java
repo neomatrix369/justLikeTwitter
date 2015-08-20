@@ -9,7 +9,7 @@ import java.util.List;
 public class FollowUserCommand extends CommandExecutor {
 
     @Override
-    public String getResults() {
+    public String execute() {
         CommandLineEntry commandLineEntry = new CommandLineEntry(dateTimeCentral);
         commandLineEntry.setUserName(tokens[USERNAME_INDEX].trim());
         commandLineEntry.setOtherUsersName(tokens[OTHER_USERNAME_INDEX].trim());

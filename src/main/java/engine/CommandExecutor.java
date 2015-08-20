@@ -21,7 +21,7 @@ public abstract class CommandExecutor {
 
     protected Map<String, List<String>> followsList;
 
-    public abstract String getResults();
+    public abstract String execute();
 
     public void setParsedTokens(String[] tokens) {
         this.tokens = Arrays.copyOf(tokens, tokens.length);

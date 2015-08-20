@@ -6,7 +6,7 @@ import engine.CommandExecutor;
 public class PostMessageCommand extends CommandExecutor {
 
     @Override
-    public String getResults() {
+    public String execute() {
         CommandLineEntry commandLineEntry = new CommandLineEntry(dateTimeCentral);
 
         commandLineEntry.setUserName(tokens[USERNAME_INDEX].trim());
