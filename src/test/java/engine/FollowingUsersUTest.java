@@ -18,6 +18,19 @@ import static org.mockito.Mockito.mock;
 
 public class FollowingUsersUTest {
 
+    private static final String USER_CHARLIE = "Charlie";
+
+    private static final String[] COMMANDS_BY_CHARLIE = new String [] {
+            "Charlie follows Alice",
+            "Charlie follows Bob"
+    };
+
+    private static final String[][] EXPECTED_FOLLOWS_LIST = {
+            new String[]{"Alice"},
+            new String[]{"Alice", "Bob"}
+    };
+
+
     private JustLikeTwitterEngine justLikeTwitterEngine;
 
     @Before
@@ -34,11 +47,11 @@ public class FollowingUsersUTest {
         //  Given Charlie is at the JustLikeTwitter command prompt ">"
         //  And Alice exists
         //  When he enters "Charlie follows Alice" at the prompt
-        justLikeTwitterEngine.executeCommand("Charlie follows Alice");
-        List<String> actualFollowsList = justLikeTwitterEngine.getFollowsListFor("Charlie");
+        justLikeTwitterEngine.executeCommand(COMMANDS_BY_CHARLIE[0]);
+        List<String> actualFollowsList = justLikeTwitterEngine.getFollowsListFor(USER_CHARLIE);
 
         // Then Alice is added to Charlie's follows list
-        List<String> expectedFollowsList = Arrays.asList(new String[]{ "Alice" });
+        List<String> expectedFollowsList = Arrays.asList(EXPECTED_FOLLOWS_LIST[0]);
         assertThat("Alice should have been added to Charlie's follows list",
                 actualFollowsList,
                 is(equalTo(expectedFollowsList)));
@@ -54,12 +67,12 @@ public class FollowingUsersUTest {
         // And Bob exists
         // When he enters "Charlie follows Alice" at the prompt
         // And he enters "Charlie follows Bob" at the prompt
-        justLikeTwitterEngine.executeCommand("Charlie follows Alice");
-        justLikeTwitterEngine.executeCommand("Charlie follows Bob");
-        List<String> actualFollowsList = justLikeTwitterEngine.getFollowsListFor("Charlie");
+        justLikeTwitterEngine.executeCommand(COMMANDS_BY_CHARLIE[0]);
+        justLikeTwitterEngine.executeCommand(COMMANDS_BY_CHARLIE[1]);
+        List<String> actualFollowsList = justLikeTwitterEngine.getFollowsListFor(USER_CHARLIE);
 
         // Then Alice and Bob are added to Charlie's follows list
-        List<String> expectedFollowsList = Arrays.asList(new String[]{ "Alice", "Bob" });
+        List<String> expectedFollowsList = Arrays.asList(EXPECTED_FOLLOWS_LIST[1]);
         assertThat("Alice and Bob should have been added to Charlie's follows list",
                 actualFollowsList,
                 is(equalTo(expectedFollowsList)));
