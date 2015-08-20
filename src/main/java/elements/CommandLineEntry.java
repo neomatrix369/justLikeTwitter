@@ -25,9 +25,10 @@ public class CommandLineEntry {
         this.userName = userName;
     }
 
-    public void setTimeLineMessage(String message) {
+    public void setTimeLineMessage(String userName, String message) {
         timeLineMessage = new TimeLineMessage(dateTimeCentral);
         timeLineMessage.setMessage(message);
+        timeLineMessage.setUserName(userName);
     }
 
     public String getOtherUsersName() {

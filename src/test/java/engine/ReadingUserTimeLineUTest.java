@@ -1,6 +1,5 @@
 package engine;
 
-import engine.JustLikeTwitterEngine;
 import interfaces.IOConsole;
 import interfaces.JustLikeTwitter;
 import org.junit.Before;
@@ -125,7 +124,7 @@ public class ReadingUserTimeLineUTest {
                                   Date currentDateTime,
                                   long delayInMilliSeconds) throws IOException {
         userTypesAtThePrompt(userNameAsCommand, currentDateTime, delayInMilliSeconds);
-        return justLikeTwitter.showTimeLineFor(userNameAsCommand);
+        return justLikeTwitter.getTimeLineFor(userNameAsCommand);
     }
 
     private Date simulateDelayUsing(Date currentDateTime, long timeInMilliSeconds) {

@@ -42,7 +42,11 @@ public class JustLikeTwitter {
         } while ((maxTimesToRun == FOREVER) || (runCount <= maxTimesToRun));
     }
 
-    public String showTimeLineFor(String userName) {
+    public String getTimeLineFor(String userName) {
         return justLikeTwitterEngine.getTimeLineFor(userName);
+    }
+
+    public String getWallFor(String userName) {
+        return justLikeTwitterEngine.getWallFor(userName);
     }
 }

@@ -1,9 +1,9 @@
 package engine;
 
-import processors.DateTimeCentral;
 import elements.TimeLineMessage;
 import org.junit.Before;
 import org.junit.Test;
+import processors.DateTimeCentral;
 
 import java.util.Arrays;
 import java.util.List;
@@ -11,7 +11,6 @@ import java.util.List;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.mock;
 
 /**
  * Feature: Adding messages to user's message list
@@ -19,9 +18,8 @@ import static org.mockito.Mockito.mock;
 
 public class AddingUserMessagesToMessageListUTest {
 
+    private final DateTimeCentral dateTimeCentral = new DateTimeCentral();
     private JustLikeTwitterEngine justLikeTwitterEngine;
-
-    private final DateTimeCentral dateTimeCentral = mock(DateTimeCentral.class);
 
     @Before
     public void setUp() {

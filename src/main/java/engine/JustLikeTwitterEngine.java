@@ -1,6 +1,7 @@
 package engine;
 
 import elements.CommandLineEntry;
+import elements.MessageStore;
 import elements.TimeLineMessage;
 import processors.CommandLineParser;
 import processors.DateTimeCentral;
@@ -10,14 +11,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static elements.CommandType.POST_MESSAGE;
+import static elements.CommandType.DISPLAY_WALL;
 import static elements.CommandType.FOLLOWS_USER;
+import static elements.CommandType.POST_MESSAGE;
 
 public class JustLikeTwitterEngine {
 
-    private static final int BEFORE_FIRST_MESSAGE = 0;
+    private static final String HYPHEN_SEPARATOR = " - ";
 
-    private final Map<String, List<TimeLineMessage>> messagesStoreForAllUsers = new HashMap<>();
+    private final MessageStore messagesStoreForAllUsers = new MessageStore();
     private final Map<String, List<String>> followsListForAllUsers = new HashMap<>();
 
     private final CommandLineParser commandLineParser;
@@ -27,7 +29,7 @@ public class JustLikeTwitterEngine {
     }
 
     public List<TimeLineMessage> getMessagesFor(String userName) {
-        return messagesStoreForAllUsers.get(userName);
+        return messagesStoreForAllUsers.getMessagesFor(userName);
     }
 
     public String executeCommand(String userTypedCommands) {
@@ -37,6 +39,8 @@ public class JustLikeTwitterEngine {
             postMessageToTimeline(userTypedCommands);
         } else if (userTypedCommands.contains(FOLLOWS_USER.getToken())) {
             addToFollowsList(userTypedCommands);
+        } else if (userTypedCommands.contains(DISPLAY_WALL.getToken())) {
+            result = displayWall(userTypedCommands);
         } else {
             result = getTimeLineFor(userTypedCommands);
         }
@@ -46,14 +50,7 @@ public class JustLikeTwitterEngine {
 
     private void postMessageToTimeline(String userTypedCommands) {
         CommandLineEntry commandLineEntry = commandLineParser.parse(userTypedCommands, POST_MESSAGE);
-        List<TimeLineMessage> existingMessages = getExistingMessagesFor(commandLineEntry.getUserName());
-        combineMessages(existingMessages, commandLineEntry);
-    }
-
-    private void combineMessages(List<TimeLineMessage> existingMessages,
-                                 CommandLineEntry newCommandLineEntry) {
-        existingMessages.add(BEFORE_FIRST_MESSAGE, newCommandLineEntry.getTimeLineMessage());
-        messagesStoreForAllUsers.put(newCommandLineEntry.getUserName(), existingMessages);
+        messagesStoreForAllUsers.addMessage(commandLineEntry.getTimeLineMessage());
     }
 
     private void addToFollowsList(String userTypedCommands) {
@@ -77,19 +74,14 @@ public class JustLikeTwitterEngine {
         followsListForAllUsers.put(newCommandLineEntry.getUserName(), existingFollowsList);
     }
 
-    private List<TimeLineMessage> getExistingMessagesFor(String userName) {
-        List<TimeLineMessage> messages = messagesStoreForAllUsers.get(userName);
-
-        if (messages == null) {
-            messages = new ArrayList<>();
-        }
-
-        return messages;
+    private String displayWall(String userTypedCommands) {
+        CommandLineEntry commandLineEntry = commandLineParser.parse(userTypedCommands, DISPLAY_WALL);
+        return getWallFor(commandLineEntry.getUserName());
     }
 
     public String getTimeLineFor(String userName) {
         StringBuilder result = new StringBuilder();
-        List<TimeLineMessage> usersMessages = messagesStoreForAllUsers.get(userName);
+        List<TimeLineMessage> usersMessages = messagesStoreForAllUsers.getMessagesFor(userName);
         for (TimeLineMessage usersMessage: usersMessages) {
             result.append(usersMessage.toString())
                   .append(System.lineSeparator());
@@ -99,5 +91,31 @@ public class JustLikeTwitterEngine {
 
     public List<String> getFollowsListFor(String userName) {
         return followsListForAllUsers.get(userName);
+    }
+
+    public String getWallFor(String userName) {
+        List<String> newFollowsList = addThisUserToFollowsList(userName);
+        return getFormattedMessagesForWallUsing(newFollowsList);
+    }
+
+    private String getFormattedMessagesForWallUsing(List<String> followsList) {
+        StringBuilder result = new StringBuilder();
+
+        List<TimeLineMessage> usersMessages = messagesStoreForAllUsers.getMessagesFor(followsList);
+
+        for (TimeLineMessage usersMessage: usersMessages) {
+            result.append(usersMessage.getUserName())
+                    .append(HYPHEN_SEPARATOR)
+                    .append(usersMessage.toString())
+                    .append(System.lineSeparator());
+        }
+
+        return result.toString();
+    }
+
+    private List<String> addThisUserToFollowsList(String userName) {
+        List<String> followsList = getFollowsListFor(userName);
+        followsList.add(userName);
+        return followsList;
     }
 }

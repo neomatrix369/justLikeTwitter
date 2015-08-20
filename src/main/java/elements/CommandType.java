@@ -2,7 +2,8 @@ package elements;
 
 public enum CommandType {
     POST_MESSAGE (" -> "),
-    FOLLOWS_USER (" follows ");
+    FOLLOWS_USER (" follows "),
+    DISPLAY_WALL(" wall");
 
     private final String token;
 

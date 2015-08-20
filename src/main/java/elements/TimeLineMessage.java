@@ -9,6 +9,7 @@ public final class TimeLineMessage {
 
     private static final String MESSAGE_ON_TIMELINE_PATTERN = "%s %s";
 
+    private String userName;
     private Date dateTime;
     private String message;
 
@@ -31,5 +32,17 @@ public final class TimeLineMessage {
                 MESSAGE_ON_TIMELINE_PATTERN,
                 message,
                 dateTimeProcessor.whenMessageWasPosted(dateTime));
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public Date getDateTime() {
+        return new Date(dateTime.getTime());
     }
 }
