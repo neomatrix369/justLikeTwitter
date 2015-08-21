@@ -59,3 +59,6 @@ Then wait for the app to load in the console tab of your IDE.
     $ mvn clean package
 
     $ mvn test
+    
+When running the above commands, and when the FullLifeCycleAcceptanceTest is run, ApprovalTests will ask if you want to 
+validate your first output, press OK in the dialog. 
