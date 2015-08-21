@@ -79,7 +79,7 @@ public class FullLifeCycleAcceptanceTest {
         try {
             List<String> listOfDates = getTheContentOf(getPathFor(datesForInputFile).toString());
             for (String eachDate: listOfDates) {
-                result.add(getDateFor(eachDate));
+                result.add(convertToDateFrom(eachDate));
             }
         } catch (IOException e) {
             System.err.println("Error loading input file with dates: " + e.getMessage());
@@ -88,7 +88,7 @@ public class FullLifeCycleAcceptanceTest {
         return result;
     }
 
-    private Date getDateFor(String dateAsString) {
+    private Date convertToDateFrom(String dateAsString) {
         DateFormat format = new SimpleDateFormat(DD_MM_YYYY_HH_MM_SS, Locale.ENGLISH);
         try {
             return format.parse(dateAsString);
