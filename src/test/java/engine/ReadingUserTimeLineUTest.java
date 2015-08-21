@@ -61,12 +61,17 @@ public class ReadingUserTimeLineUTest {
         userTypesAtThePrompt(COMMAND_TYPED_BY_HARRY, ZERO_MINUTES);
 
         // When I type "Harry" at the prompt after fifty seconds
-        String actualTimeLine =
-                getTimelineFor(USER_HARRY, currentDateTime, AFTER_FIFTY_SECONDS);
+        String actualTimeLine = userTypesAtThePrompt(USER_HARRY, AFTER_FIFTY_SECONDS);
 
         // Then I see "I like this idea (50 seconds ago)" at the prompt
-        String expectedTimeline = "I like this idea (50 seconds ago)" + System.lineSeparator();
-        assertThat("Harry's timeline with one post should have been shown",
+        verifyThatTheTimelinesMatch(
+                "Harry's timeline with one post should have been shown",
+                actualTimeLine,
+                "I like this idea (50 seconds ago)" + System.lineSeparator());
+    }
+
+    private void verifyThatTheTimelinesMatch(String reason, String actualTimeLine, String expectedTimeline) {
+        assertThat(reason,
                 actualTimeLine,
                 is(equalTo(expectedTimeline)));
     }
@@ -81,14 +86,13 @@ public class ReadingUserTimeLineUTest {
         userTypesAtThePrompt(COMMAND_TYPED_BY_ALICE, ZERO_MINUTES);
 
         // When I type "Alice" at the prompt after five minutes
-        String actualTimeLine =
-                getTimelineFor(USER_ALICE, currentDateTime, AFTER_FIVE_MINUTES);
+        String actualTimeLine = userTypesAtThePrompt(USER_ALICE, AFTER_FIVE_MINUTES);
 
         // Then I see "I love the weather today (5 minutes ago)" at the prompt
-        String expectedTimeline = "I love the weather today (5 minutes ago)" + System.lineSeparator();
-        assertThat("Alice's timeline with one post should have been shown",
+        verifyThatTheTimelinesMatch(
+                "Alice's timeline with one post should have been shown",
                 actualTimeLine,
-                is(equalTo(expectedTimeline)));
+                "I love the weather today (5 minutes ago)" + System.lineSeparator());
     }
 
     /**
@@ -102,35 +106,28 @@ public class ReadingUserTimeLineUTest {
         userTypesAtThePrompt(COMMANDS_TYPED_BY_BOB[1], AFTER_ONE_MINUTE);
 
         // When I type "Bob" at the prompt after a minute
-        String actualTimeLine = getTimelineFor(USER_BOB, currentDateTime, AFTER_ONE_MINUTE);
+        String actualTimeLine = userTypesAtThePrompt(USER_BOB, AFTER_ONE_MINUTE);
 
         // Then I see the below messages in the console:
         // "Good game though. (1 minute ago)"
         // "Damn! We lost! (2 minutes ago)"
-        String expectedTimeline =
-                "Good game though. (1 minute ago)" + System.lineSeparator() +
-                "Damn! We lost! (2 minutes ago)" + System.lineSeparator();
-        assertThat("Bob's timeline with two posts should have been shown",
+        verifyThatTheTimelinesMatch(
+                "Bob's timeline with two posts should have been shown",
                 actualTimeLine,
-                is(equalTo(expectedTimeline)));
+                "Good game though. (1 minute ago)" + System.lineSeparator() +
+                "Damn! We lost! (2 minutes ago)" + System.lineSeparator()
+        );
     }
 
-    private String getTimelineFor(String userNameAsCommand,
-                                  Date currentDateTime,
-                                  long delayInMilliSeconds) throws IOException {
-        userTypesAtThePrompt(userNameAsCommand, delayInMilliSeconds);
-        return justLikeTwitterEngine.getTimeLineFor(userNameAsCommand);
+    private String userTypesAtThePrompt(String userTypedCommand,
+                                      long delayInMilliseconds) throws IOException {
+        currentDateTime = simulateDelayUsing(currentDateTime, delayInMilliseconds);
+        return justLikeTwitterEngine.executeCommand(userTypedCommand);
     }
 
     private Date simulateDelayUsing(Date currentDateTime, long timeInMilliSeconds) {
         Date newDateTime = new Date(currentDateTime.getTime() + timeInMilliSeconds);
         when(centralSystemClock.getCurrentDateTime()).thenReturn(newDateTime);
         return newDateTime;
-    }
-
-    private void userTypesAtThePrompt(String userTypedCommand,
-                                      long delayInMilliseconds) throws IOException {
-        currentDateTime = simulateDelayUsing(currentDateTime, delayInMilliseconds);
-        justLikeTwitterEngine.executeCommand(userTypedCommand);
     }
 }

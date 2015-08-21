@@ -47,7 +47,7 @@ public class PostingMessagesUTest {
         // Given a user's message list is empty
         // And a new message "Alice -> I love the weather today" is available
         // When the message is passed to the engine for the user
-        List<TimeLineMessage> actualMessagesToAdd = userTypesTheseCommands(
+        List<TimeLineMessage> actualMessagesToAdd = userTypesAtThePrompt(
                 USER_ALICE,
                 COMMANDS_TYPED_BY_ALICE);
 
@@ -67,7 +67,7 @@ public class PostingMessagesUTest {
         // Given user's message list is empty
         // And new messages like "Bob -> Damn! We lost!" and "Bob -> Good game though." are available
         // When the messages are passed to the engine for the user
-        List<TimeLineMessage> actualMessagesToAdd = userTypesTheseCommands(
+        List<TimeLineMessage> actualMessagesToAdd = userTypesAtThePrompt(
                 "Bob",
                 COMMANDS_TYPED_BY_BOB[0],
                 COMMANDS_TYPED_BY_BOB[1]);
@@ -82,8 +82,8 @@ public class PostingMessagesUTest {
         );
     }
 
-    private List<TimeLineMessage> userTypesTheseCommands(String userName,
-                                                         String... userTypedMessages) {
+    private List<TimeLineMessage> userTypesAtThePrompt(String userName,
+                                                       String... userTypedMessages) {
         for (String eachUserTypedMessage : userTypedMessages) {
             justLikeTwitterEngine.executeCommand(eachUserTypedMessage);
         }

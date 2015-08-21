@@ -1,9 +1,9 @@
 package engine;
 
+import clock.CentralSystemClock;
 import elements.MessageStore;
 import org.junit.Before;
 import org.junit.Test;
-import clock.CentralSystemClock;
 
 import java.util.Arrays;
 import java.util.List;
@@ -49,14 +49,14 @@ public class FollowingUsersUTest {
         //  Given Charlie is at the JustLikeTwitter command prompt ">"
         //  And Alice exists
         //  When he enters "Charlie follows Alice" at the prompt
-        justLikeTwitterEngine.executeCommand(COMMANDS_BY_CHARLIE[0]);
+        userTypesAtThePrompt(COMMANDS_BY_CHARLIE[0]);
         List<String> actualFollowsList = justLikeTwitterEngine.getFollowsListFor(USER_CHARLIE);
 
         // Then Alice is added to Charlie's follows list
-        List<String> expectedFollowsList = Arrays.asList(EXPECTED_FOLLOWS_LIST[0]);
-        assertThat("Alice should have been added to Charlie's follows list",
+        verifyThatTheFollowsListMatch(
+                "Alice should have been added to Charlie's follows list",
                 actualFollowsList,
-                is(equalTo(expectedFollowsList)));
+                EXPECTED_FOLLOWS_LIST[0]);
     }
 
     /**
@@ -69,13 +69,28 @@ public class FollowingUsersUTest {
         // And Bob exists
         // When he enters "Charlie follows Alice" at the prompt
         // And he enters "Charlie follows Bob" at the prompt
-        justLikeTwitterEngine.executeCommand(COMMANDS_BY_CHARLIE[0]);
-        justLikeTwitterEngine.executeCommand(COMMANDS_BY_CHARLIE[1]);
+        userTypesAtThePrompt(COMMANDS_BY_CHARLIE[0]);
+        userTypesAtThePrompt(COMMANDS_BY_CHARLIE[1]);
         List<String> actualFollowsList = justLikeTwitterEngine.getFollowsListFor(USER_CHARLIE);
 
         // Then Alice and Bob are added to Charlie's follows list
-        List<String> expectedFollowsList = Arrays.asList(EXPECTED_FOLLOWS_LIST[1]);
-        assertThat("Alice and Bob should have been added to Charlie's follows list",
+        verifyThatTheFollowsListMatch(
+                "Alice and Bob should have been added to Charlie's follows list",
+                actualFollowsList,
+                EXPECTED_FOLLOWS_LIST[1]
+        );
+    }
+
+    private String userTypesAtThePrompt(String userTypedCommand) {
+        return justLikeTwitterEngine.executeCommand(userTypedCommand);
+    }
+
+    private void verifyThatTheFollowsListMatch(String reason,
+                                               List<String> actualFollowsList,
+                                               String[] expectedFollowsListAsArray) {
+        List<String> expectedFollowsList = Arrays.asList(expectedFollowsListAsArray);
+        assertThat(
+                reason,
                 actualFollowsList,
                 is(equalTo(expectedFollowsList)));
     }
