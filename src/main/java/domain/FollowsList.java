@@ -7,10 +7,10 @@ import static helper.ImplHelper.NO_FOLLOWS_RETURNED;
 
 public class FollowsList {
 
-    private final Map<User, Users> store = new HashMap<>();
+    private final Map<User, Users> list = new HashMap<>();
 
     public Users getFollowsFor(User user) {
-        return store.get(user);
+        return list.get(user);
     }
 
     public void addNewFollowOf(User user, User newUser) {
@@ -18,11 +18,11 @@ public class FollowsList {
 
         existingFollowsList.add(newUser);
 
-        store.put(user, existingFollowsList);
+        list.put(user, existingFollowsList);
     }
 
     private Users getExistingFollowsListFor(User user) {
-        Users existingFollowsList = store.get(user);
+        Users existingFollowsList = list.get(user);
         existingFollowsList = getNewListForTheFirstTime(existingFollowsList);
         return existingFollowsList;
     }

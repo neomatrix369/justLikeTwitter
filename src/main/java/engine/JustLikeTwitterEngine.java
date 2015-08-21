@@ -5,6 +5,7 @@ import command.CommandExecutorFactory;
 import domain.FollowsList;
 import domain.MessageStore;
 import command.CommandExecutor;
+import domain.TypedCommand;
 
 public class JustLikeTwitterEngine {
     private final MessageStore messageStore;
@@ -19,7 +20,7 @@ public class JustLikeTwitterEngine {
         this.centralSystemClock = centralSystemClock;
     }
 
-    public String executeCommand(String userTypedCommand) {
+    public String executeCommand(TypedCommand userTypedCommand) {
         CommandExecutorFactory commandExecutorFactory =
                 new CommandExecutorFactory(centralSystemClock, messageStore, followsList);
         CommandExecutor command = commandExecutorFactory.getCommand(userTypedCommand);

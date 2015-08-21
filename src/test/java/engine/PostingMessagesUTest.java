@@ -4,6 +4,7 @@ import clock.CentralSystemClock;
 import domain.FollowsList;
 import domain.MessageStore;
 import domain.MessagePosted;
+import domain.TypedCommand;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -80,7 +81,7 @@ public class PostingMessagesUTest {
         );
     }
 
-    private void userTypesAtThePrompt(String userTypedCommand) {
+    private void userTypesAtThePrompt(TypedCommand userTypedCommand) {
         justLikeTwitterEngine.executeCommand(userTypedCommand);
     }
     private List<String> expectedMessagesToAdd(String... expectedMessages) {
@@ -90,6 +91,9 @@ public class PostingMessagesUTest {
     private void verifyThatTheMessagesHaveBeenAdded(String reason,
                                                     List<MessagePosted> actualMessages,
                                                     List<String> expectedMessages) {
-        assertThat(reason, actualMessages.size(), is(equalTo(expectedMessages.size())));
+        assertThat(
+                reason,
+                actualMessages.size(),
+                is(equalTo(expectedMessages.size())));
     }
 }

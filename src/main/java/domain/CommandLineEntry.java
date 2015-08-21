@@ -25,9 +25,9 @@ public class CommandLineEntry {
         this.user = user;
     }
 
-    public void setMessagePosted(User user, String message) {
+    public void setMessagePosted(User user, MessageText messageText) {
         messagePosted = new MessagePosted(centralSystemClock);
-        messagePosted.setMessage(message);
+        messagePosted.setMessageText(messageText);
         messagePosted.setUser(user);
     }
 

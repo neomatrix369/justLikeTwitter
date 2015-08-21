@@ -10,7 +10,7 @@ public final class MessagePosted {
 
     private User user;
     private Date dateTime;
-    private String message;
+    private MessageText messageText;
 
     private final CentralSystemClock centralSystemClock;
 
@@ -18,14 +18,14 @@ public final class MessagePosted {
         this.centralSystemClock = centralSystemClock;
     }
 
-    public void setMessage(String message) {
+    public void setMessageText(MessageText messageText) {
         this.dateTime = centralSystemClock.getCurrentDateTime();
-        this.message = message;
+        this.messageText = messageText;
     }
 
     @Override
     public String toString() {
-        return String.format(MESSAGE_ON_TIMELINE_PATTERN, dateTime, message);
+        return String.format(MESSAGE_ON_TIMELINE_PATTERN, dateTime, messageText);
     }
 
     public User getUser() {
@@ -40,7 +40,7 @@ public final class MessagePosted {
         return new Date(dateTime.getTime());
     }
 
-    public String getMessage() {
-        return message;
+    public MessageText getMessageText() {
+        return messageText;
     }
 }

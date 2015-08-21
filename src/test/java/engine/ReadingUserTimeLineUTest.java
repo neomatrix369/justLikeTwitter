@@ -3,6 +3,7 @@ package engine;
 import clock.CentralSystemClock;
 import domain.FollowsList;
 import domain.MessageStore;
+import domain.TypedCommand;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -54,7 +55,8 @@ public class ReadingUserTimeLineUTest {
         userTypesAtThePrompt(HARRY_POSTS_A_MESSAGE, ZERO_MINUTES);
 
         // When I type "Harry" at the prompt after fifty seconds
-        String actualTimeLine = userTypesAtThePrompt(USER_HARRY.toString(), AFTER_FIFTY_SECONDS);
+        TypedCommand userTypedCommand = new TypedCommand(USER_HARRY);
+        String actualTimeLine = userTypesAtThePrompt(userTypedCommand, AFTER_FIFTY_SECONDS);
 
         // Then I see "I like this idea (50 seconds ago)" at the prompt
         verifyThatTheTimeLinesMatch(
@@ -73,7 +75,8 @@ public class ReadingUserTimeLineUTest {
         userTypesAtThePrompt(ALICE_POSTS_A_MESSAGE, ZERO_MINUTES);
 
         // When I type "Alice" at the prompt after five minutes
-        String actualTimeLine = userTypesAtThePrompt(USER_ALICE.toString(), AFTER_FIVE_MINUTES);
+        TypedCommand userTypedCommand = new TypedCommand(USER_ALICE);
+        String actualTimeLine = userTypesAtThePrompt(userTypedCommand, AFTER_FIVE_MINUTES);
 
         // Then I see "I love the weather today (5 minutes ago)" at the prompt
         verifyThatTheTimeLinesMatch(
@@ -93,7 +96,8 @@ public class ReadingUserTimeLineUTest {
         userTypesAtThePrompt(BOB_POSTS_TWO_MESSAGES[1], AFTER_ONE_MINUTE);
 
         // When I type "Bob" at the prompt after a minute
-        String actualTimeLine = userTypesAtThePrompt(USER_BOB.toString(), AFTER_ONE_MINUTE);
+        TypedCommand userTypedCommand = new TypedCommand(USER_BOB);
+        String actualTimeLine = userTypesAtThePrompt(userTypedCommand, AFTER_ONE_MINUTE);
 
         // Then I see the below messages in the console:
         // "Good game though. (1 minute ago)"
@@ -106,12 +110,18 @@ public class ReadingUserTimeLineUTest {
         );
     }
 
-    private String userTypesAtThePrompt(String userTypedCommand, long delayInMilliseconds) {
-        currentDateTime = simulateDelayUsing(currentDateTime, centralSystemClock, delayInMilliseconds);
+    private String userTypesAtThePrompt(TypedCommand userTypedCommand,
+                                        long delayInMilliseconds) {
+        currentDateTime = simulateDelayUsing(
+                currentDateTime,
+                centralSystemClock,
+                delayInMilliseconds);
         return justLikeTwitterEngine.executeCommand(userTypedCommand);
     }
 
-    private void verifyThatTheTimeLinesMatch(String reason, String actualTimeLine, String expectedTimeline) {
+    private void verifyThatTheTimeLinesMatch(String reason,
+                                             String actualTimeLine,
+                                             String expectedTimeline) {
         assertThat(reason,
                 actualTimeLine,
                 is(equalTo(expectedTimeline)));

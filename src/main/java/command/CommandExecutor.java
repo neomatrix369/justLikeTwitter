@@ -37,7 +37,7 @@ public abstract class CommandExecutor {
 
         return String.format(
                 helper.ImplHelper.MESSAGE_PATTERN_READ_POST,
-                messagePosted.getMessage(),
+                messagePosted.getMessageText(),
                 clockTimeFormatter.whenMessageWasPosted(messagePosted.getDateTime()));
     }
 }

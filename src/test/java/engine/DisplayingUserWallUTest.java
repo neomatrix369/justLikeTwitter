@@ -3,6 +3,7 @@ package engine;
 import clock.CentralSystemClock;
 import domain.FollowsList;
 import domain.MessageStore;
+import domain.TypedCommand;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -131,8 +132,12 @@ public class DisplayingUserWallUTest {
                         "Bob - Damn! We lost! (2 minutes ago)" + System.lineSeparator());
     }
 
-    private String userTypesAtThePrompt(String userTypedCommand, long delayInMilliseconds) {
-        currentDateTime = simulateDelayUsing(currentDateTime, centralSystemClock, delayInMilliseconds);
+    private String userTypesAtThePrompt(TypedCommand userTypedCommand,
+                                        long delayInMilliseconds) {
+        currentDateTime = simulateDelayUsing(
+                currentDateTime,
+                centralSystemClock,
+                delayInMilliseconds);
         return justLikeTwitterEngine.executeCommand(userTypedCommand);
     }
 

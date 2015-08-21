@@ -5,6 +5,7 @@ import domain.CommandType;
 import domain.FollowsList;
 import domain.MessageStore;
 import domain.PatternCommandTypeMapper;
+import domain.TypedCommand;
 
 import java.util.Map;
 
@@ -26,7 +27,7 @@ public class CommandExecutorFactory {
         this.followsList = followsList;
     }
 
-    public CommandExecutor getCommand(String userTypedCommand) {
+    public CommandExecutor getCommand(TypedCommand userTypedCommand) {
         for (Map.Entry<CommandType, CommandExecutor>
                 patternCommandExecutorPair: patternCommandMap.entrySet()) {
 
@@ -48,7 +49,7 @@ public class CommandExecutorFactory {
         return NO_COMMAND_EXECUTOR_MATCHED;
     }
 
-    private CommandExecutor preparedCommandExecutor(String userTypedCommand,
+    private CommandExecutor preparedCommandExecutor(TypedCommand userTypedCommand,
                                                     Map.Entry<CommandType, CommandExecutor> patternCommandExecutorPair,
                                                     String pattern,
                                                     String tokenSeparator) {
