@@ -53,8 +53,7 @@ public class ReadingUserTimeLineUTest {
         // Given I am at the JustLikeTwitter command prompt ">"
         // And Harry's timeline contains the required posts
         setupJustLikeTwitter();
-        currentDateTime =
-                userTypesAtThePrompt(COMMAND_TYPED_BY_HARRY, currentDateTime, ZERO_MINUTES);
+        userTypesAtThePrompt(COMMAND_TYPED_BY_HARRY, ZERO_MINUTES);
 
         // When I type "Harry" at the prompt after fifty seconds
         String actualTimeLine =
@@ -75,8 +74,7 @@ public class ReadingUserTimeLineUTest {
         // Given I am at the JustLikeTwitter command prompt ">"
         // And Alice's timeline contains the required posts
         setupJustLikeTwitter();
-        currentDateTime =
-                userTypesAtThePrompt(COMMAND_TYPED_BY_ALICE, currentDateTime, ZERO_MINUTES);
+        userTypesAtThePrompt(COMMAND_TYPED_BY_ALICE, ZERO_MINUTES);
 
         // When I type "Alice" at the prompt after five minutes
         String actualTimeLine =
@@ -97,8 +95,8 @@ public class ReadingUserTimeLineUTest {
         // Given I am at the JustLikeTwitter command prompt ">"
         // And Bob's timeline contains the required posts
         setupJustLikeTwitter();
-        currentDateTime = userTypesAtThePrompt(COMMANDS_TYPED_BY_BOB[0], currentDateTime, ZERO_MINUTES);
-        currentDateTime = userTypesAtThePrompt(COMMANDS_TYPED_BY_BOB[1], currentDateTime, AFTER_ONE_MINUTE);
+        userTypesAtThePrompt(COMMANDS_TYPED_BY_BOB[0], ZERO_MINUTES);
+        userTypesAtThePrompt(COMMANDS_TYPED_BY_BOB[1], AFTER_ONE_MINUTE);
 
         // When I type "Bob" at the prompt after a minute
         String actualTimeLine = getTimelineFor("Bob", currentDateTime, AFTER_ONE_MINUTE);
@@ -117,7 +115,7 @@ public class ReadingUserTimeLineUTest {
     private String getTimelineFor(String userNameAsCommand,
                                   Date currentDateTime,
                                   long delayInMilliSeconds) throws IOException {
-        userTypesAtThePrompt(userNameAsCommand, currentDateTime, delayInMilliSeconds);
+        userTypesAtThePrompt(userNameAsCommand, delayInMilliSeconds);
         return justLikeTwitterEngine.getTimeLineFor(userNameAsCommand);
     }
 
@@ -132,11 +130,9 @@ public class ReadingUserTimeLineUTest {
         justLikeTwitterEngine = new JustLikeTwitterEngine(messageStore, centralSystemClock);
     }
 
-    private Date userTypesAtThePrompt(String userTypedCommand,
-                                      Date currentDateTime,
+    private void userTypesAtThePrompt(String userTypedCommand,
                                       long delayInMilliseconds) throws IOException {
         currentDateTime = simulateDelayUsing(currentDateTime, delayInMilliseconds);
         justLikeTwitterEngine.executeCommand(userTypedCommand);
-        return currentDateTime;
     }
 }
