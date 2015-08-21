@@ -4,20 +4,11 @@ import clock.CentralSystemClock;
 import clock.ClockTimeFormatter;
 import elements.FollowsList;
 import elements.MessageStore;
-import elements.TimeLineMessage;
+import elements.MessagePosted;
 
 import java.util.Arrays;
 
 public abstract class CommandExecutor {
-    static final int USERNAME_INDEX = 0;
-    static final int MESSAGE_INDEX = 1;
-    static final int OTHER_USERNAME_INDEX = 1;
-
-    static final String HYPHEN_SEPARATOR = " - ";
-    static final String NOTHING_FOR_THIS_COMMAND_EXECUTION = "";
-
-    private static final String MESSAGE_PATTERN_READ_POST = "%s %s";
-
     String[] tokens;
     CentralSystemClock centralSystemClock;
     MessageStore messageStore;
@@ -41,12 +32,12 @@ public abstract class CommandExecutor {
         this.followsList = followsList;
     }
 
-    String getFormattedMessage(TimeLineMessage timeLineMessage) {
+    String getFormattedMessage(MessagePosted messagePosted) {
         ClockTimeFormatter clockTimeFormatter = new ClockTimeFormatter(centralSystemClock);
 
         return String.format(
-                MESSAGE_PATTERN_READ_POST,
-                timeLineMessage.getMessage(),
-                clockTimeFormatter.whenMessageWasPosted(timeLineMessage.getDateTime()));
+                helper.ImplHelper.MESSAGE_PATTERN_READ_POST,
+                messagePosted.getMessage(),
+                clockTimeFormatter.whenMessageWasPosted(messagePosted.getDateTime()));
     }
 }

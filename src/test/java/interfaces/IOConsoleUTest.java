@@ -9,15 +9,14 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
 
+import static helper.ImplHelper.COMMAND_PROMPT_INDICATOR;
+import static helper.TestHelper.ANY_TEXT;
+import static helper.TestHelper.COMMANDS_TYPED_BY_ALICE;
+import static helper.TestHelper.EXTRA_LINEFEED_NOT_NEEDED;
+
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
-
-import static interfaces.IOConsole.COMMAND_PROMPT_INDICATOR;
-
-import static helper.TestHelper.COMMANDS_TYPED_BY_ALICE;
-import static helper.TestHelper.ANY_TEXT;
-import static helper.TestHelper.EXTRA_LINEFEED_NOT_NEEDED;
 
 public class IOConsoleUTest {
 

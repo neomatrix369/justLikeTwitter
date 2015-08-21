@@ -1,8 +1,10 @@
 package engine.commands;
 
-import elements.TimeLineMessage;
+import elements.MessagePosted;
 
 import java.util.List;
+
+import static helper.ImplHelper.USERNAME_INDEX;
 
 public class ReadPostCommand extends CommandExecutor {
 
@@ -15,17 +17,17 @@ public class ReadPostCommand extends CommandExecutor {
     private String getFormattedMessageFor(String userName) {
         StringBuilder result = new StringBuilder();
 
-        List<TimeLineMessage> timeLineMessages = messageStore.getMessagesFor(userName);
+        List<MessagePosted> messagePosteds = messageStore.getMessagesFor(userName);
 
-        for (TimeLineMessage timeLineMessage: timeLineMessages) {
-            buildTimeLine(result, timeLineMessage);
+        for (MessagePosted messagePosted : messagePosteds) {
+            buildTimeLine(result, messagePosted);
         }
 
         return result.toString();
     }
 
-    private void buildTimeLine(StringBuilder result, TimeLineMessage timeLineMessage) {
-        result.append(getFormattedMessage(timeLineMessage))
+    private void buildTimeLine(StringBuilder result, MessagePosted messagePosted) {
+        result.append(getFormattedMessage(messagePosted))
               .append(System.lineSeparator());
     }
 }

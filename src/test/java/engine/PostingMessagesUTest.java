@@ -3,7 +3,7 @@ package engine;
 import clock.CentralSystemClock;
 import elements.FollowsList;
 import elements.MessageStore;
-import elements.TimeLineMessage;
+import elements.MessagePosted;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -14,6 +14,7 @@ import static helper.TestHelper.COMMANDS_TYPED_BY_ALICE;
 import static helper.TestHelper.COMMANDS_TYPED_BY_BOB;
 import static helper.TestHelper.USER_ALICE;
 import static helper.TestHelper.USER_BOB;
+
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -47,7 +48,7 @@ public class PostingMessagesUTest {
         // And a new message "Alice -> I love the weather today" is available
         // When the message is passed to the engine for the user
         userTypesAtThePrompt(COMMANDS_TYPED_BY_ALICE[0]);
-        List<TimeLineMessage> actualMessagesToAdd = messageStore.getMessagesFor(USER_ALICE);
+        List<MessagePosted> actualMessagesToAdd = messageStore.getMessagesFor(USER_ALICE);
 
         // Then the message is added to the user's message list
         verifyThatTheMessagesHaveBeenAdded(
@@ -67,7 +68,7 @@ public class PostingMessagesUTest {
         // When the messages are passed to the engine for the user
         userTypesAtThePrompt(COMMANDS_TYPED_BY_BOB[0]);
         userTypesAtThePrompt(COMMANDS_TYPED_BY_BOB[1]);
-        List<TimeLineMessage> actualMessagesToAdd = messageStore.getMessagesFor(USER_BOB);
+        List<MessagePosted> actualMessagesToAdd = messageStore.getMessagesFor(USER_BOB);
 
         // Then the messages are added to the user's message list, in the reverse order of entry
         verifyThatTheMessagesHaveBeenAdded(
@@ -87,7 +88,7 @@ public class PostingMessagesUTest {
     }
 
     private void verifyThatTheMessagesHaveBeenAdded(String reason,
-                                                    List<TimeLineMessage> actualMessages,
+                                                    List<MessagePosted> actualMessages,
                                                     List<String> expectedMessages) {
         assertThat(reason, actualMessages.size(), is(equalTo(expectedMessages.size())));
     }

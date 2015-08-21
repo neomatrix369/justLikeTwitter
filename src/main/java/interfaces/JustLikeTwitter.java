@@ -1,17 +1,17 @@
 package interfaces;
 
+import clock.CentralSystemClock;
 import elements.FollowsList;
 import elements.MessageStore;
 import engine.JustLikeTwitterEngine;
-import clock.CentralSystemClock;
 
 import java.io.IOException;
 
-public class JustLikeTwitter {
-    private static final int START_FROM_ONE = 1;
-    private static final int FOREVER = -1;
-    private static final boolean EXTRA_LINEFEED_NOT_NEEDED = false;
+import static helper.ImplHelper.EXTRA_LINEFEED_NOT_NEEDED;
+import static helper.ImplHelper.FOREVER;
+import static helper.ImplHelper.START_FROM_ONE;
 
+public class JustLikeTwitter {
     private final JustLikeTwitterEngine justLikeTwitterEngine;
     private final IOConsole ioConsole;
 

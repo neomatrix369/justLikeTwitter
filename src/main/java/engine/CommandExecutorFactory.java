@@ -9,9 +9,9 @@ import engine.commands.CommandExecutor;
 
 import java.util.Map;
 
-class CommandExecutorFactory {
+import static helper.ImplHelper.NO_COMMAND_EXECUTOR_MATCHED;
 
-    private static final CommandExecutor NO_COMMAND_EXECUTOR_MATCHED = null;
+class CommandExecutorFactory {
 
     private final Map<CommandType, CommandExecutor> patternCommandMap = PatternCommandTypeMapper.get();
 

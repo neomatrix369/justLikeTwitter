@@ -1,9 +1,12 @@
 package engine.commands;
 
 import elements.CommandLineEntry;
-import elements.TimeLineMessage;
+import elements.MessagePosted;
 
 import java.util.List;
+
+import static helper.ImplHelper.HYPHEN_SEPARATOR;
+import static helper.ImplHelper.USERNAME_INDEX;
 
 public class DisplayWallCommand extends CommandExecutor {
 
@@ -27,19 +30,19 @@ public class DisplayWallCommand extends CommandExecutor {
     private String getFormattedMessage(List<String> followsList) {
         StringBuilder result = new StringBuilder();
 
-        List<TimeLineMessage> timeLineMessages = messageStore.getMessagesFor(followsList);
+        List<MessagePosted> messagePosteds = messageStore.getMessagesFor(followsList);
 
-        for (TimeLineMessage timeLineMessage: timeLineMessages) {
-            buildTimeLine(result, timeLineMessage);
+        for (MessagePosted messagePosted : messagePosteds) {
+            buildTimeLine(result, messagePosted);
         }
 
         return result.toString();
     }
 
-    private void buildTimeLine(StringBuilder result, TimeLineMessage timeLineMessage) {
-        result.append(timeLineMessage.getUserName())
+    private void buildTimeLine(StringBuilder result, MessagePosted messagePosted) {
+        result.append(messagePosted.getUserName())
                 .append(HYPHEN_SEPARATOR)
-                .append(getFormattedMessage(timeLineMessage))
+                .append(getFormattedMessage(messagePosted))
                 .append(System.lineSeparator());
     }
 

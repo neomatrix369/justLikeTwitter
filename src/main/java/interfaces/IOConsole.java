@@ -5,10 +5,10 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Scanner;
 
-public class IOConsole {
-    public static final String COMMAND_PROMPT_INDICATOR = "> ";
+import static helper.ImplHelper.COMMAND_PROMPT_INDICATOR;
+import static helper.ImplHelper.NOTHING;
 
-    private static final String NOTHING = "";
+public class IOConsole {
 
     private final OutputStream outputStream;
     private final boolean needLineFeedForEachLine;

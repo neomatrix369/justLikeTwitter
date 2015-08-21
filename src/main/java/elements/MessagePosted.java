@@ -4,9 +4,9 @@ import clock.CentralSystemClock;
 
 import java.util.Date;
 
-public final class TimeLineMessage {
+import static helper.ImplHelper.MESSAGE_ON_TIMELINE_PATTERN;
 
-    private static final String MESSAGE_ON_TIMELINE_PATTERN = "%s %s";
+public final class MessagePosted {
 
     private String userName;
     private Date dateTime;
@@ -14,7 +14,7 @@ public final class TimeLineMessage {
 
     private final CentralSystemClock centralSystemClock;
 
-    public TimeLineMessage(CentralSystemClock centralSystemClock) {
+    public MessagePosted(CentralSystemClock centralSystemClock) {
         this.centralSystemClock = centralSystemClock;
     }
 

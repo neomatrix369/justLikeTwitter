@@ -5,7 +5,7 @@ import clock.CentralSystemClock;
 public class CommandLineEntry {
     private String userName;
     private String otherUsersName;
-    private TimeLineMessage timeLineMessage;
+    private MessagePosted messagePosted;
 
     private final CentralSystemClock centralSystemClock;
 
@@ -17,18 +17,18 @@ public class CommandLineEntry {
         return userName;
     }
 
-    public TimeLineMessage getTimeLineMessage() {
-        return timeLineMessage;
+    public MessagePosted getMessagePosted() {
+        return messagePosted;
     }
 
     public void setUserName(String userName) {
         this.userName = userName;
     }
 
-    public void setTimeLineMessage(String userName, String message) {
-        timeLineMessage = new TimeLineMessage(centralSystemClock);
-        timeLineMessage.setMessage(message);
-        timeLineMessage.setUserName(userName);
+    public void setMessageTyped(String userName, String message) {
+        messagePosted = new MessagePosted(centralSystemClock);
+        messagePosted.setMessage(message);
+        messagePosted.setUserName(userName);
     }
 
     public String getOtherUsersName() {

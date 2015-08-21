@@ -2,16 +2,15 @@ package clock;
 
 import java.util.Date;
 
+import static helper.ImplHelper.DEFAULT_TOKEN;
+import static helper.ImplHelper.MINUTE_TOKEN;
+import static helper.ImplHelper.SECOND_TOKEN;
+import static helper.ImplHelper.SIXTY_SECONDS;
+import static helper.ImplHelper.SUFFIX_S;
+import static helper.ImplHelper.THOUSAND_MILLISECONDS;
+import static helper.ImplHelper.TIME_IN_WORDS_PATTERN;
+
 public class ClockTimeFormatter {
-    private static final int THOUSAND_MILLISECONDS = 1000;
-    private static final int SIXTY_SECONDS = 60;
-
-    private static final String TIME_IN_WORDS_PATTERN = "(%d %s ago)";
-
-    private static final String MINUTE_TOKEN = "minute";
-    private static final String SECOND_TOKEN = "second";
-    private static final String DEFAULT_TOKEN = "(just now)";
-    private static final String SUFFIX_S = "s";
 
     private final CentralSystemClock centralSystemClock;
 

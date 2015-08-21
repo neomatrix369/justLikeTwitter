@@ -2,6 +2,10 @@ package engine.commands;
 
 import elements.CommandLineEntry;
 
+import static helper.ImplHelper.NOTHING_FOR_THIS_COMMAND_EXECUTION;
+import static helper.ImplHelper.OTHER_USERNAME_INDEX;
+import static helper.ImplHelper.USERNAME_INDEX;
+
 public class FollowUserCommand extends CommandExecutor {
 
     @Override

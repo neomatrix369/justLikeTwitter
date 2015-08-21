@@ -7,32 +7,32 @@ import java.util.Comparator;
 import java.util.List;
 
 public class MessageStore {
-    private final List<TimeLineMessage> store = new ArrayList<>();
+    private final List<MessagePosted> store = new ArrayList<>();
 
-    private final Comparator<TimeLineMessage>
-            sortByDateTimeInDescendingOrder = new Comparator<TimeLineMessage>() {
+    private final Comparator<MessagePosted>
+            sortByDateTimeInDescendingOrder = new Comparator<MessagePosted>() {
         @Override
-        public int compare(TimeLineMessage first, TimeLineMessage second) {
+        public int compare(MessagePosted first, MessagePosted second) {
             return compareToYieldResultsInDescendingOrder(first, second);
         }
 
-        private int compareToYieldResultsInDescendingOrder(TimeLineMessage first, TimeLineMessage second) {
+        private int compareToYieldResultsInDescendingOrder(MessagePosted first, MessagePosted second) {
             return second.getDateTime().compareTo(first.getDateTime());
         }
     };
 
-    public List<TimeLineMessage> getMessagesFor(String userName) {
+    public List<MessagePosted> getMessagesFor(String userName) {
         return getMessagesFor(Arrays.asList(userName));
     }
 
-    public void addMessage(TimeLineMessage messages) {
+    public void addMessage(MessagePosted messages) {
         store.add(messages);
     }
 
-    public List<TimeLineMessage> getMessagesFor(List<String> users) {
-        List<TimeLineMessage> listForUser = new ArrayList<>();
+    public List<MessagePosted> getMessagesFor(List<String> users) {
+        List<MessagePosted> listForUser = new ArrayList<>();
 
-        for (TimeLineMessage eachMessage: store) {
+        for (MessagePosted eachMessage: store) {
             if (users.contains(eachMessage.getUserName())) {
                 listForUser.add(eachMessage);
             }
