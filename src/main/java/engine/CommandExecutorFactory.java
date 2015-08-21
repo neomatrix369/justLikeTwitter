@@ -41,7 +41,7 @@ class CommandExecutorFactory {
                     pattern,
                     tokenSeparator);
 
-            if (commandExecutor != null) {
+            if (commandExecutor != NO_COMMAND_EXECUTOR_MATCHED) {
                 return commandExecutor;
             }
         }

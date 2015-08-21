@@ -39,4 +39,11 @@ public final class ImplHelper {
     public static final String UTF_8_STRING = "UTF-8";
 
     private ImplHelper() {}
+
+    public static String makePlural(long duration, String timeUnit) {
+        if (duration > 1) {
+            return timeUnit + SUFFIX_S;
+        }
+        return timeUnit;
+    }
 }

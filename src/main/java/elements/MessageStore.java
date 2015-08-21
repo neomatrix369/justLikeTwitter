@@ -32,13 +32,18 @@ public class MessageStore {
     public List<MessagePosted> getMessagesFor(List<String> users) {
         List<MessagePosted> listForUser = new ArrayList<>();
 
+        filterMessagesFor(users, listForUser);
+
+        Collections.sort(listForUser, sortByDateTimeInDescendingOrder);
+
+        return listForUser;
+    }
+
+    private void filterMessagesFor(List<String> users, List<MessagePosted> listForUser) {
         for (MessagePosted eachMessage: store) {
             if (users.contains(eachMessage.getUserName())) {
                 listForUser.add(eachMessage);
             }
         }
-
-        Collections.sort(listForUser, sortByDateTimeInDescendingOrder);
-        return listForUser;
     }
 }

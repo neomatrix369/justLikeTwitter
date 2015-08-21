@@ -11,11 +11,11 @@ public class FollowsList {
 
     private final Map<String, List<String>> store = new HashMap<>();
 
-    public List<String> getFor(String userName) {
+    public List<String> getFollowsFor(String userName) {
         return store.get(userName);
     }
 
-    public void addNewFor(String userName, String newUsername) {
+    public void addNewFollowOf(String userName, String newUsername) {
         List<String> existingFollowsList = getExistingFollowsListFor(userName);
 
         existingFollowsList.add(newUsername);

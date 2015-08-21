@@ -12,7 +12,7 @@ public class FollowUserCommand extends CommandExecutor {
     public String execute() {
         CommandLineEntry commandLineEntry = prepareCommandLineEntry();
 
-        followsList.addNewFor(commandLineEntry.getUserName(), commandLineEntry.getOtherUsersName());
+        followsList.addNewFollowOf(commandLineEntry.getUserName(), commandLineEntry.getOtherUsersName());
 
         return NOTHING_FOR_THIS_COMMAND_EXECUTION;
     }

@@ -6,9 +6,9 @@ import static helper.ImplHelper.DEFAULT_TOKEN;
 import static helper.ImplHelper.MINUTE_TOKEN;
 import static helper.ImplHelper.SECOND_TOKEN;
 import static helper.ImplHelper.SIXTY_SECONDS;
-import static helper.ImplHelper.SUFFIX_S;
 import static helper.ImplHelper.THOUSAND_MILLISECONDS;
 import static helper.ImplHelper.TIME_IN_WORDS_PATTERN;
+import static helper.ImplHelper.makePlural;
 
 public class ClockTimeFormatter {
 
@@ -43,12 +43,5 @@ public class ClockTimeFormatter {
         }
 
         return DEFAULT_TOKEN;
-    }
-
-    private String makePlural(long duration, String timeUnit) {
-        if (duration > 1) {
-            return timeUnit + SUFFIX_S;
-        }
-        return timeUnit;
     }
 }

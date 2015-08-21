@@ -53,6 +53,6 @@ public class DisplayWallCommand extends CommandExecutor {
     }
 
     private List<String> getFollowsListFor(String userName) {
-        return followsList.getFor(userName);
+        return followsList.getFollowsFor(userName);
     }
 }

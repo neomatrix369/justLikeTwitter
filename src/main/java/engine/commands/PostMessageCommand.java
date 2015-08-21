@@ -18,7 +18,7 @@ public class PostMessageCommand extends CommandExecutor {
     private CommandLineEntry prepareCommandLineEntry() {
         CommandLineEntry commandLineEntry = new CommandLineEntry(centralSystemClock);
         commandLineEntry.setUserName(tokens[USERNAME_INDEX].trim());
-        commandLineEntry.setMessageTyped(commandLineEntry.getUserName(), tokens[MESSAGE_INDEX].trim());
+        commandLineEntry.setMessagePosted(commandLineEntry.getUserName(), tokens[MESSAGE_INDEX].trim());
         return commandLineEntry;
     }
 }
