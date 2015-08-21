@@ -1,14 +1,18 @@
 package engine;
 
+import clock.CentralSystemClock;
 import elements.MessageStore;
 import elements.TimeLineMessage;
 import org.junit.Before;
 import org.junit.Test;
-import clock.CentralSystemClock;
 
 import java.util.Arrays;
 import java.util.List;
 
+import static helper.TestHelper.COMMANDS_TYPED_BY_ALICE;
+import static helper.TestHelper.COMMANDS_TYPED_BY_BOB;
+import static helper.TestHelper.USER_ALICE;
+import static helper.TestHelper.USER_BOB;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -18,17 +22,6 @@ import static org.junit.Assert.assertThat;
  */
 
 public class PostingMessagesUTest {
-
-    private static final String USER_ALICE = "Alice";
-
-    private static final String[] COMMANDS_TYPED_BY_ALICE = new String[]{
-            "Alice -> I love the weather today",
-    };
-
-    private static final String[] COMMANDS_TYPED_BY_BOB = new String[]{
-            "Bob -> Damn! We lost!",
-            "Bob -> Good game though."
-    };
 
     private final CentralSystemClock centralSystemClock = new CentralSystemClock();
     private JustLikeTwitterEngine justLikeTwitterEngine;
@@ -68,7 +61,7 @@ public class PostingMessagesUTest {
         // And new messages like "Bob -> Damn! We lost!" and "Bob -> Good game though." are available
         // When the messages are passed to the engine for the user
         List<TimeLineMessage> actualMessagesToAdd = userTypesAtThePrompt(
-                "Bob",
+                USER_BOB,
                 COMMANDS_TYPED_BY_BOB[0],
                 COMMANDS_TYPED_BY_BOB[1]);
 

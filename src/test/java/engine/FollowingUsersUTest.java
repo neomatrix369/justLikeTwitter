@@ -8,6 +8,9 @@ import org.junit.Test;
 import java.util.Arrays;
 import java.util.List;
 
+import static helper.TestHelper.COMMANDS_TYPED_BY_CHARLIE;
+import static helper.TestHelper.EXPECTED_FOLLOWS_LIST;
+import static helper.TestHelper.USER_CHARLIE;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -18,19 +21,6 @@ import static org.mockito.Mockito.mock;
  */
 
 public class FollowingUsersUTest {
-
-    private static final String USER_CHARLIE = "Charlie";
-
-    private static final String[] COMMANDS_BY_CHARLIE = new String [] {
-            "Charlie follows Alice",
-            "Charlie follows Bob"
-    };
-
-    private static final String[][] EXPECTED_FOLLOWS_LIST = {
-            new String[]{"Alice"},
-            new String[]{"Alice", "Bob"}
-    };
-
 
     private JustLikeTwitterEngine justLikeTwitterEngine;
 
@@ -49,7 +39,7 @@ public class FollowingUsersUTest {
         //  Given Charlie is at the JustLikeTwitter command prompt ">"
         //  And Alice exists
         //  When he enters "Charlie follows Alice" at the prompt
-        userTypesAtThePrompt(COMMANDS_BY_CHARLIE[0]);
+        userTypesAtThePrompt(COMMANDS_TYPED_BY_CHARLIE[1]);
         List<String> actualFollowsList = justLikeTwitterEngine.getFollowsListFor(USER_CHARLIE);
 
         // Then Alice is added to Charlie's follows list
@@ -69,8 +59,8 @@ public class FollowingUsersUTest {
         // And Bob exists
         // When he enters "Charlie follows Alice" at the prompt
         // And he enters "Charlie follows Bob" at the prompt
-        userTypesAtThePrompt(COMMANDS_BY_CHARLIE[0]);
-        userTypesAtThePrompt(COMMANDS_BY_CHARLIE[1]);
+        userTypesAtThePrompt(COMMANDS_TYPED_BY_CHARLIE[1]);
+        userTypesAtThePrompt(COMMANDS_TYPED_BY_CHARLIE[2]);
         List<String> actualFollowsList = justLikeTwitterEngine.getFollowsListFor(USER_CHARLIE);
 
         // Then Alice and Bob are added to Charlie's follows list

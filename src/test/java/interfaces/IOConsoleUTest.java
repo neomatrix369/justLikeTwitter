@@ -9,23 +9,24 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
 
-import static interfaces.IOConsole.COMMAND_PROMPT_INDICATOR;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-public class IOConsoleUTest {
+import static interfaces.IOConsole.COMMAND_PROMPT_INDICATOR;
 
-    private static final String INPUT_FROM_ALICE = "Alice -> I love the weather today";
-    private static final String ANY_TEXT = "Some test to display on the console";
-    private static final boolean EXTRA_LINEFEED_NOT_NEEDED = false;
+import static helper.TestHelper.COMMANDS_TYPED_BY_ALICE;
+import static helper.TestHelper.ANY_TEXT;
+import static helper.TestHelper.EXTRA_LINEFEED_NOT_NEEDED;
+
+public class IOConsoleUTest {
 
     private IOConsole ioConsole;
     private ByteArrayOutputStream outputStreamContent;
 
     @Before
     public void setUp() {
-        ByteArrayInputStream inputInputStreamContent = new ByteArrayInputStream(INPUT_FROM_ALICE.getBytes());
+        ByteArrayInputStream inputInputStreamContent = new ByteArrayInputStream(COMMANDS_TYPED_BY_ALICE[0].getBytes());
         BufferedInputStream bufferedInputStream = new BufferedInputStream(inputInputStreamContent);
 
         outputStreamContent = new ByteArrayOutputStream();
@@ -43,7 +44,7 @@ public class IOConsoleUTest {
         // then
         assertThat("The expected line of input should have been returned.",
                 actualOutputString,
-                is(equalTo(INPUT_FROM_ALICE)));
+                is(equalTo(COMMANDS_TYPED_BY_ALICE[0])));
     }
 
     @Test

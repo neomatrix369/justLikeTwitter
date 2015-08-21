@@ -1,5 +1,3 @@
-import com.github.approval.Approval;
-import com.github.approval.reporters.Reporters;
 import elements.MessageStore;
 import engine.JustLikeTwitterEngine;
 import interfaces.IOConsole;
@@ -31,20 +29,15 @@ import java.util.Locale;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import static helper.TestHelper.EXTRA_LINEFEED_NEEDED;
+import static helper.TestHelper.REPLAY_INPUT_FILE;
+import static helper.TestHelper.ACTUAL_OUTPUT_FILE;
+import static helper.TestHelper.APPROVER;
+import static helper.TestHelper.DATES_FOR_MESSAGES_INPUT_FILE;
+import static helper.TestHelper.DD_MM_YYYY_HH_MM_SS;
+import static helper.TestHelper.EXPECTED_OUTPUT_FILE;
+
 public class FullLifeCycleAcceptanceTest {
-
-    private static final String REPLAY_INPUT_FILE = "justLikeTwitterCommandsInputFile.txt";
-    private static final String DATES_FOR_MESSAGES_INPUT_FILE = "justLikeTwitterCommandsInputFileMessageDateTimes.txt";
-    private static final String EXPECTED_OUTPUT_FILE = "justLikeTwitterCommandsExpectedOutputFile.txt";
-    private static final String ACTUAL_OUTPUT_FILE = "justLikeTwitterCommandsActualOutputFile.txt";
-
-    private static final boolean EXTRA_LINEFEED_NEEDED = true;
-
-    private static final String DD_MM_YYYY_HH_MM_SS = "dd/MM/yyyy hh:mm:ss";
-
-    private static final Approval<String> APPROVER = Approval.of(String.class)
-            .withReporter(Reporters.console())
-            .build();
 
     private JustLikeTwitter justLikeTwitter;
     private CentralSystemClock centralSystemClockMock = mock(CentralSystemClock.class);

@@ -8,6 +8,16 @@ import org.junit.Test;
 import java.io.IOException;
 import java.util.Date;
 
+import static helper.TestHelper.AFTER_FIFTEEN_SECONDS;
+import static helper.TestHelper.AFTER_FIVE_MINUTES;
+import static helper.TestHelper.AFTER_ONE_MINUTE;
+import static helper.TestHelper.AFTER_THREE_MINUTES;
+import static helper.TestHelper.AFTER_TWO_SECONDS;
+import static helper.TestHelper.COMMANDS_TYPED_BY_ALICE;
+import static helper.TestHelper.COMMANDS_TYPED_BY_BOB;
+import static helper.TestHelper.COMMANDS_TYPED_BY_CHARLIE;
+import static helper.TestHelper.ZERO_MINUTES;
+
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -20,35 +30,10 @@ import static org.mockito.Mockito.when;
 
 public class DisplayingUserWallUTest {
 
-    private static final long ZERO_MINUTES = 0;
-    private static final long THOUSAND_MILLISECONDS = 1000;
-    private static final long AFTER_ONE_MINUTE = 60 * THOUSAND_MILLISECONDS;
-    private static final long AFTER_FIVE_MINUTES = 5 * AFTER_ONE_MINUTE;
-    private static final long ONE_SECOND = THOUSAND_MILLISECONDS;
-    private static final long AFTER_TWO_SECONDS = 2 * ONE_SECOND;
-    private static final long AFTER_FIFTEEN_SECONDS = 15 * ONE_SECOND;
-    private static final long AFTER_THREE_MINUTES = 3 * AFTER_ONE_MINUTE;
-
     private Date currentDateTime;
     private JustLikeTwitterEngine justLikeTwitterEngine;
 
     private final CentralSystemClock centralSystemClock = mock(CentralSystemClock.class);
-
-    private static final String[] COMMANDS_TYPED_BY_ALICE = new String[]{
-            "Alice -> I love the weather today",
-    };
-
-    private static final String[] COMMANDS_TYPED_BY_BOB = new String[]{
-            "Bob -> Damn! We lost!",
-            "Bob -> Good game though."
-    };
-
-    private static final String[] COMMANDS_TYPED_BY_CHARLIE = new String[]{
-            "Charlie -> I'm in New York today! Anyone wants to have a coffee?",
-            "Charlie follows Alice",
-            "Charlie follows Bob",
-            "Charlie wall"
-    };
 
     /**
      * Scenario: Charlie can subscribe to Alice’s timeline, and views an aggregated list of all subscriptions

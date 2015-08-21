@@ -8,6 +8,17 @@ import org.junit.Test;
 import java.io.IOException;
 import java.util.Date;
 
+import static helper.TestHelper.AFTER_FIFTY_SECONDS;
+import static helper.TestHelper.AFTER_FIVE_MINUTES;
+import static helper.TestHelper.AFTER_ONE_MINUTE;
+import static helper.TestHelper.COMMANDS_TYPED_BY_ALICE;
+import static helper.TestHelper.COMMANDS_TYPED_BY_BOB;
+import static helper.TestHelper.COMMAND_TYPED_BY_HARRY;
+import static helper.TestHelper.USER_ALICE;
+import static helper.TestHelper.USER_BOB;
+import static helper.TestHelper.USER_HARRY;
+import static helper.TestHelper.ZERO_MINUTES;
+
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -15,24 +26,6 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class ReadingUserTimeLineUTest {
-
-    private static final long ZERO_MINUTES = 0;
-    private static final long THOUSAND_MILLISECONDS = 1000;
-    private static final long AFTER_ONE_MINUTE = 60 * THOUSAND_MILLISECONDS;
-    private static final long AFTER_FIVE_MINUTES = 5 * AFTER_ONE_MINUTE;
-    private static final long ONE_SECOND = THOUSAND_MILLISECONDS;
-    private static final long AFTER_FIFTY_SECONDS = 50 * ONE_SECOND;
-
-    private static final String USER_ALICE = "Alice";
-    private static final String USER_HARRY = "Harry";
-    private static final String USER_BOB = "Bob";
-
-    private static final String COMMAND_TYPED_BY_HARRY = "Harry -> I like this idea";
-    private static final String COMMAND_TYPED_BY_ALICE = "Alice -> I love the weather today";
-    private static final String[] COMMANDS_TYPED_BY_BOB = new String[] {
-            "Bob -> Damn! We lost!",
-            "Bob -> Good game though."
-    };
 
     private JustLikeTwitterEngine justLikeTwitterEngine;
     private Date currentDateTime;
@@ -58,19 +51,19 @@ public class ReadingUserTimeLineUTest {
     public void givenHarryHasAPost_whenHarryIsTypedAtThePrompt_thenHarrysTimeLineIsShown() throws IOException {
         // Given I am at the JustLikeTwitter command prompt ">"
         // And Harry's timeline contains the required posts
-        userTypesAtThePrompt(COMMAND_TYPED_BY_HARRY, ZERO_MINUTES);
+        userTypesAtThePrompt(COMMAND_TYPED_BY_HARRY[0], ZERO_MINUTES);
 
         // When I type "Harry" at the prompt after fifty seconds
         String actualTimeLine = userTypesAtThePrompt(USER_HARRY, AFTER_FIFTY_SECONDS);
 
         // Then I see "I like this idea (50 seconds ago)" at the prompt
-        verifyThatTheTimelinesMatch(
+        verifyThatTheTimeLinesMatch(
                 "Harry's timeline with one post should have been shown",
                 actualTimeLine,
                 "I like this idea (50 seconds ago)" + System.lineSeparator());
     }
 
-    private void verifyThatTheTimelinesMatch(String reason, String actualTimeLine, String expectedTimeline) {
+    private void verifyThatTheTimeLinesMatch(String reason, String actualTimeLine, String expectedTimeline) {
         assertThat(reason,
                 actualTimeLine,
                 is(equalTo(expectedTimeline)));
@@ -83,13 +76,13 @@ public class ReadingUserTimeLineUTest {
     public void givenAliceHasAPost_whenAliceIsTypedAtThePrompt_thenAlicesTimeLineIsShown() throws IOException {
         // Given I am at the JustLikeTwitter command prompt ">"
         // And Alice's timeline contains the required posts
-        userTypesAtThePrompt(COMMAND_TYPED_BY_ALICE, ZERO_MINUTES);
+        userTypesAtThePrompt(COMMANDS_TYPED_BY_ALICE[0], ZERO_MINUTES);
 
         // When I type "Alice" at the prompt after five minutes
         String actualTimeLine = userTypesAtThePrompt(USER_ALICE, AFTER_FIVE_MINUTES);
 
         // Then I see "I love the weather today (5 minutes ago)" at the prompt
-        verifyThatTheTimelinesMatch(
+        verifyThatTheTimeLinesMatch(
                 "Alice's timeline with one post should have been shown",
                 actualTimeLine,
                 "I love the weather today (5 minutes ago)" + System.lineSeparator());
@@ -111,11 +104,11 @@ public class ReadingUserTimeLineUTest {
         // Then I see the below messages in the console:
         // "Good game though. (1 minute ago)"
         // "Damn! We lost! (2 minutes ago)"
-        verifyThatTheTimelinesMatch(
+        verifyThatTheTimeLinesMatch(
                 "Bob's timeline with two posts should have been shown",
                 actualTimeLine,
                 "Good game though. (1 minute ago)" + System.lineSeparator() +
-                "Damn! We lost! (2 minutes ago)" + System.lineSeparator()
+                        "Damn! We lost! (2 minutes ago)" + System.lineSeparator()
         );
     }
 
