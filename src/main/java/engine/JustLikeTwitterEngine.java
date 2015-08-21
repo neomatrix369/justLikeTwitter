@@ -1,21 +1,19 @@
 package engine;
 
-import elements.CommandType;
-import elements.MessageStore;
 import clock.CentralSystemClock;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import elements.FollowsList;
+import elements.MessageStore;
 
 public class JustLikeTwitterEngine {
     private final MessageStore messageStore;
-    private final Map<String, List<String>> followsList = new HashMap<>();
+    private final FollowsList followsList;
     private final CentralSystemClock centralSystemClock;
 
     public JustLikeTwitterEngine(MessageStore messageStore,
+                                 FollowsList followsList,
                                  CentralSystemClock centralSystemClock) {
         this.messageStore = messageStore;
+        this.followsList = followsList;
         this.centralSystemClock = centralSystemClock;
     }
 
@@ -24,18 +22,5 @@ public class JustLikeTwitterEngine {
                 new CommandExecutorFactory(centralSystemClock, messageStore, followsList);
         CommandExecutor command = commandExecutorFactory.getCommand(userTypedCommand);
         return command.execute();
-    }
-
-    public String getTimeLineFor(String userName) {
-        return executeCommand(userName);
-    }
-
-    public String getWallFor(String userName) {
-        String userWall = userName + CommandType.DISPLAY_WALL.getTokenSeparator();
-        return executeCommand(userWall);
-    }
-
-    public List<String> getFollowsListFor(String userName) {
-        return followsList.get(userName);
     }
 }

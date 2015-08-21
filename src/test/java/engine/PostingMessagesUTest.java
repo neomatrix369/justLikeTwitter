@@ -1,6 +1,7 @@
 package engine;
 
 import clock.CentralSystemClock;
+import elements.FollowsList;
 import elements.MessageStore;
 import elements.TimeLineMessage;
 import org.junit.Before;
@@ -23,13 +24,18 @@ import static org.junit.Assert.assertThat;
 
 public class PostingMessagesUTest {
 
-    private final CentralSystemClock centralSystemClock = new CentralSystemClock();
     private JustLikeTwitterEngine justLikeTwitterEngine;
     private MessageStore messageStore = new MessageStore();
 
+    private final CentralSystemClock centralSystemClock = new CentralSystemClock();
+
     @Before
     public void setUp() {
-        justLikeTwitterEngine = new JustLikeTwitterEngine(messageStore, centralSystemClock);
+        FollowsList followsList = new FollowsList();
+        justLikeTwitterEngine = new JustLikeTwitterEngine(
+                messageStore,
+                followsList,
+                centralSystemClock);
     }
 
     /**

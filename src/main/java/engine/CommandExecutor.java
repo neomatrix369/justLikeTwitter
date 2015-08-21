@@ -1,13 +1,12 @@
 package engine;
 
-import elements.MessageStore;
-import elements.TimeLineMessage;
 import clock.CentralSystemClock;
 import clock.ClockTimeFormatter;
+import elements.FollowsList;
+import elements.MessageStore;
+import elements.TimeLineMessage;
 
 import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
 
 public abstract class CommandExecutor {
     protected static final int USERNAME_INDEX = 0;
@@ -21,8 +20,7 @@ public abstract class CommandExecutor {
     protected String[] tokens;
     protected CentralSystemClock centralSystemClock;
     protected MessageStore messageStore;
-
-    protected Map<String, List<String>> followsList;
+    protected FollowsList followsList;
 
     public abstract String execute();
 
@@ -38,7 +36,7 @@ public abstract class CommandExecutor {
         this.messageStore = messageStore;
     }
 
-    public void setFollowsList(Map<String, List<String>> followsList) {
+    public void setFollowsList(FollowsList followsList) {
         this.followsList = followsList;
     }
 

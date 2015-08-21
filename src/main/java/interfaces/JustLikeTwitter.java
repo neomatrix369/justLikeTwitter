@@ -1,5 +1,6 @@
 package interfaces;
 
+import elements.FollowsList;
 import elements.MessageStore;
 import engine.JustLikeTwitterEngine;
 import clock.CentralSystemClock;
@@ -28,8 +29,13 @@ public class JustLikeTwitter {
 
     private static JustLikeTwitter setupJustLikeTwitter() {
         CentralSystemClock centralSystemClock = new CentralSystemClock();
+        FollowsList followsList = new FollowsList();
         MessageStore messageStore = new MessageStore();
-        JustLikeTwitterEngine justLikeTwitterEngine = new JustLikeTwitterEngine(messageStore, centralSystemClock);
+        JustLikeTwitterEngine justLikeTwitterEngine =
+                new JustLikeTwitterEngine(
+                        messageStore,
+                        followsList,
+                        centralSystemClock);
 
         IOConsole ioConsole = new IOConsole(System.in, System.out, EXTRA_LINEFEED_NOT_NEEDED);
 
@@ -55,7 +61,7 @@ public class JustLikeTwitter {
                 .append("---------------------------------------------------------------------------------------").append(System.lineSeparator())
                 .append("Running JustLikeTwitter console app").append(System.lineSeparator())
                 .append("Use Ctrl-C to exit the program.").append(System.lineSeparator())
-                .append("Only sunny path cases have been covered.").append(System.lineSeparator())
+                .append("Only sunny day scenarios have been covered.").append(System.lineSeparator())
                 .append("---------------------------------------------------------------------------------------").append(System.lineSeparator())
                 .append("").append(System.lineSeparator())
                 .append("Command-line help (usage with examples):").append(System.lineSeparator())

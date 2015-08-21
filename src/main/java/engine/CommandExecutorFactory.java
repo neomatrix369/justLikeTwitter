@@ -1,15 +1,15 @@
 package engine;
 
+import clock.CentralSystemClock;
 import elements.CommandType;
+import elements.FollowsList;
 import elements.MessageStore;
 import engine.commands.DisplayWallCommand;
 import engine.commands.FollowUserCommand;
 import engine.commands.PostMessageCommand;
 import engine.commands.ReadPostCommand;
-import clock.CentralSystemClock;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import static elements.CommandType.DISPLAY_WALL;
@@ -23,7 +23,7 @@ public class CommandExecutorFactory {
 
     private final CentralSystemClock centralSystemClock;
     private final MessageStore messageStore;
-    private Map<String, List<String>> followsList;
+    private final FollowsList followsList;
 
     private static Map<CommandType, CommandExecutor> patternCommandMap =
             new HashMap<CommandType, CommandExecutor>() {
@@ -37,7 +37,7 @@ public class CommandExecutorFactory {
 
     public CommandExecutorFactory(CentralSystemClock centralSystemClock,
                                   MessageStore messageStore,
-                                  Map<String, List<String>> followsList) {
+                                  FollowsList followsList) {
         this.centralSystemClock = centralSystemClock;
         this.messageStore = messageStore;
         this.followsList = followsList;

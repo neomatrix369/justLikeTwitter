@@ -1,6 +1,7 @@
 package engine;
 
 import clock.CentralSystemClock;
+import elements.FollowsList;
 import elements.MessageStore;
 import org.junit.Before;
 import org.junit.Test;
@@ -44,7 +45,8 @@ public class DisplayingUserWallUTest {
         currentDateTime = new Date();
         justLikeTwitterEngine = mock(JustLikeTwitterEngine.class);
         MessageStore messageStore = new MessageStore();
-        justLikeTwitterEngine = new JustLikeTwitterEngine(messageStore, centralSystemClock);
+        FollowsList followsList = new FollowsList();
+        justLikeTwitterEngine = new JustLikeTwitterEngine(messageStore, followsList, centralSystemClock);
     }
 
     @Test

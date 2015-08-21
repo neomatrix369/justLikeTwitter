@@ -1,6 +1,7 @@
 package engine;
 
 import clock.CentralSystemClock;
+import elements.FollowsList;
 import elements.MessageStore;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,12 +24,14 @@ import static org.mockito.Mockito.mock;
 public class FollowingUsersUTest {
 
     private JustLikeTwitterEngine justLikeTwitterEngine;
+    private FollowsList followsList;
 
     @Before
     public void setUp() {
         CentralSystemClock centralSystemClock = mock(CentralSystemClock.class);
         MessageStore messageStore = new MessageStore();
-        justLikeTwitterEngine = new JustLikeTwitterEngine(messageStore, centralSystemClock);
+        followsList = new FollowsList();
+        justLikeTwitterEngine = new JustLikeTwitterEngine(messageStore, followsList, centralSystemClock);
     }
 
     /**
@@ -40,9 +43,9 @@ public class FollowingUsersUTest {
         //  And Alice exists
         //  When he enters "Charlie follows Alice" at the prompt
         userTypesAtThePrompt(COMMANDS_TYPED_BY_CHARLIE[1]);
-        List<String> actualFollowsList = justLikeTwitterEngine.getFollowsListFor(USER_CHARLIE);
+        List<String> actualFollowsList = followsList.get(USER_CHARLIE);
 
-        // Then Alice is added to Charlie's follows list
+                // Then Alice is added to Charlie's follows list
         verifyThatTheFollowsListMatch(
                 "Alice should have been added to Charlie's follows list",
                 actualFollowsList,
@@ -61,7 +64,7 @@ public class FollowingUsersUTest {
         // And he enters "Charlie follows Bob" at the prompt
         userTypesAtThePrompt(COMMANDS_TYPED_BY_CHARLIE[1]);
         userTypesAtThePrompt(COMMANDS_TYPED_BY_CHARLIE[2]);
-        List<String> actualFollowsList = justLikeTwitterEngine.getFollowsListFor(USER_CHARLIE);
+        List<String> actualFollowsList = followsList.get(USER_CHARLIE);
 
         // Then Alice and Bob are added to Charlie's follows list
         verifyThatTheFollowsListMatch(

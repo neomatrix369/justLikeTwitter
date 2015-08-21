@@ -23,7 +23,7 @@ Then wait for the app to load in the console tab of your IDE.
     ---------------------------------------------------------------------------------------
     Running JustLikeTwitter console app
     Use Ctrl-C to exit the program.
-    Only sunny path cases have been covered.
+    Only sunny day scenarios have been covered.
     ---------------------------------------------------------------------------------------
 
     Command-line help (usage with examples):

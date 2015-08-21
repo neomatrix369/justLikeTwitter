@@ -1,3 +1,4 @@
+import elements.FollowsList;
 import elements.MessageStore;
 import engine.JustLikeTwitterEngine;
 import interfaces.IOConsole;
@@ -46,7 +47,11 @@ public class FullLifeCycleAcceptanceTest {
     @Before
     public void setUp() throws FileNotFoundException {
         MessageStore messageStore = new MessageStore();
-        JustLikeTwitterEngine justLikeTwitterEngine = new JustLikeTwitterEngine(messageStore, centralSystemClockMock);
+        FollowsList followsList = new FollowsList();
+        JustLikeTwitterEngine justLikeTwitterEngine = new JustLikeTwitterEngine(
+                messageStore,
+                followsList,
+                centralSystemClockMock);
         IOConsole ioConsole = new IOConsole(
                 getFileToReadFrom(REPLAY_INPUT_FILE),
                 getFileToWriteTo(ACTUAL_OUTPUT_FILE),
