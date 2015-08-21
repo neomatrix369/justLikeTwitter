@@ -1,5 +1,7 @@
 package clock;
 
+import helper.ImplHelper;
+
 import java.util.Date;
 
 import static helper.ImplHelper.DEFAULT_TOKEN;
@@ -21,13 +23,22 @@ public class ClockTimeFormatter {
     public String whenMessageWasPosted(Date anotherDate) {
         Date currentDate = centralSystemClock.getCurrentDateTime();
         long difference = currentDate.getTime() - anotherDate.getTime();
+
+        long diffHours = difference / (SIXTY_SECONDS  * SIXTY_SECONDS * THOUSAND_MILLISECONDS);
         long diffMinutes = difference / (SIXTY_SECONDS * THOUSAND_MILLISECONDS);
         long diffSeconds = difference / THOUSAND_MILLISECONDS;
 
-        return appropriateTimeDifferenceInWords(diffMinutes, diffSeconds);
+        return appropriateTimeDifferenceInWords(diffHours, diffMinutes, diffSeconds);
     }
 
-    private String appropriateTimeDifferenceInWords(long diffMinutes, long diffSeconds) {
+    private String appropriateTimeDifferenceInWords(long diffHours, long diffMinutes, long diffSeconds) {
+        if (diffHours > 0) {
+            return String.format(
+                    TIME_IN_WORDS_PATTERN,
+                    diffHours,
+                    makePlural(diffHours, ImplHelper.HOUR_TOKEN));
+        }
+
         if (diffMinutes > 0) {
             return String.format(
                     TIME_IN_WORDS_PATTERN,

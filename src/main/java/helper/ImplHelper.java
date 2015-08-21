@@ -10,6 +10,7 @@ public final class ImplHelper {
 
     public static final String TIME_IN_WORDS_PATTERN = "(%d %s ago)";
 
+    public static final String HOUR_TOKEN = "hour";
     public static final String MINUTE_TOKEN = "minute";
     public static final String SECOND_TOKEN = "second";
     public static final String DEFAULT_TOKEN = "(just now)";
@@ -26,6 +27,7 @@ public final class ImplHelper {
     public static final String NOTHING_FOR_THIS_COMMAND_EXECUTION = "";
 
     public static final CommandExecutor NO_COMMAND_EXECUTOR_MATCHED = null;
+    public static final List<String> NO_FOLLOWS_RETURNED = null;
 
     public static final String COMMAND_PROMPT_INDICATOR = "> ";
     public static final String NOTHING = "";
@@ -35,6 +37,9 @@ public final class ImplHelper {
     public static final boolean EXTRA_LINEFEED_NOT_NEEDED = false;
 
     public static final String DD_MM_YYYY_HH_MM_SS = "dd/MM/yyyy hh:mm:ss";
+    public static final String COLUMN_SEPARATOR = ",";
+    public static final int DATE_COL_INDEX = 0;
+    public static final int MESSAGE_COL_INDEX = 1;
 
     public static final List<String> FIRST_TIME = null;
 

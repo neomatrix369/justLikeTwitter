@@ -10,7 +10,6 @@ import static org.mockito.Mockito.when;
 
 public final class TestHelper {
     public static final String REPLAY_INPUT_FILE = "justLikeTwitterCommandsInputFile.txt";
-    public static final String DATES_FOR_MESSAGES_INPUT_FILE = "justLikeTwitterCommandsInputFileMessageDateTimes.txt";
     public static final String EXPECTED_OUTPUT_FILE = "justLikeTwitterCommandsExpectedOutputFile.txt";
     public static final String ACTUAL_OUTPUT_FILE = "justLikeTwitterCommandsActualOutputFile.txt";
 

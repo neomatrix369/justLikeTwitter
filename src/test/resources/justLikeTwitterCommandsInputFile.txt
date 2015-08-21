@@ -1,10 +1,11 @@
-Alice -> I love the weather today
-Bob -> Damn! We lost!
-Bob -> Good game though.
-Alice
-Bob
-Charlie -> I'm in New York today! Anyone wants to have a coffee?
-Charlie follows Alice
-Charlie wall
-Charlie follows Bob
-Charlie wall
+01/09/2015 10:00:00,Alice -> I love the weather today
+01/09/2015 10:03:00,Bob -> Damn! We lost!
+01/09/2015 10:04:00,Bob -> Good game though.
+01/09/2015 10:05:00,Alice
+01/09/2015 10:05:00,Bob
+01/09/2015 10:05:58,Charlie -> I'm in New York today! Anyone wants to have a coffee?
+01/09/2015 10:05:59,Charlie follows Alice
+01/09/2015 10:06:00,Charlie wall
+01/09/2015 10:07:00,Charlie follows Bob
+01/09/2015 10:08:20,Charlie wall
+01/09/2015 11:15:20,Alice wall

@@ -3,10 +3,12 @@ package command;
 import domain.CommandLineEntry;
 import domain.MessagePosted;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static helper.ImplHelper.HYPHEN_SEPARATOR;
 import static helper.ImplHelper.USERNAME_INDEX;
+import static helper.ImplHelper.NO_FOLLOWS_RETURNED;
 
 public class DisplayWallCommand extends CommandExecutor {
 
@@ -53,6 +55,10 @@ public class DisplayWallCommand extends CommandExecutor {
     }
 
     private List<String> getFollowsListFor(String userName) {
-        return followsList.getFollowsFor(userName);
+        List<String> list = followsList.getFollowsFor(userName);
+        if (list == NO_FOLLOWS_RETURNED) {
+            return new ArrayList<>();
+        }
+        return list;
     }
 }

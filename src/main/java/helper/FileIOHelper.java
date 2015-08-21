@@ -1,7 +1,7 @@
 package helper;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -19,14 +19,20 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import static helper.ImplHelper.COLUMN_SEPARATOR;
+import static helper.ImplHelper.DATE_COL_INDEX;
 import static helper.ImplHelper.DD_MM_YYYY_HH_MM_SS;
+import static helper.ImplHelper.MESSAGE_COL_INDEX;
 
 public class FileIOHelper {
+
     public static List<Date> loadDatesFrom(Class<? extends Object> aClass, String datesForInputFile) {
         List<Date> result = new ArrayList<>();
         try {
-            List<String> listOfDates = getTheContentOf(getPathFor(aClass, datesForInputFile).toString());
-            for (String eachDate: listOfDates) {
+            List<String> lines = getTheContentOf(getPathFor(aClass, datesForInputFile).toString());
+            for (String eachLine: lines) {
+                String[] eachLineSplit = eachLine.split(COLUMN_SEPARATOR);
+                String eachDate = eachLineSplit[DATE_COL_INDEX];
                 result.add(convertToDateFrom(eachDate));
             }
         } catch (IOException e) {
@@ -64,9 +70,16 @@ public class FileIOHelper {
         return lines.size();
     }
 
-    public static InputStream getFileToReadFrom(Class<? extends Object> aClass, String fileName) throws FileNotFoundException {
-        Path filePath = getPathFor(aClass, fileName);
-        return new FileInputStream(filePath.toFile());
+    public static InputStream getFileToReadFrom(Class<? extends Object> aClass, String fileName) throws IOException {
+        List<String> lines = getTheContentOf(getPathFor(aClass, fileName).toString());
+
+        String inputString = "";
+        for (String eachLine: lines) {
+            String[] splitEachLine = eachLine.split(COLUMN_SEPARATOR);
+            inputString += splitEachLine[MESSAGE_COL_INDEX] + System.lineSeparator();
+        }
+
+        return new ByteArrayInputStream(inputString.getBytes());
     }
 
     public static FileOutputStream getFileToWriteTo(String fileName) throws FileNotFoundException {
@@ -78,7 +91,8 @@ public class FileIOHelper {
         try {
             return format.parse(dateAsString);
         } catch (ParseException e) {
-            System.err.println("Error occurred while parsing: " + e.getMessage());
+            System.err.println("Error occurred while parsing a date: " + e.getMessage());
+            System.err.println("Error cause by: " + dateAsString);
         }
         return null;
     }
