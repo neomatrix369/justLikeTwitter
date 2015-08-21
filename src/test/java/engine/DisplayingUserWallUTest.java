@@ -58,6 +58,8 @@ public class DisplayingUserWallUTest {
     public void setUp() {
         currentDateTime = new Date();
         justLikeTwitterEngine = mock(JustLikeTwitterEngine.class);
+        MessageStore messageStore = new MessageStore();
+        justLikeTwitterEngine = new JustLikeTwitterEngine(messageStore, centralSystemClock);
     }
 
     @Test
@@ -66,7 +68,6 @@ public class DisplayingUserWallUTest {
         // And Alice's timeline contains the required posts
         // And he enters "Charlie -> I'm in New York today! Anyone wants to have a coffee?" at the prompt
         // And then he enters "Charlie follows Alice" at the prompt
-        setupJustLikeTwitter();
         userTypesAtThePrompt(COMMANDS_TYPED_BY_ALICE[0], ZERO_MINUTES);
         userTypesAtThePrompt(COMMANDS_TYPED_BY_CHARLIE[0], AFTER_FIVE_MINUTES);
         userTypesAtThePrompt(COMMANDS_TYPED_BY_CHARLIE[1], AFTER_TWO_SECONDS);
@@ -95,7 +96,6 @@ public class DisplayingUserWallUTest {
         // And he enters "Charlie -> I'm in New York today! Anyone wants to have a coffee?" at the prompt
         // And then he enters "Charlie follows Alice" at the prompt
         // And then he enters "Charlie follows Bob" at the prompt
-        setupJustLikeTwitter();
         userTypesAtThePrompt(COMMANDS_TYPED_BY_ALICE[0], ZERO_MINUTES);
         userTypesAtThePrompt(COMMANDS_TYPED_BY_BOB[0], AFTER_THREE_MINUTES);
         userTypesAtThePrompt(COMMANDS_TYPED_BY_BOB[1], AFTER_ONE_MINUTE);
@@ -131,7 +131,6 @@ public class DisplayingUserWallUTest {
         // And Bob's timeline contains the required posts
         // And he enters "Charlie -> I'm in New York today! Anyone wants to have a coffee?" at the prompt
         // And then he enters "Charlie follows Bob" at the prompt
-        setupJustLikeTwitter();
         userTypesAtThePrompt(COMMANDS_TYPED_BY_BOB[0], ZERO_MINUTES);
         userTypesAtThePrompt(COMMANDS_TYPED_BY_BOB[1], AFTER_ONE_MINUTE);
         userTypesAtThePrompt(COMMANDS_TYPED_BY_CHARLIE[0], AFTER_ONE_MINUTE);
@@ -160,11 +159,6 @@ public class DisplayingUserWallUTest {
                                       long delayInMilliseconds) throws IOException {
         currentDateTime = simulateDelayUsing(currentDateTime, delayInMilliseconds);
         return justLikeTwitterEngine.executeCommand(userTypedCommand);
-    }
-
-    private void setupJustLikeTwitter() {
-        MessageStore messageStore = new MessageStore();
-        justLikeTwitterEngine = new JustLikeTwitterEngine(messageStore, centralSystemClock);
     }
 
     private Date simulateDelayUsing(Date currentDateTime, long timeInMilliSeconds) {

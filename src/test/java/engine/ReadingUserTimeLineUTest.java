@@ -39,6 +39,8 @@ public class ReadingUserTimeLineUTest {
     public void setUp() {
         currentDateTime = new Date();
         justLikeTwitterEngine = mock(JustLikeTwitterEngine.class);
+        MessageStore messageStore = new MessageStore();
+        justLikeTwitterEngine = new JustLikeTwitterEngine(messageStore, centralSystemClock);
     }
 
     /********************************************************************************************
@@ -52,7 +54,6 @@ public class ReadingUserTimeLineUTest {
     public void givenHarryHasAPost_whenHarryIsTypedAtThePrompt_thenHarrysTimeLineIsShown() throws IOException {
         // Given I am at the JustLikeTwitter command prompt ">"
         // And Harry's timeline contains the required posts
-        setupJustLikeTwitter();
         userTypesAtThePrompt(COMMAND_TYPED_BY_HARRY, ZERO_MINUTES);
 
         // When I type "Harry" at the prompt after fifty seconds
@@ -73,7 +74,6 @@ public class ReadingUserTimeLineUTest {
     public void givenAliceHasAPost_whenAliceIsTypedAtThePrompt_thenAlicesTimeLineIsShown() throws IOException {
         // Given I am at the JustLikeTwitter command prompt ">"
         // And Alice's timeline contains the required posts
-        setupJustLikeTwitter();
         userTypesAtThePrompt(COMMAND_TYPED_BY_ALICE, ZERO_MINUTES);
 
         // When I type "Alice" at the prompt after five minutes
@@ -94,7 +94,6 @@ public class ReadingUserTimeLineUTest {
     public void givenBobHasPosts_whenBobIsTypedAtThePrompt_thenBobsTimeLineIsShown() throws IOException {
         // Given I am at the JustLikeTwitter command prompt ">"
         // And Bob's timeline contains the required posts
-        setupJustLikeTwitter();
         userTypesAtThePrompt(COMMANDS_TYPED_BY_BOB[0], ZERO_MINUTES);
         userTypesAtThePrompt(COMMANDS_TYPED_BY_BOB[1], AFTER_ONE_MINUTE);
 
@@ -123,11 +122,6 @@ public class ReadingUserTimeLineUTest {
         Date newDateTime = new Date(currentDateTime.getTime() + timeInMilliSeconds);
         when(centralSystemClock.getCurrentDateTime()).thenReturn(newDateTime);
         return newDateTime;
-    }
-
-    private void setupJustLikeTwitter() {
-        MessageStore messageStore = new MessageStore();
-        justLikeTwitterEngine = new JustLikeTwitterEngine(messageStore, centralSystemClock);
     }
 
     private void userTypesAtThePrompt(String userTypedCommand,
