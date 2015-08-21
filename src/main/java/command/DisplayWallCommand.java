@@ -1,7 +1,7 @@
-package engine.commands;
+package command;
 
-import elements.CommandLineEntry;
-import elements.MessagePosted;
+import domain.CommandLineEntry;
+import domain.MessagePosted;
 
 import java.util.List;
 

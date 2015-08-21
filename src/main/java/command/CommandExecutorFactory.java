@@ -1,17 +1,16 @@
-package engine;
+package command;
 
 import clock.CentralSystemClock;
-import elements.CommandType;
-import elements.FollowsList;
-import elements.MessageStore;
-import elements.PatternCommandTypeMapper;
-import engine.commands.CommandExecutor;
+import domain.CommandType;
+import domain.FollowsList;
+import domain.MessageStore;
+import domain.PatternCommandTypeMapper;
 
 import java.util.Map;
 
 import static helper.ImplHelper.NO_COMMAND_EXECUTOR_MATCHED;
 
-class CommandExecutorFactory {
+public class CommandExecutorFactory {
 
     private final Map<CommandType, CommandExecutor> patternCommandMap = PatternCommandTypeMapper.get();
 

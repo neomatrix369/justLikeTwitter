@@ -1,6 +1,6 @@
 import clock.CentralSystemClock;
-import elements.FollowsList;
-import elements.MessageStore;
+import domain.FollowsList;
+import domain.MessageStore;
 import engine.JustLikeTwitterEngine;
 import interfaces.IOConsole;
 import interfaces.JustLikeTwitter;

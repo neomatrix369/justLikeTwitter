@@ -1,4 +1,4 @@
-package elements;
+package domain;
 
 public enum CommandType {
     POST_MESSAGE ("(\\w+) -> (.*)"        , " -> "     ),

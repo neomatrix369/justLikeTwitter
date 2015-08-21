@@ -1,8 +1,8 @@
 package engine;
 
 import clock.CentralSystemClock;
-import elements.FollowsList;
-import elements.MessageStore;
+import domain.FollowsList;
+import domain.MessageStore;
 import org.junit.Before;
 import org.junit.Test;
 

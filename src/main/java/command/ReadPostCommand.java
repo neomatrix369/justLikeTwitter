@@ -1,6 +1,6 @@
-package engine.commands;
+package command;
 
-import elements.MessagePosted;
+import domain.MessagePosted;
 
 import java.util.List;
 

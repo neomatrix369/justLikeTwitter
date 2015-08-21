@@ -1,10 +1,10 @@
-package engine.commands;
+package command;
 
 import clock.CentralSystemClock;
 import clock.ClockTimeFormatter;
-import elements.FollowsList;
-import elements.MessageStore;
-import elements.MessagePosted;
+import domain.FollowsList;
+import domain.MessageStore;
+import domain.MessagePosted;
 
 import java.util.Arrays;
 

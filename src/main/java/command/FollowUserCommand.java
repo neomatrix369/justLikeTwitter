@@ -1,6 +1,6 @@
-package engine.commands;
+package command;
 
-import elements.CommandLineEntry;
+import domain.CommandLineEntry;
 
 import static helper.ImplHelper.NOTHING_FOR_THIS_COMMAND_EXECUTION;
 import static helper.ImplHelper.OTHER_USERNAME_INDEX;

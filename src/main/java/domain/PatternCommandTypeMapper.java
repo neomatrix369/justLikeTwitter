@@ -1,18 +1,18 @@
-package elements;
+package domain;
 
-import engine.commands.CommandExecutor;
-import engine.commands.DisplayWallCommand;
-import engine.commands.FollowUserCommand;
-import engine.commands.PostMessageCommand;
-import engine.commands.ReadPostCommand;
+import command.CommandExecutor;
+import command.DisplayWallCommand;
+import command.FollowUserCommand;
+import command.PostMessageCommand;
+import command.ReadPostCommand;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static elements.CommandType.DISPLAY_WALL;
-import static elements.CommandType.FOLLOWS_USER;
-import static elements.CommandType.POST_MESSAGE;
-import static elements.CommandType.READ_POST;
+import static domain.CommandType.DISPLAY_WALL;
+import static domain.CommandType.FOLLOWS_USER;
+import static domain.CommandType.POST_MESSAGE;
+import static domain.CommandType.READ_POST;
 
 public final class PatternCommandTypeMapper {
     private Map<CommandType, CommandExecutor> patternCommandMap;

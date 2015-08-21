@@ -1,9 +1,10 @@
 package engine;
 
 import clock.CentralSystemClock;
-import elements.FollowsList;
-import elements.MessageStore;
-import engine.commands.CommandExecutor;
+import command.CommandExecutorFactory;
+import domain.FollowsList;
+import domain.MessageStore;
+import command.CommandExecutor;
 
 public class JustLikeTwitterEngine {
     private final MessageStore messageStore;
