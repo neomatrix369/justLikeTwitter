@@ -9,8 +9,13 @@ public class ReadPostCommand extends CommandExecutor {
 
     @Override
     public String execute() {
-        StringBuilder result = new StringBuilder();
         String userName = tokens[USERNAME_INDEX];
+        return getFormattedMessageFrom(userName);
+    }
+
+    private String getFormattedMessageFrom(String userName) {
+        StringBuilder result = new StringBuilder();
+
         List<TimeLineMessage> timeLineMessages = messageStore.getMessagesFor(userName);
 
         for (TimeLineMessage timeLineMessage: timeLineMessages) {

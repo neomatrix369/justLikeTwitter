@@ -32,9 +32,7 @@ public class IOConsole {
 
     private void printPromptIndicator(OutputStream outputStream) throws IOException {
         String newCommandPrompt = COMMAND_PROMPT_INDICATOR;
-        if (needLineFeedForEachLine) {
-            newCommandPrompt = System.lineSeparator() + newCommandPrompt;
-        }
+        newCommandPrompt = insertLineFeedInFrontOf(newCommandPrompt);
         outputStream.write(newCommandPrompt.getBytes());
     }
 
@@ -48,10 +46,15 @@ public class IOConsole {
     public void display(String outputToDisplay) throws IOException {
         if (outputToDisplay != null) {
             String newOutputToDisplay = outputToDisplay;
-            if (needLineFeedForEachLine) {
-                newOutputToDisplay = System.lineSeparator() + newOutputToDisplay;
-            }
+            newOutputToDisplay = insertLineFeedInFrontOf(newOutputToDisplay);
             outputStream.write(newOutputToDisplay.getBytes());
         }
+    }
+
+    private String insertLineFeedInFrontOf(String value) {
+        if (needLineFeedForEachLine) {
+            value = System.lineSeparator() + value;
+        }
+        return value;
     }
 }

@@ -45,18 +45,14 @@ public class FullLifeCycleAcceptanceTest {
             .withReporter(Reporters.console())
             .build();
 
-
-    private JustLikeTwitterEngine justLikeTwitterEngine;
-    private IOConsole ioConsole;
-
     private JustLikeTwitter justLikeTwitter;
     private DateTimeCentral dateTimeCentralMock = mock(DateTimeCentral.class);
     private List<Date> dateTimeForMessages = loadDatesFrom(DATES_FOR_MESSAGES_INPUT_FILE);
 
     @Before
     public void setUp() throws FileNotFoundException {
-        justLikeTwitterEngine = new JustLikeTwitterEngine(dateTimeCentralMock);
-        ioConsole = new IOConsole(
+        JustLikeTwitterEngine justLikeTwitterEngine = new JustLikeTwitterEngine(dateTimeCentralMock);
+        IOConsole ioConsole = new IOConsole(
                 getFileToReadFrom(REPLAY_INPUT_FILE),
                 getFileToWriteTo(ACTUAL_OUTPUT_FILE),
                 EXTRA_LINEFEED_NEEDED);

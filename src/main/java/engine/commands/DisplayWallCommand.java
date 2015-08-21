@@ -17,10 +17,10 @@ public class DisplayWallCommand extends CommandExecutor {
 
     private String getWallFor(String userName) {
         List<String> newFollowsList = addThisUserToFollowsList(userName);
-        return getFormattedMessagesForWallUsing(newFollowsList);
+        return getFormattedMessage(newFollowsList);
     }
 
-    private String getFormattedMessagesForWallUsing(List<String> followsList) {
+    private String getFormattedMessage(List<String> followsList) {
         StringBuilder result = new StringBuilder();
 
         List<TimeLineMessage> timeLineMessages = messageStore.getMessagesFor(followsList);
