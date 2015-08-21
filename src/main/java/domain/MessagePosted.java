@@ -2,14 +2,12 @@ package domain;
 
 import clock.CentralSystemClock;
 
-import java.util.Date;
-
 import static helper.ImplHelper.MESSAGE_ON_TIMELINE_PATTERN;
 
 public final class MessagePosted {
 
     private User user;
-    private Date dateTime;
+    private MessageDate messageDate;
     private MessageText messageText;
 
     private final CentralSystemClock centralSystemClock;
@@ -19,13 +17,13 @@ public final class MessagePosted {
     }
 
     public void setMessageText(MessageText messageText) {
-        this.dateTime = centralSystemClock.getCurrentDateTime();
+        this.messageDate = new MessageDate(centralSystemClock.getCurrentDateTime());
         this.messageText = messageText;
     }
 
     @Override
     public String toString() {
-        return String.format(MESSAGE_ON_TIMELINE_PATTERN, dateTime, messageText);
+        return String.format(MESSAGE_ON_TIMELINE_PATTERN, messageDate, messageText);
     }
 
     public User getUser() {
@@ -36,8 +34,8 @@ public final class MessagePosted {
         this.user = user;
     }
 
-    public Date getDateTime() {
-        return new Date(dateTime.getTime());
+    public MessageDate getMessageDate() {
+        return new MessageDate(messageDate.toDate());
     }
 
     public MessageText getMessageText() {

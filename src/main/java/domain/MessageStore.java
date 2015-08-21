@@ -16,7 +16,7 @@ public class MessageStore {
         }
 
         private int compareToYieldResultsInDescendingOrder(MessagePosted first, MessagePosted second) {
-            return second.getDateTime().compareTo(first.getDateTime());
+            return second.getMessageDate().compareTo(first.getMessageDate());
         }
     };
 

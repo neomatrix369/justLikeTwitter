@@ -1,5 +1,6 @@
 package clock;
 
+import domain.MessageDate;
 import helper.ImplHelper;
 
 import java.util.Date;
@@ -20,7 +21,7 @@ public class ClockTimeFormatter {
         this.centralSystemClock = centralSystemClock;
     }
 
-    public String whenMessageWasPosted(Date anotherDate) {
+    public String whenMessageWasPosted(MessageDate anotherDate) {
         Date currentDate = centralSystemClock.getCurrentDateTime();
         long difference = currentDate.getTime() - anotherDate.getTime();
 
