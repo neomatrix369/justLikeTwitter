@@ -50,39 +50,37 @@ public class JustLikeTwitter {
     }
 
     private void showUsageText() throws IOException {
-        String usageText =
-        "---------------------------------------------------------------------------------------" + System.lineSeparator() +
-        "Running JustLikeTwitter console app" + System.lineSeparator() +
-        "Use Ctrl-C to exit the program." + System.lineSeparator() +
-        "Only sunny path cases have been covered." + System.lineSeparator() +
-        "---------------------------------------------------------------------------------------" + System.lineSeparator() +
-        "" + System.lineSeparator() +
-        "Command-line help (usage with examples):" + System.lineSeparator() +
-        "" + System.lineSeparator() + 
-        "  - Posting to personal timeline: <user name> -> <message>" + System.lineSeparator() + 
-        "  for e.g." + System.lineSeparator() + 
-        "     > Alice -> I'm having a great time" + System.lineSeparator() + 
-        "" + System.lineSeparator() + 
-        "  - Reading any user's timeline: <user name>" + System.lineSeparator() + 
-        "  for e.g." + System.lineSeparator() + 
-        "     > Alice " + System.lineSeparator() + 
-        "     I'm having a great time (2 seconds ago)" + System.lineSeparator() + 
-        "" + System.lineSeparator() + 
-        "  - Following another user: <user name> follows <another user>" + System.lineSeparator() + 
-        "  for e.g." + System.lineSeparator() + 
-        "     > Alice follows Bob" + System.lineSeparator() + 
-        "" + System.lineSeparator() + 
-        "  - Display user's wall : <user name> wall" + System.lineSeparator() + 
-        "  for e.g." + System.lineSeparator() + 
-        "     > Alice wall" + System.lineSeparator() + 
-        "     Bob - I'm in New York today! Anyone wants to have a coffee? (2 seconds ago)" + System.lineSeparator() + 
-        "     Alice - I'm having a great time (5 minutes ago)" + System.lineSeparator() + 
-        "" + System.lineSeparator();
+        StringBuilder stringBuilder = new StringBuilder();
+        String usageText = stringBuilder
+                .append("---------------------------------------------------------------------------------------").append(System.lineSeparator())
+                .append("Running JustLikeTwitter console app").append(System.lineSeparator())
+                .append("Use Ctrl-C to exit the program.").append(System.lineSeparator())
+                .append("Only sunny path cases have been covered.").append(System.lineSeparator())
+                .append("---------------------------------------------------------------------------------------").append(System.lineSeparator())
+                .append("").append(System.lineSeparator())
+                .append("Command-line help (usage with examples):").append(System.lineSeparator())
+                .append("").append(System.lineSeparator())
+                .append("  - Posting to personal timeline: <user name> -> <message>").append(System.lineSeparator())
+                .append("  for e.g.").append(System.lineSeparator())
+                .append("     > Alice -> I'm having a great time").append(System.lineSeparator())
+                .append("").append(System.lineSeparator())
+                .append("  - Reading any user's timeline: <user name>").append(System.lineSeparator())
+                .append("  for e.g.").append(System.lineSeparator())
+                .append("     > Alice ").append(System.lineSeparator())
+                .append("     I'm having a great time (2 seconds ago)").append(System.lineSeparator())
+                .append("").append(System.lineSeparator())
+                .append("  - Following another user: <user name> follows <another user>").append(System.lineSeparator())
+                .append("  for e.g.").append(System.lineSeparator())
+                .append("     > Alice follows Bob").append(System.lineSeparator())
+                .append("").append(System.lineSeparator())
+                .append("  - Display user's wall : <user name> wall").append(System.lineSeparator())
+                .append("  for e.g.").append(System.lineSeparator())
+                .append("     > Alice wall").append(System.lineSeparator())
+                .append("     Bob - I'm in New York today! Anyone wants to have a coffee? (2 seconds ago)").append(System.lineSeparator())
+                .append("     Alice - I'm having a great time (5 minutes ago)").append(System.lineSeparator())
+                .append("").append(System.lineSeparator())
+                .toString();
 
         ioConsole.display(usageText);
-    }
-
-    public String getWallFor(String userName) {
-        return justLikeTwitterEngine.getWallFor(userName);
     }
 }

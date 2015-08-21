@@ -1,11 +1,9 @@
 package engine;
 
+import clock.CentralSystemClock;
 import elements.MessageStore;
-import interfaces.IOConsole;
-import interfaces.JustLikeTwitter;
 import org.junit.Before;
 import org.junit.Test;
-import clock.CentralSystemClock;
 
 import java.io.IOException;
 import java.util.Date;
@@ -22,8 +20,6 @@ import static org.mockito.Mockito.when;
 
 public class DisplayingUserWallUTest {
 
-    private static final int ONCE_ONLY = 1;
-
     private static final long ZERO_MINUTES = 0;
     private static final long THOUSAND_MILLISECONDS = 1000;
     private static final long AFTER_ONE_MINUTE = 60 * THOUSAND_MILLISECONDS;
@@ -35,11 +31,8 @@ public class DisplayingUserWallUTest {
 
     private Date currentDateTime;
     private JustLikeTwitterEngine justLikeTwitterEngine;
-    private IOConsole ioConsole;
 
     private final CentralSystemClock centralSystemClock = mock(CentralSystemClock.class);
-
-    private JustLikeTwitter justLikeTwitter;
 
     private static final String[] COMMANDS_TYPED_BY_ALICE = new String[]{
             "Alice -> I love the weather today",
@@ -65,7 +58,6 @@ public class DisplayingUserWallUTest {
     public void setUp() {
         currentDateTime = new Date();
         justLikeTwitterEngine = mock(JustLikeTwitterEngine.class);
-        ioConsole = mock(IOConsole.class);
     }
 
     @Test
@@ -80,8 +72,7 @@ public class DisplayingUserWallUTest {
         userTypesAtThePrompt(COMMANDS_TYPED_BY_CHARLIE[1], AFTER_TWO_SECONDS);
 
         // When he types "Charlie wall" at the prompt
-        userTypesAtThePrompt(COMMANDS_TYPED_BY_CHARLIE[3], ZERO_MINUTES);
-        String actualWall = justLikeTwitter.getWallFor("Charlie");
+        String actualWall = userTypesAtThePrompt(COMMANDS_TYPED_BY_CHARLIE[3], ZERO_MINUTES);
 
         // Then he sees the below in the console
         // "Charlie - I'm in New York today! Anyone wants to have a coffee? (2 seconds ago)
@@ -113,8 +104,7 @@ public class DisplayingUserWallUTest {
         userTypesAtThePrompt(COMMANDS_TYPED_BY_CHARLIE[2], ZERO_MINUTES);
 
         // When he types "Charlie wall" at the prompt
-        userTypesAtThePrompt(COMMANDS_TYPED_BY_CHARLIE[3], AFTER_FIFTEEN_SECONDS);
-        String actualWall = justLikeTwitter.getWallFor("Charlie");
+        String actualWall = userTypesAtThePrompt(COMMANDS_TYPED_BY_CHARLIE[3], AFTER_FIFTEEN_SECONDS);
 
         // Then he sees the below in the console
         // "Charlie - I'm in New York today! Anyone wants to have a coffee? (15 seconds ago)
@@ -148,8 +138,7 @@ public class DisplayingUserWallUTest {
         userTypesAtThePrompt(COMMANDS_TYPED_BY_CHARLIE[2], ZERO_MINUTES);
 
         // When he types "Charlie wall" at the prompt
-        userTypesAtThePrompt(COMMANDS_TYPED_BY_CHARLIE[3], AFTER_FIFTEEN_SECONDS);
-        String actualWall = justLikeTwitter.getWallFor("Charlie");
+        String actualWall = userTypesAtThePrompt(COMMANDS_TYPED_BY_CHARLIE[3], AFTER_FIFTEEN_SECONDS);
 
         // Then he sees the below in the console
         // "Charlie - I'm in New York today! Anyone wants to have a coffee? (15 seconds ago)
@@ -167,19 +156,15 @@ public class DisplayingUserWallUTest {
                 is(equalTo(expectedWall)));
     }
 
-    private Date userTypesAtThePrompt(String userTypedCommand,
+    private String userTypesAtThePrompt(String userTypedCommand,
                                       long delayInMilliseconds) throws IOException {
         currentDateTime = simulateDelayUsing(currentDateTime, delayInMilliseconds);
-        when(ioConsole.waitForUserAtThePrompt()).thenReturn(userTypedCommand);
-        justLikeTwitter.run(ONCE_ONLY);
-
-        return currentDateTime;
+        return justLikeTwitterEngine.executeCommand(userTypedCommand);
     }
 
     private void setupJustLikeTwitter() {
         MessageStore messageStore = new MessageStore();
         justLikeTwitterEngine = new JustLikeTwitterEngine(messageStore, centralSystemClock);
-        justLikeTwitter = new JustLikeTwitter(ioConsole, justLikeTwitterEngine);
     }
 
     private Date simulateDelayUsing(Date currentDateTime, long timeInMilliSeconds) {
