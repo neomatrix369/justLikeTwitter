@@ -30,9 +30,9 @@ public class DisplayWallCommand extends CommandExecutor {
     private String getFormattedMessage(List<String> followsList) {
         StringBuilder result = new StringBuilder();
 
-        List<MessagePosted> messagePosteds = messageStore.getMessagesFor(followsList);
+        List<MessagePosted> messagesPosted = messageStore.getMessagesFor(followsList);
 
-        for (MessagePosted messagePosted : messagePosteds) {
+        for (MessagePosted messagePosted : messagesPosted) {
             buildTimeLine(result, messagePosted);
         }
 

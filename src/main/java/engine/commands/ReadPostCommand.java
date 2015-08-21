@@ -17,9 +17,9 @@ public class ReadPostCommand extends CommandExecutor {
     private String getFormattedMessageFor(String userName) {
         StringBuilder result = new StringBuilder();
 
-        List<MessagePosted> messagePosteds = messageStore.getMessagesFor(userName);
+        List<MessagePosted> messagesPosted = messageStore.getMessagesFor(userName);
 
-        for (MessagePosted messagePosted : messagePosteds) {
+        for (MessagePosted messagePosted : messagesPosted) {
             buildTimeLine(result, messagePosted);
         }
 
