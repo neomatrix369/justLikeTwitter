@@ -36,7 +36,9 @@ public class PostingMessagesUTest {
         // Given a user's message list is empty
         // And a new message "Alice -> I love the weather today" is available
         // When the message is passed to the engine for the user
-        List<TimeLineMessage> actualMessagesToAdd = processMessagesReceivedFor("Alice", "Alice -> I love the weather today");
+        List<TimeLineMessage> actualMessagesToAdd = userTypesTheseCommands(
+                "Alice",
+                "Alice -> I love the weather today");
 
         // Then the message is added to the user's message list
         verifyThatTheMessagesHaveBeenAdded(
@@ -54,7 +56,7 @@ public class PostingMessagesUTest {
         // Given user's message list is empty
         // And new messages like "Bob -> Damn! We lost!" and "Bob -> Good game though." are available
         // When the messages are passed to the engine for the user
-        List<TimeLineMessage> actualMessagesToAdd = processMessagesReceivedFor(
+        List<TimeLineMessage> actualMessagesToAdd = userTypesTheseCommands(
                 "Bob",
                 "Bob -> Damn! We lost!",
                 "Bob -> Good game though.");
@@ -69,8 +71,8 @@ public class PostingMessagesUTest {
         );
     }
 
-    private List<TimeLineMessage> processMessagesReceivedFor(String userName,
-                                                             String... userTypedMessages) {
+    private List<TimeLineMessage> userTypesTheseCommands(String userName,
+                                                         String... userTypedMessages) {
         for (String eachUserTypedMessage : userTypedMessages) {
             justLikeTwitterEngine.executeCommand(eachUserTypedMessage);
         }
