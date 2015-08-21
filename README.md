@@ -3,6 +3,11 @@
 Implement a console-based social networking application (similar to Twitter) satisfying the scenarios below 
 (rest of the info available separately).
 
+####Installation into your IDE
+In order to run the FullLifeCycleAcceptanceTest test, the Reporter needs some comparison tool as needed by ApprovalTests, 
+see [http://approval.readthedocs.org/en/latest/getting-started.html](http://approval.readthedocs.org/en/latest/getting-started.html).
+By default the console will be used to show if any differences in output.
+
 ####Usage
 
     $ sh runJustLikeTwitter.sh
