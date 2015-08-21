@@ -3,6 +3,8 @@ package helper;
 import clock.CentralSystemClock;
 import com.github.approval.Approval;
 import com.github.approval.reporters.Reporters;
+import domain.User;
+import domain.Users;
 
 import java.util.Date;
 
@@ -32,10 +34,10 @@ public final class TestHelper {
     public static final long AFTER_FIFTY_SECONDS = 50 * ONE_SECOND;
     public static final long AFTER_THREE_MINUTES = 3 * AFTER_ONE_MINUTE;
 
-    public static final String USER_CHARLIE = "Charlie";
-    public static final String USER_ALICE = "Alice";
-    public static final String USER_HARRY = "Harry";
-    public static final String USER_BOB = "Bob";
+    public static final User USER_CHARLIE = new User("Charlie");
+    public static final User USER_ALICE = new User("Alice");
+    public static final User USER_HARRY = new User("Harry");
+    public static final User USER_BOB = new User("Bob");
 
     public static final String ANY_TEXT = "Some test to display on the console";
 
@@ -55,9 +57,9 @@ public final class TestHelper {
     public static final String CHARLIE_FOLLOWS_BOB = "Charlie follows Bob";
     public static final String CHARLIE_REQUESTS_WALL = "Charlie wall";
 
-    public static final String[][] EXPECTED_FOLLOWS_LIST = {
-            new String[]{USER_ALICE},
-            new String[]{USER_ALICE, USER_BOB}
+    public static final Users[] EXPECTED_FOLLOWS_LIST = {
+            new Users(USER_ALICE),
+            new Users(USER_ALICE, USER_BOB)
     };
 
     private TestHelper() {}

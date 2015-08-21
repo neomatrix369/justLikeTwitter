@@ -1,37 +1,35 @@
 package domain;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import static helper.ImplHelper.FIRST_TIME;
+import static helper.ImplHelper.NO_FOLLOWS_RETURNED;
 
 public class FollowsList {
 
-    private final Map<String, List<String>> store = new HashMap<>();
+    private final Map<User, Users> store = new HashMap<>();
 
-    public List<String> getFollowsFor(String userName) {
-        return store.get(userName);
+    public Users getFollowsFor(User user) {
+        return store.get(user);
     }
 
-    public void addNewFollowOf(String userName, String newUsername) {
-        List<String> existingFollowsList = getExistingFollowsListFor(userName);
+    public void addNewFollowOf(User user, User newUser) {
+        Users existingFollowsList = getExistingFollowsListFor(user);
 
-        existingFollowsList.add(newUsername);
+        existingFollowsList.add(newUser);
 
-        store.put(userName, existingFollowsList);
+        store.put(user, existingFollowsList);
     }
 
-    private List<String> getExistingFollowsListFor(String userName) {
-        List<String> existingFollowsList = store.get(userName);
+    private Users getExistingFollowsListFor(User user) {
+        Users existingFollowsList = store.get(user);
         existingFollowsList = getNewListForTheFirstTime(existingFollowsList);
         return existingFollowsList;
     }
 
-    private List<String> getNewListForTheFirstTime(List<String> existingFollowsList) {
-        if (existingFollowsList == FIRST_TIME) {
-            return new ArrayList<>();
+    private Users getNewListForTheFirstTime(Users existingFollowsList) {
+        if (existingFollowsList == NO_FOLLOWS_RETURNED) {
+            return new Users();
         }
         return existingFollowsList;
     }

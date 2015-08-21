@@ -8,7 +8,7 @@ import static helper.ImplHelper.MESSAGE_ON_TIMELINE_PATTERN;
 
 public final class MessagePosted {
 
-    private String userName;
+    private User user;
     private Date dateTime;
     private String message;
 
@@ -28,12 +28,12 @@ public final class MessagePosted {
         return String.format(MESSAGE_ON_TIMELINE_PATTERN, dateTime, message);
     }
 
-    public String getUserName() {
-        return userName;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Date getDateTime() {

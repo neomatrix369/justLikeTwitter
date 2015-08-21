@@ -1,6 +1,7 @@
 package command;
 
 import domain.CommandLineEntry;
+import domain.User;
 
 import static helper.ImplHelper.MESSAGE_INDEX;
 import static helper.ImplHelper.NOTHING_FOR_THIS_COMMAND_EXECUTION;
@@ -17,8 +18,8 @@ public class PostMessageCommand extends CommandExecutor {
 
     private CommandLineEntry prepareCommandLineEntry() {
         CommandLineEntry commandLineEntry = new CommandLineEntry(centralSystemClock);
-        commandLineEntry.setUserName(tokens[USERNAME_INDEX].trim());
-        commandLineEntry.setMessagePosted(commandLineEntry.getUserName(), tokens[MESSAGE_INDEX].trim());
+        commandLineEntry.setUser(new User(tokens[USERNAME_INDEX]));
+        commandLineEntry.setMessagePosted(commandLineEntry.getUser(), tokens[MESSAGE_INDEX].trim());
         return commandLineEntry;
     }
 }

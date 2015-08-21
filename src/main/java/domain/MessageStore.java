@@ -1,7 +1,6 @@
 package domain;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -21,15 +20,15 @@ public class MessageStore {
         }
     };
 
-    public List<MessagePosted> getMessagesFor(String userName) {
-        return getMessagesFor(Arrays.asList(userName));
+    public List<MessagePosted> getMessagesFor(User user) {
+        return getMessagesFor(new Users(user));
     }
 
     public void addMessage(MessagePosted messages) {
         store.add(messages);
     }
 
-    public List<MessagePosted> getMessagesFor(List<String> users) {
+    public List<MessagePosted> getMessagesFor(Users users) {
         List<MessagePosted> listForUser = new ArrayList<>();
 
         filterMessagesFor(users, listForUser);
@@ -39,9 +38,9 @@ public class MessageStore {
         return listForUser;
     }
 
-    private void filterMessagesFor(List<String> users, List<MessagePosted> listForUser) {
+    private void filterMessagesFor(Users users, List<MessagePosted> listForUser) {
         for (MessagePosted eachMessage: store) {
-            if (users.contains(eachMessage.getUserName())) {
+            if (users.contains(eachMessage.getUser())) {
                 listForUser.add(eachMessage);
             }
         }

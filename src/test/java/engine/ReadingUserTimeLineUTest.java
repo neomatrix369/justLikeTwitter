@@ -54,7 +54,7 @@ public class ReadingUserTimeLineUTest {
         userTypesAtThePrompt(HARRY_POSTS_A_MESSAGE, ZERO_MINUTES);
 
         // When I type "Harry" at the prompt after fifty seconds
-        String actualTimeLine = userTypesAtThePrompt(USER_HARRY, AFTER_FIFTY_SECONDS);
+        String actualTimeLine = userTypesAtThePrompt(USER_HARRY.toString(), AFTER_FIFTY_SECONDS);
 
         // Then I see "I like this idea (50 seconds ago)" at the prompt
         verifyThatTheTimeLinesMatch(
@@ -73,7 +73,7 @@ public class ReadingUserTimeLineUTest {
         userTypesAtThePrompt(ALICE_POSTS_A_MESSAGE, ZERO_MINUTES);
 
         // When I type "Alice" at the prompt after five minutes
-        String actualTimeLine = userTypesAtThePrompt(USER_ALICE, AFTER_FIVE_MINUTES);
+        String actualTimeLine = userTypesAtThePrompt(USER_ALICE.toString(), AFTER_FIVE_MINUTES);
 
         // Then I see "I love the weather today (5 minutes ago)" at the prompt
         verifyThatTheTimeLinesMatch(
@@ -93,7 +93,7 @@ public class ReadingUserTimeLineUTest {
         userTypesAtThePrompt(BOB_POSTS_TWO_MESSAGES[1], AFTER_ONE_MINUTE);
 
         // When I type "Bob" at the prompt after a minute
-        String actualTimeLine = userTypesAtThePrompt(USER_BOB, AFTER_ONE_MINUTE);
+        String actualTimeLine = userTypesAtThePrompt(USER_BOB.toString(), AFTER_ONE_MINUTE);
 
         // Then I see the below messages in the console:
         // "Good game though. (1 minute ago)"

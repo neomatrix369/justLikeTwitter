@@ -1,6 +1,7 @@
 package command;
 
 import domain.MessagePosted;
+import domain.User;
 
 import java.util.List;
 
@@ -10,14 +11,14 @@ public class ReadPostCommand extends CommandExecutor {
 
     @Override
     public String execute() {
-        String userName = tokens[USERNAME_INDEX];
-        return getFormattedMessageFor(userName);
+        User user = new User(tokens[USERNAME_INDEX]);
+        return getFormattedMessageFor(user);
     }
 
-    private String getFormattedMessageFor(String userName) {
+    private String getFormattedMessageFor(User user) {
         StringBuilder result = new StringBuilder();
 
-        List<MessagePosted> messagesPosted = messageStore.getMessagesFor(userName);
+        List<MessagePosted> messagesPosted = messageStore.getMessagesFor(user);
 
         for (MessagePosted messagePosted : messagesPosted) {
             buildTimeLine(result, messagePosted);

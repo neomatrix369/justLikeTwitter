@@ -2,34 +2,35 @@ package command;
 
 import domain.CommandLineEntry;
 import domain.MessagePosted;
+import domain.User;
+import domain.Users;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static helper.ImplHelper.HYPHEN_SEPARATOR;
-import static helper.ImplHelper.USERNAME_INDEX;
 import static helper.ImplHelper.NO_FOLLOWS_RETURNED;
+import static helper.ImplHelper.USERNAME_INDEX;
 
 public class DisplayWallCommand extends CommandExecutor {
 
     @Override
     public String execute() {
         CommandLineEntry commandLineEntry = prepareCommandLineEntry();
-        return getWallFor(commandLineEntry.getUserName());
+        return getWallFor(commandLineEntry.getUser());
     }
 
     private CommandLineEntry prepareCommandLineEntry() {
         CommandLineEntry commandLineEntry = new CommandLineEntry(centralSystemClock);
-        commandLineEntry.setUserName(tokens[USERNAME_INDEX].trim());
+        commandLineEntry.setUser(new User(tokens[USERNAME_INDEX]));
         return commandLineEntry;
     }
 
-    private String getWallFor(String userName) {
-        List<String> newFollowsList = addThisUserToFollowsList(userName);
+    private String getWallFor(User user) {
+        Users newFollowsList = addThisUserToFollowsList(user);
         return getFormattedMessage(newFollowsList);
     }
 
-    private String getFormattedMessage(List<String> followsList) {
+    private String getFormattedMessage(Users followsList) {
         StringBuilder result = new StringBuilder();
 
         List<MessagePosted> messagesPosted = messageStore.getMessagesFor(followsList);
@@ -42,22 +43,22 @@ public class DisplayWallCommand extends CommandExecutor {
     }
 
     private void buildTimeLine(StringBuilder result, MessagePosted messagePosted) {
-        result.append(messagePosted.getUserName())
+        result.append(messagePosted.getUser())
                 .append(HYPHEN_SEPARATOR)
                 .append(getFormattedMessage(messagePosted))
                 .append(System.lineSeparator());
     }
 
-    private List<String> addThisUserToFollowsList(String userName) {
-        List<String> followsList = getFollowsListFor(userName);
-        followsList.add(userName);
+    private Users addThisUserToFollowsList(User user) {
+        Users followsList = getFollowsListFor(user);
+        followsList.add(user);
         return followsList;
     }
 
-    private List<String> getFollowsListFor(String userName) {
-        List<String> list = followsList.getFollowsFor(userName);
+    private Users getFollowsListFor(User user) {
+        Users list = followsList.getFollowsFor(user);
         if (list == NO_FOLLOWS_RETURNED) {
-            return new ArrayList<>();
+            return new Users();
         }
         return list;
     }

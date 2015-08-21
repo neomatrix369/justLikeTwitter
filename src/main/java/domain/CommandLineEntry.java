@@ -3,8 +3,8 @@ package domain;
 import clock.CentralSystemClock;
 
 public class CommandLineEntry {
-    private String userName;
-    private String otherUsersName;
+    private User user;
+    private User otherUsersName;
     private MessagePosted messagePosted;
 
     private final CentralSystemClock centralSystemClock;
@@ -13,29 +13,29 @@ public class CommandLineEntry {
         this.centralSystemClock = centralSystemClock;
     }
 
-    public String getUserName() {
-        return userName;
+    public User getUser() {
+        return user;
     }
 
     public MessagePosted getMessagePosted() {
         return messagePosted;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public void setMessagePosted(String userName, String message) {
+    public void setMessagePosted(User user, String message) {
         messagePosted = new MessagePosted(centralSystemClock);
         messagePosted.setMessage(message);
-        messagePosted.setUserName(userName);
+        messagePosted.setUser(user);
     }
 
-    public String getOtherUsersName() {
+    public User getOtherUsersName() {
         return otherUsersName;
     }
 
-    public void setOtherUsersName(String otherUsersName) {
+    public void setOtherUsersName(User otherUsersName) {
         this.otherUsersName = otherUsersName;
     }
 }

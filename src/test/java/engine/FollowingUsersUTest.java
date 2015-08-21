@@ -3,11 +3,9 @@ package engine;
 import clock.CentralSystemClock;
 import domain.FollowsList;
 import domain.MessageStore;
+import domain.Users;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.util.Arrays;
-import java.util.List;
 
 import static helper.TestHelper.CHARLIE_FOLLOWS_ALICE;
 import static helper.TestHelper.CHARLIE_FOLLOWS_BOB;
@@ -44,13 +42,13 @@ public class FollowingUsersUTest {
         //  And Alice exists
         //  When he enters "Charlie follows Alice" at the prompt
         userTypesAtThePrompt(CHARLIE_FOLLOWS_ALICE);
-        List<String> actualFollowsList = followsList.getFollowsFor(USER_CHARLIE);
+        Users actualFollowsList = followsList.getFollowsFor(USER_CHARLIE);
 
                 // Then Alice is added to Charlie's follows list
         verifyThatTheFollowsListMatch(
                 "Alice should have been added to Charlie's follows list",
                 actualFollowsList,
-                Arrays.asList(EXPECTED_FOLLOWS_LIST[0]));
+                new Users(EXPECTED_FOLLOWS_LIST[0]));
     }
 
     /**
@@ -65,13 +63,13 @@ public class FollowingUsersUTest {
         // And he enters "Charlie follows Bob" at the prompt
         userTypesAtThePrompt(CHARLIE_FOLLOWS_ALICE);
         userTypesAtThePrompt(CHARLIE_FOLLOWS_BOB);
-        List<String> actualFollowsList = followsList.getFollowsFor(USER_CHARLIE);
+        Users actualFollowsList = followsList.getFollowsFor(USER_CHARLIE);
 
         // Then Alice and Bob are added to Charlie's follows list
         verifyThatTheFollowsListMatch(
                 "Alice and Bob should have been added to Charlie's follows list",
                 actualFollowsList,
-                Arrays.asList(EXPECTED_FOLLOWS_LIST[1])
+                new Users(EXPECTED_FOLLOWS_LIST[1])
         );
     }
 
@@ -80,8 +78,8 @@ public class FollowingUsersUTest {
     }
 
     private void verifyThatTheFollowsListMatch(String reason,
-                                               List<String> actualFollowsList,
-                                               List<String> expectedFollowsList) {
+                                               Users actualFollowsList,
+                                               Users expectedFollowsList) {
         assertThat(
                 reason,
                 actualFollowsList,

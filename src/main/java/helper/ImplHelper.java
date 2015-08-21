@@ -1,6 +1,7 @@
 package helper;
 
 import command.CommandExecutor;
+import domain.User;
 
 import java.util.List;
 
@@ -27,7 +28,7 @@ public final class ImplHelper {
     public static final String NOTHING_FOR_THIS_COMMAND_EXECUTION = "";
 
     public static final CommandExecutor NO_COMMAND_EXECUTOR_MATCHED = null;
-    public static final List<String> NO_FOLLOWS_RETURNED = null;
+    public static final List<User> NO_FOLLOWS_RETURNED = null;
 
     public static final String COMMAND_PROMPT_INDICATOR = "> ";
     public static final String NOTHING = "";
@@ -40,8 +41,6 @@ public final class ImplHelper {
     public static final String COLUMN_SEPARATOR = ",";
     public static final int DATE_COL_INDEX = 0;
     public static final int MESSAGE_COL_INDEX = 1;
-
-    public static final List<String> FIRST_TIME = null;
 
     public static final String UTF_8_STRING = "UTF-8";
 
