@@ -169,7 +169,7 @@ public class DisplayingUserWallUTest {
     private Date userTypesAtThePrompt(String userTypedCommand,
                                       long delayInMilliseconds) throws IOException {
         currentDateTime = simulateDelayUsing(currentDateTime, delayInMilliseconds);
-        when(ioConsole.showPrompt()).thenReturn(userTypedCommand);
+        when(ioConsole.waitForUserAtThePrompt()).thenReturn(userTypedCommand);
         justLikeTwitter.run(ONCE_ONLY);
 
         return currentDateTime;

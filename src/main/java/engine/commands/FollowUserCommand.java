@@ -17,7 +17,7 @@ public class FollowUserCommand extends CommandExecutor {
         List<String> existingFollowsList = getExistingFollowsListFor(commandLineEntry.getUserName());
         combineFollowsList(existingFollowsList, commandLineEntry);
 
-        return existingFollowsList.toString();
+        return "";
     }
 
     private List<String> getExistingFollowsListFor(String userName) {

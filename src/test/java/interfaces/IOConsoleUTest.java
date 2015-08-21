@@ -17,7 +17,8 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class IOConsoleUTest {
 
     private static final String INPUT_FROM_ALICE = "Alice -> I love the weather today";
-    private static final String ANY_TEXT = "\nSome test to display on the console";
+    private static final String ANY_TEXT = "Some test to display on the console";
+    private static final boolean EXTRA_LINEFEED_NOT_NEEDED = false;
 
     private IOConsole ioConsole;
     private ByteArrayOutputStream outputStreamContent;
@@ -30,14 +31,14 @@ public class IOConsoleUTest {
         outputStreamContent = new ByteArrayOutputStream();
         PrintStream printStreamAsOutputStream = new PrintStream(outputStreamContent);
 
-        ioConsole = new IOConsole(bufferedInputStream, printStreamAsOutputStream);
+        ioConsole = new IOConsole(bufferedInputStream, printStreamAsOutputStream, EXTRA_LINEFEED_NOT_NEEDED);
     }
 
     @Test
     public void givenConsoleIsLoadedWithBufferedInputStreamAndPrintStream_whenALineOfInputIsPassedIn_thenTheSameInputIsReturned() throws IOException {
         // given
         // when
-        String actualOutputString = ioConsole.showPrompt();
+        String actualOutputString = ioConsole.waitForUserAtThePrompt();
 
         // then
         assertThat("The expected line of input should have been returned.",
@@ -49,7 +50,7 @@ public class IOConsoleUTest {
     public void givenConsoleIsLoadedWithBufferedInputStreamAndPrintStream_whenConsolesDisplayIsInvoked_thenItAppearsOnANewLine() throws IOException {
         // given
         // when
-        ioConsole.showPrompt();
+        ioConsole.waitForUserAtThePrompt();
         ioConsole.display(ANY_TEXT);
         String actualOutputString = outputStreamContent.toString();
 

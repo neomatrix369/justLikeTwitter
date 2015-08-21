@@ -6,31 +6,52 @@ import java.io.OutputStream;
 import java.util.Scanner;
 
 public class IOConsole {
-    public static final String COMMAND_PROMPT_INDICATOR = "> ";
+    public static String COMMAND_PROMPT_INDICATOR = "> ";
+
+    private static final String NOTHING = "";
 
     private final InputStream inputStream;
     private final OutputStream outputStream;
+    private boolean needLineFeedForEachLine;
+    private Scanner scanner;
 
-    public IOConsole(InputStream inputStream, OutputStream outputStream) {
+    public IOConsole(InputStream inputStream,
+                     OutputStream outputStream,
+                     boolean needLineFeedForEachLine) {
         this.inputStream = inputStream;
         this.outputStream = outputStream;
+        this.needLineFeedForEachLine = needLineFeedForEachLine;
+
+        scanner = new Scanner(inputStream, "UTF-8");
     }
 
-    public String showPrompt() throws IOException {
+    public String waitForUserAtThePrompt() throws IOException {
         printPromptIndicator(outputStream);
         return gatherWhatTheUserTypesAtThePrompt(inputStream);
     }
 
     private void printPromptIndicator(OutputStream outputStream) throws IOException {
-        outputStream.write(COMMAND_PROMPT_INDICATOR.getBytes());
+        String newCommandPrompt = COMMAND_PROMPT_INDICATOR;
+        if (needLineFeedForEachLine) {
+            newCommandPrompt = System.lineSeparator() + newCommandPrompt;
+        }
+        outputStream.write(newCommandPrompt.getBytes());
     }
 
     private String gatherWhatTheUserTypesAtThePrompt(InputStream inputStream) {
-        Scanner scanner = new Scanner(inputStream, "UTF-8");
-        return scanner.nextLine();
+        if (scanner.hasNextLine()) {
+            return scanner.nextLine();
+        }
+        return NOTHING;
     }
 
-    public void display(String output) throws IOException {
-        outputStream.write(output.getBytes());
+    public void display(String outputToDisplay) throws IOException {
+        if (outputToDisplay != null) {
+            String newOutputToDisplay = outputToDisplay;
+            if (needLineFeedForEachLine) {
+                newOutputToDisplay = System.lineSeparator() + newOutputToDisplay;
+            }
+            outputStream.write(newOutputToDisplay.getBytes());
+        }
     }
 }

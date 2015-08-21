@@ -86,7 +86,7 @@ public class PostingMessagesUTest {
         List<String> userTypedCommandsList = Arrays.asList(userTypedCommands);
 
         for (String userTypedCommand: userTypedCommands) {
-            when(ioConsole.showPrompt())
+            when(ioConsole.waitForUserAtThePrompt())
                     .thenAnswer(
                             AdditionalAnswers.returnsElementsOf(userTypedCommandsList));
         }

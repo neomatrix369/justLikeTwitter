@@ -143,7 +143,7 @@ public class ReadingUserTimeLineUTest {
                                       Date currentDateTime,
                                       long delayInMilliseconds) throws IOException {
         currentDateTime = simulateDelayUsing(currentDateTime, delayInMilliseconds);
-        when(ioConsole.showPrompt()).thenReturn(userTypedCommand);
+        when(ioConsole.waitForUserAtThePrompt()).thenReturn(userTypedCommand);
         justLikeTwitter.run(ONCE_ONLY);
 
         return currentDateTime;

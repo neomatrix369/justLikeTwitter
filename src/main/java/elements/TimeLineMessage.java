@@ -1,6 +1,5 @@
 package elements;
 
-import processors.DateTimeProcessor;
 import processors.DateTimeCentral;
 
 import java.util.Date;
@@ -14,11 +13,9 @@ public final class TimeLineMessage {
     private String message;
 
     private final DateTimeCentral dateTimeCentral;
-    private final DateTimeProcessor dateTimeProcessor;
 
     public TimeLineMessage(DateTimeCentral dateTimeCentral) {
         this.dateTimeCentral = dateTimeCentral;
-        dateTimeProcessor = new DateTimeProcessor(dateTimeCentral);
     }
 
     public void setMessage(String message) {
@@ -28,10 +25,7 @@ public final class TimeLineMessage {
 
     @Override
     public String toString() {
-        return String.format(
-                MESSAGE_ON_TIMELINE_PATTERN,
-                message,
-                dateTimeProcessor.whenMessageWasPosted(dateTime));
+        return String.format(MESSAGE_ON_TIMELINE_PATTERN, dateTime, message);
     }
 
     public String getUserName() {
@@ -44,5 +38,9 @@ public final class TimeLineMessage {
 
     public Date getDateTime() {
         return new Date(dateTime.getTime());
+    }
+
+    public String getMessage() {
+        return message;
     }
 }

@@ -6,17 +6,22 @@ import engine.CommandExecutor;
 import java.util.List;
 
 public class ReadPostCommand extends CommandExecutor {
+
     @Override
     public String execute() {
         StringBuilder result = new StringBuilder();
         String userName = tokens[USERNAME_INDEX];
-        List<TimeLineMessage> usersMessages = messageStore.getMessagesFor(userName);
+        List<TimeLineMessage> timeLineMessages = messageStore.getMessagesFor(userName);
 
-        for (TimeLineMessage usersMessage: usersMessages) {
-            result.append(usersMessage.toString())
-                  .append(System.lineSeparator());
+        for (TimeLineMessage timeLineMessage: timeLineMessages) {
+            buildTimeLine(result, timeLineMessage);
         }
 
         return result.toString();
+    }
+
+    private void buildTimeLine(StringBuilder result, TimeLineMessage timeLineMessage) {
+        result.append(getFormattedMessage(timeLineMessage))
+              .append(System.lineSeparator());
     }
 }

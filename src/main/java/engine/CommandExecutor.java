@@ -1,7 +1,9 @@
 package engine;
 
 import elements.MessageStore;
+import elements.TimeLineMessage;
 import processors.DateTimeCentral;
+import processors.DateTimeProcessor;
 
 import java.util.Arrays;
 import java.util.List;
@@ -12,6 +14,7 @@ public abstract class CommandExecutor {
     protected static final int MESSAGE_INDEX = 1;
     protected static final int OTHER_USERNAME_INDEX = 1;
 
+    protected static final String MESSAGE_PATTERN_READ_POST = "%s %s";
     protected static final String HYPHEN_SEPARATOR = " - ";
     protected static final String NOTHING_REALLY = "";
 
@@ -37,5 +40,14 @@ public abstract class CommandExecutor {
 
     public void setFollowsList(Map<String, List<String>> followsList) {
         this.followsList = followsList;
+    }
+
+    public String getFormattedMessage(TimeLineMessage timeLineMessage) {
+        DateTimeProcessor dateTimeProcessor = new DateTimeProcessor(dateTimeCentral);
+
+        return String.format(
+                MESSAGE_PATTERN_READ_POST,
+                timeLineMessage.getMessage(),
+                dateTimeProcessor.whenMessageWasPosted(timeLineMessage.getDateTime()));
     }
 }

@@ -8,6 +8,7 @@ import java.io.IOException;
 public class JustLikeTwitter {
     private static final int START_FROM_ONE = 1;
     private static final int FOREVER = -1;
+    private static final boolean EXTRA_LINEFEED_NOT_NEEDED = false;
 
     private final JustLikeTwitterEngine justLikeTwitterEngine;
     private final IOConsole ioConsole;
@@ -26,7 +27,7 @@ public class JustLikeTwitter {
     private static JustLikeTwitter setupJustLikeTwitter() {
         DateTimeCentral dateTimeCentral = new DateTimeCentral();
         JustLikeTwitterEngine justLikeTwitterEngine = new JustLikeTwitterEngine(dateTimeCentral);
-        IOConsole ioConsole = new IOConsole(System.in, System.out);
+        IOConsole ioConsole = new IOConsole(System.in, System.out, EXTRA_LINEFEED_NOT_NEEDED);
 
         return new JustLikeTwitter(justLikeTwitterEngine, ioConsole);
     }
@@ -37,8 +38,7 @@ public class JustLikeTwitter {
         showUsageText();
         
         do {
-            String userTypedCommand = ioConsole.showPrompt();
-
+            String userTypedCommand = ioConsole.waitForUserAtThePrompt();
             String result = justLikeTwitterEngine.executeCommand(userTypedCommand);
             ioConsole.display(result);
             runCount++;

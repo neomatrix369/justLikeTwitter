@@ -23,16 +23,20 @@ public class DisplayWallCommand extends CommandExecutor {
     private String getFormattedMessagesForWallUsing(List<String> followsList) {
         StringBuilder result = new StringBuilder();
 
-        List<TimeLineMessage> usersMessages = messageStore.getMessagesFor(followsList);
+        List<TimeLineMessage> timeLineMessages = messageStore.getMessagesFor(followsList);
 
-        for (TimeLineMessage usersMessage: usersMessages) {
-            result.append(usersMessage.getUserName())
-                    .append(HYPHEN_SEPARATOR)
-                    .append(usersMessage.toString())
-                    .append(System.lineSeparator());
+        for (TimeLineMessage timeLineMessage: timeLineMessages) {
+            buildTimeLine(result, timeLineMessage);
         }
 
         return result.toString();
+    }
+
+    private void buildTimeLine(StringBuilder result, TimeLineMessage timeLineMessage) {
+        result.append(timeLineMessage.getUserName())
+                .append(HYPHEN_SEPARATOR)
+                .append(getFormattedMessage(timeLineMessage))
+                .append(System.lineSeparator());
     }
 
     private List<String> addThisUserToFollowsList(String userName) {

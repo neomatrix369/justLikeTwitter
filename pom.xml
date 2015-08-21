@@ -65,6 +65,11 @@
             <version>1.9.5</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.github.nikolavp</groupId>
+            <artifactId>approval-core</artifactId>
+            <version>0.3</version>
+        </dependency>
     </dependencies>
 
 </project>
