@@ -2,8 +2,8 @@ package engine;
 
 import elements.MessageStore;
 import elements.TimeLineMessage;
-import processors.DateTimeCentral;
-import processors.DateTimeProcessor;
+import clock.CentralSystemClock;
+import clock.ClockTimeFormatter;
 
 import java.util.Arrays;
 import java.util.List;
@@ -19,7 +19,7 @@ public abstract class CommandExecutor {
     protected static final String NOTHING_REALLY = "";
 
     protected String[] tokens;
-    protected DateTimeCentral dateTimeCentral;
+    protected CentralSystemClock centralSystemClock;
     protected MessageStore messageStore;
 
     protected Map<String, List<String>> followsList;
@@ -30,8 +30,8 @@ public abstract class CommandExecutor {
         this.tokens = Arrays.copyOf(tokens, tokens.length);
     }
 
-    public void setDateTimeCentral(DateTimeCentral dateTimeCentral) {
-        this.dateTimeCentral = dateTimeCentral;
+    public void setCentralSystemClock(CentralSystemClock centralSystemClock) {
+        this.centralSystemClock = centralSystemClock;
     }
 
     public void setMessageStore(MessageStore messageStore) {
@@ -43,11 +43,11 @@ public abstract class CommandExecutor {
     }
 
     public String getFormattedMessage(TimeLineMessage timeLineMessage) {
-        DateTimeProcessor dateTimeProcessor = new DateTimeProcessor(dateTimeCentral);
+        ClockTimeFormatter clockTimeFormatter = new ClockTimeFormatter(centralSystemClock);
 
         return String.format(
                 MESSAGE_PATTERN_READ_POST,
                 timeLineMessage.getMessage(),
-                dateTimeProcessor.whenMessageWasPosted(timeLineMessage.getDateTime()));
+                clockTimeFormatter.whenMessageWasPosted(timeLineMessage.getDateTime()));
     }
 }

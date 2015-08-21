@@ -1,16 +1,16 @@
 package elements;
 
-import processors.DateTimeCentral;
+import clock.CentralSystemClock;
 
 public class CommandLineEntry {
     private String userName;
     private String otherUsersName;
     private TimeLineMessage timeLineMessage;
 
-    private final DateTimeCentral dateTimeCentral;
+    private final CentralSystemClock centralSystemClock;
 
-    public CommandLineEntry(DateTimeCentral dateTimeCentral) {
-        this.dateTimeCentral = dateTimeCentral;
+    public CommandLineEntry(CentralSystemClock centralSystemClock) {
+        this.centralSystemClock = centralSystemClock;
     }
 
     public String getUserName() {
@@ -26,7 +26,7 @@ public class CommandLineEntry {
     }
 
     public void setTimeLineMessage(String userName, String message) {
-        timeLineMessage = new TimeLineMessage(dateTimeCentral);
+        timeLineMessage = new TimeLineMessage(centralSystemClock);
         timeLineMessage.setMessage(message);
         timeLineMessage.setUserName(userName);
     }

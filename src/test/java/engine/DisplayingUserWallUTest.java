@@ -5,7 +5,7 @@ import interfaces.IOConsole;
 import interfaces.JustLikeTwitter;
 import org.junit.Before;
 import org.junit.Test;
-import processors.DateTimeCentral;
+import clock.CentralSystemClock;
 
 import java.io.IOException;
 import java.util.Date;
@@ -37,7 +37,7 @@ public class DisplayingUserWallUTest {
     private JustLikeTwitterEngine justLikeTwitterEngine;
     private IOConsole ioConsole;
 
-    private final DateTimeCentral dateTimeCentral = mock(DateTimeCentral.class);
+    private final CentralSystemClock centralSystemClock = mock(CentralSystemClock.class);
 
     private JustLikeTwitter justLikeTwitter;
 
@@ -178,13 +178,13 @@ public class DisplayingUserWallUTest {
 
     private void setupJustLikeTwitter() {
         MessageStore messageStore = new MessageStore();
-        justLikeTwitterEngine = new JustLikeTwitterEngine(messageStore, dateTimeCentral);
+        justLikeTwitterEngine = new JustLikeTwitterEngine(messageStore, centralSystemClock);
         justLikeTwitter = new JustLikeTwitter(ioConsole, justLikeTwitterEngine, messageStore);
     }
 
     private Date simulateDelayUsing(Date currentDateTime, long timeInMilliSeconds) {
         Date newDateTime = new Date(currentDateTime.getTime() + timeInMilliSeconds);
-        when(dateTimeCentral.getCurrentDateTime()).thenReturn(newDateTime);
+        when(centralSystemClock.getCurrentDateTime()).thenReturn(newDateTime);
         return newDateTime;
     }
 }

@@ -6,7 +6,7 @@ import engine.commands.DisplayWallCommand;
 import engine.commands.FollowUserCommand;
 import engine.commands.PostMessageCommand;
 import engine.commands.ReadPostCommand;
-import processors.DateTimeCentral;
+import clock.CentralSystemClock;
 
 import java.util.HashMap;
 import java.util.List;
@@ -21,7 +21,7 @@ public class CommandExecutorFactory {
 
     private static final CommandExecutor NO_COMMAND_EXECUTOR_MATCHED = null;
 
-    private final DateTimeCentral dateTimeCentral;
+    private final CentralSystemClock centralSystemClock;
     private final MessageStore messageStore;
     private Map<String, List<String>> followsList;
 
@@ -35,10 +35,10 @@ public class CommandExecutorFactory {
         }
     };
 
-    public CommandExecutorFactory(DateTimeCentral dateTimeCentral,
+    public CommandExecutorFactory(CentralSystemClock centralSystemClock,
                                   MessageStore messageStore,
                                   Map<String, List<String>> followsList) {
-        this.dateTimeCentral = dateTimeCentral;
+        this.centralSystemClock = centralSystemClock;
         this.messageStore = messageStore;
         this.followsList = followsList;
     }
@@ -75,7 +75,7 @@ public class CommandExecutorFactory {
             String[] tokens = userTypedCommand.split(tokenSeparator);
             commandExecutor.setParsedTokens(tokens);
             commandExecutor.setMessageStore(messageStore);
-            commandExecutor.setDateTimeCentral(dateTimeCentral);
+            commandExecutor.setCentralSystemClock(centralSystemClock);
             commandExecutor.setFollowsList(followsList);
             return commandExecutor;
         }

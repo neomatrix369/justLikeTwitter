@@ -2,7 +2,7 @@ package interfaces;
 
 import elements.MessageStore;
 import engine.JustLikeTwitterEngine;
-import processors.DateTimeCentral;
+import clock.CentralSystemClock;
 
 import java.io.IOException;
 
@@ -30,9 +30,9 @@ public class JustLikeTwitter {
     }
 
     private static JustLikeTwitter setupJustLikeTwitter() {
-        DateTimeCentral dateTimeCentral = new DateTimeCentral();
+        CentralSystemClock centralSystemClock = new CentralSystemClock();
         MessageStore messageStore = new MessageStore();
-        JustLikeTwitterEngine justLikeTwitterEngine = new JustLikeTwitterEngine(messageStore, dateTimeCentral);
+        JustLikeTwitterEngine justLikeTwitterEngine = new JustLikeTwitterEngine(messageStore, centralSystemClock);
 
         IOConsole ioConsole = new IOConsole(System.in, System.out, EXTRA_LINEFEED_NOT_NEEDED);
 

@@ -10,7 +10,7 @@ public class DisplayWallCommand extends CommandExecutor {
 
     @Override
     public String execute() {
-        CommandLineEntry commandLineEntry = new CommandLineEntry(dateTimeCentral);
+        CommandLineEntry commandLineEntry = new CommandLineEntry(centralSystemClock);
         commandLineEntry.setUserName(tokens[USERNAME_INDEX].trim());
         return getWallFor(commandLineEntry.getUserName());
     }

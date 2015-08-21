@@ -3,7 +3,7 @@ package engine;
 import elements.MessageStore;
 import org.junit.Before;
 import org.junit.Test;
-import processors.DateTimeCentral;
+import clock.CentralSystemClock;
 
 import java.util.Arrays;
 import java.util.List;
@@ -36,9 +36,9 @@ public class FollowingUsersUTest {
 
     @Before
     public void setUp() {
-        DateTimeCentral dateTimeCentral = mock(DateTimeCentral.class);
+        CentralSystemClock centralSystemClock = mock(CentralSystemClock.class);
         MessageStore messageStore = new MessageStore();
-        justLikeTwitterEngine = new JustLikeTwitterEngine(messageStore, dateTimeCentral);
+        justLikeTwitterEngine = new JustLikeTwitterEngine(messageStore, centralSystemClock);
     }
 
     /**

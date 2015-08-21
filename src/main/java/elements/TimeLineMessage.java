@@ -1,6 +1,6 @@
 package elements;
 
-import processors.DateTimeCentral;
+import clock.CentralSystemClock;
 
 import java.util.Date;
 
@@ -12,14 +12,14 @@ public final class TimeLineMessage {
     private Date dateTime;
     private String message;
 
-    private final DateTimeCentral dateTimeCentral;
+    private final CentralSystemClock centralSystemClock;
 
-    public TimeLineMessage(DateTimeCentral dateTimeCentral) {
-        this.dateTimeCentral = dateTimeCentral;
+    public TimeLineMessage(CentralSystemClock centralSystemClock) {
+        this.centralSystemClock = centralSystemClock;
     }
 
     public void setMessage(String message) {
-        this.dateTime = dateTimeCentral.getCurrentDateTime();
+        this.dateTime = centralSystemClock.getCurrentDateTime();
         this.message = message;
     }
 

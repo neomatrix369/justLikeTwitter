@@ -2,7 +2,7 @@ package engine;
 
 import elements.CommandType;
 import elements.MessageStore;
-import processors.DateTimeCentral;
+import clock.CentralSystemClock;
 
 import java.util.HashMap;
 import java.util.List;
@@ -11,17 +11,17 @@ import java.util.Map;
 public class JustLikeTwitterEngine {
     private final MessageStore messageStore;
     private final Map<String, List<String>> followsList = new HashMap<>();
-    private final DateTimeCentral dateTimeCentral;
+    private final CentralSystemClock centralSystemClock;
 
     public JustLikeTwitterEngine(MessageStore messageStore,
-                                 DateTimeCentral dateTimeCentral) {
+                                 CentralSystemClock centralSystemClock) {
         this.messageStore = messageStore;
-        this.dateTimeCentral = dateTimeCentral;
+        this.centralSystemClock = centralSystemClock;
     }
 
     public String executeCommand(String userTypedCommand) {
         CommandExecutorFactory commandExecutorFactory =
-                new CommandExecutorFactory(dateTimeCentral, messageStore, followsList);
+                new CommandExecutorFactory(centralSystemClock, messageStore, followsList);
         CommandExecutor command = commandExecutorFactory.getCommand(userTypedCommand);
         return command.execute();
     }

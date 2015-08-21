@@ -4,7 +4,7 @@ import elements.MessageStore;
 import elements.TimeLineMessage;
 import org.junit.Before;
 import org.junit.Test;
-import processors.DateTimeCentral;
+import clock.CentralSystemClock;
 
 import java.util.Arrays;
 import java.util.List;
@@ -19,13 +19,13 @@ import static org.junit.Assert.assertThat;
 
 public class PostingMessagesUTest {
 
-    private final DateTimeCentral dateTimeCentral = new DateTimeCentral();
+    private final CentralSystemClock centralSystemClock = new CentralSystemClock();
     private JustLikeTwitterEngine justLikeTwitterEngine;
     private MessageStore messageStore = new MessageStore();
 
     @Before
     public void setUp() {
-        justLikeTwitterEngine = new JustLikeTwitterEngine(messageStore, dateTimeCentral);
+        justLikeTwitterEngine = new JustLikeTwitterEngine(messageStore, centralSystemClock);
     }
 
     /**

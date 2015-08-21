@@ -10,7 +10,7 @@ public class FollowUserCommand extends CommandExecutor {
 
     @Override
     public String execute() {
-        CommandLineEntry commandLineEntry = new CommandLineEntry(dateTimeCentral);
+        CommandLineEntry commandLineEntry = new CommandLineEntry(centralSystemClock);
         commandLineEntry.setUserName(tokens[USERNAME_INDEX].trim());
         commandLineEntry.setOtherUsersName(tokens[OTHER_USERNAME_INDEX].trim());
 

@@ -7,7 +7,7 @@ import interfaces.JustLikeTwitter;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.AdditionalAnswers;
-import processors.DateTimeCentral;
+import clock.CentralSystemClock;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -47,13 +47,13 @@ public class FullLifeCycleAcceptanceTest {
             .build();
 
     private JustLikeTwitter justLikeTwitter;
-    private DateTimeCentral dateTimeCentralMock = mock(DateTimeCentral.class);
+    private CentralSystemClock centralSystemClockMock = mock(CentralSystemClock.class);
     private List<Date> dateTimeForMessages = loadDatesFrom(DATES_FOR_MESSAGES_INPUT_FILE);
 
     @Before
     public void setUp() throws FileNotFoundException {
         MessageStore messageStore = new MessageStore();
-        JustLikeTwitterEngine justLikeTwitterEngine = new JustLikeTwitterEngine(messageStore, dateTimeCentralMock);
+        JustLikeTwitterEngine justLikeTwitterEngine = new JustLikeTwitterEngine(messageStore, centralSystemClockMock);
         IOConsole ioConsole = new IOConsole(
                 getFileToReadFrom(REPLAY_INPUT_FILE),
                 getFileToWriteTo(ACTUAL_OUTPUT_FILE),
@@ -64,7 +64,7 @@ public class FullLifeCycleAcceptanceTest {
     @Test
     public void givenJustLikeTwitter_whenASeriesOfCommandsArePassedIn_thenATimelineIsGenerated() throws IOException {
         // given
-        when(dateTimeCentralMock.getCurrentDateTime())
+        when(centralSystemClockMock.getCurrentDateTime())
                 .thenAnswer(AdditionalAnswers.returnsElementsOf(dateTimeForMessages));
 
         // when
