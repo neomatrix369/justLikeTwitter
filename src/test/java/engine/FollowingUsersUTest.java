@@ -12,6 +12,7 @@ import java.util.List;
 import static helper.TestHelper.COMMANDS_TYPED_BY_CHARLIE;
 import static helper.TestHelper.EXPECTED_FOLLOWS_LIST;
 import static helper.TestHelper.USER_CHARLIE;
+
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -49,7 +50,7 @@ public class FollowingUsersUTest {
         verifyThatTheFollowsListMatch(
                 "Alice should have been added to Charlie's follows list",
                 actualFollowsList,
-                EXPECTED_FOLLOWS_LIST[0]);
+                Arrays.asList(EXPECTED_FOLLOWS_LIST[0]));
     }
 
     /**
@@ -70,7 +71,7 @@ public class FollowingUsersUTest {
         verifyThatTheFollowsListMatch(
                 "Alice and Bob should have been added to Charlie's follows list",
                 actualFollowsList,
-                EXPECTED_FOLLOWS_LIST[1]
+                Arrays.asList(EXPECTED_FOLLOWS_LIST[1])
         );
     }
 
@@ -80,8 +81,7 @@ public class FollowingUsersUTest {
 
     private void verifyThatTheFollowsListMatch(String reason,
                                                List<String> actualFollowsList,
-                                               String[] expectedFollowsListAsArray) {
-        List<String> expectedFollowsList = Arrays.asList(expectedFollowsListAsArray);
+                                               List<String> expectedFollowsList) {
         assertThat(
                 reason,
                 actualFollowsList,

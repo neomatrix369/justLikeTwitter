@@ -1,7 +1,12 @@
 package helper;
 
+import clock.CentralSystemClock;
 import com.github.approval.Approval;
 import com.github.approval.reporters.Reporters;
+
+import java.util.Date;
+
+import static org.mockito.Mockito.when;
 
 public class TestHelper {
     public static final String REPLAY_INPUT_FILE = "justLikeTwitterCommandsInputFile.txt";
@@ -59,4 +64,12 @@ public class TestHelper {
             new String[]{USER_ALICE},
             new String[]{USER_ALICE, USER_BOB}
     };
+
+    public static Date simulateDelayUsing(Date currentDateTime,
+                                   CentralSystemClock centralSystemClock,
+                                   long timeInMilliSeconds) {
+        Date newDateTime = new Date(currentDateTime.getTime() + timeInMilliSeconds);
+        when(centralSystemClock.getCurrentDateTime()).thenReturn(newDateTime);
+        return newDateTime;
+    }
 }

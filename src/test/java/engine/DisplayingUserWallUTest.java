@@ -18,12 +18,13 @@ import static helper.TestHelper.COMMANDS_TYPED_BY_ALICE;
 import static helper.TestHelper.COMMANDS_TYPED_BY_BOB;
 import static helper.TestHelper.COMMANDS_TYPED_BY_CHARLIE;
 import static helper.TestHelper.ZERO_MINUTES;
+import static helper.TestHelper.simulateDelayUsing;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+
 
 /**
  * Feature: Displaying a user's wall
@@ -130,16 +131,9 @@ public class DisplayingUserWallUTest {
                         "Bob - Damn! We lost! (2 minutes ago)" + System.lineSeparator());
     }
 
-    private String userTypesAtThePrompt(String userTypedCommand,
-                                      long delayInMilliseconds) throws IOException {
-        currentDateTime = simulateDelayUsing(currentDateTime, delayInMilliseconds);
+    private String userTypesAtThePrompt(String userTypedCommand, long delayInMilliseconds) throws IOException {
+        currentDateTime = simulateDelayUsing(currentDateTime, centralSystemClock, delayInMilliseconds);
         return justLikeTwitterEngine.executeCommand(userTypedCommand);
-    }
-
-    private Date simulateDelayUsing(Date currentDateTime, long timeInMilliSeconds) {
-        Date newDateTime = new Date(currentDateTime.getTime() + timeInMilliSeconds);
-        when(centralSystemClock.getCurrentDateTime()).thenReturn(newDateTime);
-        return newDateTime;
     }
 
     private void verifyThatTheWallsMatch(String reason,
