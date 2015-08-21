@@ -13,16 +13,18 @@ import static helper.TestHelper.AFTER_FIVE_MINUTES;
 import static helper.TestHelper.AFTER_ONE_MINUTE;
 import static helper.TestHelper.AFTER_THREE_MINUTES;
 import static helper.TestHelper.AFTER_TWO_SECONDS;
-import static helper.TestHelper.COMMANDS_TYPED_BY_ALICE;
-import static helper.TestHelper.COMMANDS_TYPED_BY_BOB;
-import static helper.TestHelper.COMMANDS_TYPED_BY_CHARLIE;
+import static helper.TestHelper.ALICE_POSTS_A_MESSAGE;
+import static helper.TestHelper.BOB_POSTS_TWO_MESSAGES;
+import static helper.TestHelper.CHARLIE_FOLLOWS_ALICE;
+import static helper.TestHelper.CHARLIE_FOLLOWS_BOB;
+import static helper.TestHelper.CHARLIE_POSTS_A_MESSAGE;
+import static helper.TestHelper.CHARLIE_REQUESTS_WALL;
 import static helper.TestHelper.ZERO_MINUTES;
 import static helper.TestHelper.simulateDelayUsing;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.Mockito.mock;
-
 
 /**
  * Feature: Displaying a user's wall
@@ -54,12 +56,12 @@ public class DisplayingUserWallUTest {
         // And Alice's timeline contains the required posts
         // And he enters "Charlie -> I'm in New York today! Anyone wants to have a coffee?" at the prompt
         // And then he enters "Charlie follows Alice" at the prompt
-        userTypesAtThePrompt(COMMANDS_TYPED_BY_ALICE[0], ZERO_MINUTES);
-        userTypesAtThePrompt(COMMANDS_TYPED_BY_CHARLIE[0], AFTER_FIVE_MINUTES);
-        userTypesAtThePrompt(COMMANDS_TYPED_BY_CHARLIE[1], AFTER_TWO_SECONDS);
+        userTypesAtThePrompt(ALICE_POSTS_A_MESSAGE, ZERO_MINUTES);
+        userTypesAtThePrompt(CHARLIE_POSTS_A_MESSAGE, AFTER_FIVE_MINUTES);
+        userTypesAtThePrompt(CHARLIE_FOLLOWS_ALICE, AFTER_TWO_SECONDS);
 
         // When he types "Charlie wall" at the prompt
-        String actualWall = userTypesAtThePrompt(COMMANDS_TYPED_BY_CHARLIE[3], ZERO_MINUTES);
+        String actualWall = userTypesAtThePrompt(CHARLIE_REQUESTS_WALL, ZERO_MINUTES);
 
         // Then he sees the below in the console
         // "Charlie - I'm in New York today! Anyone wants to have a coffee? (2 seconds ago)
@@ -79,15 +81,15 @@ public class DisplayingUserWallUTest {
         // And he enters "Charlie -> I'm in New York today! Anyone wants to have a coffee?" at the prompt
         // And then he enters "Charlie follows Alice" at the prompt
         // And then he enters "Charlie follows Bob" at the prompt
-        userTypesAtThePrompt(COMMANDS_TYPED_BY_ALICE[0], ZERO_MINUTES);
-        userTypesAtThePrompt(COMMANDS_TYPED_BY_BOB[0], AFTER_THREE_MINUTES);
-        userTypesAtThePrompt(COMMANDS_TYPED_BY_BOB[1], AFTER_ONE_MINUTE);
-        userTypesAtThePrompt(COMMANDS_TYPED_BY_CHARLIE[0], AFTER_ONE_MINUTE);
-        userTypesAtThePrompt(COMMANDS_TYPED_BY_CHARLIE[1], ZERO_MINUTES);
-        userTypesAtThePrompt(COMMANDS_TYPED_BY_CHARLIE[2], ZERO_MINUTES);
+        userTypesAtThePrompt(ALICE_POSTS_A_MESSAGE, ZERO_MINUTES);
+        userTypesAtThePrompt(BOB_POSTS_TWO_MESSAGES[0], AFTER_THREE_MINUTES);
+        userTypesAtThePrompt(BOB_POSTS_TWO_MESSAGES[1], AFTER_ONE_MINUTE);
+        userTypesAtThePrompt(CHARLIE_POSTS_A_MESSAGE, AFTER_ONE_MINUTE);
+        userTypesAtThePrompt(CHARLIE_FOLLOWS_ALICE, ZERO_MINUTES);
+        userTypesAtThePrompt(CHARLIE_FOLLOWS_BOB, ZERO_MINUTES);
 
         // When he types "Charlie wall" at the prompt
-        String actualWall = userTypesAtThePrompt(COMMANDS_TYPED_BY_CHARLIE[3], AFTER_FIFTEEN_SECONDS);
+        String actualWall = userTypesAtThePrompt(CHARLIE_REQUESTS_WALL, AFTER_FIFTEEN_SECONDS);
 
         // Then he sees the below in the console
         // "Charlie - I'm in New York today! Anyone wants to have a coffee? (15 seconds ago)
@@ -109,13 +111,13 @@ public class DisplayingUserWallUTest {
         // And Bob's timeline contains the required posts
         // And he enters "Charlie -> I'm in New York today! Anyone wants to have a coffee?" at the prompt
         // And then he enters "Charlie follows Bob" at the prompt
-        userTypesAtThePrompt(COMMANDS_TYPED_BY_BOB[0], ZERO_MINUTES);
-        userTypesAtThePrompt(COMMANDS_TYPED_BY_BOB[1], AFTER_ONE_MINUTE);
-        userTypesAtThePrompt(COMMANDS_TYPED_BY_CHARLIE[0], AFTER_ONE_MINUTE);
-        userTypesAtThePrompt(COMMANDS_TYPED_BY_CHARLIE[2], ZERO_MINUTES);
+        userTypesAtThePrompt(BOB_POSTS_TWO_MESSAGES[0], ZERO_MINUTES);
+        userTypesAtThePrompt(BOB_POSTS_TWO_MESSAGES[1], AFTER_ONE_MINUTE);
+        userTypesAtThePrompt(CHARLIE_POSTS_A_MESSAGE, AFTER_ONE_MINUTE);
+        userTypesAtThePrompt(CHARLIE_FOLLOWS_BOB, ZERO_MINUTES);
 
         // When he types "Charlie wall" at the prompt
-        String actualWall = userTypesAtThePrompt(COMMANDS_TYPED_BY_CHARLIE[3], AFTER_FIFTEEN_SECONDS);
+        String actualWall = userTypesAtThePrompt(CHARLIE_REQUESTS_WALL, AFTER_FIFTEEN_SECONDS);
 
         // Then he sees the below in the console
         // "Charlie - I'm in New York today! Anyone wants to have a coffee? (15 seconds ago)

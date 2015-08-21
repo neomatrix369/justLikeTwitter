@@ -11,7 +11,7 @@ import java.io.PrintStream;
 
 import static helper.ImplHelper.COMMAND_PROMPT_INDICATOR;
 import static helper.TestHelper.ANY_TEXT;
-import static helper.TestHelper.COMMANDS_TYPED_BY_ALICE;
+import static helper.TestHelper.ALICE_POSTS_A_MESSAGE;
 import static helper.TestHelper.EXTRA_LINEFEED_NOT_NEEDED;
 
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -25,7 +25,7 @@ public class IOConsoleUTest {
 
     @Before
     public void setUp() {
-        ByteArrayInputStream inputInputStreamContent = new ByteArrayInputStream(COMMANDS_TYPED_BY_ALICE[0].getBytes());
+        ByteArrayInputStream inputInputStreamContent = new ByteArrayInputStream(ALICE_POSTS_A_MESSAGE.getBytes());
         BufferedInputStream bufferedInputStream = new BufferedInputStream(inputInputStreamContent);
 
         outputStreamContent = new ByteArrayOutputStream();
@@ -43,7 +43,7 @@ public class IOConsoleUTest {
         // then
         assertThat("The expected line of input should have been returned.",
                 actualOutputString,
-                is(equalTo(COMMANDS_TYPED_BY_ALICE[0])));
+                is(equalTo(ALICE_POSTS_A_MESSAGE)));
     }
 
     @Test

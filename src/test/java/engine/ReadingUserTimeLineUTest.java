@@ -11,9 +11,9 @@ import java.util.Date;
 import static helper.TestHelper.AFTER_FIFTY_SECONDS;
 import static helper.TestHelper.AFTER_FIVE_MINUTES;
 import static helper.TestHelper.AFTER_ONE_MINUTE;
-import static helper.TestHelper.COMMANDS_TYPED_BY_ALICE;
-import static helper.TestHelper.COMMANDS_TYPED_BY_BOB;
-import static helper.TestHelper.COMMAND_TYPED_BY_HARRY;
+import static helper.TestHelper.ALICE_POSTS_A_MESSAGE;
+import static helper.TestHelper.BOB_POSTS_TWO_MESSAGES;
+import static helper.TestHelper.HARRY_POSTS_A_MESSAGE;
 import static helper.TestHelper.USER_ALICE;
 import static helper.TestHelper.USER_BOB;
 import static helper.TestHelper.USER_HARRY;
@@ -51,7 +51,7 @@ public class ReadingUserTimeLineUTest {
     public void givenHarryHasAPost_whenHarryIsTypedAtThePrompt_thenHarrysTimeLineIsShown() {
         // Given I am at the JustLikeTwitter command prompt ">"
         // And Harry's timeline contains the required posts
-        userTypesAtThePrompt(COMMAND_TYPED_BY_HARRY[0], ZERO_MINUTES);
+        userTypesAtThePrompt(HARRY_POSTS_A_MESSAGE, ZERO_MINUTES);
 
         // When I type "Harry" at the prompt after fifty seconds
         String actualTimeLine = userTypesAtThePrompt(USER_HARRY, AFTER_FIFTY_SECONDS);
@@ -70,7 +70,7 @@ public class ReadingUserTimeLineUTest {
     public void givenAliceHasAPost_whenAliceIsTypedAtThePrompt_thenAlicesTimeLineIsShown() {
         // Given I am at the JustLikeTwitter command prompt ">"
         // And Alice's timeline contains the required posts
-        userTypesAtThePrompt(COMMANDS_TYPED_BY_ALICE[0], ZERO_MINUTES);
+        userTypesAtThePrompt(ALICE_POSTS_A_MESSAGE, ZERO_MINUTES);
 
         // When I type "Alice" at the prompt after five minutes
         String actualTimeLine = userTypesAtThePrompt(USER_ALICE, AFTER_FIVE_MINUTES);
@@ -89,8 +89,8 @@ public class ReadingUserTimeLineUTest {
     public void givenBobHasPosts_whenBobIsTypedAtThePrompt_thenBobsTimeLineIsShown() {
         // Given I am at the JustLikeTwitter command prompt ">"
         // And Bob's timeline contains the required posts
-        userTypesAtThePrompt(COMMANDS_TYPED_BY_BOB[0], ZERO_MINUTES);
-        userTypesAtThePrompt(COMMANDS_TYPED_BY_BOB[1], AFTER_ONE_MINUTE);
+        userTypesAtThePrompt(BOB_POSTS_TWO_MESSAGES[0], ZERO_MINUTES);
+        userTypesAtThePrompt(BOB_POSTS_TWO_MESSAGES[1], AFTER_ONE_MINUTE);
 
         // When I type "Bob" at the prompt after a minute
         String actualTimeLine = userTypesAtThePrompt(USER_BOB, AFTER_ONE_MINUTE);

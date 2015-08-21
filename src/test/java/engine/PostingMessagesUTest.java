@@ -10,8 +10,8 @@ import org.junit.Test;
 import java.util.Arrays;
 import java.util.List;
 
-import static helper.TestHelper.COMMANDS_TYPED_BY_ALICE;
-import static helper.TestHelper.COMMANDS_TYPED_BY_BOB;
+import static helper.TestHelper.ALICE_POSTS_A_MESSAGE;
+import static helper.TestHelper.BOB_POSTS_TWO_MESSAGES;
 import static helper.TestHelper.USER_ALICE;
 import static helper.TestHelper.USER_BOB;
 
@@ -47,7 +47,7 @@ public class PostingMessagesUTest {
         // Given a user's message list is empty
         // And a new message "Alice -> I love the weather today" is available
         // When the message is passed to the engine for the user
-        userTypesAtThePrompt(COMMANDS_TYPED_BY_ALICE[0]);
+        userTypesAtThePrompt(ALICE_POSTS_A_MESSAGE);
         List<MessagePosted> actualMessagesToAdd = messageStore.getMessagesFor(USER_ALICE);
 
         // Then the message is added to the user's message list
@@ -66,8 +66,8 @@ public class PostingMessagesUTest {
         // Given user's message list is empty
         // And new messages like "Bob -> Damn! We lost!" and "Bob -> Good game though." are available
         // When the messages are passed to the engine for the user
-        userTypesAtThePrompt(COMMANDS_TYPED_BY_BOB[0]);
-        userTypesAtThePrompt(COMMANDS_TYPED_BY_BOB[1]);
+        userTypesAtThePrompt(BOB_POSTS_TWO_MESSAGES[0]);
+        userTypesAtThePrompt(BOB_POSTS_TWO_MESSAGES[1]);
         List<MessagePosted> actualMessagesToAdd = messageStore.getMessagesFor(USER_BOB);
 
         // Then the messages are added to the user's message list, in the reverse order of entry

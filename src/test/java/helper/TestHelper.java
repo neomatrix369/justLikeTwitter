@@ -40,25 +40,21 @@ public final class TestHelper {
 
     public static final String ANY_TEXT = "Some test to display on the console";
 
-    public static final String[] COMMANDS_TYPED_BY_ALICE = new String[]{
-            "Alice -> I love the weather today",
-    };
+    public static final String ALICE_POSTS_A_MESSAGE = "Alice -> I love the weather today";
 
-    public static final String[] COMMAND_TYPED_BY_HARRY = new String[] {
-            "Harry -> I like this idea"
-    };
+    public static final String HARRY_POSTS_A_MESSAGE = "Harry -> I like this idea";
 
-    public static final String[] COMMANDS_TYPED_BY_BOB = new String[]{
+    public static final String[] BOB_POSTS_TWO_MESSAGES = new String[]{
             "Bob -> Damn! We lost!",
             "Bob -> Good game though."
     };
 
-    public static final String[] COMMANDS_TYPED_BY_CHARLIE = new String[]{
-            "Charlie -> I'm in New York today! Anyone wants to have a coffee?",
-            "Charlie follows Alice",
-            "Charlie follows Bob",
-            "Charlie wall"
-    };
+    public static final String CHARLIE_POSTS_A_MESSAGE =
+            "Charlie -> I'm in New York today! Anyone wants to have a coffee?";
+
+    public static final String CHARLIE_FOLLOWS_ALICE = "Charlie follows Alice";
+    public static final String CHARLIE_FOLLOWS_BOB = "Charlie follows Bob";
+    public static final String CHARLIE_REQUESTS_WALL = "Charlie wall";
 
     public static final String[][] EXPECTED_FOLLOWS_LIST = {
             new String[]{USER_ALICE},
