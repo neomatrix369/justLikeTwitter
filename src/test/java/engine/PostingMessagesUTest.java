@@ -19,6 +19,17 @@ import static org.junit.Assert.assertThat;
 
 public class PostingMessagesUTest {
 
+    private static final String USER_ALICE = "Alice";
+
+    private static final String[] COMMANDS_TYPED_BY_ALICE = new String[]{
+            "Alice -> I love the weather today",
+    };
+
+    private static final String[] COMMANDS_TYPED_BY_BOB = new String[]{
+            "Bob -> Damn! We lost!",
+            "Bob -> Good game though."
+    };
+
     private final CentralSystemClock centralSystemClock = new CentralSystemClock();
     private JustLikeTwitterEngine justLikeTwitterEngine;
     private MessageStore messageStore = new MessageStore();
@@ -37,8 +48,8 @@ public class PostingMessagesUTest {
         // And a new message "Alice -> I love the weather today" is available
         // When the message is passed to the engine for the user
         List<TimeLineMessage> actualMessagesToAdd = userTypesTheseCommands(
-                "Alice",
-                "Alice -> I love the weather today");
+                USER_ALICE,
+                COMMANDS_TYPED_BY_ALICE);
 
         // Then the message is added to the user's message list
         verifyThatTheMessagesHaveBeenAdded(
@@ -58,8 +69,8 @@ public class PostingMessagesUTest {
         // When the messages are passed to the engine for the user
         List<TimeLineMessage> actualMessagesToAdd = userTypesTheseCommands(
                 "Bob",
-                "Bob -> Damn! We lost!",
-                "Bob -> Good game though.");
+                COMMANDS_TYPED_BY_BOB[0],
+                COMMANDS_TYPED_BY_BOB[1]);
 
         // Then the messages are added to the user's message list, in the reverse order of entry
         verifyThatTheMessagesHaveBeenAdded(

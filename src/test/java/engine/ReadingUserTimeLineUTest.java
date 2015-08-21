@@ -23,6 +23,10 @@ public class ReadingUserTimeLineUTest {
     private static final long ONE_SECOND = THOUSAND_MILLISECONDS;
     private static final long AFTER_FIFTY_SECONDS = 50 * ONE_SECOND;
 
+    private static final String USER_ALICE = "Alice";
+    private static final String USER_HARRY = "Harry";
+    private static final String USER_BOB = "Bob";
+
     private static final String COMMAND_TYPED_BY_HARRY = "Harry -> I like this idea";
     private static final String COMMAND_TYPED_BY_ALICE = "Alice -> I love the weather today";
     private static final String[] COMMANDS_TYPED_BY_BOB = new String[] {
@@ -58,7 +62,7 @@ public class ReadingUserTimeLineUTest {
 
         // When I type "Harry" at the prompt after fifty seconds
         String actualTimeLine =
-                getTimelineFor("Harry", currentDateTime, AFTER_FIFTY_SECONDS);
+                getTimelineFor(USER_HARRY, currentDateTime, AFTER_FIFTY_SECONDS);
 
         // Then I see "I like this idea (50 seconds ago)" at the prompt
         String expectedTimeline = "I like this idea (50 seconds ago)" + System.lineSeparator();
@@ -78,7 +82,7 @@ public class ReadingUserTimeLineUTest {
 
         // When I type "Alice" at the prompt after five minutes
         String actualTimeLine =
-                getTimelineFor("Alice", currentDateTime, AFTER_FIVE_MINUTES);
+                getTimelineFor(USER_ALICE, currentDateTime, AFTER_FIVE_MINUTES);
 
         // Then I see "I love the weather today (5 minutes ago)" at the prompt
         String expectedTimeline = "I love the weather today (5 minutes ago)" + System.lineSeparator();
@@ -98,7 +102,7 @@ public class ReadingUserTimeLineUTest {
         userTypesAtThePrompt(COMMANDS_TYPED_BY_BOB[1], AFTER_ONE_MINUTE);
 
         // When I type "Bob" at the prompt after a minute
-        String actualTimeLine = getTimelineFor("Bob", currentDateTime, AFTER_ONE_MINUTE);
+        String actualTimeLine = getTimelineFor(USER_BOB, currentDateTime, AFTER_ONE_MINUTE);
 
         // Then I see the below messages in the console:
         // "Good game though. (1 minute ago)"

@@ -79,10 +79,8 @@ public class DisplayingUserWallUTest {
         // "Charlie - I'm in New York today! Anyone wants to have a coffee? (2 seconds ago)
         // Alice - I love the weather today (5 minutes ago)"
         String expectedWall =
-                "Charlie - I'm in New York today! Anyone wants to have a coffee? (2 seconds ago)" +
-                        System.lineSeparator() +
-                        "Alice - I love the weather today (5 minutes ago)" +
-                        System.lineSeparator();
+                "Charlie - I'm in New York today! Anyone wants to have a coffee? (2 seconds ago)" + System.lineSeparator() +
+                "Alice - I love the weather today (5 minutes ago)" + System.lineSeparator();
         assertThat("Should have displayed a wall with Charlie's and Alice's time lines on it",
                 actualWall,
                 is(equalTo(expectedWall)));
@@ -112,14 +110,10 @@ public class DisplayingUserWallUTest {
         // Bob - Damn! We lost! (2 minutes ago)
         // Alice - I love the weather today (5 minutes ago)"
         String expectedWall =
-                "Charlie - I'm in New York today! Anyone wants to have a coffee? (15 seconds ago)" +
-                        System.lineSeparator() +
-                        "Bob - Good game though. (1 minute ago)" +
-                        System.lineSeparator() +
-                        "Bob - Damn! We lost! (2 minutes ago)" +
-                        System.lineSeparator() +
-                        "Alice - I love the weather today (5 minutes ago)" +
-                        System.lineSeparator();
+                "Charlie - I'm in New York today! Anyone wants to have a coffee? (15 seconds ago)" + System.lineSeparator() +
+                        "Bob - Good game though. (1 minute ago)" + System.lineSeparator() +
+                        "Bob - Damn! We lost! (2 minutes ago)" + System.lineSeparator() +
+                        "Alice - I love the weather today (5 minutes ago)" + System.lineSeparator();
         assertThat("Should have displayed a wall with Charlie's, Alice's and Bob's time lines on it",
                 actualWall,
                 is(equalTo(expectedWall)));
@@ -144,12 +138,9 @@ public class DisplayingUserWallUTest {
         // Bob - Good game though. (1 minute ago)
         // Bob - Damn! We lost! (2 minutes ago)"
         String expectedWall =
-                "Charlie - I'm in New York today! Anyone wants to have a coffee? (15 seconds ago)" +
-                        System.lineSeparator() +
-                        "Bob - Good game though. (1 minute ago)" +
-                        System.lineSeparator() +
-                        "Bob - Damn! We lost! (2 minutes ago)" +
-                        System.lineSeparator();
+                "Charlie - I'm in New York today! Anyone wants to have a coffee? (15 seconds ago)" + System.lineSeparator() +
+                        "Bob - Good game though. (1 minute ago)" + System.lineSeparator() +
+                        "Bob - Damn! We lost! (2 minutes ago)" + System.lineSeparator();
         assertThat("Should have displayed a wall with Charlie's and Bob's time lines on it",
                 actualWall,
                 is(equalTo(expectedWall)));
