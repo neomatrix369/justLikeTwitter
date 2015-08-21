@@ -15,15 +15,15 @@ import static elements.CommandType.POST_MESSAGE;
 import static elements.CommandType.READ_POST;
 
 public final class PatternCommandTypeMapper {
-    private final Map<CommandType, CommandExecutor> patternCommandMap =
-            new HashMap<CommandType, CommandExecutor>() {
-                {
-                    put(POST_MESSAGE, new PostMessageCommand() );
-                    put(READ_POST, new ReadPostCommand() );
-                    put(FOLLOWS_USER, new FollowUserCommand() );
-                    put(DISPLAY_WALL, new DisplayWallCommand());
-                }
-            };
+    private Map<CommandType, CommandExecutor> patternCommandMap;
+
+    private PatternCommandTypeMapper() {
+        patternCommandMap = new HashMap<>();
+        patternCommandMap.put(POST_MESSAGE, new PostMessageCommand());
+        patternCommandMap.put(READ_POST, new ReadPostCommand());
+        patternCommandMap.put(FOLLOWS_USER, new FollowUserCommand());
+        patternCommandMap.put(DISPLAY_WALL, new DisplayWallCommand());
+    }
 
     public static Map<CommandType, CommandExecutor> get() {
         return new PatternCommandTypeMapper().patternCommandMap;

@@ -2,7 +2,9 @@ package helper;
 
 import engine.commands.CommandExecutor;
 
-public class ImplHelper {
+import java.util.List;
+
+public final class ImplHelper {
     public static final int THOUSAND_MILLISECONDS = 1000;
     public static final int SIXTY_SECONDS = 60;
 
@@ -32,4 +34,9 @@ public class ImplHelper {
     public static final int FOREVER = -1;
     public static final boolean EXTRA_LINEFEED_NOT_NEEDED = false;
 
+    public static final List<String> FIRST_TIME = null;
+
+    public static final String UTF_8_STRING = "UTF-8";
+
+    private ImplHelper() {}
 }

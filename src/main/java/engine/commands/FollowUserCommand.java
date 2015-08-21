@@ -23,5 +23,4 @@ public class FollowUserCommand extends CommandExecutor {
         commandLineEntry.setOtherUsersName(tokens[OTHER_USERNAME_INDEX].trim());
         return commandLineEntry;
     }
-
 }

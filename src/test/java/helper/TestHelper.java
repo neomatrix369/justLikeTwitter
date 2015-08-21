@@ -25,7 +25,7 @@ import java.util.Locale;
 
 import static org.mockito.Mockito.when;
 
-public class TestHelper {
+public final class TestHelper {
     public static final String REPLAY_INPUT_FILE = "justLikeTwitterCommandsInputFile.txt";
     public static final String DATES_FOR_MESSAGES_INPUT_FILE = "justLikeTwitterCommandsInputFileMessageDateTimes.txt";
     public static final String EXPECTED_OUTPUT_FILE = "justLikeTwitterCommandsExpectedOutputFile.txt";
@@ -83,6 +83,8 @@ public class TestHelper {
             new String[]{USER_ALICE},
             new String[]{USER_ALICE, USER_BOB}
     };
+
+    private TestHelper() {}
 
     public static Date simulateDelayUsing(Date currentDateTime,
                                    CentralSystemClock centralSystemClock,

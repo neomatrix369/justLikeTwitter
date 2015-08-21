@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 import static helper.ImplHelper.COMMAND_PROMPT_INDICATOR;
 import static helper.ImplHelper.NOTHING;
+import static helper.ImplHelper.UTF_8_STRING;
 
 public class IOConsole {
 
@@ -20,7 +21,7 @@ public class IOConsole {
         this.outputStream = outputStream;
         this.needLineFeedForEachLine = needLineFeedForEachLine;
 
-        scanner = new Scanner(inputStream, "UTF-8");
+        scanner = new Scanner(inputStream, UTF_8_STRING);
     }
 
     public String waitForUserAtThePrompt() throws IOException {

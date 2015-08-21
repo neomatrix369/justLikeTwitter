@@ -5,7 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static helper.ImplHelper.FIRST_TIME;
+
 public class FollowsList {
+
     private final Map<String, List<String>> store = new HashMap<>();
 
     public List<String> getFor(String userName) {
@@ -22,9 +25,13 @@ public class FollowsList {
 
     private List<String> getExistingFollowsListFor(String userName) {
         List<String> existingFollowsList = store.get(userName);
+        existingFollowsList = getNewListForTheFirstTime(existingFollowsList);
+        return existingFollowsList;
+    }
 
-        if (existingFollowsList == null) {
-            existingFollowsList = new ArrayList<>();
+    private List<String> getNewListForTheFirstTime(List<String> existingFollowsList) {
+        if (existingFollowsList == FIRST_TIME) {
+            return new ArrayList<>();
         }
         return existingFollowsList;
     }
