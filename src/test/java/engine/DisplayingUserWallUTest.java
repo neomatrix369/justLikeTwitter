@@ -1,5 +1,6 @@
 package engine;
 
+import elements.MessageStore;
 import interfaces.IOConsole;
 import interfaces.JustLikeTwitter;
 import org.junit.Before;
@@ -176,8 +177,9 @@ public class DisplayingUserWallUTest {
     }
 
     private void setupJustLikeTwitter() {
-        justLikeTwitterEngine = new JustLikeTwitterEngine(dateTimeCentral);
-        justLikeTwitter = new JustLikeTwitter(justLikeTwitterEngine, ioConsole);
+        MessageStore messageStore = new MessageStore();
+        justLikeTwitterEngine = new JustLikeTwitterEngine(messageStore, dateTimeCentral);
+        justLikeTwitter = new JustLikeTwitter(ioConsole, justLikeTwitterEngine, messageStore);
     }
 
     private Date simulateDelayUsing(Date currentDateTime, long timeInMilliSeconds) {

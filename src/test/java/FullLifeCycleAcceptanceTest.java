@@ -1,5 +1,6 @@
 import com.github.approval.Approval;
 import com.github.approval.reporters.Reporters;
+import elements.MessageStore;
 import engine.JustLikeTwitterEngine;
 import interfaces.IOConsole;
 import interfaces.JustLikeTwitter;
@@ -51,12 +52,13 @@ public class FullLifeCycleAcceptanceTest {
 
     @Before
     public void setUp() throws FileNotFoundException {
-        JustLikeTwitterEngine justLikeTwitterEngine = new JustLikeTwitterEngine(dateTimeCentralMock);
+        MessageStore messageStore = new MessageStore();
+        JustLikeTwitterEngine justLikeTwitterEngine = new JustLikeTwitterEngine(messageStore, dateTimeCentralMock);
         IOConsole ioConsole = new IOConsole(
                 getFileToReadFrom(REPLAY_INPUT_FILE),
                 getFileToWriteTo(ACTUAL_OUTPUT_FILE),
                 EXTRA_LINEFEED_NEEDED);
-        justLikeTwitter = new JustLikeTwitter(justLikeTwitterEngine, ioConsole);
+        justLikeTwitter = new JustLikeTwitter(ioConsole, justLikeTwitterEngine, messageStore);
     }
 
     @Test

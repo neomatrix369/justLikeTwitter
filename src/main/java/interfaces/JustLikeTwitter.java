@@ -1,5 +1,6 @@
 package interfaces;
 
+import elements.MessageStore;
 import engine.JustLikeTwitterEngine;
 import processors.DateTimeCentral;
 
@@ -12,10 +13,14 @@ public class JustLikeTwitter {
 
     private final JustLikeTwitterEngine justLikeTwitterEngine;
     private final IOConsole ioConsole;
+    private final MessageStore messageStore;
 
-    public JustLikeTwitter(JustLikeTwitterEngine justLikeTwitterEngine, IOConsole ioConsole) {
+    public JustLikeTwitter(IOConsole ioConsole,
+                           JustLikeTwitterEngine justLikeTwitterEngine,
+                           MessageStore messageStore) {
         this.justLikeTwitterEngine = justLikeTwitterEngine;
         this.ioConsole = ioConsole;
+        this.messageStore = messageStore;
     }
 
     public static void main(String[] args) throws IOException {
@@ -26,10 +31,12 @@ public class JustLikeTwitter {
 
     private static JustLikeTwitter setupJustLikeTwitter() {
         DateTimeCentral dateTimeCentral = new DateTimeCentral();
-        JustLikeTwitterEngine justLikeTwitterEngine = new JustLikeTwitterEngine(dateTimeCentral);
+        MessageStore messageStore = new MessageStore();
+        JustLikeTwitterEngine justLikeTwitterEngine = new JustLikeTwitterEngine(messageStore, dateTimeCentral);
+
         IOConsole ioConsole = new IOConsole(System.in, System.out, EXTRA_LINEFEED_NOT_NEEDED);
 
-        return new JustLikeTwitter(justLikeTwitterEngine, ioConsole);
+        return new JustLikeTwitter(ioConsole, justLikeTwitterEngine, messageStore);
     }
 
     public void run(int maxTimesToRun) throws IOException {

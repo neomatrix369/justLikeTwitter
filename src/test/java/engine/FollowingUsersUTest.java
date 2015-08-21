@@ -1,5 +1,6 @@
 package engine;
 
+import elements.MessageStore;
 import org.junit.Before;
 import org.junit.Test;
 import processors.DateTimeCentral;
@@ -36,7 +37,8 @@ public class FollowingUsersUTest {
     @Before
     public void setUp() {
         DateTimeCentral dateTimeCentral = mock(DateTimeCentral.class);
-        justLikeTwitterEngine = new JustLikeTwitterEngine(dateTimeCentral);
+        MessageStore messageStore = new MessageStore();
+        justLikeTwitterEngine = new JustLikeTwitterEngine(messageStore, dateTimeCentral);
     }
 
     /**

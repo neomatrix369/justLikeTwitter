@@ -2,7 +2,6 @@ package engine;
 
 import elements.CommandType;
 import elements.MessageStore;
-import elements.TimeLineMessage;
 import processors.DateTimeCentral;
 
 import java.util.HashMap;
@@ -10,16 +9,14 @@ import java.util.List;
 import java.util.Map;
 
 public class JustLikeTwitterEngine {
-    private final MessageStore messageStore = new MessageStore();
+    private final MessageStore messageStore;
     private final Map<String, List<String>> followsList = new HashMap<>();
     private final DateTimeCentral dateTimeCentral;
 
-    public JustLikeTwitterEngine(DateTimeCentral dateTimeCentral) {
+    public JustLikeTwitterEngine(MessageStore messageStore,
+                                 DateTimeCentral dateTimeCentral) {
+        this.messageStore = messageStore;
         this.dateTimeCentral = dateTimeCentral;
-    }
-
-    public List<TimeLineMessage> getMessagesFor(String userName) {
-        return messageStore.getMessagesFor(userName);
     }
 
     public String executeCommand(String userTypedCommand) {

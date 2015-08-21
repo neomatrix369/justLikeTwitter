@@ -1,96 +1,90 @@
 package engine;
 
-import interfaces.IOConsole;
-import interfaces.JustLikeTwitter;
+import elements.MessageStore;
+import elements.TimeLineMessage;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.AdditionalAnswers;
+import processors.DateTimeCentral;
 
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
+
+/**
+ * Feature: Adding messages to user's message list
+ */
 
 public class PostingMessagesUTest {
 
-    private static final int ONCE_ONLY = 1;
-    private static final int TWICE = 2;
-
-    private static final String COMMAND_TYPED_BY_ALICE = "Alice -> I love the weather today";
-    private static final String[] COMMANDS_TYPED_BY_BOB = new String[] {
-            "Bob -> Damn! We lost!",
-            "Bob -> Good game though."
-    };
-
+    private final DateTimeCentral dateTimeCentral = new DateTimeCentral();
     private JustLikeTwitterEngine justLikeTwitterEngine;
-    private IOConsole ioConsole;
-
-    private JustLikeTwitter justLikeTwitter;
+    private MessageStore messageStore = new MessageStore();
 
     @Before
     public void setUp() {
-        justLikeTwitterEngine = mock(JustLikeTwitterEngine.class);
-        ioConsole = mock(IOConsole.class);
-    }
-
-    /********************************************************************************************
-     * Feature: Posting to a personal timeline
-     *******************************************************************************************/
-
-    /**
-     * Scenario: Alice can publish a message to a personal timeline
-     */
-    @Test
-    public void givenNoPostsExitsOnTimeLineWhenAliceEntersAMessageAtTheJustLikeTwitterPromptThenMessageIsAddedToTimeLine() throws IOException {
-        // Given Alice is at the JustLikeTwitter command prompt ">"
-        // And Alice's timeline is empty
-        setupJustLikeTwitterPromptUsing(COMMAND_TYPED_BY_ALICE);
-
-        // When Alice types "Alice -> I love the weather today" at the prompt
-        justLikeTwitter.run(ONCE_ONLY);
-
-        // Then action is taken to add the message to Alice's timeline
-        verifyThatActionIsTakenToRecordTheMessage(justLikeTwitterEngine, COMMAND_TYPED_BY_ALICE);
+        justLikeTwitterEngine = new JustLikeTwitterEngine(messageStore, dateTimeCentral);
     }
 
     /**
-     * Scenario: Bob can publish messages to a personal timeline
+     * Scenario: a user's message is added to the message list
      */
     @Test
-    public void givenNoPostsExitsOnTimeLineWhenBobEntersMessagesAtTheJustLikeTwitterPromptThenTheMessagesAreAddedToTimeLine() throws IOException {
-        // Given Bob is at the JustLikeTwitter command prompt ">"
-        // And Bob's timeline is empty
-        setupJustLikeTwitterPromptUsing(COMMANDS_TYPED_BY_BOB);
+    public void givenUsersMessageListIsEmpty_WhenANewMessageIsPassedToTheEngine_ThenMessageIsAddedToTheUsersMessageList() {
+        // Given a user's message list is empty
+        // And a new message "Alice -> I love the weather today" is available
+        // When the message is passed to the engine for the user
+        List<TimeLineMessage> actualMessagesToAdd = processMessagesReceivedFor("Alice", "Alice -> I love the weather today");
 
-        // When Bob types "Bob -> Damn! We lost!" at the prompt
-        // And then types "Bob -> Good game though."  at the prompt
-        justLikeTwitter.run(TWICE);
-
-        // Then action is taken to add the messages to Bob's timeline
-        verifyThatActionIsTakenToRecordTheMessage(justLikeTwitterEngine, COMMANDS_TYPED_BY_BOB);
+        // Then the message is added to the user's message list
+        verifyThatTheMessagesHaveBeenAdded(
+                "Should have contained the expected message in the message list for Alice",
+                actualMessagesToAdd,
+                expectedMessagesToAdd("I love the weather today")
+        );
     }
 
-    private void verifyThatActionIsTakenToRecordTheMessage(
-            JustLikeTwitterEngine justLikeTwitterEngine,
-            String... userTypedCommands) {
-        for (String userTypedCommand: userTypedCommands) {
-            verify(justLikeTwitterEngine).executeCommand(eq(userTypedCommand));
-        }
+    /**
+     * Scenario: multiple messages from a user are added to the message list
+     */
+    @Test
+    public void givenUsersMessageListIsEmpty_WhenNewMessagesArePassedToTheEngine_ThenMessagesAreAddedToTheUsersMessageList() {
+        // Given user's message list is empty
+        // And new messages like "Bob -> Damn! We lost!" and "Bob -> Good game though." are available
+        // When the messages are passed to the engine for the user
+        List<TimeLineMessage> actualMessagesToAdd = processMessagesReceivedFor(
+                "Bob",
+                "Bob -> Damn! We lost!",
+                "Bob -> Good game though.");
+
+        // Then the messages are added to the user's message list, in the reverse order of entry
+        verifyThatTheMessagesHaveBeenAdded(
+                "Should have contained the expected messages in the message list for Bob",
+                actualMessagesToAdd,
+                expectedMessagesToAdd(
+                        "Good game though.",
+                        "Damn! We lost!")
+        );
     }
 
-    private void setupJustLikeTwitterPromptUsing(String... userTypedCommands) throws IOException {
-        List<String> userTypedCommandsList = Arrays.asList(userTypedCommands);
-
-        for (String userTypedCommand: userTypedCommands) {
-            when(ioConsole.waitForUserAtThePrompt())
-                    .thenAnswer(
-                            AdditionalAnswers.returnsElementsOf(userTypedCommandsList));
+    private List<TimeLineMessage> processMessagesReceivedFor(String userName,
+                                                             String... userTypedMessages) {
+        for (String eachUserTypedMessage : userTypedMessages) {
+            justLikeTwitterEngine.executeCommand(eachUserTypedMessage);
         }
 
-        justLikeTwitter = new JustLikeTwitter(justLikeTwitterEngine, ioConsole);
+        return messageStore.getMessagesFor(userName);
+    }
+
+    private List<String> expectedMessagesToAdd(String... expectedMessages) {
+        return Arrays.asList(expectedMessages);
+    }
+
+    private void verifyThatTheMessagesHaveBeenAdded(String reason,
+                                                    List<TimeLineMessage> actualMessages,
+                                                    List<String> expectedMessages) {
+        assertThat(reason, actualMessages.size(), is(equalTo(expectedMessages.size())));
     }
 }
