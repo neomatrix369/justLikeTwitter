@@ -40,9 +40,8 @@ public class PostingMessagesUTest {
         // Given a user's message list is empty
         // And a new message "Alice -> I love the weather today" is available
         // When the message is passed to the engine for the user
-        List<TimeLineMessage> actualMessagesToAdd = userTypesAtThePrompt(
-                USER_ALICE,
-                COMMANDS_TYPED_BY_ALICE);
+        userTypesAtThePrompt(COMMANDS_TYPED_BY_ALICE[0]);
+        List<TimeLineMessage> actualMessagesToAdd = messageStore.getMessagesFor(USER_ALICE);
 
         // Then the message is added to the user's message list
         verifyThatTheMessagesHaveBeenAdded(
@@ -60,10 +59,9 @@ public class PostingMessagesUTest {
         // Given user's message list is empty
         // And new messages like "Bob -> Damn! We lost!" and "Bob -> Good game though." are available
         // When the messages are passed to the engine for the user
-        List<TimeLineMessage> actualMessagesToAdd = userTypesAtThePrompt(
-                USER_BOB,
-                COMMANDS_TYPED_BY_BOB[0],
-                COMMANDS_TYPED_BY_BOB[1]);
+        userTypesAtThePrompt(COMMANDS_TYPED_BY_BOB[0]);
+        userTypesAtThePrompt(COMMANDS_TYPED_BY_BOB[1]);
+        List<TimeLineMessage> actualMessagesToAdd = messageStore.getMessagesFor(USER_BOB);
 
         // Then the messages are added to the user's message list, in the reverse order of entry
         verifyThatTheMessagesHaveBeenAdded(
@@ -75,15 +73,9 @@ public class PostingMessagesUTest {
         );
     }
 
-    private List<TimeLineMessage> userTypesAtThePrompt(String userName,
-                                                       String... userTypedMessages) {
-        for (String eachUserTypedMessage : userTypedMessages) {
-            justLikeTwitterEngine.executeCommand(eachUserTypedMessage);
-        }
-
-        return messageStore.getMessagesFor(userName);
+    private String userTypesAtThePrompt(String userTypedCommand) {
+        return justLikeTwitterEngine.executeCommand(userTypedCommand);
     }
-
     private List<String> expectedMessagesToAdd(String... expectedMessages) {
         return Arrays.asList(expectedMessages);
     }
