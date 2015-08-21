@@ -179,7 +179,7 @@ public class DisplayingUserWallUTest {
     private void setupJustLikeTwitter() {
         MessageStore messageStore = new MessageStore();
         justLikeTwitterEngine = new JustLikeTwitterEngine(messageStore, centralSystemClock);
-        justLikeTwitter = new JustLikeTwitter(ioConsole, justLikeTwitterEngine, messageStore);
+        justLikeTwitter = new JustLikeTwitter(ioConsole, justLikeTwitterEngine);
     }
 
     private Date simulateDelayUsing(Date currentDateTime, long timeInMilliSeconds) {

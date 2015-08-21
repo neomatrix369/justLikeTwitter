@@ -1,11 +1,9 @@
 package engine;
 
+import clock.CentralSystemClock;
 import elements.MessageStore;
-import interfaces.IOConsole;
-import interfaces.JustLikeTwitter;
 import org.junit.Before;
 import org.junit.Test;
-import clock.CentralSystemClock;
 
 import java.io.IOException;
 import java.util.Date;
@@ -17,8 +15,6 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class ReadingUserTimeLineUTest {
-
-    private static final int ONCE_ONLY = 1;
 
     private static final long ZERO_MINUTES = 0;
     private static final long THOUSAND_MILLISECONDS = 1000;
@@ -35,9 +31,6 @@ public class ReadingUserTimeLineUTest {
     };
 
     private JustLikeTwitterEngine justLikeTwitterEngine;
-    private IOConsole ioConsole;
-
-    private JustLikeTwitter justLikeTwitter;
     private Date currentDateTime;
 
     private final CentralSystemClock centralSystemClock = mock(CentralSystemClock.class);
@@ -46,7 +39,6 @@ public class ReadingUserTimeLineUTest {
     public void setUp() {
         currentDateTime = new Date();
         justLikeTwitterEngine = mock(JustLikeTwitterEngine.class);
-        ioConsole = mock(IOConsole.class);
     }
 
     /********************************************************************************************
@@ -126,7 +118,7 @@ public class ReadingUserTimeLineUTest {
                                   Date currentDateTime,
                                   long delayInMilliSeconds) throws IOException {
         userTypesAtThePrompt(userNameAsCommand, currentDateTime, delayInMilliSeconds);
-        return justLikeTwitter.getTimeLineFor(userNameAsCommand);
+        return justLikeTwitterEngine.getTimeLineFor(userNameAsCommand);
     }
 
     private Date simulateDelayUsing(Date currentDateTime, long timeInMilliSeconds) {
@@ -138,16 +130,13 @@ public class ReadingUserTimeLineUTest {
     private void setupJustLikeTwitter() {
         MessageStore messageStore = new MessageStore();
         justLikeTwitterEngine = new JustLikeTwitterEngine(messageStore, centralSystemClock);
-        justLikeTwitter = new JustLikeTwitter(ioConsole, justLikeTwitterEngine, messageStore);
     }
 
     private Date userTypesAtThePrompt(String userTypedCommand,
                                       Date currentDateTime,
                                       long delayInMilliseconds) throws IOException {
         currentDateTime = simulateDelayUsing(currentDateTime, delayInMilliseconds);
-        when(ioConsole.waitForUserAtThePrompt()).thenReturn(userTypedCommand);
-        justLikeTwitter.run(ONCE_ONLY);
-
+        justLikeTwitterEngine.executeCommand(userTypedCommand);
         return currentDateTime;
     }
 }

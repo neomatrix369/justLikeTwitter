@@ -58,7 +58,7 @@ public class FullLifeCycleAcceptanceTest {
                 getFileToReadFrom(REPLAY_INPUT_FILE),
                 getFileToWriteTo(ACTUAL_OUTPUT_FILE),
                 EXTRA_LINEFEED_NEEDED);
-        justLikeTwitter = new JustLikeTwitter(ioConsole, justLikeTwitterEngine, messageStore);
+        justLikeTwitter = new JustLikeTwitter(ioConsole, justLikeTwitterEngine);
     }
 
     @Test

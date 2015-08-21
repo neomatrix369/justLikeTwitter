@@ -13,14 +13,11 @@ public class JustLikeTwitter {
 
     private final JustLikeTwitterEngine justLikeTwitterEngine;
     private final IOConsole ioConsole;
-    private final MessageStore messageStore;
 
     public JustLikeTwitter(IOConsole ioConsole,
-                           JustLikeTwitterEngine justLikeTwitterEngine,
-                           MessageStore messageStore) {
+                           JustLikeTwitterEngine justLikeTwitterEngine) {
         this.justLikeTwitterEngine = justLikeTwitterEngine;
         this.ioConsole = ioConsole;
-        this.messageStore = messageStore;
     }
 
     public static void main(String[] args) throws IOException {
@@ -36,7 +33,7 @@ public class JustLikeTwitter {
 
         IOConsole ioConsole = new IOConsole(System.in, System.out, EXTRA_LINEFEED_NOT_NEEDED);
 
-        return new JustLikeTwitter(ioConsole, justLikeTwitterEngine, messageStore);
+        return new JustLikeTwitter(ioConsole, justLikeTwitterEngine);
     }
 
     public void run(int maxTimesToRun) throws IOException {
@@ -83,10 +80,6 @@ public class JustLikeTwitter {
         "" + System.lineSeparator();
 
         ioConsole.display(usageText);
-    }
-
-    public String getTimeLineFor(String userName) {
-        return justLikeTwitterEngine.getTimeLineFor(userName);
     }
 
     public String getWallFor(String userName) {
