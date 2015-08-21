@@ -4,36 +4,20 @@ import clock.CentralSystemClock;
 import elements.CommandType;
 import elements.FollowsList;
 import elements.MessageStore;
-import engine.commands.DisplayWallCommand;
-import engine.commands.FollowUserCommand;
-import engine.commands.PostMessageCommand;
-import engine.commands.ReadPostCommand;
+import elements.PatternCommandTypeMapper;
+import engine.commands.CommandExecutor;
 
-import java.util.HashMap;
 import java.util.Map;
 
-import static elements.CommandType.DISPLAY_WALL;
-import static elements.CommandType.FOLLOWS_USER;
-import static elements.CommandType.POST_MESSAGE;
-import static elements.CommandType.READ_POST;
-
-public class CommandExecutorFactory {
+class CommandExecutorFactory {
 
     private static final CommandExecutor NO_COMMAND_EXECUTOR_MATCHED = null;
+
+    private final Map<CommandType, CommandExecutor> patternCommandMap = PatternCommandTypeMapper.get();
 
     private final CentralSystemClock centralSystemClock;
     private final MessageStore messageStore;
     private final FollowsList followsList;
-
-    private static Map<CommandType, CommandExecutor> patternCommandMap =
-            new HashMap<CommandType, CommandExecutor>() {
-        {
-            put(POST_MESSAGE, new PostMessageCommand() );
-            put(READ_POST, new ReadPostCommand() );
-            put(FOLLOWS_USER, new FollowUserCommand() );
-            put(DISPLAY_WALL, new DisplayWallCommand());
-        }
-    };
 
     public CommandExecutorFactory(CentralSystemClock centralSystemClock,
                                   MessageStore messageStore,

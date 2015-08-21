@@ -6,7 +6,6 @@ import elements.MessageStore;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.IOException;
 import java.util.Date;
 
 import static helper.TestHelper.AFTER_FIFTEEN_SECONDS;
@@ -19,7 +18,6 @@ import static helper.TestHelper.COMMANDS_TYPED_BY_BOB;
 import static helper.TestHelper.COMMANDS_TYPED_BY_CHARLIE;
 import static helper.TestHelper.ZERO_MINUTES;
 import static helper.TestHelper.simulateDelayUsing;
-
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -51,7 +49,7 @@ public class DisplayingUserWallUTest {
     }
 
     @Test
-    public void givenAliceAndCharliesHavePostsAndCharlieFollowsAlice_whenCharlieRequestsToSeeTheWall_thenBothAliceAndCharliesPostsAreShownInTheTimeLine() throws IOException {
+    public void givenAliceAndCharliesHavePostsAndCharlieFollowsAlice_whenCharlieRequestsToSeeTheWall_thenBothAliceAndCharliesPostsAreShownInTheTimeLine() {
         // Given Charlie is at the JustLikeTwitter command prompt ">"
         // And Alice's timeline contains the required posts
         // And he enters "Charlie -> I'm in New York today! Anyone wants to have a coffee?" at the prompt
@@ -74,7 +72,7 @@ public class DisplayingUserWallUTest {
     }
 
     @Test
-    public void givenAliceBobAndCharliesHavePostsAndCharlieFollowsAliceAndBob_whenCharlieRequestsToSeeTheWall_thenAllTheirPostsAreShownInTheTimeLine() throws IOException {
+    public void givenAliceBobAndCharliesHavePostsAndCharlieFollowsAliceAndBob_whenCharlieRequestsToSeeTheWall_thenAllTheirPostsAreShownInTheTimeLine() {
         // Given Charlie is at the JustLikeTwitter command prompt ">"
         // And Alice 's timeline contains the required posts
         // And Bob's timeline contains the required posts
@@ -106,7 +104,7 @@ public class DisplayingUserWallUTest {
     }
 
     @Test
-    public void givenBobAndCharliesHavePostsAndCharlieFollowsBob_whenCharlieRequestsToSeeTheWall_thenBothBobAndCharliesPostsAreShownInTheTimeLine() throws IOException {
+    public void givenBobAndCharliesHavePostsAndCharlieFollowsBob_whenCharlieRequestsToSeeTheWall_thenBothBobAndCharliesPostsAreShownInTheTimeLine() {
         // Given Charlie is at the JustLikeTwitter command prompt ">"
         // And Bob's timeline contains the required posts
         // And he enters "Charlie -> I'm in New York today! Anyone wants to have a coffee?" at the prompt
@@ -131,7 +129,7 @@ public class DisplayingUserWallUTest {
                         "Bob - Damn! We lost! (2 minutes ago)" + System.lineSeparator());
     }
 
-    private String userTypesAtThePrompt(String userTypedCommand, long delayInMilliseconds) throws IOException {
+    private String userTypesAtThePrompt(String userTypedCommand, long delayInMilliseconds) {
         currentDateTime = simulateDelayUsing(currentDateTime, centralSystemClock, delayInMilliseconds);
         return justLikeTwitterEngine.executeCommand(userTypedCommand);
     }

@@ -6,7 +6,6 @@ import elements.MessageStore;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.IOException;
 import java.util.Date;
 
 import static helper.TestHelper.AFTER_FIFTY_SECONDS;
@@ -20,7 +19,6 @@ import static helper.TestHelper.USER_BOB;
 import static helper.TestHelper.USER_HARRY;
 import static helper.TestHelper.ZERO_MINUTES;
 import static helper.TestHelper.simulateDelayUsing;
-
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -50,7 +48,7 @@ public class ReadingUserTimeLineUTest {
      * Scenario: I can view Harry's timeline
      */
     @Test
-    public void givenHarryHasAPost_whenHarryIsTypedAtThePrompt_thenHarrysTimeLineIsShown() throws IOException {
+    public void givenHarryHasAPost_whenHarryIsTypedAtThePrompt_thenHarrysTimeLineIsShown() {
         // Given I am at the JustLikeTwitter command prompt ">"
         // And Harry's timeline contains the required posts
         userTypesAtThePrompt(COMMAND_TYPED_BY_HARRY[0], ZERO_MINUTES);
@@ -69,7 +67,7 @@ public class ReadingUserTimeLineUTest {
      * Scenario: I can view Alice's timeline
      */
     @Test
-    public void givenAliceHasAPost_whenAliceIsTypedAtThePrompt_thenAlicesTimeLineIsShown() throws IOException {
+    public void givenAliceHasAPost_whenAliceIsTypedAtThePrompt_thenAlicesTimeLineIsShown() {
         // Given I am at the JustLikeTwitter command prompt ">"
         // And Alice's timeline contains the required posts
         userTypesAtThePrompt(COMMANDS_TYPED_BY_ALICE[0], ZERO_MINUTES);
@@ -88,7 +86,7 @@ public class ReadingUserTimeLineUTest {
      * Scenario: I can view Bob's timeline
      */
     @Test
-    public void givenBobHasPosts_whenBobIsTypedAtThePrompt_thenBobsTimeLineIsShown() throws IOException {
+    public void givenBobHasPosts_whenBobIsTypedAtThePrompt_thenBobsTimeLineIsShown() {
         // Given I am at the JustLikeTwitter command prompt ">"
         // And Bob's timeline contains the required posts
         userTypesAtThePrompt(COMMANDS_TYPED_BY_BOB[0], ZERO_MINUTES);
@@ -108,7 +106,7 @@ public class ReadingUserTimeLineUTest {
         );
     }
 
-    private String userTypesAtThePrompt(String userTypedCommand, long delayInMilliseconds) throws IOException {
+    private String userTypesAtThePrompt(String userTypedCommand, long delayInMilliseconds) {
         currentDateTime = simulateDelayUsing(currentDateTime, centralSystemClock, delayInMilliseconds);
         return justLikeTwitterEngine.executeCommand(userTypedCommand);
     }

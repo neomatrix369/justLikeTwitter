@@ -25,7 +25,7 @@ import static org.junit.Assert.assertThat;
 public class PostingMessagesUTest {
 
     private JustLikeTwitterEngine justLikeTwitterEngine;
-    private MessageStore messageStore = new MessageStore();
+    private final MessageStore messageStore = new MessageStore();
 
     private final CentralSystemClock centralSystemClock = new CentralSystemClock();
 
@@ -79,8 +79,8 @@ public class PostingMessagesUTest {
         );
     }
 
-    private String userTypesAtThePrompt(String userTypedCommand) {
-        return justLikeTwitterEngine.executeCommand(userTypedCommand);
+    private void userTypesAtThePrompt(String userTypedCommand) {
+        justLikeTwitterEngine.executeCommand(userTypedCommand);
     }
     private List<String> expectedMessagesToAdd(String... expectedMessages) {
         return Arrays.asList(expectedMessages);

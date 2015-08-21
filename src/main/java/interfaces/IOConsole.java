@@ -11,8 +11,8 @@ public class IOConsole {
     private static final String NOTHING = "";
 
     private final OutputStream outputStream;
-    private boolean needLineFeedForEachLine;
-    private Scanner scanner;
+    private final boolean needLineFeedForEachLine;
+    private final Scanner scanner;
 
     public IOConsole(InputStream inputStream,
                      OutputStream outputStream,

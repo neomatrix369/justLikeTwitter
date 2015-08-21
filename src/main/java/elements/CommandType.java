@@ -7,7 +7,7 @@ public enum CommandType {
     DISPLAY_WALL ("(\\w+) wall"           , " wall"    );
 
     private final String matchingPattern;
-    private String tokenSeparator;
+    private final String tokenSeparator;
 
     CommandType(String matchingPattern, String tokenSeparator) {
         this.matchingPattern = matchingPattern;

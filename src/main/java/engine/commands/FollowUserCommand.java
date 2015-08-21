@@ -1,7 +1,6 @@
 package engine.commands;
 
 import elements.CommandLineEntry;
-import engine.CommandExecutor;
 
 public class FollowUserCommand extends CommandExecutor {
 

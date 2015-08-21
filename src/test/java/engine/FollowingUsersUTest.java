@@ -75,8 +75,8 @@ public class FollowingUsersUTest {
         );
     }
 
-    private String userTypesAtThePrompt(String userTypedCommand) {
-        return justLikeTwitterEngine.executeCommand(userTypedCommand);
+    private void userTypesAtThePrompt(String userTypedCommand) {
+        justLikeTwitterEngine.executeCommand(userTypedCommand);
     }
 
     private void verifyThatTheFollowsListMatch(String reason,

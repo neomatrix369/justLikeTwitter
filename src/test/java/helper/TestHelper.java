@@ -23,11 +23,13 @@ public class TestHelper {
             .withReporter(Reporters.console())
             .build();
 
+    private static final long THOUSAND_MILLISECONDS = 1000;
+    private static final long ONE_SECOND = THOUSAND_MILLISECONDS;
+
     public static final long ZERO_MINUTES = 0;
-    public static final long THOUSAND_MILLISECONDS = 1000;
     public static final long AFTER_ONE_MINUTE = 60 * THOUSAND_MILLISECONDS;
     public static final long AFTER_FIVE_MINUTES = 5 * AFTER_ONE_MINUTE;
-    public static final long ONE_SECOND = THOUSAND_MILLISECONDS;
+
     public static final long AFTER_TWO_SECONDS = 2 * ONE_SECOND;
     public static final long AFTER_FIFTEEN_SECONDS = 15 * ONE_SECOND;
     public static final long AFTER_FIFTY_SECONDS = 50 * ONE_SECOND;

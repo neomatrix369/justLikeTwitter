@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 public class FollowsList {
-    private Map<String, List<String>> store = new HashMap<>();
+    private final Map<String, List<String>> store = new HashMap<>();
 
     public List<String> getFor(String userName) {
         return store.get(userName);

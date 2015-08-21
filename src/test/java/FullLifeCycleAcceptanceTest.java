@@ -41,8 +41,8 @@ import static helper.TestHelper.EXPECTED_OUTPUT_FILE;
 public class FullLifeCycleAcceptanceTest {
 
     private JustLikeTwitter justLikeTwitter;
-    private CentralSystemClock centralSystemClockMock = mock(CentralSystemClock.class);
-    private List<Date> dateTimeForMessages = loadDatesFrom(DATES_FOR_MESSAGES_INPUT_FILE);
+    private final CentralSystemClock centralSystemClockMock = mock(CentralSystemClock.class);
+    private final List<Date> dateTimeForMessages = loadDatesFrom(DATES_FOR_MESSAGES_INPUT_FILE);
 
     @Before
     public void setUp() throws FileNotFoundException {
