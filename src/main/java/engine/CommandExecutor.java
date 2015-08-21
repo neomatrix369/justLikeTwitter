@@ -16,7 +16,7 @@ public abstract class CommandExecutor {
 
     protected static final String MESSAGE_PATTERN_READ_POST = "%s %s";
     protected static final String HYPHEN_SEPARATOR = " - ";
-    protected static final String NOTHING_REALLY = "";
+    protected static final String NOTHING_FOR_THIS_COMMAND_EXECUTION = "";
 
     protected String[] tokens;
     protected CentralSystemClock centralSystemClock;

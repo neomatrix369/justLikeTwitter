@@ -10,9 +10,14 @@ public class DisplayWallCommand extends CommandExecutor {
 
     @Override
     public String execute() {
+        CommandLineEntry commandLineEntry = prepareCommandLineEntry();
+        return getWallFor(commandLineEntry.getUserName());
+    }
+
+    private CommandLineEntry prepareCommandLineEntry() {
         CommandLineEntry commandLineEntry = new CommandLineEntry(centralSystemClock);
         commandLineEntry.setUserName(tokens[USERNAME_INDEX].trim());
-        return getWallFor(commandLineEntry.getUserName());
+        return commandLineEntry;
     }
 
     private String getWallFor(String userName) {
