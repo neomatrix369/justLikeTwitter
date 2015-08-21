@@ -1,8 +1,9 @@
 package interfaces;
 
+import domain.Keyboard;
+import domain.Screen;
+
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.Scanner;
 
 import static helper.ImplHelper.COMMAND_PROMPT_INDICATOR;
@@ -11,28 +12,29 @@ import static helper.ImplHelper.UTF_8_STRING;
 
 public class IOConsole {
 
-    private final OutputStream outputStream;
     private final boolean needLineFeedForEachLine;
     private final Scanner scanner;
 
-    public IOConsole(InputStream inputStream,
-                     OutputStream outputStream,
+    private final Screen screen;
+
+    public IOConsole(Keyboard keyBoard,
+                     Screen screen,
                      boolean needLineFeedForEachLine) {
-        this.outputStream = outputStream;
+        this.screen = screen;
         this.needLineFeedForEachLine = needLineFeedForEachLine;
 
-        scanner = new Scanner(inputStream, UTF_8_STRING);
+        scanner = new Scanner(keyBoard.get(), UTF_8_STRING);
     }
 
     public String waitForUserAtThePrompt() throws IOException {
-        printPromptIndicator(outputStream);
+        printPromptIndicator(screen);
         return gatherWhatTheUserTypesAtThePrompt();
     }
 
-    private void printPromptIndicator(OutputStream outputStream) throws IOException {
+    private void printPromptIndicator(Screen screen) throws IOException {
         String newCommandPrompt = COMMAND_PROMPT_INDICATOR;
         newCommandPrompt = insertLineFeedInFrontOf(newCommandPrompt);
-        outputStream.write(newCommandPrompt.getBytes());
+        screen.write(newCommandPrompt.getBytes());
     }
 
     private String gatherWhatTheUserTypesAtThePrompt() {
@@ -46,7 +48,7 @@ public class IOConsole {
         if (outputToDisplay != null) {
             String newOutputToDisplay = outputToDisplay;
             newOutputToDisplay = insertLineFeedInFrontOf(newOutputToDisplay);
-            outputStream.write(newOutputToDisplay.getBytes());
+            screen.get().write(newOutputToDisplay.getBytes());
         }
     }
 

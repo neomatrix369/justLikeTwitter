@@ -1,5 +1,7 @@
 package interfaces;
 
+import domain.Keyboard;
+import domain.Screen;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -10,10 +12,9 @@ import java.io.IOException;
 import java.io.PrintStream;
 
 import static helper.ImplHelper.COMMAND_PROMPT_INDICATOR;
-import static helper.TestHelper.ANY_TEXT;
 import static helper.TestHelper.ALICE_POSTS_A_MESSAGE;
+import static helper.TestHelper.ANY_TEXT;
 import static helper.TestHelper.EXTRA_LINEFEED_NOT_NEEDED;
-
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -31,7 +32,10 @@ public class IOConsoleUTest {
         outputStreamContent = new ByteArrayOutputStream();
         PrintStream printStreamAsOutputStream = new PrintStream(outputStreamContent);
 
-        ioConsole = new IOConsole(bufferedInputStream, printStreamAsOutputStream, EXTRA_LINEFEED_NOT_NEEDED);
+        ioConsole = new IOConsole(
+                new Keyboard(bufferedInputStream),
+                new Screen(printStreamAsOutputStream),
+                EXTRA_LINEFEED_NOT_NEEDED);
     }
 
     @Test

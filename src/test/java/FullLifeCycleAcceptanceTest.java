@@ -1,6 +1,8 @@
 import clock.CentralSystemClock;
 import domain.FollowsList;
+import domain.Keyboard;
 import domain.MessageStore;
+import domain.Screen;
 import engine.JustLikeTwitterEngine;
 import interfaces.IOConsole;
 import interfaces.JustLikeTwitter;
@@ -44,8 +46,8 @@ public class FullLifeCycleAcceptanceTest {
                 centralSystemClockMock);
 
         IOConsole ioConsole = new IOConsole(
-                getFileToReadFrom(getClass(), REPLAY_INPUT_FILE),
-                getFileToWriteTo(ACTUAL_OUTPUT_FILE),
+                new Keyboard(getFileToReadFrom(getClass(), REPLAY_INPUT_FILE)),
+                new Screen(getFileToWriteTo(ACTUAL_OUTPUT_FILE)),
                 EXTRA_LINEFEED_NEEDED);
 
         justLikeTwitter = new JustLikeTwitter(ioConsole, justLikeTwitterEngine);

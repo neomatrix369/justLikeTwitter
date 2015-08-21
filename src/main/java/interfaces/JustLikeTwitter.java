@@ -2,7 +2,9 @@ package interfaces;
 
 import clock.CentralSystemClock;
 import domain.FollowsList;
+import domain.Keyboard;
 import domain.MessageStore;
+import domain.Screen;
 import engine.JustLikeTwitterEngine;
 import helper.FileIOHelper;
 
@@ -35,13 +37,17 @@ public class JustLikeTwitter {
         CentralSystemClock centralSystemClock = new CentralSystemClock();
         FollowsList followsList = new FollowsList();
         MessageStore messageStore = new MessageStore();
+
         JustLikeTwitterEngine justLikeTwitterEngine =
                 new JustLikeTwitterEngine(
                         messageStore,
                         followsList,
                         centralSystemClock);
 
-        IOConsole ioConsole = new IOConsole(System.in, System.out, EXTRA_LINEFEED_NOT_NEEDED);
+        IOConsole ioConsole = new IOConsole(
+                new Keyboard(System.in),
+                new Screen(System.out),
+                EXTRA_LINEFEED_NOT_NEEDED);
 
         return new JustLikeTwitter(ioConsole, justLikeTwitterEngine);
     }
