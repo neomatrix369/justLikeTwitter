@@ -6,11 +6,10 @@ import java.io.OutputStream;
 import java.util.Scanner;
 
 public class IOConsole {
-    public static String COMMAND_PROMPT_INDICATOR = "> ";
+    public static final String COMMAND_PROMPT_INDICATOR = "> ";
 
     private static final String NOTHING = "";
 
-    private final InputStream inputStream;
     private final OutputStream outputStream;
     private boolean needLineFeedForEachLine;
     private Scanner scanner;
@@ -18,7 +17,6 @@ public class IOConsole {
     public IOConsole(InputStream inputStream,
                      OutputStream outputStream,
                      boolean needLineFeedForEachLine) {
-        this.inputStream = inputStream;
         this.outputStream = outputStream;
         this.needLineFeedForEachLine = needLineFeedForEachLine;
 
@@ -27,7 +25,7 @@ public class IOConsole {
 
     public String waitForUserAtThePrompt() throws IOException {
         printPromptIndicator(outputStream);
-        return gatherWhatTheUserTypesAtThePrompt(inputStream);
+        return gatherWhatTheUserTypesAtThePrompt();
     }
 
     private void printPromptIndicator(OutputStream outputStream) throws IOException {
@@ -36,7 +34,7 @@ public class IOConsole {
         outputStream.write(newCommandPrompt.getBytes());
     }
 
-    private String gatherWhatTheUserTypesAtThePrompt(InputStream inputStream) {
+    private String gatherWhatTheUserTypesAtThePrompt() {
         if (scanner.hasNextLine()) {
             return scanner.nextLine();
         }
@@ -53,7 +51,7 @@ public class IOConsole {
 
     private String insertLineFeedInFrontOf(String value) {
         if (needLineFeedForEachLine) {
-            value = System.lineSeparator() + value;
+            return System.lineSeparator() + value;
         }
         return value;
     }
