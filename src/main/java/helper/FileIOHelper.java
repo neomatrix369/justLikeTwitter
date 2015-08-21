@@ -19,7 +19,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import static helper.TestHelper.DD_MM_YYYY_HH_MM_SS;
+import static helper.ImplHelper.DD_MM_YYYY_HH_MM_SS;
 
 public class FileIOHelper {
     public static List<Date> loadDatesFrom(Class<? extends Object> aClass, String datesForInputFile) {

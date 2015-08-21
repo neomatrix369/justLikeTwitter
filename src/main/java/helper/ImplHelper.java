@@ -34,9 +34,13 @@ public final class ImplHelper {
     public static final int FOREVER = -1;
     public static final boolean EXTRA_LINEFEED_NOT_NEEDED = false;
 
+    public static final String DD_MM_YYYY_HH_MM_SS = "dd/MM/yyyy hh:mm:ss";
+
     public static final List<String> FIRST_TIME = null;
 
     public static final String UTF_8_STRING = "UTF-8";
+
+    public static final String APP_USAGE_FILEPATH = "../AppUsage.txt";
 
     private ImplHelper() {}
 

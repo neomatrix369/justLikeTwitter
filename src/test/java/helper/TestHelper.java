@@ -17,8 +17,6 @@ public final class TestHelper {
     public static final boolean EXTRA_LINEFEED_NEEDED = true;
     public static final boolean EXTRA_LINEFEED_NOT_NEEDED = false;
 
-    public static final String DD_MM_YYYY_HH_MM_SS = "dd/MM/yyyy hh:mm:ss";
-
     public static final Approval<String> APPROVER = Approval.of(String.class)
             .withReporter(Reporters.console())
             .build();

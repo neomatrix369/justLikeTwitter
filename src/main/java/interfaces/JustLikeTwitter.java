@@ -4,9 +4,13 @@ import clock.CentralSystemClock;
 import domain.FollowsList;
 import domain.MessageStore;
 import engine.JustLikeTwitterEngine;
+import helper.FileIOHelper;
 
 import java.io.IOException;
+import java.nio.file.Path;
+import java.util.List;
 
+import static helper.ImplHelper.APP_USAGE_FILEPATH;
 import static helper.ImplHelper.EXTRA_LINEFEED_NOT_NEEDED;
 import static helper.ImplHelper.FOREVER;
 import static helper.ImplHelper.START_FROM_ONE;
@@ -56,37 +60,13 @@ public class JustLikeTwitter {
     }
 
     private void showUsageText() throws IOException {
-        StringBuilder stringBuilder = new StringBuilder();
-        String usageText = stringBuilder
-                .append("---------------------------------------------------------------------------------------").append(System.lineSeparator())
-                .append("Running JustLikeTwitter console app").append(System.lineSeparator())
-                .append("Use Ctrl-C to exit the program.").append(System.lineSeparator())
-                .append("Only sunny day scenarios have been covered.").append(System.lineSeparator())
-                .append("---------------------------------------------------------------------------------------").append(System.lineSeparator())
-                .append("").append(System.lineSeparator())
-                .append("Command-line help (usage with examples):").append(System.lineSeparator())
-                .append("").append(System.lineSeparator())
-                .append("  - Posting to personal timeline: <user name> -> <message>").append(System.lineSeparator())
-                .append("  for e.g.").append(System.lineSeparator())
-                .append("     > Alice -> I'm having a great time").append(System.lineSeparator())
-                .append("").append(System.lineSeparator())
-                .append("  - Reading any user's timeline: <user name>").append(System.lineSeparator())
-                .append("  for e.g.").append(System.lineSeparator())
-                .append("     > Alice ").append(System.lineSeparator())
-                .append("     I'm having a great time (2 seconds ago)").append(System.lineSeparator())
-                .append("").append(System.lineSeparator())
-                .append("  - Following another user: <user name> follows <another user>").append(System.lineSeparator())
-                .append("  for e.g.").append(System.lineSeparator())
-                .append("     > Alice follows Bob").append(System.lineSeparator())
-                .append("").append(System.lineSeparator())
-                .append("  - Display user's wall : <user name> wall").append(System.lineSeparator())
-                .append("  for e.g.").append(System.lineSeparator())
-                .append("     > Alice wall").append(System.lineSeparator())
-                .append("     Bob - I'm in New York today! Anyone wants to have a coffee? (2 seconds ago)").append(System.lineSeparator())
-                .append("     Alice - I'm having a great time (5 minutes ago)").append(System.lineSeparator())
-                .append("").append(System.lineSeparator())
-                .toString();
-
+        String usageText = getUsageTextFromTheResources();
         ioConsole.display(usageText);
+    }
+
+    private String getUsageTextFromTheResources() throws IOException {
+        Path path = FileIOHelper.getPathFor(getClass(), APP_USAGE_FILEPATH);
+        List<String> contentAsList = FileIOHelper.getTheContentOf(path.toString());
+        return FileIOHelper.convertListToStringWithLinefeed(contentAsList);
     }
 }
