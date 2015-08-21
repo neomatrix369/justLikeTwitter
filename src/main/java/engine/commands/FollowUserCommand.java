@@ -3,17 +3,13 @@ package engine.commands;
 import elements.CommandLineEntry;
 import engine.CommandExecutor;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class FollowUserCommand extends CommandExecutor {
 
     @Override
     public String execute() {
         CommandLineEntry commandLineEntry = prepareCommandLineEntry();
 
-        List<String> existingFollowsList = getExistingFollowsListFor(commandLineEntry.getUserName());
-        combineFollowsList(existingFollowsList, commandLineEntry);
+        followsList.addNewFor(commandLineEntry.getUserName(), commandLineEntry.getOtherUsersName());
 
         return NOTHING_FOR_THIS_COMMAND_EXECUTION;
     }
@@ -25,18 +21,4 @@ public class FollowUserCommand extends CommandExecutor {
         return commandLineEntry;
     }
 
-    private List<String> getExistingFollowsListFor(String userName) {
-        List<String> followsListForAllUsers = followsList.get(userName);
-
-        if (followsListForAllUsers == null) {
-            followsListForAllUsers = new ArrayList<>();
-        }
-
-        return followsListForAllUsers;
-    }
-
-    private void combineFollowsList(List<String> existingFollowsList, CommandLineEntry newCommandLineEntry) {
-        existingFollowsList.add(newCommandLineEntry.getOtherUsersName());
-        followsList.put(newCommandLineEntry.getUserName(), existingFollowsList);
-    }
 }

@@ -43,7 +43,7 @@ public class FollowingUsersUTest {
         //  And Alice exists
         //  When he enters "Charlie follows Alice" at the prompt
         userTypesAtThePrompt(COMMANDS_TYPED_BY_CHARLIE[1]);
-        List<String> actualFollowsList = followsList.get(USER_CHARLIE);
+        List<String> actualFollowsList = followsList.getFor(USER_CHARLIE);
 
                 // Then Alice is added to Charlie's follows list
         verifyThatTheFollowsListMatch(
@@ -64,7 +64,7 @@ public class FollowingUsersUTest {
         // And he enters "Charlie follows Bob" at the prompt
         userTypesAtThePrompt(COMMANDS_TYPED_BY_CHARLIE[1]);
         userTypesAtThePrompt(COMMANDS_TYPED_BY_CHARLIE[2]);
-        List<String> actualFollowsList = followsList.get(USER_CHARLIE);
+        List<String> actualFollowsList = followsList.getFor(USER_CHARLIE);
 
         // Then Alice and Bob are added to Charlie's follows list
         verifyThatTheFollowsListMatch(
