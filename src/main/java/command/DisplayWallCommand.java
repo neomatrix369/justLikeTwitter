@@ -4,6 +4,7 @@ import domain.CommandLineEntry;
 import domain.CommandType;
 import domain.MessagePosted;
 import domain.User;
+import domain.UserTypedCommand;
 import domain.Users;
 
 import java.util.List;
@@ -12,14 +13,16 @@ import static helper.ImplHelper.HYPHEN_SEPARATOR;
 import static helper.ImplHelper.USER_DOES_NOT_FOLLOW_ANYONE;
 import static helper.ImplHelper.USER_FIELD;
 
-public class DisplayWallCommand extends CommandExecutor {
+public class DisplayWallCommand extends CommandExecutorImpl {
 
     public DisplayWallCommand(CommandType commandType) {
         super(commandType);
     }
 
     @Override
-    public String execute() {
+    public String execute(UserTypedCommand userTypedCommand) {
+        super.execute(userTypedCommand);
+
         CommandLineEntry commandLineEntry = new CommandLineEntry(centralSystemClock);
         commandLineEntry.setUser(createNewUserFrom(commandTokens, USER_FIELD));
         return getWallFor(commandLineEntry.getUser());

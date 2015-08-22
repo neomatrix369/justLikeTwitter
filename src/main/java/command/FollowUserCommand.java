@@ -2,19 +2,22 @@ package command;
 
 import domain.CommandLineEntry;
 import domain.CommandType;
+import domain.UserTypedCommand;
 
 import static helper.ImplHelper.NOTHING_FOR_THIS_COMMAND_EXECUTION;
 import static helper.ImplHelper.OTHER_USER_FIELD;
 import static helper.ImplHelper.USER_FIELD;
 
-public class FollowUserCommand extends CommandExecutor {
+public class FollowUserCommand extends CommandExecutorImpl {
 
     public FollowUserCommand(CommandType commandType) {
         super(commandType);
     }
 
     @Override
-    public String execute() {
+    public String execute(UserTypedCommand userTypedCommand) {
+        super.execute(userTypedCommand);
+
         CommandLineEntry commandLineEntry = prepareCommandLineEntry();
 
         followsList.addNewFollowOf(commandLineEntry.getUser(), commandLineEntry.getOtherUsersName());

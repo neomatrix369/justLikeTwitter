@@ -24,11 +24,10 @@ public class JustLikeTwitterEngine {
         CommandExecutorFactory commandExecutorFactory = new CommandExecutorFactory();
         CommandExecutor commandExecutor = commandExecutorFactory.getCommandUsing(userTypedCommand);
 
-        commandExecutor.parseUserTypedCommand(userTypedCommand);
         commandExecutor.setMessageStore(messageStore);
         commandExecutor.setCentralSystemClock(centralSystemClock);
         commandExecutor.setFollowsList(followsList);
 
-        return commandExecutor.execute();
+        return commandExecutor.execute(userTypedCommand);
     }
 }
