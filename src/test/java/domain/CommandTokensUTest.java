@@ -76,24 +76,32 @@ public class CommandTokensUTest {
     @Test
     public void givenUserTypedCommandIsAvailable_whenCommandTokenParsesIt_thenItUsesTheRespectivePattern() {
         // given
-        String commandString = commandAsString;
-
         // when
-        CommandTokens commandTokens = new CommandTokens(commandString, commandType);
-        String[] actualFieldValues = new String[commandType.getFieldNames().length];
-        int index = 0;
-        for (String fieldName : commandType.getFieldNames()) {
-            actualFieldValues[index] = commandTokens.get(fieldName);
-            index++;
-        }
+        String[] actualFieldValues = retrieveFieldValuesFromCommandTypedByUser(commandAsString);
 
         // then
-        index = 0;
+        verifyIfFieldsReturnedAreAsExpected(actualFieldValues);
+    }
+
+    private void verifyIfFieldsReturnedAreAsExpected(String[] actualFieldValues) {
+        int index = 0;
         for (String expectedFieldValue : expectedFieldValues) {
             assertThat(String.format(ASSERT_REASON_FOR_FIELD_VALUE_NOT_RETURNED, expectedFieldValue),
                     actualFieldValues[index],
                     is(equalTo(expectedFieldValue)));
             index++;
         }
+    }
+
+    private String[] retrieveFieldValuesFromCommandTypedByUser(String commandString) {
+        CommandTokens commandTokens = new CommandTokens(commandString, commandType);
+        String[] actualFieldValues = new String[commandType.getFieldNames().length];
+
+        int index = 0;
+        for (String fieldName : commandType.getFieldNames()) {
+            actualFieldValues[index] = commandTokens.get(fieldName);
+            index++;
+        }
+        return actualFieldValues;
     }
 }
