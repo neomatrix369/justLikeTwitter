@@ -42,6 +42,7 @@ public final class TestHelper {
     public static final User USER_BOB = new User("Bob");
 
     public static final String ANY_TEXT = "Some test to display on the console";
+    public static final String ASSERT_REASON_FOR_FIELD_VALUE_NOT_RETURNED = "Field value of '%s' should have been returned";
 
     public static final UserTypedCommand ALICE_POSTS_A_MESSAGE = new UserTypedCommand("Alice -> I love the weather today");
     public static final UserTypedCommand HARRY_POSTS_A_MESSAGE = new UserTypedCommand("Harry -> I like this idea");
