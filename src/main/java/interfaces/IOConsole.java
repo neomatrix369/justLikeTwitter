@@ -2,7 +2,7 @@ package interfaces;
 
 import domain.Keyboard;
 import domain.Screen;
-import domain.TypedCommand;
+import domain.UserTypedCommand;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -28,7 +28,7 @@ public class IOConsole {
         scanner = new Scanner(keyBoard.get(), UTF_8_STRING);
     }
 
-    public TypedCommand waitForUserAtThePrompt() throws IOException {
+    public UserTypedCommand waitForUserAtThePrompt() throws IOException {
         printPromptIndicator(screen);
         return gatherWhatTheUserTypesAtThePrompt();
     }
@@ -39,11 +39,11 @@ public class IOConsole {
         screen.write(newCommandPrompt.getBytes());
     }
 
-    private TypedCommand gatherWhatTheUserTypesAtThePrompt() {
+    private UserTypedCommand gatherWhatTheUserTypesAtThePrompt() {
         if (scanner.hasNextLine()) {
-            return new TypedCommand(scanner.nextLine());
+            return new UserTypedCommand(scanner.nextLine());
         }
-        return new TypedCommand(NOTHING);
+        return new UserTypedCommand(NOTHING);
     }
 
     public void display(String outputToDisplay) throws IOException {

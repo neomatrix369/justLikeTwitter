@@ -3,7 +3,7 @@ package engine;
 import clock.CentralSystemClock;
 import domain.FollowsList;
 import domain.MessageStore;
-import domain.TypedCommand;
+import domain.UserTypedCommand;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -132,7 +132,7 @@ public class DisplayingUserWallUTest {
                         "Bob - Damn! We lost! (2 minutes ago)" + System.lineSeparator());
     }
 
-    private String userTypesAtThePrompt(TypedCommand userTypedCommand,
+    private String userTypesAtThePrompt(UserTypedCommand userTypedCommand,
                                         long delayInMilliseconds) {
         currentDateTime = simulateDelayUsing(
                 currentDateTime,

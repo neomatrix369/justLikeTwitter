@@ -1,6 +1,7 @@
 package command;
 
 import domain.CommandLineEntry;
+import domain.CommandType;
 import domain.MessagePosted;
 import domain.User;
 import domain.Users;
@@ -13,16 +14,15 @@ import static helper.ImplHelper.USER_FIELD;
 
 public class DisplayWallCommand extends CommandExecutor {
 
-    @Override
-    public String execute() {
-        CommandLineEntry commandLineEntry = prepareCommandLineEntry();
-        return getWallFor(commandLineEntry.getUser());
+    public DisplayWallCommand(CommandType commandType) {
+        super(commandType);
     }
 
-    private CommandLineEntry prepareCommandLineEntry() {
+    @Override
+    public String execute() {
         CommandLineEntry commandLineEntry = new CommandLineEntry(centralSystemClock);
-        commandLineEntry.setUser(createNewUserInstanceFrom(commandTokens, USER_FIELD));
-        return commandLineEntry;
+        commandLineEntry.setUser(createNewUserFrom(commandTokens, USER_FIELD));
+        return getWallFor(commandLineEntry.getUser());
     }
 
     private String getWallFor(User user) {

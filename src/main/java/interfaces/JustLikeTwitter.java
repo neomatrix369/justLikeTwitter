@@ -5,7 +5,7 @@ import domain.FollowsList;
 import domain.Keyboard;
 import domain.MessageStore;
 import domain.Screen;
-import domain.TypedCommand;
+import domain.UserTypedCommand;
 import engine.JustLikeTwitterEngine;
 import helper.FileIOHelper;
 
@@ -59,7 +59,7 @@ public class JustLikeTwitter {
         showUsageText();
         
         do {
-            TypedCommand userTypedCommand = ioConsole.waitForUserAtThePrompt();
+            UserTypedCommand userTypedCommand = ioConsole.waitForUserAtThePrompt();
             String result = justLikeTwitterEngine.executeCommand(userTypedCommand);
             ioConsole.display(result);
             runCount++;

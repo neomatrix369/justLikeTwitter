@@ -2,7 +2,7 @@ package interfaces;
 
 import domain.Keyboard;
 import domain.Screen;
-import domain.TypedCommand;
+import domain.UserTypedCommand;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -43,11 +43,11 @@ public class IOConsoleUTest {
     public void givenConsoleIsLoadedWithBufferedInputStreamAndPrintStream_whenALineOfInputIsPassedIn_thenTheSameInputIsReturned() throws IOException {
         // given
         // when
-        TypedCommand actualTypedCommand = ioConsole.waitForUserAtThePrompt();
+        UserTypedCommand actualUserTypedCommand = ioConsole.waitForUserAtThePrompt();
 
         // then
         assertThat("The expected line of input should have been returned.",
-                actualTypedCommand,
+                actualUserTypedCommand,
                 is(equalTo(ALICE_POSTS_A_MESSAGE)));
     }
 

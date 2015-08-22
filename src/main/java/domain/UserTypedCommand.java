@@ -3,14 +3,14 @@ package domain;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
-public class TypedCommand {
+public class UserTypedCommand {
     private final String commandAsString;
 
-    public TypedCommand(String commandAsString) {
+    public UserTypedCommand(String commandAsString) {
         this.commandAsString = commandAsString;
     }
 
-    public TypedCommand(User userHarry) {
+    public UserTypedCommand(User userHarry) {
         commandAsString = userHarry.toString();
     }
 
@@ -18,8 +18,8 @@ public class TypedCommand {
         return commandAsString.matches(pattern);
     }
 
-    public CommandTokens parse(String tokenSeparator, String[] fieldNames) {
-        return new CommandTokens(commandAsString, tokenSeparator, fieldNames);
+    public CommandTokens parseUsing(CommandType commandType) {
+        return new CommandTokens(commandAsString, commandType);
     }
 
     public byte[] getBytes() {
@@ -36,7 +36,7 @@ public class TypedCommand {
             return false;
         }
 
-        TypedCommand that = (TypedCommand) o;
+        UserTypedCommand that = (UserTypedCommand) o;
 
         return new EqualsBuilder()
                 .append(commandAsString, that.commandAsString)

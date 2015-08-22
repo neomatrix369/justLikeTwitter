@@ -3,7 +3,7 @@ package helper;
 import clock.CentralSystemClock;
 import com.github.approval.Approval;
 import com.github.approval.reporters.Reporters;
-import domain.TypedCommand;
+import domain.UserTypedCommand;
 import domain.User;
 import domain.Users;
 
@@ -42,20 +42,20 @@ public final class TestHelper {
 
     public static final String ANY_TEXT = "Some test to display on the console";
 
-    public static final TypedCommand ALICE_POSTS_A_MESSAGE = new TypedCommand("Alice -> I love the weather today");
-    public static final TypedCommand HARRY_POSTS_A_MESSAGE = new TypedCommand("Harry -> I like this idea");
+    public static final UserTypedCommand ALICE_POSTS_A_MESSAGE = new UserTypedCommand("Alice -> I love the weather today");
+    public static final UserTypedCommand HARRY_POSTS_A_MESSAGE = new UserTypedCommand("Harry -> I like this idea");
 
-    public static final TypedCommand[] BOB_POSTS_TWO_MESSAGES = new TypedCommand[]{
-            new TypedCommand("Bob -> Damn! We lost!"),
-            new TypedCommand("Bob -> Good game though.")
+    public static final UserTypedCommand[] BOB_POSTS_TWO_MESSAGES = new UserTypedCommand[]{
+            new UserTypedCommand("Bob -> Damn! We lost!"),
+            new UserTypedCommand("Bob -> Good game though.")
     };
 
-    public static final TypedCommand CHARLIE_POSTS_A_MESSAGE =
-            new TypedCommand("Charlie -> I'm in New York today! Anyone wants to have a coffee?");
+    public static final UserTypedCommand CHARLIE_POSTS_A_MESSAGE =
+            new UserTypedCommand("Charlie -> I'm in New York today! Anyone wants to have a coffee?");
 
-    public static final TypedCommand CHARLIE_FOLLOWS_ALICE = new TypedCommand("Charlie follows Alice");
-    public static final TypedCommand CHARLIE_FOLLOWS_BOB = new TypedCommand("Charlie follows Bob");
-    public static final TypedCommand CHARLIE_REQUESTS_WALL = new TypedCommand("Charlie wall");
+    public static final UserTypedCommand CHARLIE_FOLLOWS_ALICE = new UserTypedCommand("Charlie follows Alice");
+    public static final UserTypedCommand CHARLIE_FOLLOWS_BOB = new UserTypedCommand("Charlie follows Bob");
+    public static final UserTypedCommand CHARLIE_REQUESTS_WALL = new UserTypedCommand("Charlie wall");
 
     public static final Users[] EXPECTED_FOLLOWS_LIST = {
             new Users(USER_ALICE),

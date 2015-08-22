@@ -19,10 +19,10 @@ public final class PatternCommandTypeMapper {
 
     private PatternCommandTypeMapper() {
         patternCommandMap = new HashMap<>();
-        patternCommandMap.put(POST_MESSAGE, new PostMessageCommand());
-        patternCommandMap.put(READ_POST, new ReadPostCommand());
-        patternCommandMap.put(FOLLOWS_USER, new FollowUserCommand());
-        patternCommandMap.put(DISPLAY_WALL, new DisplayWallCommand());
+        patternCommandMap.put(POST_MESSAGE, new PostMessageCommand(POST_MESSAGE));
+        patternCommandMap.put(READ_POST, new ReadPostCommand(READ_POST));
+        patternCommandMap.put(FOLLOWS_USER, new FollowUserCommand(FOLLOWS_USER));
+        patternCommandMap.put(DISPLAY_WALL, new DisplayWallCommand(DISPLAY_WALL));
     }
 
     public static Map<CommandType, CommandExecutor> get() {

@@ -1,11 +1,11 @@
 package engine;
 
 import clock.CentralSystemClock;
+import command.CommandExecutor;
 import command.CommandExecutorFactory;
 import domain.FollowsList;
 import domain.MessageStore;
-import command.CommandExecutor;
-import domain.TypedCommand;
+import domain.UserTypedCommand;
 
 public class JustLikeTwitterEngine {
     private final MessageStore messageStore;
@@ -20,10 +20,15 @@ public class JustLikeTwitterEngine {
         this.centralSystemClock = centralSystemClock;
     }
 
-    public String executeCommand(TypedCommand userTypedCommand) {
-        CommandExecutorFactory commandExecutorFactory =
-                new CommandExecutorFactory(centralSystemClock, messageStore, followsList);
-        CommandExecutor command = commandExecutorFactory.getCommand(userTypedCommand);
-        return command.execute();
+    public String executeCommand(UserTypedCommand userTypedCommand) {
+        CommandExecutorFactory commandExecutorFactory = new CommandExecutorFactory();
+        CommandExecutor commandExecutor = commandExecutorFactory.getCommandUsing(userTypedCommand);
+
+        commandExecutor.parseUserTypedCommand(userTypedCommand);
+        commandExecutor.setMessageStore(messageStore);
+        commandExecutor.setCentralSystemClock(centralSystemClock);
+        commandExecutor.setFollowsList(followsList);
+
+        return commandExecutor.execute();
     }
 }

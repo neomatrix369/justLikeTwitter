@@ -3,23 +3,28 @@ package command;
 import clock.CentralSystemClock;
 import clock.ClockTimeFormatter;
 import domain.CommandTokens;
+import domain.CommandType;
 import domain.FollowsList;
 import domain.MessagePosted;
 import domain.MessageStore;
 import domain.MessageText;
+import domain.UserTypedCommand;
 import domain.User;
 
 public abstract class CommandExecutor {
-    CommandTokens commandTokens;
     CentralSystemClock centralSystemClock;
+
     MessageStore messageStore;
     FollowsList followsList;
 
-    public abstract String execute();
+    CommandType commandType;
+    CommandTokens commandTokens;
 
-    public void setCommandTokens(CommandTokens commandTokens) {
-        this.commandTokens = commandTokens;
+    public CommandExecutor(CommandType commandType) {
+        this.commandType = commandType;
     }
+
+    public abstract String execute();
 
     public void setCentralSystemClock(CentralSystemClock centralSystemClock) {
         this.centralSystemClock = centralSystemClock;
@@ -33,6 +38,10 @@ public abstract class CommandExecutor {
         this.followsList = followsList;
     }
 
+    public void parseUserTypedCommand(UserTypedCommand userTypedCommand) {
+        this.commandTokens = userTypedCommand.parseUsing(commandType);
+    }
+
     String getFormattedMessage(MessagePosted messagePosted) {
         ClockTimeFormatter clockTimeFormatter = new ClockTimeFormatter(centralSystemClock);
 
@@ -42,11 +51,11 @@ public abstract class CommandExecutor {
                 clockTimeFormatter.whenMessageWasPosted(messagePosted.getMessageDate()));
     }
 
-    User createNewUserInstanceFrom(CommandTokens commandTokens, String fieldName) {
+    User createNewUserFrom(CommandTokens commandTokens, String fieldName) {
         return new User(commandTokens.get(fieldName));
     }
 
-    MessageText createNewMessageTextInstanceFrom(CommandTokens commandTokens, String fieldName) {
+    MessageText createNewMessageTextFrom(CommandTokens commandTokens, String fieldName) {
         return new MessageText(commandTokens.get(fieldName));
     }
 }

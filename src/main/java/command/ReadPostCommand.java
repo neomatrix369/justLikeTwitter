@@ -1,5 +1,6 @@
 package command;
 
+import domain.CommandType;
 import domain.MessagePosted;
 import domain.User;
 
@@ -9,9 +10,13 @@ import static helper.ImplHelper.USER_FIELD;
 
 public class ReadPostCommand extends CommandExecutor {
 
+    public ReadPostCommand(CommandType commandType) {
+        super(commandType);
+    }
+
     @Override
     public String execute() {
-        User user = createNewUserInstanceFrom(commandTokens, USER_FIELD);
+        User user = createNewUserFrom(commandTokens, USER_FIELD);
         return getFormattedMessageFor(user);
     }
 

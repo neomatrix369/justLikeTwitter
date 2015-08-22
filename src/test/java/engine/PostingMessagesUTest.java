@@ -4,7 +4,7 @@ import clock.CentralSystemClock;
 import domain.FollowsList;
 import domain.MessageStore;
 import domain.MessagePosted;
-import domain.TypedCommand;
+import domain.UserTypedCommand;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -81,7 +81,7 @@ public class PostingMessagesUTest {
         );
     }
 
-    private void userTypesAtThePrompt(TypedCommand userTypedCommand) {
+    private void userTypesAtThePrompt(UserTypedCommand userTypedCommand) {
         justLikeTwitterEngine.executeCommand(userTypedCommand);
     }
     private List<String> expectedMessagesToAdd(String... expectedMessages) {

@@ -3,7 +3,7 @@ package engine;
 import clock.CentralSystemClock;
 import domain.FollowsList;
 import domain.MessageStore;
-import domain.TypedCommand;
+import domain.UserTypedCommand;
 import domain.Users;
 import org.junit.Before;
 import org.junit.Test;
@@ -74,7 +74,7 @@ public class FollowingUsersUTest {
         );
     }
 
-    private void userTypesAtThePrompt(TypedCommand userTypedCommand) {
+    private void userTypesAtThePrompt(UserTypedCommand userTypedCommand) {
         justLikeTwitterEngine.executeCommand(userTypedCommand);
     }
 
