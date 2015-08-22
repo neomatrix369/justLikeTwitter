@@ -1,11 +1,11 @@
 package clock;
 
 import domain.MessageDate;
-import helper.ImplHelper;
 
 import java.util.Date;
 
 import static helper.ImplHelper.DEFAULT_TOKEN;
+import static helper.ImplHelper.HOUR_TOKEN;
 import static helper.ImplHelper.MINUTE_TOKEN;
 import static helper.ImplHelper.SECOND_TOKEN;
 import static helper.ImplHelper.SIXTY_SECONDS;
@@ -32,12 +32,14 @@ public class ClockTimeFormatter {
         return appropriateTimeDifferenceInWords(diffHours, diffMinutes, diffSeconds);
     }
 
-    private String appropriateTimeDifferenceInWords(long diffHours, long diffMinutes, long diffSeconds) {
+    private String appropriateTimeDifferenceInWords(long diffHours,
+                                                    long diffMinutes,
+                                                    long diffSeconds) {
         if (diffHours > 0) {
             return String.format(
                     TIME_IN_WORDS_PATTERN,
                     diffHours,
-                    makePlural(diffHours, ImplHelper.HOUR_TOKEN));
+                    makePlural(diffHours, HOUR_TOKEN));
         }
 
         if (diffMinutes > 0) {
