@@ -6,6 +6,7 @@ import com.github.approval.reporters.Reporters;
 import domain.UserTypedCommand;
 import domain.User;
 import domain.Users;
+import engine.JustLikeTwitterEngine;
 
 import java.util.Date;
 
@@ -63,6 +64,22 @@ public final class TestHelper {
     };
 
     private TestHelper() {
+    }
+
+    public static void userTypesAtThePrompt(JustLikeTwitterEngine justLikeTwitterEngine, UserTypedCommand userTypedCommand) {
+        justLikeTwitterEngine.executeCommand(userTypedCommand);
+    }
+
+    public static String userTypesAtThePrompt(JustLikeTwitterEngine justLikeTwitterEngine,
+                                        UserTypedCommand userTypedCommand,
+                                        CentralSystemClock centralSystemClock,
+                                        Date currentDateTime,
+                                        long delayInMilliseconds) {
+        currentDateTime = simulateDelayUsing(
+                currentDateTime,
+                centralSystemClock,
+                delayInMilliseconds);
+        return justLikeTwitterEngine.executeCommand(userTypedCommand);
     }
 
     public static Date simulateDelayUsing(Date currentDateTime,

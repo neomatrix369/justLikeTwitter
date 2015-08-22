@@ -2,9 +2,8 @@ package engine;
 
 import clock.CentralSystemClock;
 import domain.FollowsList;
-import domain.MessageStore;
 import domain.MessagePosted;
-import domain.UserTypedCommand;
+import domain.MessageStore;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -15,7 +14,7 @@ import static helper.TestHelper.ALICE_POSTS_A_MESSAGE;
 import static helper.TestHelper.BOB_POSTS_TWO_MESSAGES;
 import static helper.TestHelper.USER_ALICE;
 import static helper.TestHelper.USER_BOB;
-
+import static helper.TestHelper.userTypesAtThePrompt;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -48,7 +47,7 @@ public class PostingMessagesUTest {
         // Given a user's message list is empty
         // And a new message "Alice -> I love the weather today" is available
         // When the message is passed to the engine for the user
-        userTypesAtThePrompt(ALICE_POSTS_A_MESSAGE);
+        userTypesAtThePrompt(justLikeTwitterEngine, ALICE_POSTS_A_MESSAGE);
         List<MessagePosted> actualMessagesToAdd = messageStore.getMessagesFor(USER_ALICE);
 
         // Then the message is added to the user's message list
@@ -67,8 +66,8 @@ public class PostingMessagesUTest {
         // Given user's message list is empty
         // And new messages like "Bob -> Damn! We lost!" and "Bob -> Good game though." are available
         // When the messages are passed to the engine for the user
-        userTypesAtThePrompt(BOB_POSTS_TWO_MESSAGES[0]);
-        userTypesAtThePrompt(BOB_POSTS_TWO_MESSAGES[1]);
+        userTypesAtThePrompt(justLikeTwitterEngine, BOB_POSTS_TWO_MESSAGES[0]);
+        userTypesAtThePrompt(justLikeTwitterEngine, BOB_POSTS_TWO_MESSAGES[1]);
         List<MessagePosted> actualMessagesToAdd = messageStore.getMessagesFor(USER_BOB);
 
         // Then the messages are added to the user's message list, in the reverse order of entry
@@ -81,9 +80,6 @@ public class PostingMessagesUTest {
         );
     }
 
-    private void userTypesAtThePrompt(UserTypedCommand userTypedCommand) {
-        justLikeTwitterEngine.executeCommand(userTypedCommand);
-    }
     private List<String> expectedMessagesToAdd(String... expectedMessages) {
         return Arrays.asList(expectedMessages);
     }
