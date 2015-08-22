@@ -62,7 +62,8 @@ public final class TestHelper {
             new Users(USER_ALICE, USER_BOB)
     };
 
-    private TestHelper() {}
+    private TestHelper() {
+    }
 
     public static Date simulateDelayUsing(Date currentDateTime,
                                    CentralSystemClock centralSystemClock,

@@ -15,7 +15,7 @@ import static domain.CommandType.POST_MESSAGE;
 import static domain.CommandType.READ_POST;
 
 public final class PatternCommandTypeMapper {
-    private Map<CommandType, CommandExecutor> patternCommandMap;
+    private final Map<CommandType, CommandExecutor> patternCommandMap;
 
     private PatternCommandTypeMapper() {
         patternCommandMap = new HashMap<>();

@@ -6,11 +6,11 @@ public class MessageDate {
     private final Date date;
 
     public MessageDate(Date date) {
-        this.date = date;
+        this.date = new Date(date.getTime());
     }
 
     public Date toDate() {
-        return date;
+        return new Date(date.getTime());
     }
 
     public int compareTo(MessageDate messageDate) {

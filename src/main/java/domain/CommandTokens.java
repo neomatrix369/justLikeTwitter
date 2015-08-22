@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CommandTokens {
-    private Map<String, String> tokens = new HashMap<>();
+    private final Map<String, String> tokens = new HashMap<>();
 
     public CommandTokens(String commandAsString, String tokenSeparator, String[] fieldNames) {
         String[] splitCommands = commandAsString.split(tokenSeparator);

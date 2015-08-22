@@ -26,7 +26,10 @@ import static helper.ImplHelper.MESSAGE_COL_INDEX;
 
 public class FileIOHelper {
 
-    public static List<Date> loadDatesFrom(Class<? extends Object> aClass, String datesForInputFile) {
+    private FileIOHelper() {
+    }
+
+    public static List<Date> loadDatesFrom(Class<?> aClass, String datesForInputFile) {
         List<Date> result = new ArrayList<>();
         try {
             List<String> lines = getTheContentOf(getPathFor(aClass, datesForInputFile).toString());
@@ -59,18 +62,18 @@ public class FileIOHelper {
         return Files.readAllLines(filePath, Charset.defaultCharset());
     }
 
-    public static Path getPathFor(Class<? extends Object> aClass, String inputFileName) {
+    public static Path getPathFor(Class<?> aClass, String inputFileName) {
         URL fileUrl = aClass.getResource(inputFileName);
         return Paths.get(fileUrl.getPath());
     }
 
-    public static int getNumberOfCommandsIn(Class<? extends Object> aClass, String inputFileName) throws IOException {
+    public static int getNumberOfCommandsIn(Class<?> aClass, String inputFileName) throws IOException {
         Path filePath = getPathFor(aClass, inputFileName);
         List<String> lines = Files.readAllLines(filePath, Charset.defaultCharset());
         return lines.size();
     }
 
-    public static InputStream getFileToReadFrom(Class<? extends Object> aClass, String fileName) throws IOException {
+    public static InputStream getFileToReadFrom(Class<?> aClass, String fileName) throws IOException {
         List<String> lines = getTheContentOf(getPathFor(aClass, fileName).toString());
 
         String inputString = "";

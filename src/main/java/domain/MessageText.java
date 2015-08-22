@@ -1,15 +1,15 @@
 package domain;
 
 public class MessageText {
-    private String messageText;
+    private final String message;
 
-    public MessageText(String messageText) {
-        this.messageText = messageText;
+    public MessageText(String message) {
+        this.message = message;
     }
 
     @Override
     public String toString() {
-        return messageText;
+        return message;
     }
 }
 

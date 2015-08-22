@@ -1,5 +1,7 @@
 package domain;
 
+import java.util.Arrays;
+
 public enum CommandType {
     POST_MESSAGE ("(\\w+) -> (.*)"        , " -> "     , new String[]{"User", "MessageText"}),
     READ_POST    ("(\\w+)"                , " "        , new String[]{"User"}),
@@ -25,6 +27,6 @@ public enum CommandType {
     }
 
     public String[] getFieldNames() {
-        return fieldNames;
+        return Arrays.copyOf(fieldNames, fieldNames.length);
     }
 }

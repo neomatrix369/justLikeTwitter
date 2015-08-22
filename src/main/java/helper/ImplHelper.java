@@ -15,7 +15,6 @@ public final class ImplHelper {
     public static final String MINUTE_TOKEN = "minute";
     public static final String SECOND_TOKEN = "second";
     public static final String DEFAULT_TOKEN = "(just now)";
-    public static final String SUFFIX_S = "s";
 
     public static final String MESSAGE_ON_TIMELINE_PATTERN = "%s %s";
     public static final String MESSAGE_PATTERN_READ_POST = "%s %s";
@@ -29,6 +28,7 @@ public final class ImplHelper {
 
     public static final CommandExecutor NO_COMMAND_EXECUTOR_MATCHED = null;
     public static final List<User> USER_DOES_NOT_FOLLOW_ANYONE = null;
+    public static final String NO_OUTPUT_IS_AVAILABLE = null;
 
     public static final String COMMAND_PROMPT_INDICATOR = "> ";
     public static final String NOTHING = "";
@@ -46,7 +46,10 @@ public final class ImplHelper {
 
     public static final String APP_USAGE_FILEPATH = "../AppUsage.txt";
 
-    private ImplHelper() {}
+    private static final String SUFFIX_S = "s";
+
+    private ImplHelper() {
+    }
 
     public static String makePlural(long duration, String timeUnit) {
         if (duration > 1) {
