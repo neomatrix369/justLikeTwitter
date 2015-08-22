@@ -3,7 +3,7 @@ package domain;
 import java.util.HashMap;
 import java.util.Map;
 
-import static helper.ImplHelper.NO_FOLLOWS_RETURNED;
+import static helper.ImplHelper.USER_DOES_NOT_FOLLOW_ANYONE;
 
 public class FollowsList {
 
@@ -28,7 +28,7 @@ public class FollowsList {
     }
 
     private Users getNewListForTheFirstTime(Users existingFollowsList) {
-        if (existingFollowsList == NO_FOLLOWS_RETURNED) {
+        if (existingFollowsList == USER_DOES_NOT_FOLLOW_ANYONE) {
             return new Users();
         }
         return existingFollowsList;

@@ -8,8 +8,8 @@ import domain.Users;
 import java.util.List;
 
 import static helper.ImplHelper.HYPHEN_SEPARATOR;
-import static helper.ImplHelper.NO_FOLLOWS_RETURNED;
-import static helper.ImplHelper.USERNAME_INDEX;
+import static helper.ImplHelper.USER_DOES_NOT_FOLLOW_ANYONE;
+import static helper.ImplHelper.USER_FIELD;
 
 public class DisplayWallCommand extends CommandExecutor {
 
@@ -21,7 +21,7 @@ public class DisplayWallCommand extends CommandExecutor {
 
     private CommandLineEntry prepareCommandLineEntry() {
         CommandLineEntry commandLineEntry = new CommandLineEntry(centralSystemClock);
-        commandLineEntry.setUser(new User(tokens[USERNAME_INDEX]));
+        commandLineEntry.setUser(createNewUserInstanceFrom(commandTokens, USER_FIELD));
         return commandLineEntry;
     }
 
@@ -57,7 +57,7 @@ public class DisplayWallCommand extends CommandExecutor {
 
     private Users getFollowsListFor(User user) {
         Users list = followsList.getFollowsFor(user);
-        if (list == NO_FOLLOWS_RETURNED) {
+        if (list == USER_DOES_NOT_FOLLOW_ANYONE) {
             return new Users();
         }
         return list;

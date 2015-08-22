@@ -1,6 +1,7 @@
 package command;
 
 import clock.CentralSystemClock;
+import domain.CommandTokens;
 import domain.CommandType;
 import domain.FollowsList;
 import domain.MessageStore;
@@ -34,12 +35,14 @@ public class CommandExecutorFactory {
             CommandType pairKey = patternCommandExecutorPair.getKey();
             String pattern = pairKey.getMatchingPattern();
             String tokenSeparator = pairKey.getTokenSeparator();
+            String[] fieldNames = pairKey.getFieldNames();
 
             CommandExecutor commandExecutor = preparedCommandExecutor(
                     userTypedCommand,
                     patternCommandExecutorPair,
                     pattern,
-                    tokenSeparator);
+                    tokenSeparator,
+                    fieldNames);
 
             if (commandExecutor != NO_COMMAND_EXECUTOR_MATCHED) {
                 return commandExecutor;
@@ -52,12 +55,13 @@ public class CommandExecutorFactory {
     private CommandExecutor preparedCommandExecutor(TypedCommand userTypedCommand,
                                                     Map.Entry<CommandType, CommandExecutor> patternCommandExecutorPair,
                                                     String pattern,
-                                                    String tokenSeparator) {
+                                                    String tokenSeparator,
+                                                    String[] fieldNames) {
         if (userTypedCommand.matches(pattern)) {
             CommandExecutor commandExecutor = patternCommandExecutorPair.getValue();
 
-            String[] tokens = userTypedCommand.split(tokenSeparator);
-            commandExecutor.setParsedTokens(tokens);
+            CommandTokens commandTokens = userTypedCommand.parse(tokenSeparator, fieldNames);
+            commandExecutor.setCommandTokens(commandTokens);
             commandExecutor.setMessageStore(messageStore);
             commandExecutor.setCentralSystemClock(centralSystemClock);
             commandExecutor.setFollowsList(followsList);

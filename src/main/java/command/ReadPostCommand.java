@@ -5,13 +5,13 @@ import domain.User;
 
 import java.util.List;
 
-import static helper.ImplHelper.USERNAME_INDEX;
+import static helper.ImplHelper.USER_FIELD;
 
 public class ReadPostCommand extends CommandExecutor {
 
     @Override
     public String execute() {
-        User user = new User(tokens[USERNAME_INDEX]);
+        User user = createNewUserInstanceFrom(commandTokens, USER_FIELD);
         return getFormattedMessageFor(user);
     }
 

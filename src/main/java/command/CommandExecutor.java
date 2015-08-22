@@ -2,22 +2,23 @@ package command;
 
 import clock.CentralSystemClock;
 import clock.ClockTimeFormatter;
+import domain.CommandTokens;
 import domain.FollowsList;
-import domain.MessageStore;
 import domain.MessagePosted;
-
-import java.util.Arrays;
+import domain.MessageStore;
+import domain.MessageText;
+import domain.User;
 
 public abstract class CommandExecutor {
-    String[] tokens;
+    CommandTokens commandTokens;
     CentralSystemClock centralSystemClock;
     MessageStore messageStore;
     FollowsList followsList;
 
     public abstract String execute();
 
-    public void setParsedTokens(String[] tokens) {
-        this.tokens = Arrays.copyOf(tokens, tokens.length);
+    public void setCommandTokens(CommandTokens commandTokens) {
+        this.commandTokens = commandTokens;
     }
 
     public void setCentralSystemClock(CentralSystemClock centralSystemClock) {
@@ -39,5 +40,13 @@ public abstract class CommandExecutor {
                 helper.ImplHelper.MESSAGE_PATTERN_READ_POST,
                 messagePosted.getMessageText(),
                 clockTimeFormatter.whenMessageWasPosted(messagePosted.getMessageDate()));
+    }
+
+    User createNewUserInstanceFrom(CommandTokens commandTokens, String fieldName) {
+        return new User(commandTokens.get(fieldName));
+    }
+
+    MessageText createNewMessageTextInstanceFrom(CommandTokens commandTokens, String fieldName) {
+        return new MessageText(commandTokens.get(fieldName));
     }
 }

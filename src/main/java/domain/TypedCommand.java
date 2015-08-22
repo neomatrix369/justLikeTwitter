@@ -18,8 +18,8 @@ public class TypedCommand {
         return commandAsString.matches(pattern);
     }
 
-    public String[] split(String tokenSeparator) {
-        return commandAsString.split(tokenSeparator);
+    public CommandTokens parse(String tokenSeparator, String[] fieldNames) {
+        return new CommandTokens(commandAsString, tokenSeparator, fieldNames);
     }
 
     public byte[] getBytes() {

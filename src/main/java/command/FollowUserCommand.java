@@ -1,11 +1,10 @@
 package command;
 
 import domain.CommandLineEntry;
-import domain.User;
 
 import static helper.ImplHelper.NOTHING_FOR_THIS_COMMAND_EXECUTION;
-import static helper.ImplHelper.OTHER_USERNAME_INDEX;
-import static helper.ImplHelper.USERNAME_INDEX;
+import static helper.ImplHelper.OTHER_USER_FIELD;
+import static helper.ImplHelper.USER_FIELD;
 
 public class FollowUserCommand extends CommandExecutor {
 
@@ -20,8 +19,8 @@ public class FollowUserCommand extends CommandExecutor {
 
     private CommandLineEntry prepareCommandLineEntry() {
         CommandLineEntry commandLineEntry = new CommandLineEntry(centralSystemClock);
-        commandLineEntry.setUser(new User(tokens[USERNAME_INDEX]));
-        commandLineEntry.setOtherUsersName(new User(tokens[OTHER_USERNAME_INDEX]));
+        commandLineEntry.setUser(createNewUserInstanceFrom(commandTokens, USER_FIELD));
+        commandLineEntry.setOtherUsersName(createNewUserInstanceFrom(commandTokens, OTHER_USER_FIELD));
         return commandLineEntry;
     }
 }

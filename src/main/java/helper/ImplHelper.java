@@ -20,15 +20,15 @@ public final class ImplHelper {
     public static final String MESSAGE_ON_TIMELINE_PATTERN = "%s %s";
     public static final String MESSAGE_PATTERN_READ_POST = "%s %s";
 
-    public static final int USERNAME_INDEX = 0;
-    public static final int MESSAGE_INDEX = 1;
-    public static final int OTHER_USERNAME_INDEX = 1;
+    public static final String USER_FIELD = "User";
+    public static final String MESSAGE_TEXT_FIELD = "MessageText";
+    public static final String OTHER_USER_FIELD = "OtherUser";
 
     public static final String HYPHEN_SEPARATOR = " - ";
     public static final String NOTHING_FOR_THIS_COMMAND_EXECUTION = "";
 
     public static final CommandExecutor NO_COMMAND_EXECUTOR_MATCHED = null;
-    public static final List<User> NO_FOLLOWS_RETURNED = null;
+    public static final List<User> USER_DOES_NOT_FOLLOW_ANYONE = null;
 
     public static final String COMMAND_PROMPT_INDICATOR = "> ";
     public static final String NOTHING = "";

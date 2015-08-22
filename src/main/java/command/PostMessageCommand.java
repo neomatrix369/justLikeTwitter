@@ -1,12 +1,10 @@
 package command;
 
 import domain.CommandLineEntry;
-import domain.MessageText;
-import domain.User;
 
-import static helper.ImplHelper.MESSAGE_INDEX;
+import static helper.ImplHelper.USER_FIELD;
+import static helper.ImplHelper.MESSAGE_TEXT_FIELD;
 import static helper.ImplHelper.NOTHING_FOR_THIS_COMMAND_EXECUTION;
-import static helper.ImplHelper.USERNAME_INDEX;
 
 public class PostMessageCommand extends CommandExecutor {
 
@@ -19,10 +17,10 @@ public class PostMessageCommand extends CommandExecutor {
 
     private CommandLineEntry prepareCommandLineEntry() {
         CommandLineEntry commandLineEntry = new CommandLineEntry(centralSystemClock);
-        commandLineEntry.setUser(new User(tokens[USERNAME_INDEX]));
+        commandLineEntry.setUser(createNewUserInstanceFrom(commandTokens, USER_FIELD));
         commandLineEntry.setMessagePosted(
                 commandLineEntry.getUser(),
-                new MessageText(tokens[MESSAGE_INDEX]));
+                createNewMessageTextInstanceFrom(commandTokens, MESSAGE_TEXT_FIELD));
         return commandLineEntry;
     }
 }
