@@ -4,7 +4,7 @@ Implement a console-based social networking application (similar to Twitter) sat
 (rest of the info available separately).
 
 ####Installation into your IDE
-In order to run the FullLifeCycleAcceptanceTest test, the Reporter needs some comparison tool as needed by ApprovalTests, 
+In order to run the ```FullLifeCycleAcceptanceTest test```, the Reporter needs some comparison tool as needed by ApprovalTests, 
 see [http://approval.readthedocs.org/en/latest/getting-started.html](http://approval.readthedocs.org/en/latest/getting-started.html).
 By default the console will be used to show if any differences in output.
 
@@ -19,9 +19,7 @@ By default the console will be used to show if any differences in output.
 
 Alternatively you can also run from within the IDE:
     
-    Load the class ```interfaces.JustLikeTwitter``` and run the ```main()``` function
-
-Then wait for the app to load in the console tab of your IDE.
+Load the class ```interfaces.JustLikeTwitter``` and run the ```main()``` function. Then wait for the app to load in the console tab of your IDE.
 
 ####Expected UI
 
@@ -60,5 +58,4 @@ Then wait for the app to load in the console tab of your IDE.
 
     $ mvn test
     
-When running the above commands, and when the FullLifeCycleAcceptanceTest is run, ApprovalTests will ask if you want to 
-validate your first output, press OK in the dialog. 
+When running the above commands, and when the ```FullLifeCycleAcceptanceTest``` is run, ```ApprovalTests``` will ask if you want to validate your first output, press OK in the dialog. 
