@@ -11,33 +11,38 @@ import domain.MessageText;
 import domain.User;
 import domain.UserTypedCommand;
 
+import static helper.ImplHelper.NOTHING_FOR_THIS_COMMAND_EXECUTION;
+
 public class CommandExecutorImpl implements CommandExecutor {
     CentralSystemClock centralSystemClock;
 
     MessageStore messageStore;
     FollowsList followsList;
-
-    CommandType commandType;
     CommandTokens commandTokens;
 
-    public CommandExecutorImpl(CommandType commandType) {
+    private final CommandType commandType;
+
+    CommandExecutorImpl(CommandType commandType) {
         this.commandType = commandType;
     }
 
     @Override
     public String execute(UserTypedCommand userTypedCommand) {
         commandTokens = userTypedCommand.parseUsing(commandType);
-        return "";
+        return NOTHING_FOR_THIS_COMMAND_EXECUTION;
     }
 
+    @Override
     public void setCentralSystemClock(CentralSystemClock centralSystemClock) {
         this.centralSystemClock = centralSystemClock;
     }
 
+    @Override
     public void setMessageStore(MessageStore messageStore) {
         this.messageStore = messageStore;
     }
 
+    @Override
     public void setFollowsList(FollowsList followsList) {
         this.followsList = followsList;
     }

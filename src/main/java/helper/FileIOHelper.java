@@ -76,13 +76,15 @@ public class FileIOHelper {
     public static InputStream getFileToReadFrom(Class<?> aClass, String fileName) throws IOException {
         List<String> lines = getTheContentOf(getPathFor(aClass, fileName).toString());
 
-        String inputString = "";
+        StringBuilder inputString = new StringBuilder();
         for (String eachLine: lines) {
             String[] splitEachLine = eachLine.split(COLUMN_SEPARATOR);
-            inputString += splitEachLine[MESSAGE_COL_INDEX] + System.lineSeparator();
+            inputString
+                    .append(splitEachLine[MESSAGE_COL_INDEX])
+                    .append(System.lineSeparator());
         }
 
-        return new ByteArrayInputStream(inputString.getBytes());
+        return new ByteArrayInputStream(inputString.toString().getBytes());
     }
 
     public static FileOutputStream getFileToWriteTo(String fileName) throws FileNotFoundException {
