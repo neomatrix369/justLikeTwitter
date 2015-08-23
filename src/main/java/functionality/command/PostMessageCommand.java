@@ -1,16 +1,16 @@
-package command;
+package functionality.command;
 
 import domain.command.CommandLineEntry;
 import domain.command.CommandType;
 import domain.command.UserTypedCommand;
 
-import static helper.ImplHelper.NOTHING_FOR_THIS_COMMAND_EXECUTION;
-import static helper.ImplHelper.OTHER_USER_FIELD;
 import static helper.ImplHelper.USER_FIELD;
+import static helper.ImplHelper.MESSAGE_TEXT_FIELD;
+import static helper.ImplHelper.NOTHING_FOR_THIS_COMMAND_EXECUTION;
 
-public class FollowUserCommand extends CommandExecutorImpl {
+public class PostMessageCommand extends CommandExecutorImpl {
 
-    public FollowUserCommand(CommandType commandType) {
+    public PostMessageCommand(CommandType commandType) {
         super(commandType);
     }
 
@@ -19,16 +19,16 @@ public class FollowUserCommand extends CommandExecutorImpl {
         super.execute(userTypedCommand);
 
         CommandLineEntry commandLineEntry = prepareCommandLineEntry();
-
-        followsList.addNewFollowOf(commandLineEntry.getUser(), commandLineEntry.getOtherUsersName());
-
+        messageStore.addMessage(commandLineEntry.getMessagePosted());
         return NOTHING_FOR_THIS_COMMAND_EXECUTION;
     }
 
     private CommandLineEntry prepareCommandLineEntry() {
         CommandLineEntry commandLineEntry = new CommandLineEntry(centralSystemClock);
         commandLineEntry.setUser(createNewUserFrom(commandTokens, USER_FIELD));
-        commandLineEntry.setOtherUsersName(createNewUserFrom(commandTokens, OTHER_USER_FIELD));
+        commandLineEntry.setMessagePosted(
+                commandLineEntry.getUser(),
+                createNewMessageTextFrom(commandTokens, MESSAGE_TEXT_FIELD));
         return commandLineEntry;
     }
 }

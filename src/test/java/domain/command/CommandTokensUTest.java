@@ -1,8 +1,5 @@
-package domain;
+package domain.command;
 
-import domain.command.CommandTokens;
-import domain.command.CommandType;
-import domain.command.Fields;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;

@@ -3,10 +3,10 @@ package interfaces;
 import clock.CentralSystemClock;
 import domain.FollowsList;
 import domain.Keyboard;
-import domain.MessageStore;
+import domain.message.MessageStore;
 import domain.Screen;
 import domain.command.UserTypedCommand;
-import engine.JustLikeTwitterEngine;
+import functionality.JustLikeTwitterEngine;
 import helper.FileIOHelper;
 
 import java.io.IOException;

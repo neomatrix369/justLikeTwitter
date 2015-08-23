@@ -1,11 +1,11 @@
-package command;
+package functionality.command;
 
 import clock.CentralSystemClock;
 import domain.command.CommandTokens;
 import domain.command.CommandType;
 import domain.FollowsList;
-import domain.MessageStore;
-import domain.MessageText;
+import domain.message.MessageStore;
+import domain.message.MessageText;
 import domain.User;
 import domain.command.UserTypedCommand;
 

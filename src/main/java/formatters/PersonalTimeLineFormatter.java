@@ -1,8 +1,8 @@
 package formatters;
 
 import clock.CentralSystemClock;
-import domain.MessagePosted;
-import domain.MessageStore;
+import domain.message.MessagePosted;
+import domain.message.MessageStore;
 import domain.User;
 
 import java.util.List;

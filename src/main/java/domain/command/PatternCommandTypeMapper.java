@@ -1,10 +1,10 @@
 package domain.command;
 
-import command.CommandExecutor;
-import command.DisplayWallCommand;
-import command.FollowUserCommand;
-import command.PostMessageCommand;
-import command.ReadPostCommand;
+import functionality.command.CommandExecutor;
+import functionality.command.DisplayWallCommand;
+import functionality.command.FollowUserCommand;
+import functionality.command.PostMessageCommand;
+import functionality.command.ReadPostCommand;
 
 import java.util.HashMap;
 import java.util.Map;

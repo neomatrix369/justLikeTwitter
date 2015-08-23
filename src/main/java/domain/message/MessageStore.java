@@ -1,4 +1,7 @@
-package domain;
+package domain.message;
+
+import domain.User;
+import domain.Users;
 
 import java.util.ArrayList;
 import java.util.Collections;

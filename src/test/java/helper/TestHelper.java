@@ -5,7 +5,7 @@ import com.github.approval.reporters.Reporters;
 import domain.User;
 import domain.command.UserTypedCommand;
 import domain.Users;
-import engine.JustLikeTwitterEngine;
+import functionality.JustLikeTwitterEngine;
 
 public final class TestHelper {
     public static final String REPLAY_INPUT_FILE = "justLikeTwitterCommandsInputFile.txt";

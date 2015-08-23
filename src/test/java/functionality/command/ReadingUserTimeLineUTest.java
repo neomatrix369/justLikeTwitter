@@ -1,9 +1,10 @@
-package engine;
+package functionality.command;
 
 import clock.CentralSystemClock;
 import domain.FollowsList;
-import domain.MessageStore;
+import domain.message.MessageStore;
 import domain.command.UserTypedCommand;
+import functionality.JustLikeTwitterEngine;
 import org.junit.Before;
 import org.junit.Test;
 

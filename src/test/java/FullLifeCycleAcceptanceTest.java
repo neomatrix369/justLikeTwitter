@@ -1,9 +1,9 @@
 import clock.CentralSystemClock;
 import domain.FollowsList;
 import domain.Keyboard;
-import domain.MessageStore;
+import domain.message.MessageStore;
 import domain.Screen;
-import engine.JustLikeTwitterEngine;
+import functionality.JustLikeTwitterEngine;
 import interfaces.IOConsole;
 import interfaces.JustLikeTwitter;
 import org.junit.Before;

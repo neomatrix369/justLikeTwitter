@@ -1,4 +1,4 @@
-package command;
+package functionality.command;
 
 import domain.command.CommandPattern;
 import domain.command.CommandType;

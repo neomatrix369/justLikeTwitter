@@ -1,10 +1,10 @@
-package engine;
+package functionality;
 
-import command.CommandExecutor;
-import command.CommandExecutorFactory;
+import functionality.command.CommandExecutor;
+import functionality.command.CommandExecutorFactory;
 import clock.CentralSystemClock;
 import domain.FollowsList;
-import domain.MessageStore;
+import domain.message.MessageStore;
 import domain.command.UserTypedCommand;
 
 public class JustLikeTwitterEngine {

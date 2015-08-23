@@ -1,6 +1,7 @@
-package domain;
+package domain.message;
 
 import clock.CentralSystemClock;
+import domain.User;
 
 import static helper.ImplHelper.MESSAGE_ON_TIMELINE_PATTERN;
 

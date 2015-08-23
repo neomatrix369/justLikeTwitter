@@ -1,4 +1,4 @@
-package domain;
+package domain.message;
 
 public class MessageText {
     private final String message;

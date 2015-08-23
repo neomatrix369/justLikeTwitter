@@ -1,8 +1,8 @@
 package formatters;
 
 import clock.CentralSystemClock;
-import domain.MessageDate;
-import domain.MessagePosted;
+import domain.message.MessageDate;
+import domain.message.MessagePosted;
 
 public class MessageFormatter {
 
