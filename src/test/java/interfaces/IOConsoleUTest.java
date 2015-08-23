@@ -15,7 +15,7 @@ import java.io.PrintStream;
 import static helper.ImplHelper.COMMAND_PROMPT_INDICATOR;
 import static helper.TestHelper.ALICE_POSTS_A_MESSAGE;
 import static helper.TestHelper.ANY_TEXT;
-import static helper.TestHelper.EXTRA_LINEFEED_NOT_NEEDED;
+import static helper.ImplHelper.EXTRA_LINEFEED_NOT_NEEDED;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;

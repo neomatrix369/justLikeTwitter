@@ -24,7 +24,7 @@ import static helper.FileIOHelper.loadDatesFrom;
 import static helper.TestHelper.ACTUAL_OUTPUT_FILE;
 import static helper.TestHelper.APPROVER;
 import static helper.TestHelper.EXPECTED_OUTPUT_FILE;
-import static helper.TestHelper.EXTRA_LINEFEED_NEEDED;
+import static helper.ImplHelper.EXTRA_LINEFEED_NEEDED;
 import static helper.TestHelper.REPLAY_INPUT_FILE;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;

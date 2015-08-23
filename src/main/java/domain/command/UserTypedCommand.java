@@ -7,26 +7,26 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import java.util.Arrays;
 
 public class UserTypedCommand {
-    private final String commandAsString;
+    private final String command;
 
-    public UserTypedCommand(String commandAsString) {
-        this.commandAsString = commandAsString;
+    public UserTypedCommand(String command) {
+        this.command = command;
     }
 
     public UserTypedCommand(User user) {
-        commandAsString = user.toString();
+        command = user.toString();
     }
 
     public boolean matches(String pattern) {
-        return commandAsString.matches(pattern);
+        return command.matches(pattern);
     }
 
     public CommandTokens parseUsing(CommandPattern commandPattern, Fields fields) {
-        return new CommandTokens(commandAsString, commandPattern, fields);
+        return new CommandTokens(command, commandPattern, fields);
     }
 
     public byte[] getBytes() {
-        byte[] bytes = commandAsString.getBytes();
+        byte[] bytes = command.getBytes();
         return Arrays.copyOf(bytes, bytes.length);
     }
 
@@ -43,14 +43,14 @@ public class UserTypedCommand {
         UserTypedCommand that = (UserTypedCommand) o;
 
         return new EqualsBuilder()
-                .append(commandAsString, that.commandAsString)
+                .append(command, that.command)
                 .isEquals();
     }
 
     @Override
     public int hashCode() {
         return new HashCodeBuilder(17, 37)
-                .append(commandAsString)
+                .append(command)
                 .toHashCode();
     }
 }

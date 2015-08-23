@@ -10,17 +10,17 @@ import static helper.ImplHelper.START_FROM_ONE;
 public class CommandTokens {
     private final Map<String, String> tokens = new HashMap<>();
 
-    public CommandTokens(String commandAsString, CommandPattern commandPattern, Fields fields) {
-        Matcher matcher = prepareMatcherWith(commandAsString, commandPattern);
+    public CommandTokens(String command, CommandPattern commandPattern, Fields fields) {
+        Matcher matcher = prepareMatcherWith(command, commandPattern);
 
         if (matcher.matches()) {
             populateTokens(fields, matcher);
         }
     }
 
-    private Matcher prepareMatcherWith(String commandAsString, CommandPattern matchingPattern) {
+    private Matcher prepareMatcherWith(String command, CommandPattern matchingPattern) {
         Pattern pattern = Pattern.compile(matchingPattern.toString());
-        return pattern.matcher(commandAsString);
+        return pattern.matcher(command);
     }
 
     private void populateTokens(Fields fields, Matcher matcher) {

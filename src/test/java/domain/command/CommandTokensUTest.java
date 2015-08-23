@@ -21,7 +21,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 @RunWith(Parameterized.class)
 public class CommandTokensUTest {
 
-    private final String commandAsString;
+    private final String command;
     private final CommandType commandType;
     private final List<String> expectedFieldValues;
 
@@ -65,10 +65,10 @@ public class CommandTokensUTest {
                 });
     }
 
-    public CommandTokensUTest(String commandAsString,
+    public CommandTokensUTest(String command,
                               CommandType commandType,
                               List<String> expectedFieldValues) {
-        this.commandAsString = commandAsString;
+        this.command = command;
         this.commandType = commandType;
         this.expectedFieldValues = expectedFieldValues;
     }
@@ -77,7 +77,7 @@ public class CommandTokensUTest {
     public void givenUserTypedCommandIsAvailable_whenCommandTokenParsesIt_thenItUsesTheRespectivePattern() {
         // given
         // when
-        String[] actualFieldValues = retrieveFieldValuesFromCommandTypedByUser(commandAsString);
+        String[] actualFieldValues = retrieveFieldValuesFromCommandTypedByUser(command);
 
         // then
         verifyIfFieldsReturnedAreAsExpected(actualFieldValues);

@@ -1,5 +1,7 @@
 package helper;
 
+import domain.LineFeedToggle;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -33,7 +35,9 @@ public final class ImplHelper {
 
     public static final int START_FROM_ONE = 1;
     public static final int FOREVER = -1;
-    public static final boolean EXTRA_LINEFEED_NOT_NEEDED = false;
+
+    public static final LineFeedToggle EXTRA_LINEFEED_NEEDED = new LineFeedToggle(true);
+    public static final LineFeedToggle EXTRA_LINEFEED_NOT_NEEDED = new LineFeedToggle(false);
 
     public static final String COLUMN_SEPARATOR = ",";
     public static final int DATE_COL_INDEX = 0;

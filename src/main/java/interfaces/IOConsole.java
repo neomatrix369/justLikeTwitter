@@ -1,6 +1,7 @@
 package interfaces;
 
 import domain.Keyboard;
+import domain.LineFeedToggle;
 import domain.Screen;
 import domain.command.UserTypedCommand;
 
@@ -14,14 +15,14 @@ import static helper.ImplHelper.UTF_8_STRING;
 
 public class IOConsole {
 
-    private final boolean needLineFeedForEachLine;
+    private final LineFeedToggle needLineFeedForEachLine;
     private final Scanner scanner;
 
     private final Screen screen;
 
     public IOConsole(Keyboard keyBoard,
                      Screen screen,
-                     boolean needLineFeedForEachLine) {
+                     LineFeedToggle needLineFeedForEachLine) {
         this.screen = screen;
         this.needLineFeedForEachLine = needLineFeedForEachLine;
 
@@ -55,7 +56,7 @@ public class IOConsole {
     }
 
     private String insertLineFeedInFrontOf(String value) {
-        if (needLineFeedForEachLine) {
+        if (needLineFeedForEachLine.toBoolean()) {
             return System.lineSeparator() + value;
         }
         return value;
