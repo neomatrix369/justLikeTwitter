@@ -21,6 +21,7 @@ public class PostMessageCommand extends CommandExecutorImpl {
 
         CommandLineEntry commandLineEntry = prepareCommandLineEntry();
         messageStore.addMessage(commandLineEntry.getMessagePosted());
+
         return NOTHING_FOR_THIS_COMMAND_EXECUTION;
     }
 
@@ -30,6 +31,7 @@ public class PostMessageCommand extends CommandExecutorImpl {
         commandLineEntry.setMessagePosted(
                 commandLineEntry.getUser(),
                 createNewMessageTextFrom(commandTokens, MESSAGE_TEXT_FIELD));
+
         return commandLineEntry;
     }
 }

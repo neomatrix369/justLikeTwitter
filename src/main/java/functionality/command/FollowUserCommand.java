@@ -20,7 +20,6 @@ public class FollowUserCommand extends CommandExecutorImpl {
         super.execute(userTypedCommand);
 
         CommandLineEntry commandLineEntry = prepareCommandLineEntry();
-
         followsList.addNewFollowOf(commandLineEntry.getUser(), commandLineEntry.getOtherUsersName());
 
         return NOTHING_FOR_THIS_COMMAND_EXECUTION;
@@ -30,6 +29,7 @@ public class FollowUserCommand extends CommandExecutorImpl {
         CommandLineEntry commandLineEntry = new CommandLineEntry(centralSystemClock);
         commandLineEntry.setUser(createNewUserFrom(commandTokens, USER_FIELD));
         commandLineEntry.setOtherUsersName(createNewUserFrom(commandTokens, OTHER_USER_FIELD));
+
         return commandLineEntry;
     }
 }

@@ -22,19 +22,21 @@ public class DisplayWallCommand extends CommandExecutorImpl {
 
         CommandLineEntry commandLineEntry = new CommandLineEntry(centralSystemClock);
         commandLineEntry.setUser(createNewUserFrom(commandTokens, USER_FIELD));
+
         return getWallFor(commandLineEntry.getUser());
     }
 
     private String getWallFor(User user) {
         Users newFollowsList = addThisUserToFollowsList(user);
-
         WallTimeLineFormatter wallTimeLineFormatter = new WallTimeLineFormatter(centralSystemClock);
+
         return wallTimeLineFormatter.getMessagesFor(newFollowsList, messageStore);
     }
 
     private Users addThisUserToFollowsList(User user) {
         Users existingFollowsList = followsList.getFollowsFor(user);
         existingFollowsList.add(user);
+
         return existingFollowsList;
     }
 }

@@ -54,10 +54,12 @@ public class JustLikeTwitter {
     }
 
     public void run(int maxTimesToRun) throws IOException {
-        int runCount = START_FROM_ONE;
-
         showUsageText();
-        
+        runNow(maxTimesToRun);
+    }
+
+    private void runNow(int maxTimesToRun) throws IOException {
+        int runCount = START_FROM_ONE;
         do {
             UserTypedCommand userTypedCommand = ioConsole.waitForUserAtThePrompt();
             String result = justLikeTwitterEngine.executeCommand(userTypedCommand);

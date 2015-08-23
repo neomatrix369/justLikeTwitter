@@ -105,7 +105,7 @@ public class CommandTokensUTest {
         String[] actualFieldValues = new String[fields.getLength()];
         int index = 0;
         for (String field : fields.toList()) {
-            actualFieldValues[index] = commandTokens.get(field);
+            actualFieldValues[index] = commandTokens.getValueFor(field);
             index++;
         }
         return actualFieldValues;

@@ -31,7 +31,7 @@ public class CommandTokens {
         }
     }
 
-    public String get(String fieldName) {
+    public String getValueFor(String fieldName) {
         return tokens.get(fieldName);
     }
 }

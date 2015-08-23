@@ -21,6 +21,7 @@ public class ReadPostCommand extends CommandExecutorImpl {
         User user = createNewUserFrom(commandTokens, USER_FIELD);
         PersonalTimeLineFormatter personalTimeLineFormatter =
                 new PersonalTimeLineFormatter(centralSystemClock);
+
         return personalTimeLineFormatter.getMessagesFor(user, messageStore);
     }
 }

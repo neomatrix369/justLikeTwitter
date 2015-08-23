@@ -55,10 +55,10 @@ public class CommandExecutorImpl implements CommandExecutor {
     }
 
     User createNewUserFrom(CommandTokens commandTokens, String fieldName) {
-        return new User(commandTokens.get(fieldName));
+        return new User(commandTokens.getValueFor(fieldName));
     }
 
     MessageText createNewMessageTextFrom(CommandTokens commandTokens, String fieldName) {
-        return new MessageText(commandTokens.get(fieldName));
+        return new MessageText(commandTokens.getValueFor(fieldName));
     }
 }
