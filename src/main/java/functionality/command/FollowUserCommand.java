@@ -1,7 +1,8 @@
 package functionality.command;
 
 import domain.command.CommandLineEntry;
-import domain.command.CommandType;
+import domain.command.CommandPattern;
+import domain.command.Fields;
 import domain.command.UserTypedCommand;
 
 import static helper.ImplHelper.NOTHING_FOR_THIS_COMMAND_EXECUTION;
@@ -10,8 +11,8 @@ import static helper.ImplHelper.USER_FIELD;
 
 public class FollowUserCommand extends CommandExecutorImpl {
 
-    public FollowUserCommand(CommandType commandType) {
-        super(commandType);
+    public FollowUserCommand(CommandPattern commandPattern, Fields fields) {
+        super(commandPattern, fields);
     }
 
     @Override

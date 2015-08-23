@@ -10,16 +10,8 @@ import static helper.ImplHelper.START_FROM_ONE;
 public class CommandTokens {
     private final Map<String, String> tokens = new HashMap<>();
 
-    public CommandTokens(String commandAsString, CommandType commandType) {
-        Fields fields = commandType.getFields();
-        CommandPattern matchingPattern = commandType.getMatchingPattern();
-        mapFieldToValueIn(commandAsString, matchingPattern, fields);
-    }
-
-    private void mapFieldToValueIn(String commandAsString,
-                                   CommandPattern matchingPattern,
-                                   Fields fields) {
-        Matcher matcher = prepareMatcherWith(commandAsString, matchingPattern);
+    public CommandTokens(String commandAsString, CommandPattern commandPattern, Fields fields) {
+        Matcher matcher = prepareMatcherWith(commandAsString, commandPattern);
 
         if (matcher.matches()) {
             populateTokens(fields, matcher);

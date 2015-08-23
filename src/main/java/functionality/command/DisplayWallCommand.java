@@ -1,18 +1,19 @@
 package functionality.command;
 
-import domain.command.CommandLineEntry;
-import domain.command.CommandType;
 import domain.User;
-import domain.command.UserTypedCommand;
 import domain.Users;
+import domain.command.CommandLineEntry;
+import domain.command.CommandPattern;
+import domain.command.Fields;
+import domain.command.UserTypedCommand;
 import formatters.WallTimeLineFormatter;
 
 import static helper.ImplHelper.USER_FIELD;
 
 public class DisplayWallCommand extends CommandExecutorImpl {
 
-    public DisplayWallCommand(CommandType commandType) {
-        super(commandType);
+    public DisplayWallCommand(CommandPattern commandPattern, Fields fields) {
+        super(commandPattern, fields);
     }
 
     @Override

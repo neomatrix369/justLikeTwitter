@@ -21,8 +21,8 @@ public class UserTypedCommand {
         return commandAsString.matches(pattern);
     }
 
-    public CommandTokens parseUsing(CommandType commandType) {
-        return new CommandTokens(commandAsString, commandType);
+    public CommandTokens parseUsing(CommandPattern commandPattern, Fields fields) {
+        return new CommandTokens(commandAsString, commandPattern, fields);
     }
 
     public byte[] getBytes() {

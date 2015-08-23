@@ -94,9 +94,14 @@ public class CommandTokensUTest {
     }
 
     private String[] retrieveFieldValuesFromCommandTypedByUser(String commandString) {
-        CommandTokens commandTokens = new CommandTokens(commandString, commandType);
-        Fields fields = commandType.getFields();
+        Fields fields = commandType.getCommandExecutor().getFields();
+        CommandPattern matchingPattern = commandType.getMatchingPattern();
+        CommandTokens commandTokens = new CommandTokens(commandString, matchingPattern, fields);
 
+        return getActualFieldValues(fields, commandTokens);
+    }
+
+    private String[] getActualFieldValues(Fields fields, CommandTokens commandTokens) {
         String[] actualFieldValues = new String[fields.getLength()];
         int index = 0;
         for (String field : fields.toList()) {

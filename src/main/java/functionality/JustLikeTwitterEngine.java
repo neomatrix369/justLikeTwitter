@@ -1,11 +1,11 @@
 package functionality;
 
-import functionality.command.CommandExecutor;
-import functionality.command.CommandExecutorFactory;
 import clock.CentralSystemClock;
 import domain.FollowsList;
-import domain.message.MessageStore;
 import domain.command.UserTypedCommand;
+import domain.message.MessageStore;
+import functionality.command.CommandExecutor;
+import functionality.command.CommandExecutorFactory;
 
 public class JustLikeTwitterEngine {
     private final MessageStore messageStore;
@@ -22,8 +22,8 @@ public class JustLikeTwitterEngine {
 
     public String executeCommand(UserTypedCommand userTypedCommand) {
         CommandExecutorFactory commandExecutorFactory = new CommandExecutorFactory();
-        CommandExecutor commandExecutor = commandExecutorFactory.getCommandUsing(userTypedCommand);
 
+        CommandExecutor commandExecutor = commandExecutorFactory.getCommandExecutorFor(userTypedCommand);
         commandExecutor.setMessageStore(messageStore);
         commandExecutor.setCentralSystemClock(centralSystemClock);
         commandExecutor.setFollowsList(followsList);

@@ -21,8 +21,8 @@ public final class TestHelper {
 
     public static final User USER_CHARLIE = new User("Charlie");
     public static final User USER_ALICE = new User("Alice");
-    public static final User USER_HARRY = new User("Harry");
     public static final User USER_BOB = new User("Bob");
+    private static final User USER_HARRY = new User("Harry");
 
     public static final String ANY_TEXT = "Some test to display on the console";
     public static final String ASSERT_REASON_FOR_FIELD_VALUE_NOT_RETURNED = "Field value of '%s' should have been returned";
