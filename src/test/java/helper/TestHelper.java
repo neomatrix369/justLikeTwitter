@@ -3,7 +3,7 @@ package helper;
 import com.github.approval.Approval;
 import com.github.approval.reporters.Reporters;
 import domain.User;
-import domain.UserTypedCommand;
+import domain.command.UserTypedCommand;
 import domain.Users;
 import engine.JustLikeTwitterEngine;
 

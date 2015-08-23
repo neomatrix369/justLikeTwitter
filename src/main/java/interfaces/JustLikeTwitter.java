@@ -5,7 +5,7 @@ import domain.FollowsList;
 import domain.Keyboard;
 import domain.MessageStore;
 import domain.Screen;
-import domain.UserTypedCommand;
+import domain.command.UserTypedCommand;
 import engine.JustLikeTwitterEngine;
 import helper.FileIOHelper;
 

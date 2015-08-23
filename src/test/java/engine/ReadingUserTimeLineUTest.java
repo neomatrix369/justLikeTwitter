@@ -3,7 +3,7 @@ package engine;
 import clock.CentralSystemClock;
 import domain.FollowsList;
 import domain.MessageStore;
-import domain.UserTypedCommand;
+import domain.command.UserTypedCommand;
 import org.junit.Before;
 import org.junit.Test;
 

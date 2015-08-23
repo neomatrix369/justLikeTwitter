@@ -1,9 +1,9 @@
 package command;
 
-import domain.CommandPattern;
-import domain.CommandType;
-import domain.PatternCommandTypeMapper;
-import domain.UserTypedCommand;
+import domain.command.CommandPattern;
+import domain.command.CommandType;
+import domain.command.PatternCommandTypeMapper;
+import domain.command.UserTypedCommand;
 
 import java.util.Map;
 

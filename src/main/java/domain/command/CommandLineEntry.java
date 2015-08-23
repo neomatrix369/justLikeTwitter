@@ -1,6 +1,9 @@
-package domain;
+package domain.command;
 
 import clock.CentralSystemClock;
+import domain.MessagePosted;
+import domain.MessageText;
+import domain.User;
 
 public class CommandLineEntry {
     private User user;

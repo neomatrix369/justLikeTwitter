@@ -5,7 +5,7 @@ import command.CommandExecutorFactory;
 import clock.CentralSystemClock;
 import domain.FollowsList;
 import domain.MessageStore;
-import domain.UserTypedCommand;
+import domain.command.UserTypedCommand;
 
 public class JustLikeTwitterEngine {
     private final MessageStore messageStore;

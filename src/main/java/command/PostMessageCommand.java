@@ -1,8 +1,8 @@
 package command;
 
-import domain.CommandLineEntry;
-import domain.CommandType;
-import domain.UserTypedCommand;
+import domain.command.CommandLineEntry;
+import domain.command.CommandType;
+import domain.command.UserTypedCommand;
 
 import static helper.ImplHelper.USER_FIELD;
 import static helper.ImplHelper.MESSAGE_TEXT_FIELD;

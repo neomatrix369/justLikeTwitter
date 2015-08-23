@@ -1,5 +1,8 @@
 package domain;
 
+import domain.command.CommandTokens;
+import domain.command.CommandType;
+import domain.command.Fields;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -9,10 +12,10 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-import static domain.CommandType.DISPLAY_WALL;
-import static domain.CommandType.FOLLOWS_USER;
-import static domain.CommandType.POST_MESSAGE;
-import static domain.CommandType.READ_POST;
+import static domain.command.CommandType.DISPLAY_WALL;
+import static domain.command.CommandType.FOLLOWS_USER;
+import static domain.command.CommandType.POST_MESSAGE;
+import static domain.command.CommandType.READ_POST;
 import static helper.TestHelper.ASSERT_REASON_FOR_FIELD_VALUE_NOT_RETURNED;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;

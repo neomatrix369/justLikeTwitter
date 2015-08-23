@@ -3,7 +3,7 @@ package command;
 import clock.CentralSystemClock;
 import domain.FollowsList;
 import domain.MessageStore;
-import domain.UserTypedCommand;
+import domain.command.UserTypedCommand;
 
 public interface CommandExecutor {
     String execute(UserTypedCommand userTypedCommand);

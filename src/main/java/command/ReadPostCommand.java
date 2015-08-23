@@ -1,8 +1,8 @@
 package command;
 
-import domain.CommandType;
+import domain.command.CommandType;
 import domain.User;
-import domain.UserTypedCommand;
+import domain.command.UserTypedCommand;
 import formatters.PersonalTimeLineFormatter;
 
 import static helper.ImplHelper.USER_FIELD;

@@ -1,8 +1,8 @@
 package command;
 
-import domain.CommandLineEntry;
-import domain.CommandType;
-import domain.UserTypedCommand;
+import domain.command.CommandLineEntry;
+import domain.command.CommandType;
+import domain.command.UserTypedCommand;
 
 import static helper.ImplHelper.NOTHING_FOR_THIS_COMMAND_EXECUTION;
 import static helper.ImplHelper.OTHER_USER_FIELD;

@@ -1,4 +1,4 @@
-package domain;
+package domain.command;
 
 import command.CommandExecutor;
 import command.DisplayWallCommand;
@@ -9,10 +9,10 @@ import command.ReadPostCommand;
 import java.util.HashMap;
 import java.util.Map;
 
-import static domain.CommandType.DISPLAY_WALL;
-import static domain.CommandType.FOLLOWS_USER;
-import static domain.CommandType.POST_MESSAGE;
-import static domain.CommandType.READ_POST;
+import static domain.command.CommandType.DISPLAY_WALL;
+import static domain.command.CommandType.FOLLOWS_USER;
+import static domain.command.CommandType.POST_MESSAGE;
+import static domain.command.CommandType.READ_POST;
 
 public final class PatternCommandTypeMapper {
     private final Map<CommandType, CommandExecutor> patternCommandMap;

@@ -1,13 +1,13 @@
 package command;
 
 import clock.CentralSystemClock;
-import domain.CommandTokens;
-import domain.CommandType;
+import domain.command.CommandTokens;
+import domain.command.CommandType;
 import domain.FollowsList;
 import domain.MessageStore;
 import domain.MessageText;
 import domain.User;
-import domain.UserTypedCommand;
+import domain.command.UserTypedCommand;
 
 import static helper.ImplHelper.NOTHING_FOR_THIS_COMMAND_EXECUTION;
 

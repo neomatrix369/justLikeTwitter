@@ -1,4 +1,4 @@
-package domain;
+package domain.command;
 
 public enum CommandType {
     POST_MESSAGE(new CommandPattern("(\\w+) -> (.*)")        , new Fields("User", "MessageText")),

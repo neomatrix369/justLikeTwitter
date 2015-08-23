@@ -1,9 +1,9 @@
 package command;
 
-import domain.CommandLineEntry;
-import domain.CommandType;
+import domain.command.CommandLineEntry;
+import domain.command.CommandType;
 import domain.User;
-import domain.UserTypedCommand;
+import domain.command.UserTypedCommand;
 import domain.Users;
 import formatters.WallTimeLineFormatter;
 

@@ -1,4 +1,4 @@
-package domain;
+package domain.command;
 
 public class CommandPattern {
     private final String pattern;
