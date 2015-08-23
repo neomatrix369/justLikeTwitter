@@ -27,7 +27,7 @@ public final class TestHelper {
     public static final String ANY_TEXT = "Some test to display on the console";
     public static final String ASSERT_REASON_FOR_FIELD_VALUE_NOT_RETURNED = "Field value of '%s' should have been returned";
 
-    public static final String SPACE_DELIMETER = " ";
+    public static final String SPACE_DELIMITER = " ";
 
     public static final UserTypedCommand ALICE_POSTS_A_MESSAGE = new UserTypedCommand("Alice -> I love the weather today");
     public static final UserTypedCommand HARRY_POSTS_A_MESSAGE = new UserTypedCommand("Harry -> I like this idea");
@@ -39,6 +39,10 @@ public final class TestHelper {
 
     public static final UserTypedCommand CHARLIE_POSTS_A_MESSAGE =
             new UserTypedCommand("Charlie -> I'm in New York today! Anyone wants to have a coffee?");
+
+    public static final UserTypedCommand HARRY_READS_POSTS = new UserTypedCommand(USER_HARRY);
+    public static final UserTypedCommand ALICE_READS_POSTS = new UserTypedCommand(USER_ALICE);
+    public static final UserTypedCommand BOB_READS_POSTS = new UserTypedCommand(USER_BOB);
 
     public static final UserTypedCommand CHARLIE_FOLLOWS_ALICE = new UserTypedCommand("Charlie follows Alice");
     public static final UserTypedCommand CHARLIE_FOLLOWS_BOB = new UserTypedCommand("Charlie follows Bob");
@@ -52,8 +56,9 @@ public final class TestHelper {
     private TestHelper() {
     }
 
-    public static void userTypesAtThePrompt(JustLikeTwitterEngine justLikeTwitterEngine, UserTypedCommand userTypedCommand) {
-        justLikeTwitterEngine.executeCommand(userTypedCommand);
+    public static void atThePrompt(JustLikeTwitterEngine justLikeTwitterEngine,
+                                   UserTypedCommand theUserHasTyped) {
+        justLikeTwitterEngine.executeCommand(theUserHasTyped);
     }
 
     public static String at(String timePart) {

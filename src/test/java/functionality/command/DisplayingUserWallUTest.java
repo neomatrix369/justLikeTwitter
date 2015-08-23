@@ -17,7 +17,7 @@ import static helper.TestHelper.CHARLIE_FOLLOWS_ALICE;
 import static helper.TestHelper.CHARLIE_FOLLOWS_BOB;
 import static helper.TestHelper.CHARLIE_POSTS_A_MESSAGE;
 import static helper.TestHelper.CHARLIE_REQUESTS_WALL;
-import static helper.TestHelper.SPACE_DELIMETER;
+import static helper.TestHelper.SPACE_DELIMITER;
 import static helper.TestHelper.at;
 import static helper.TestHelper.on;
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -42,9 +42,9 @@ public class DisplayingUserWallUTest {
 
     @Before
     public void setUp() {
-        justLikeTwitterEngine = mock(JustLikeTwitterEngine.class);
         MessageStore messageStore = new MessageStore();
         FollowsList followsList = new FollowsList();
+        justLikeTwitterEngine = mock(JustLikeTwitterEngine.class);
         justLikeTwitterEngine = new JustLikeTwitterEngine(messageStore, followsList, centralSystemClock);
     }
 
@@ -54,12 +54,12 @@ public class DisplayingUserWallUTest {
         // And Alice's timeline contains the required posts
         // And he enters "Charlie -> I'm in New York today! Anyone wants to have a coffee?" at the prompt
         // And then he enters "Charlie follows Alice" at the prompt
-        userTypesAtThePrompt(ALICE_POSTS_A_MESSAGE, on("05/09/2015"), at("10:45:00"));
-        userTypesAtThePrompt(CHARLIE_POSTS_A_MESSAGE, on("05/09/2015"), at("10:50:00"));
-        userTypesAtThePrompt(CHARLIE_FOLLOWS_ALICE, on("05/09/2015"), at("10:50:02"));
+        atThePrompt(ALICE_POSTS_A_MESSAGE, on("05/09/2015"), at("10:45:00"));
+        atThePrompt(CHARLIE_POSTS_A_MESSAGE, on("05/09/2015"), at("10:50:00"));
+        atThePrompt(CHARLIE_FOLLOWS_ALICE, on("05/09/2015"), at("10:50:02"));
 
         // When he types "Charlie wall" at the prompt
-        String actualWall = userTypesAtThePrompt(CHARLIE_REQUESTS_WALL, on("05/09/2015"), at("10:50:02"));
+        String actualWall = atThePrompt(CHARLIE_REQUESTS_WALL, on("05/09/2015"), at("10:50:02"));
 
         // Then he sees the below in the console
         // "Charlie - I'm in New York today! Anyone wants to have a coffee? (2 seconds ago)
@@ -79,15 +79,15 @@ public class DisplayingUserWallUTest {
         // And he enters "Charlie -> I'm in New York today! Anyone wants to have a coffee?" at the prompt
         // And then he enters "Charlie follows Alice" at the prompt
         // And then he enters "Charlie follows Bob" at the prompt
-        userTypesAtThePrompt(ALICE_POSTS_A_MESSAGE, on("04/09/2015"), at("09:30:00"));
-        userTypesAtThePrompt(BOB_POSTS_TWO_MESSAGES[0], on("04/09/2015"), at("09:33:00"));
-        userTypesAtThePrompt(BOB_POSTS_TWO_MESSAGES[1], on("04/09/2015"), at("09:34:00"));
-        userTypesAtThePrompt(CHARLIE_POSTS_A_MESSAGE, on("04/09/2015"), at("09:35:00"));
-        userTypesAtThePrompt(CHARLIE_FOLLOWS_ALICE, on("04/09/2015"), at("09:35:00"));
-        userTypesAtThePrompt(CHARLIE_FOLLOWS_BOB, on("04/09/2015"), at("09:35:00"));
+        atThePrompt(ALICE_POSTS_A_MESSAGE, on("04/09/2015"), at("09:30:00"));
+        atThePrompt(BOB_POSTS_TWO_MESSAGES[0], on("04/09/2015"), at("09:33:00"));
+        atThePrompt(BOB_POSTS_TWO_MESSAGES[1], on("04/09/2015"), at("09:34:00"));
+        atThePrompt(CHARLIE_POSTS_A_MESSAGE, on("04/09/2015"), at("09:35:00"));
+        atThePrompt(CHARLIE_FOLLOWS_ALICE, on("04/09/2015"), at("09:35:00"));
+        atThePrompt(CHARLIE_FOLLOWS_BOB, on("04/09/2015"), at("09:35:00"));
 
         // When he types "Charlie wall" at the prompt
-        String actualWall = userTypesAtThePrompt(CHARLIE_REQUESTS_WALL, on("04/09/2015"), at("09:35:15"));
+        String actualWall = atThePrompt(CHARLIE_REQUESTS_WALL, on("04/09/2015"), at("09:35:15"));
 
         // Then he sees the below in the console
         // "Charlie - I'm in New York today! Anyone wants to have a coffee? (15 seconds ago)
@@ -109,13 +109,13 @@ public class DisplayingUserWallUTest {
         // And Bob's timeline contains the required posts
         // And he enters "Charlie -> I'm in New York today! Anyone wants to have a coffee?" at the prompt
         // And then he enters "Charlie follows Bob" at the prompt
-        userTypesAtThePrompt(BOB_POSTS_TWO_MESSAGES[0], on("06/09/2015"), at("09:00:00"));
-        userTypesAtThePrompt(BOB_POSTS_TWO_MESSAGES[1], on("06/09/2015"), at("09:01:00"));
-        userTypesAtThePrompt(CHARLIE_POSTS_A_MESSAGE, on("06/09/2015"), at("09:02:00"));
-        userTypesAtThePrompt(CHARLIE_FOLLOWS_BOB, on("06/09/2015"), at("09:02:00"));
+        atThePrompt(BOB_POSTS_TWO_MESSAGES[0], on("06/09/2015"), at("09:00:00"));
+        atThePrompt(BOB_POSTS_TWO_MESSAGES[1], on("06/09/2015"), at("09:01:00"));
+        atThePrompt(CHARLIE_POSTS_A_MESSAGE, on("06/09/2015"), at("09:02:00"));
+        atThePrompt(CHARLIE_FOLLOWS_BOB, on("06/09/2015"), at("09:02:00"));
 
         // When he types "Charlie wall" at the prompt
-        String actualWall = userTypesAtThePrompt(CHARLIE_REQUESTS_WALL, on("06/09/2015"), at("09:02:15"));
+        String actualWall = atThePrompt(CHARLIE_REQUESTS_WALL, on("06/09/2015"), at("09:02:15"));
 
         // Then he sees the below in the console
         // "Charlie - I'm in New York today! Anyone wants to have a coffee? (15 seconds ago)
@@ -129,12 +129,12 @@ public class DisplayingUserWallUTest {
                         "Bob - Damn! We lost! (2 minutes ago)" + System.lineSeparator());
     }
 
-    private String userTypesAtThePrompt(UserTypedCommand userTypedCommand,
-                                        String onSpecificDate,
-                                        String atASpecificTime) {
-        Date theSimulatedActionDate = convertToDateFrom(onSpecificDate + SPACE_DELIMETER + atASpecificTime);
+    private String atThePrompt(UserTypedCommand theUserTypes,
+                               String onASpecificDate,
+                               String atASpecificTime) {
+        Date theSimulatedActionDate = convertToDateFrom(onASpecificDate + SPACE_DELIMITER + atASpecificTime);
         when(centralSystemClock.getCurrentDateTime()).thenReturn(theSimulatedActionDate);
-        return justLikeTwitterEngine.executeCommand(userTypedCommand);
+        return justLikeTwitterEngine.executeCommand(theUserTypes);
     }
 
     private void verifyThatTheWallsMatch(String reason,

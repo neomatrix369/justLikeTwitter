@@ -12,7 +12,7 @@ import static helper.TestHelper.CHARLIE_FOLLOWS_ALICE;
 import static helper.TestHelper.CHARLIE_FOLLOWS_BOB;
 import static helper.TestHelper.EXPECTED_FOLLOWS_LIST;
 import static helper.TestHelper.USER_CHARLIE;
-import static helper.TestHelper.userTypesAtThePrompt;
+import static helper.TestHelper.atThePrompt;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -43,7 +43,7 @@ public class FollowingUsersUTest {
         //  Given Charlie is at the JustLikeTwitter command prompt ">"
         //  And Alice exists
         //  When he enters "Charlie follows Alice" at the prompt
-        userTypesAtThePrompt(justLikeTwitterEngine, CHARLIE_FOLLOWS_ALICE);
+        atThePrompt(justLikeTwitterEngine, CHARLIE_FOLLOWS_ALICE);
         Users actualFollowsList = followsList.getFollowsFor(USER_CHARLIE);
 
                 // Then Alice is added to Charlie's follows list
@@ -63,8 +63,8 @@ public class FollowingUsersUTest {
         // And Bob exists
         // When he enters "Charlie follows Alice" at the prompt
         // And he enters "Charlie follows Bob" at the prompt
-        userTypesAtThePrompt(justLikeTwitterEngine, CHARLIE_FOLLOWS_ALICE);
-        userTypesAtThePrompt(justLikeTwitterEngine, CHARLIE_FOLLOWS_BOB);
+        atThePrompt(justLikeTwitterEngine, CHARLIE_FOLLOWS_ALICE);
+        atThePrompt(justLikeTwitterEngine, CHARLIE_FOLLOWS_BOB);
         Users actualFollowsList = followsList.getFollowsFor(USER_CHARLIE);
 
         // Then Alice and Bob are added to Charlie's follows list
