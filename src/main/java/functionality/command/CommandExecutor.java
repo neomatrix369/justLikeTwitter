@@ -3,8 +3,8 @@ package functionality.command;
 import clock.CentralSystemClock;
 import domain.FollowsList;
 import domain.command.Fields;
-import domain.message.MessageStore;
 import domain.command.UserTypedCommand;
+import domain.message.MessageStore;
 
 public interface CommandExecutor {
     String execute(UserTypedCommand userTypedCommand);

@@ -1,10 +1,6 @@
 package domain.command;
 
-import java.io.Serializable;
-
-public class CommandPattern implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+public class CommandPattern {
 
     private final String pattern;
 

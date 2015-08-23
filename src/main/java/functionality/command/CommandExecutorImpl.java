@@ -13,6 +13,7 @@ import domain.message.MessageText;
 import static helper.ImplHelper.NOTHING_FOR_THIS_COMMAND_EXECUTION;
 
 public class CommandExecutorImpl implements CommandExecutor {
+
     private final CommandPattern commandPattern;
     private final Fields fields;
 

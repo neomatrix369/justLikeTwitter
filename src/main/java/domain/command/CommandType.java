@@ -41,5 +41,8 @@ public enum CommandType {
         static final CommandPattern READ_POST_COMMAND_PATTERN = new CommandPattern("(\\w+)");
         static final CommandPattern FOLLOW_USER_COMMAND_PATTERN = new CommandPattern("(\\w+) follows (\\w+)");
         static final CommandPattern DISPLAY_WALL_COMMAND_PATTERN = new CommandPattern("(\\w+) wall");
+
+        private Constants() {
+        }
     }
 }
