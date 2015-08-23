@@ -1,9 +1,12 @@
 package domain.command;
 
+import java.io.Serializable;
 import java.util.Arrays;
 
-public class Fields {
-    private String[] fieldNames;
+public class Fields implements Serializable {
+    private static final long serialVersionUID = 1L;
+
+    private final String[] fieldNames;
 
     public Fields(String... fieldNames) {
         this.fieldNames = fieldNames;

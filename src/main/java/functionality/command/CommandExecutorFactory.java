@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class CommandExecutorFactory {
 
-    private CommandExecutor NO_COMMAND_EXECUTOR_MATCHED = null;
+    private static final CommandExecutor NO_COMMAND_EXECUTOR_MATCHED = null;
 
     private final Map<CommandType, CommandExecutor> patternCommandMap = PatternCommandTypeMapper.get();
 

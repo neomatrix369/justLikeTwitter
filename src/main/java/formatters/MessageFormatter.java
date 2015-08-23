@@ -4,14 +4,14 @@ import clock.CentralSystemClock;
 import domain.message.MessageDate;
 import domain.message.MessagePosted;
 
-public class MessageFormatter {
+class MessageFormatter {
 
+    static final String HYPHEN_SEPARATOR = " - ";
     private static final String MESSAGE_TEXT_WHEN_POSTED_PATTERN = "%s %s";
-    protected static final String HYPHEN_SEPARATOR = " - ";
 
-    private CentralSystemClock centralSystemClock;
+    private final CentralSystemClock centralSystemClock;
 
-    public MessageFormatter(CentralSystemClock centralSystemClock) {
+    MessageFormatter(CentralSystemClock centralSystemClock) {
         this.centralSystemClock = centralSystemClock;
     }
 

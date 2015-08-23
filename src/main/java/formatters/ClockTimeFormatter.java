@@ -13,7 +13,7 @@ import static helper.ImplHelper.THOUSAND_MILLISECONDS;
 import static helper.ImplHelper.TIME_IN_WORDS_PATTERN;
 import static helper.ImplHelper.makePlural;
 
-public class ClockTimeFormatter {
+class ClockTimeFormatter {
 
     private final CentralSystemClock centralSystemClock;
 
