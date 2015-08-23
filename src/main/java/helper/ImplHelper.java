@@ -3,7 +3,12 @@ package helper;
 import command.CommandExecutor;
 import domain.User;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public final class ImplHelper {
     public static final int THOUSAND_MILLISECONDS = 1000;
@@ -56,5 +61,16 @@ public final class ImplHelper {
             return timeUnit + SUFFIX_S;
         }
         return timeUnit;
+    }
+
+    public static Date convertToDateFrom(String dateAsString) {
+        DateFormat format = new SimpleDateFormat(DD_MM_YYYY_HH_MM_SS, Locale.ENGLISH);
+        try {
+            return format.parse(dateAsString);
+        } catch (ParseException e) {
+            System.err.println("Error occurred while parsing a date: " + e.getMessage());
+            System.err.println("Error cause by: " + dateAsString);
+        }
+        return null;
     }
 }

@@ -9,32 +9,31 @@ import org.junit.Test;
 
 import java.util.Date;
 
-import static helper.TestHelper.AFTER_FIFTY_SECONDS;
-import static helper.TestHelper.AFTER_FIVE_MINUTES;
-import static helper.TestHelper.AFTER_ONE_MINUTE;
+import static helper.ImplHelper.convertToDateFrom;
 import static helper.TestHelper.ALICE_POSTS_A_MESSAGE;
 import static helper.TestHelper.BOB_POSTS_TWO_MESSAGES;
 import static helper.TestHelper.HARRY_POSTS_A_MESSAGE;
+import static helper.TestHelper.SPACE_DELIMETER;
 import static helper.TestHelper.USER_ALICE;
 import static helper.TestHelper.USER_BOB;
 import static helper.TestHelper.USER_HARRY;
-import static helper.TestHelper.ZERO_MINUTES;
-import static helper.TestHelper.simulateDelayUsing;
+import static helper.TestHelper.at;
+import static helper.TestHelper.on;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
 
 public class ReadingUserTimeLineUTest {
 
     private JustLikeTwitterEngine justLikeTwitterEngine;
-    private Date currentDateTime;
 
     private final CentralSystemClock centralSystemClock = mock(CentralSystemClock.class);
 
     @Before
     public void setUp() {
-        currentDateTime = new Date();
         justLikeTwitterEngine = mock(JustLikeTwitterEngine.class);
         MessageStore messageStore = new MessageStore();
         FollowsList followsList = new FollowsList();
@@ -52,11 +51,11 @@ public class ReadingUserTimeLineUTest {
     public void givenHarryHasAPost_whenHarryIsTypedAtThePrompt_thenHarrysTimeLineIsShown() {
         // Given I am at the JustLikeTwitter command prompt ">"
         // And Harry's timeline contains the required posts
-        userTypesAtThePrompt(HARRY_POSTS_A_MESSAGE, ZERO_MINUTES);
+        userTypesAtThePrompt(HARRY_POSTS_A_MESSAGE, on("03/09/2015"), at("12:10:00"));
 
         // When I type "Harry" at the prompt after fifty seconds
         UserTypedCommand userTypedCommand = new UserTypedCommand(USER_HARRY);
-        String actualTimeLine = userTypesAtThePrompt(userTypedCommand, AFTER_FIFTY_SECONDS);
+        String actualTimeLine = userTypesAtThePrompt(userTypedCommand, on("03/09/2015"), at("12:10:50"));
 
         // Then I see "I like this idea (50 seconds ago)" at the prompt
         verifyThatTheTimeLinesMatch(
@@ -72,11 +71,11 @@ public class ReadingUserTimeLineUTest {
     public void givenAliceHasAPost_whenAliceIsTypedAtThePrompt_thenAlicesTimeLineIsShown() {
         // Given I am at the JustLikeTwitter command prompt ">"
         // And Alice's timeline contains the required posts
-        userTypesAtThePrompt(ALICE_POSTS_A_MESSAGE, ZERO_MINUTES);
+        userTypesAtThePrompt(ALICE_POSTS_A_MESSAGE, on("02/09/2015"), at("12:10:00"));
 
         // When I type "Alice" at the prompt after five minutes
         UserTypedCommand userTypedCommand = new UserTypedCommand(USER_ALICE);
-        String actualTimeLine = userTypesAtThePrompt(userTypedCommand, AFTER_FIVE_MINUTES);
+        String actualTimeLine = userTypesAtThePrompt(userTypedCommand, on("02/09/2015"), at("12:15:10"));
 
         // Then I see "I love the weather today (5 minutes ago)" at the prompt
         verifyThatTheTimeLinesMatch(
@@ -92,12 +91,12 @@ public class ReadingUserTimeLineUTest {
     public void givenBobHasPosts_whenBobIsTypedAtThePrompt_thenBobsTimeLineIsShown() {
         // Given I am at the JustLikeTwitter command prompt ">"
         // And Bob's timeline contains the required posts
-        userTypesAtThePrompt(BOB_POSTS_TWO_MESSAGES[0], ZERO_MINUTES);
-        userTypesAtThePrompt(BOB_POSTS_TWO_MESSAGES[1], AFTER_ONE_MINUTE);
+        userTypesAtThePrompt(BOB_POSTS_TWO_MESSAGES[0], on("01/09/2015"), at("10:10:00"));
+        userTypesAtThePrompt(BOB_POSTS_TWO_MESSAGES[1], on("01/09/2015"), at("10:11:15"));
 
         // When I type "Bob" at the prompt after a minute
         UserTypedCommand userTypedCommand = new UserTypedCommand(USER_BOB);
-        String actualTimeLine = userTypesAtThePrompt(userTypedCommand, AFTER_ONE_MINUTE);
+        String actualTimeLine = userTypesAtThePrompt(userTypedCommand, on("01/09/2015"), at("10:12:25"));
 
         // Then I see the below messages in the console:
         // "Good game though. (1 minute ago)"
@@ -111,11 +110,10 @@ public class ReadingUserTimeLineUTest {
     }
 
     private String userTypesAtThePrompt(UserTypedCommand userTypedCommand,
-                                        long delayInMilliseconds) {
-        currentDateTime = simulateDelayUsing(
-                currentDateTime,
-                centralSystemClock,
-                delayInMilliseconds);
+                                        String onSpecificDate,
+                                        String atASpecificTime) {
+        Date theSimulatedActionDate = convertToDateFrom(onSpecificDate + SPACE_DELIMETER + atASpecificTime);
+        when(centralSystemClock.getCurrentDateTime()).thenReturn(theSimulatedActionDate);
         return justLikeTwitterEngine.executeCommand(userTypedCommand);
     }
 

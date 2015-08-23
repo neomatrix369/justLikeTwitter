@@ -11,18 +11,14 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import static helper.ImplHelper.COLUMN_SEPARATOR;
 import static helper.ImplHelper.DATE_COL_INDEX;
-import static helper.ImplHelper.DD_MM_YYYY_HH_MM_SS;
 import static helper.ImplHelper.MESSAGE_COL_INDEX;
+import static helper.ImplHelper.convertToDateFrom;
 
 public class FileIOHelper {
 
@@ -89,16 +85,5 @@ public class FileIOHelper {
 
     public static FileOutputStream getFileToWriteTo(String fileName) throws FileNotFoundException {
         return new FileOutputStream(fileName);
-    }
-
-    private static Date convertToDateFrom(String dateAsString) {
-        DateFormat format = new SimpleDateFormat(DD_MM_YYYY_HH_MM_SS, Locale.ENGLISH);
-        try {
-            return format.parse(dateAsString);
-        } catch (ParseException e) {
-            System.err.println("Error occurred while parsing a date: " + e.getMessage());
-            System.err.println("Error cause by: " + dateAsString);
-        }
-        return null;
     }
 }
