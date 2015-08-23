@@ -19,13 +19,11 @@ public final class ImplHelper {
     public static final String DEFAULT_TOKEN = "(just now)";
 
     public static final String MESSAGE_ON_TIMELINE_PATTERN = "%s %s";
-    public static final String MESSAGE_PATTERN_READ_POST = "%s %s";
 
     public static final String USER_FIELD = "User";
     public static final String MESSAGE_TEXT_FIELD = "MessageText";
     public static final String OTHER_USER_FIELD = "OtherUser";
 
-    public static final String HYPHEN_SEPARATOR = " - ";
     public static final String NOTHING_FOR_THIS_COMMAND_EXECUTION = "";
 
     public static final String NO_OUTPUT_IS_AVAILABLE = null;

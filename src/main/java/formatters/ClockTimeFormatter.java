@@ -1,4 +1,6 @@
-package clock;
+package formatters;
+
+import clock.CentralSystemClock;
 
 import java.util.Date;
 

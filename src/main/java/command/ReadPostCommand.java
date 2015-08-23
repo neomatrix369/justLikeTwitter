@@ -1,11 +1,9 @@
 package command;
 
 import domain.CommandType;
-import domain.MessagePosted;
 import domain.User;
 import domain.UserTypedCommand;
-
-import java.util.List;
+import formatters.PersonalTimeLineFormatter;
 
 import static helper.ImplHelper.USER_FIELD;
 
@@ -20,23 +18,8 @@ public class ReadPostCommand extends CommandExecutorImpl {
         super.execute(userTypedCommand);
 
         User user = createNewUserFrom(commandTokens, USER_FIELD);
-        return getFormattedMessageFor(user);
-    }
-
-    private String getFormattedMessageFor(User user) {
-        StringBuilder result = new StringBuilder();
-
-        List<MessagePosted> messagesPosted = messageStore.getMessagesFor(user);
-
-        for (MessagePosted messagePosted : messagesPosted) {
-            buildTimeLine(result, messagePosted);
-        }
-
-        return result.toString();
-    }
-
-    private void buildTimeLine(StringBuilder result, MessagePosted messagePosted) {
-        result.append(getFormattedMessage(messagePosted))
-              .append(System.lineSeparator());
+        PersonalTimeLineFormatter personalTimeLineFormatter =
+                new PersonalTimeLineFormatter(centralSystemClock);
+        return personalTimeLineFormatter.getMessagesFor(user, messageStore);
     }
 }
