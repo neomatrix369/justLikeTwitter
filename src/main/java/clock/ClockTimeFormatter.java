@@ -1,9 +1,8 @@
 package clock;
 
-import domain.MessageDate;
-
 import java.util.Date;
 
+import static helper.ImplHelper.DEFAULT_TOKEN;
 import static helper.ImplHelper.HOUR_TOKEN;
 import static helper.ImplHelper.MINUTE_TOKEN;
 import static helper.ImplHelper.SECOND_TOKEN;
@@ -14,15 +13,13 @@ import static helper.ImplHelper.makePlural;
 
 public class ClockTimeFormatter {
 
-    private static final String DEFAULT_TOKEN = "(just now)";
-
     private final CentralSystemClock centralSystemClock;
 
     public ClockTimeFormatter(CentralSystemClock centralSystemClock) {
         this.centralSystemClock = centralSystemClock;
     }
 
-    public String whenMessageWasPosted(MessageDate anotherDate) {
+    public String whenMessageWasPosted(Date anotherDate) {
         Date currentDate = centralSystemClock.getCurrentDateTime();
         long difference = currentDate.getTime() - anotherDate.getTime();
 

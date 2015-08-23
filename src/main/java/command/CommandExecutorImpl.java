@@ -5,6 +5,7 @@ import clock.ClockTimeFormatter;
 import domain.CommandTokens;
 import domain.CommandType;
 import domain.FollowsList;
+import domain.MessageDate;
 import domain.MessagePosted;
 import domain.MessageStore;
 import domain.MessageText;
@@ -50,10 +51,11 @@ public class CommandExecutorImpl implements CommandExecutor {
     String getFormattedMessage(MessagePosted messagePosted) {
         ClockTimeFormatter clockTimeFormatter = new ClockTimeFormatter(centralSystemClock);
 
+        MessageDate messageDate = messagePosted.getMessageDate();
         return String.format(
                 helper.ImplHelper.MESSAGE_PATTERN_READ_POST,
                 messagePosted.getMessageText(),
-                clockTimeFormatter.whenMessageWasPosted(messagePosted.getMessageDate()));
+                clockTimeFormatter.whenMessageWasPosted(messageDate.toDate()));
     }
 
     User createNewUserFrom(CommandTokens commandTokens, String fieldName) {

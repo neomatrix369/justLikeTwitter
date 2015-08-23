@@ -16,6 +16,8 @@ public final class ImplHelper {
     public static final String MINUTE_TOKEN = "minute";
     public static final String SECOND_TOKEN = "second";
 
+    public static final String DEFAULT_TOKEN = "(just now)";
+
     public static final String MESSAGE_ON_TIMELINE_PATTERN = "%s %s";
     public static final String MESSAGE_PATTERN_READ_POST = "%s %s";
 
