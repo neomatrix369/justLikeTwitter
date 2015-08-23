@@ -3,9 +3,9 @@ package domain;
 import java.util.HashMap;
 import java.util.Map;
 
-import static helper.ImplHelper.USER_DOES_NOT_FOLLOW_ANYONE;
-
 public class FollowsList {
+
+    private static final Users USER_DOES_NOT_FOLLOW_ANYONE = null;
 
     private final Map<User, Users> list = new HashMap<>();
 

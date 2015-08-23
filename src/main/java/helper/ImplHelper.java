@@ -1,13 +1,9 @@
 package helper;
 
-import command.CommandExecutor;
-import domain.User;
-
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 
 public final class ImplHelper {
@@ -19,7 +15,6 @@ public final class ImplHelper {
     public static final String HOUR_TOKEN = "hour";
     public static final String MINUTE_TOKEN = "minute";
     public static final String SECOND_TOKEN = "second";
-    public static final String DEFAULT_TOKEN = "(just now)";
 
     public static final String MESSAGE_ON_TIMELINE_PATTERN = "%s %s";
     public static final String MESSAGE_PATTERN_READ_POST = "%s %s";
@@ -31,8 +26,6 @@ public final class ImplHelper {
     public static final String HYPHEN_SEPARATOR = " - ";
     public static final String NOTHING_FOR_THIS_COMMAND_EXECUTION = "";
 
-    public static final CommandExecutor NO_COMMAND_EXECUTOR_MATCHED = null;
-    public static final List<User> USER_DOES_NOT_FOLLOW_ANYONE = null;
     public static final String NO_OUTPUT_IS_AVAILABLE = null;
 
     public static final String COMMAND_PROMPT_INDICATOR = "> ";

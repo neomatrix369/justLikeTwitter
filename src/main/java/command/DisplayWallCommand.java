@@ -10,10 +10,11 @@ import domain.Users;
 import java.util.List;
 
 import static helper.ImplHelper.HYPHEN_SEPARATOR;
-import static helper.ImplHelper.USER_DOES_NOT_FOLLOW_ANYONE;
 import static helper.ImplHelper.USER_FIELD;
 
 public class DisplayWallCommand extends CommandExecutorImpl {
+
+    private static final Users USER_DOES_NOT_FOLLOW_ANYONE = null;
 
     public DisplayWallCommand(CommandType commandType) {
         super(commandType);

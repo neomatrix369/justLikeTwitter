@@ -6,9 +6,9 @@ import domain.UserTypedCommand;
 
 import java.util.Map;
 
-import static helper.ImplHelper.NO_COMMAND_EXECUTOR_MATCHED;
-
 public class CommandExecutorFactory {
+
+    private CommandExecutor NO_COMMAND_EXECUTOR_MATCHED = null;
 
     private final Map<CommandType, CommandExecutor> patternCommandMap = PatternCommandTypeMapper.get();
 
