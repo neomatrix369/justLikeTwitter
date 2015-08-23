@@ -4,6 +4,8 @@ import domain.User;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
+import java.util.Arrays;
+
 public class UserTypedCommand {
     private final String commandAsString;
 
@@ -11,8 +13,8 @@ public class UserTypedCommand {
         this.commandAsString = commandAsString;
     }
 
-    public UserTypedCommand(User userHarry) {
-        commandAsString = userHarry.toString();
+    public UserTypedCommand(User user) {
+        commandAsString = user.toString();
     }
 
     public boolean matches(String pattern) {
@@ -24,7 +26,8 @@ public class UserTypedCommand {
     }
 
     public byte[] getBytes() {
-        return commandAsString.getBytes();
+        byte[] bytes = commandAsString.getBytes();
+        return Arrays.copyOf(bytes, bytes.length);
     }
 
     @Override
