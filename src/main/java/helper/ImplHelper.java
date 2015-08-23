@@ -42,7 +42,6 @@ public final class ImplHelper {
     public static final int FOREVER = -1;
     public static final boolean EXTRA_LINEFEED_NOT_NEEDED = false;
 
-    public static final String DD_MM_YYYY_HH_MM_SS = "dd/MM/yyyy hh:mm:ss";
     public static final String COLUMN_SEPARATOR = ",";
     public static final int DATE_COL_INDEX = 0;
     public static final int MESSAGE_COL_INDEX = 1;
@@ -52,6 +51,8 @@ public final class ImplHelper {
     public static final String APP_USAGE_FILEPATH = "../AppUsage.txt";
 
     private static final String SUFFIX_S = "s";
+
+    private static final String DD_MM_YYYY_HH_MM_SS = "dd/MM/yyyy hh:mm:ss";
 
     private ImplHelper() {
     }

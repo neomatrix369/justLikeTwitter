@@ -20,12 +20,12 @@ public class CommandTokens {
         Matcher matcher = prepareMatcherWith(commandAsString, matchingPattern);
 
         if (matcher.matches()) {
-            int index = START_FROM_ONE;
-            populateTokens(fieldNames, matcher, index);
+            populateTokens(fieldNames, matcher);
         }
     }
 
-    private void populateTokens(String[] fieldNames, Matcher matcher, int index) {
+    private void populateTokens(String[] fieldNames, Matcher matcher) {
+        int index = START_FROM_ONE;
         for (String fieldName : fieldNames) {
             tokens.put(fieldName, matcher.group(index));
             index++;

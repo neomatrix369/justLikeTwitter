@@ -26,13 +26,13 @@ public class CommandTokensUTest {
     private final List<String> expectedFieldValues;
 
     @Parameterized.Parameters(name = "{index}: (User types {0}, invoking the {1} action, giving Command Tokens: {2}")
-    public static Collection<?> data() {
+    public static Collection<Object[]> data() {
         return Arrays.asList(
                 new Object[][]{
                         // Post message
                         {"Alice -> I'm having a good time",
                                 POST_MESSAGE,
-                                new ArrayList() {{
+                                new ArrayList<String>() {{
                                     add("Alice");
                                     add("I'm having a good time");
                                 }}
@@ -41,7 +41,7 @@ public class CommandTokensUTest {
                         // Read message
                         {"Alice",
                                 READ_POST,
-                                new ArrayList() {{
+                                new ArrayList<String>() {{
                                     add("Alice");
                                 }}
                         },
@@ -49,7 +49,7 @@ public class CommandTokensUTest {
                         // Follow
                         {"Alice follows Bob",
                                 FOLLOWS_USER,
-                                new ArrayList() {{
+                                new ArrayList<String>() {{
                                     add("Alice");
                                     add("Bob");
                                 }}
@@ -58,7 +58,7 @@ public class CommandTokensUTest {
                         // Display Wall
                         {"Bob wall",
                                 DISPLAY_WALL,
-                                new ArrayList() {{
+                                new ArrayList<String>() {{
                                     add("Bob");
                                 }}
                         }
