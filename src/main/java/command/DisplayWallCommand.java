@@ -47,7 +47,7 @@ public class DisplayWallCommand extends CommandExecutorImpl {
     }
 
     private void buildTimeLine(StringBuilder result, MessagePosted messagePosted) {
-        result.append(messagePosted.getUser())
+        result.append(messagePosted.toUser())
                 .append(HYPHEN_SEPARATOR)
                 .append(getFormattedMessage(messagePosted))
                 .append(System.lineSeparator());

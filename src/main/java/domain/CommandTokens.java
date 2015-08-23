@@ -11,30 +11,32 @@ public class CommandTokens {
     private final Map<String, String> tokens = new HashMap<>();
 
     public CommandTokens(String commandAsString, CommandType commandType) {
-        String[] fieldNames = commandType.getFieldNames();
-        String matchingPattern = commandType.getMatchingPattern();
-        mapFieldToValueIn(commandAsString, matchingPattern, fieldNames);
+        Fields fields = commandType.getFields();
+        CommandPattern matchingPattern = commandType.getMatchingPattern();
+        mapFieldToValueIn(commandAsString, matchingPattern, fields);
     }
 
-    private void mapFieldToValueIn(String commandAsString, String matchingPattern, String[] fieldNames) {
+    private void mapFieldToValueIn(String commandAsString,
+                                   CommandPattern matchingPattern,
+                                   Fields fields) {
         Matcher matcher = prepareMatcherWith(commandAsString, matchingPattern);
 
         if (matcher.matches()) {
-            populateTokens(fieldNames, matcher);
+            populateTokens(fields, matcher);
         }
     }
 
-    private void populateTokens(String[] fieldNames, Matcher matcher) {
+    private Matcher prepareMatcherWith(String commandAsString, CommandPattern matchingPattern) {
+        Pattern pattern = Pattern.compile(matchingPattern.toString());
+        return pattern.matcher(commandAsString);
+    }
+
+    private void populateTokens(Fields fields, Matcher matcher) {
         int index = START_FROM_ONE;
-        for (String fieldName : fieldNames) {
+        for (String fieldName : fields.toList()) {
             tokens.put(fieldName, matcher.group(index));
             index++;
         }
-    }
-
-    private Matcher prepareMatcherWith(String commandAsString, String matchingPattern) {
-        Pattern pattern = Pattern.compile(matchingPattern);
-        return pattern.matcher(commandAsString);
     }
 
     public String get(String fieldName) {

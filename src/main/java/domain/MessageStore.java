@@ -40,7 +40,7 @@ public class MessageStore {
 
     private void filterMessagesFor(Users users, List<MessagePosted> listForUser) {
         for (MessagePosted eachMessage: store) {
-            if (users.contains(eachMessage.getUser())) {
+            if (users.contains(eachMessage.toUser())) {
                 listForUser.add(eachMessage);
             }
         }

@@ -1,26 +1,24 @@
 package domain;
 
-import java.util.Arrays;
-
 public enum CommandType {
-    POST_MESSAGE ("(\\w+) -> (.*)"        , new String[]{"User", "MessageText"}),
-    READ_POST    ("(\\w+)"                , new String[]{"User"}),
-    FOLLOWS_USER ("(\\w+) follows (\\w+)" , new String[]{"User", "OtherUser"}),
-    DISPLAY_WALL ("(\\w+) wall"           , new String[]{"User"});
+    POST_MESSAGE(new CommandPattern("(\\w+) -> (.*)")        , new Fields("User", "MessageText")),
+    READ_POST   (new CommandPattern("(\\w+)")                , new Fields("User")),
+    FOLLOWS_USER(new CommandPattern("(\\w+) follows (\\w+)") , new Fields("User", "OtherUser")),
+    DISPLAY_WALL(new CommandPattern("(\\w+) wall")           , new Fields("User"));
 
-    private final String matchingPattern;
-    private final String[] fieldNames;
+    private final CommandPattern matchingPattern;
+    private final Fields fields;
 
-    CommandType(String matchingPattern, String[] fieldNames) {
+    CommandType(CommandPattern matchingPattern, Fields fields) {
         this.matchingPattern = matchingPattern;
-        this.fieldNames = fieldNames;
+        this.fields = fields;
     }
 
-    public String getMatchingPattern() {
+    public CommandPattern getMatchingPattern() {
         return matchingPattern;
     }
 
-    public String[] getFieldNames() {
-        return Arrays.copyOf(fieldNames, fieldNames.length);
+    public Fields getFields() {
+        return fields;
     }
 }

@@ -25,7 +25,7 @@ public class IOConsole {
         this.screen = screen;
         this.needLineFeedForEachLine = needLineFeedForEachLine;
 
-        scanner = new Scanner(keyBoard.get(), UTF_8_STRING);
+        scanner = new Scanner(keyBoard.toStream(), UTF_8_STRING);
     }
 
     public UserTypedCommand waitForUserAtThePrompt() throws IOException {

@@ -1,5 +1,6 @@
 package command;
 
+import domain.CommandPattern;
 import domain.CommandType;
 import domain.PatternCommandTypeMapper;
 import domain.UserTypedCommand;
@@ -18,9 +19,9 @@ public class CommandExecutorFactory {
 
             CommandType commandType = patternCommandExecutorPair.getKey();
             CommandExecutor commandExecutor = patternCommandExecutorPair.getValue();
-            String pattern = commandType.getMatchingPattern();
+            CommandPattern matchingPattern = commandType.getMatchingPattern();
 
-            if (userTypedCommand.matches(pattern)) {
+            if (userTypedCommand.matches(matchingPattern.toString())) {
                 return commandExecutor;
             }
         }

@@ -9,7 +9,7 @@ public class Keyboard {
         this.inputStream = inputStream;
     }
 
-    public InputStream get() {
+    public InputStream toStream() {
         return inputStream;
     }
 }
