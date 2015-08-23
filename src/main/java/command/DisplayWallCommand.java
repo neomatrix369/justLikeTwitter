@@ -14,8 +14,6 @@ import static helper.ImplHelper.USER_FIELD;
 
 public class DisplayWallCommand extends CommandExecutorImpl {
 
-    private static final Users USER_DOES_NOT_FOLLOW_ANYONE = null;
-
     public DisplayWallCommand(CommandType commandType) {
         super(commandType);
     }
@@ -32,6 +30,12 @@ public class DisplayWallCommand extends CommandExecutorImpl {
     private String getWallFor(User user) {
         Users newFollowsList = addThisUserToFollowsList(user);
         return getFormattedMessage(newFollowsList);
+    }
+
+    private Users addThisUserToFollowsList(User user) {
+        Users existingFollowsList = followsList.getFollowsFor(user);
+        existingFollowsList.add(user);
+        return existingFollowsList;
     }
 
     private String getFormattedMessage(Users followsList) {
@@ -51,19 +55,5 @@ public class DisplayWallCommand extends CommandExecutorImpl {
                 .append(HYPHEN_SEPARATOR)
                 .append(getFormattedMessage(messagePosted))
                 .append(System.lineSeparator());
-    }
-
-    private Users addThisUserToFollowsList(User user) {
-        Users followsList = getFollowsListFor(user);
-        followsList.add(user);
-        return followsList;
-    }
-
-    private Users getFollowsListFor(User user) {
-        Users list = followsList.getFollowsFor(user);
-        if (list == USER_DOES_NOT_FOLLOW_ANYONE) {
-            return new Users();
-        }
-        return list;
     }
 }
