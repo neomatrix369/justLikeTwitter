@@ -4,7 +4,7 @@ import domain.command.CommandPattern;
 import domain.command.CommandType;
 import domain.command.UserTypedCommand;
 
-public class CommandExecutorFactory {
+public class CommandExecutorSelector {
 
     private static final CommandExecutor NO_COMMAND_EXECUTOR_MATCHED = null;
 
