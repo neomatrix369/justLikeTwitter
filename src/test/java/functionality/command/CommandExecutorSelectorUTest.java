@@ -1,6 +1,8 @@
 package functionality.command;
 
+import domain.command.CommandPattern;
 import domain.command.CommandType;
+import domain.command.Fields;
 import domain.command.UserTypedCommand;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,14 +15,14 @@ import static helper.TestHelper.ALICE_POSTS_A_MESSAGE;
 import static helper.TestHelper.ALICE_READS_POSTS;
 import static helper.TestHelper.CHARLIE_FOLLOWS_ALICE;
 import static helper.TestHelper.CHARLIE_REQUESTS_WALL;
-
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 @RunWith(Parameterized.class)
 public class CommandExecutorSelectorUTest {
-    private static final Object NO_COMMAND_EXECUTOR_MATCHED = null;
+    private static final String INVALID_COMMAND = "Invalid command";
+    private static final CommandExecutor NO_COMMAND_EXECUTOR_MATCHED =
+            new NoMatchingCommand(new CommandPattern(INVALID_COMMAND), new Fields());
 
     private final UserTypedCommand userTypedCommand;
     private final CommandExecutor expectedCommandExecutor;
@@ -33,7 +35,7 @@ public class CommandExecutorSelectorUTest {
                         { ALICE_READS_POSTS, CommandType.READ_POST.getCommandExecutor() },
                         { CHARLIE_FOLLOWS_ALICE, CommandType.FOLLOWS_USER.getCommandExecutor() },
                         { CHARLIE_REQUESTS_WALL, CommandType.DISPLAY_WALL.getCommandExecutor() },
-                        { new UserTypedCommand("Invalid command"), NO_COMMAND_EXECUTOR_MATCHED }
+                        { new UserTypedCommand(INVALID_COMMAND), NO_COMMAND_EXECUTOR_MATCHED }
                 }
         );
     }
@@ -45,7 +47,7 @@ public class CommandExecutorSelectorUTest {
     }
 
     @Test
-    public void given_when_then() {
+    public void givenAUserTypedCommand_whenCommandExecutorSelectorIsInvokedWithIt_thenTheRespectiveCommandExecutorIsReturned() {
         // given
         CommandExecutorSelector commandExecutorSelector = new CommandExecutorSelector();
 
@@ -55,7 +57,7 @@ public class CommandExecutorSelectorUTest {
         // then
         assertThat("Should have returned the appropriate command executor.",
                 actualCommandExecutor,
-                is(equalTo(expectedCommandExecutor))
+                instanceOf(expectedCommandExecutor.getClass())
         );
     }
 }
