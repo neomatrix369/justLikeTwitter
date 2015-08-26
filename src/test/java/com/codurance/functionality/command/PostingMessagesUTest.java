@@ -34,10 +34,7 @@ public class PostingMessagesUTest {
     @Before
     public void setUp() {
         FollowsList followsList = new FollowsList();
-        justLikeTwitterEngine = new JustLikeTwitterEngine(
-                messageStore,
-                followsList,
-                centralSystemClock);
+        justLikeTwitterEngine = new JustLikeTwitterEngine(centralSystemClock, messageStore, followsList);
     }
 
     /**

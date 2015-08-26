@@ -38,9 +38,10 @@ public class JustLikeTwitter {
 
         JustLikeTwitterEngine justLikeTwitterEngine =
                 new JustLikeTwitterEngine(
+                        centralSystemClock,
                         messageStore,
-                        followsList,
-                        centralSystemClock);
+                        followsList
+                );
 
         IOConsole ioConsole = new IOConsole(
                 new Keyboard(System.in),

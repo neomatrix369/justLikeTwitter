@@ -32,7 +32,7 @@ public class FollowingUsersUTest {
         CentralSystemClock centralSystemClock = mock(CentralSystemClock.class);
         MessageStore messageStore = new MessageStore();
         followsList = new FollowsList();
-        justLikeTwitterEngine = new JustLikeTwitterEngine(messageStore, followsList, centralSystemClock);
+        justLikeTwitterEngine = new JustLikeTwitterEngine(centralSystemClock, messageStore, followsList);
     }
 
     /**

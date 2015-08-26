@@ -36,9 +36,10 @@ public class FullLifeCycleAcceptanceTest {
         FollowsList followsList = new FollowsList();
 
         JustLikeTwitterEngine justLikeTwitterEngine = new JustLikeTwitterEngine(
+                centralSystemClockMock,
                 messageStore,
-                followsList,
-                centralSystemClockMock);
+                followsList
+        );
 
         IOConsole ioConsole = new IOConsole(
                 new Keyboard(FileIOHelper.getFileToReadFrom(getClass(), TestHelper.REPLAY_INPUT_FILE)),

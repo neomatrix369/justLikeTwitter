@@ -39,7 +39,7 @@ public class ReadingUserTimeLineUTest {
         MessageStore messageStore = new MessageStore();
         FollowsList followsList = new FollowsList();
         justLikeTwitterEngine = mock(JustLikeTwitterEngine.class);
-        justLikeTwitterEngine = new JustLikeTwitterEngine(messageStore, followsList, centralSystemClock);
+        justLikeTwitterEngine = new JustLikeTwitterEngine(centralSystemClock, messageStore, followsList);
     }
 
     /********************************************************************************************

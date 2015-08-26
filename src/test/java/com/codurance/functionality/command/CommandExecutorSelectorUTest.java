@@ -1,9 +1,13 @@
 package com.codurance.functionality.command;
 
+import com.codurance.clock.CentralSystemClock;
 import com.codurance.command.CommandPattern;
 import com.codurance.command.CommandType;
 import com.codurance.command.Fields;
 import com.codurance.command.UserTypedCommand;
+import com.codurance.domain.FollowsList;
+import com.codurance.domain.message.MessageStore;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -27,6 +31,8 @@ public class CommandExecutorSelectorUTest {
     private final UserTypedCommand userTypedCommand;
     private final CommandExecutor expectedCommandExecutor;
 
+    private CommandExecutorSelector commandExecutorSelector;
+
     @Parameterized.Parameters(name = "{index}: (User types {0}, invoking an action of type {1}.")
     public static Collection<Object[]> data() {
         return Arrays.asList(
@@ -40,6 +46,14 @@ public class CommandExecutorSelectorUTest {
         );
     }
 
+    @Before
+    public void setUp() {
+        commandExecutorSelector = new CommandExecutorSelector(
+                new CentralSystemClock(),
+                new MessageStore(),
+                new FollowsList());
+    }
+
     public CommandExecutorSelectorUTest(UserTypedCommand userTypedCommand,
                                         CommandExecutor expectedCommandExecutor) {
         this.userTypedCommand = userTypedCommand;
@@ -49,8 +63,6 @@ public class CommandExecutorSelectorUTest {
     @Test
     public void givenAUserTypedCommand_whenCommandExecutorSelectorIsInvokedWithIt_thenTheRespectiveCommandExecutorIsReturned() {
         // given
-        CommandExecutorSelector commandExecutorSelector = new CommandExecutorSelector();
-
         // when
         CommandExecutor actualCommandExecutor = commandExecutorSelector.getCommandExecutorFor(userTypedCommand);
 
