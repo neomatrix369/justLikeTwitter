@@ -29,8 +29,6 @@ public final class ImplHelper {
 
     public static final String NOTHING_FOR_THIS_COMMAND_EXECUTION = "";
 
-    public static final String NO_OUTPUT_IS_AVAILABLE = null;
-
     public static final String COMMAND_PROMPT_INDICATOR = "> ";
     public static final String NOTHING = "";
 

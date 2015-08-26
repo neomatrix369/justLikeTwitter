@@ -10,7 +10,6 @@ import java.util.Scanner;
 
 import static helper.ImplHelper.COMMAND_PROMPT_INDICATOR;
 import static helper.ImplHelper.NOTHING;
-import static helper.ImplHelper.NO_OUTPUT_IS_AVAILABLE;
 import static helper.ImplHelper.STRING_ENCODING;
 
 public class IOConsole {
@@ -48,11 +47,9 @@ public class IOConsole {
     }
 
     public void display(String outputToDisplay) throws IOException {
-        if (outputToDisplay != NO_OUTPUT_IS_AVAILABLE) {
-            String newOutputToDisplay = outputToDisplay;
-            newOutputToDisplay = insertLineFeedInFrontOf(newOutputToDisplay);
-            screen.get().write(newOutputToDisplay.getBytes());
-        }
+        String newOutputToDisplay = outputToDisplay;
+        newOutputToDisplay = insertLineFeedInFrontOf(newOutputToDisplay);
+        screen.get().write(newOutputToDisplay.getBytes());
     }
 
     private String insertLineFeedInFrontOf(String value) {
