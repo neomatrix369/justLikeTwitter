@@ -11,6 +11,7 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -25,7 +26,7 @@ public class FileIOHelper {
     private FileIOHelper() {
     }
 
-    public static List<Date> loadDatesFrom(Class<?> aClass, String datesForInputFile) {
+    public static List<Date> loadDatesFrom(Class<?> aClass, String datesForInputFile) throws ParseException {
         List<Date> result = new ArrayList<>();
         try {
             List<String> lines = getTheContentOf(getPathFor(aClass, datesForInputFile).toString());

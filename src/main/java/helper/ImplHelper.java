@@ -9,8 +9,9 @@ import java.util.Date;
 import java.util.Locale;
 
 public final class ImplHelper {
-    public static final int THOUSAND_MILLISECONDS = 1000;
-    public static final int SIXTY_SECONDS = 60;
+    public static final int MILLISECONDS_PER_SECOND = 1000;
+    public static final int SECONDS_PER_MINUTE = 60;
+    public static final int MINUTES_PER_HOUR = 60;
 
     public static final String TIME_IN_WORDS_PATTERN = "(%d %s ago)";
 
@@ -43,7 +44,7 @@ public final class ImplHelper {
     public static final int DATE_COL_INDEX = 0;
     public static final int MESSAGE_COL_INDEX = 1;
 
-    public static final String UTF_8_STRING = "UTF-8";
+    public static final String STRING_ENCODING = "UTF-8";
 
     public static final String APP_USAGE_FILEPATH = "../AppUsage.txt";
 
@@ -61,14 +62,8 @@ public final class ImplHelper {
         return timeUnit;
     }
 
-    public static Date convertToDateFrom(String dateAsString) {
+    public static Date convertToDateFrom(String dateAsString) throws ParseException {
         DateFormat format = new SimpleDateFormat(DD_MM_YYYY_HH_MM_SS, Locale.ENGLISH);
-        try {
-            return format.parse(dateAsString);
-        } catch (ParseException e) {
-            System.err.println("Error occurred while parsing a date: " + e.getMessage());
-            System.err.println("Error cause by: " + dateAsString);
-        }
-        return null;
+        return format.parse(dateAsString);
     }
 }

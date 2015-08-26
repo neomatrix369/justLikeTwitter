@@ -8,6 +8,7 @@ import functionality.JustLikeTwitterEngine;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.text.ParseException;
 import java.util.Date;
 
 import static helper.ImplHelper.convertToDateFrom;
@@ -49,7 +50,7 @@ public class ReadingUserTimeLineUTest {
      * Scenario: I can view Harry's timeline
      */
     @Test
-    public void givenHarryHasAPost_whenHarryIsTypedAtThePrompt_thenHarrysTimeLineIsShown() {
+    public void givenHarryHasAPost_whenHarryIsTypedAtThePrompt_thenHarrysTimeLineIsShown() throws ParseException {
         // Given I am at the JustLikeTwitter command prompt ">"
         // And Harry's timeline contains the required posts
         atThePrompt(HARRY_POSTS_A_MESSAGE, on("03/09/2015"), at("12:10:00"));
@@ -68,7 +69,7 @@ public class ReadingUserTimeLineUTest {
      * Scenario: I can view Alice's timeline
      */
     @Test
-    public void givenAliceHasAPost_whenAliceIsTypedAtThePrompt_thenAlicesTimeLineIsShown() {
+    public void givenAliceHasAPost_whenAliceIsTypedAtThePrompt_thenAlicesTimeLineIsShown() throws ParseException {
         // Given I am at the JustLikeTwitter command prompt ">"
         // And Alice's timeline contains the required posts
         atThePrompt(ALICE_POSTS_A_MESSAGE, on("02/09/2015"), at("12:10:00"));
@@ -87,7 +88,7 @@ public class ReadingUserTimeLineUTest {
      * Scenario: I can view Bob's timeline
      */
     @Test
-    public void givenBobHasPosts_whenBobIsTypedAtThePrompt_thenBobsTimeLineIsShown() {
+    public void givenBobHasPosts_whenBobIsTypedAtThePrompt_thenBobsTimeLineIsShown() throws ParseException {
         // Given I am at the JustLikeTwitter command prompt ">"
         // And Bob's timeline contains the required posts
         atThePrompt(BOB_POSTS_TWO_MESSAGES[0], on("01/09/2015"), at("10:10:00"));
@@ -109,7 +110,7 @@ public class ReadingUserTimeLineUTest {
 
     private String atThePrompt(UserTypedCommand userTypedCommand,
                                String onASpecificDate,
-                               String atASpecificTime) {
+                               String atASpecificTime) throws ParseException {
         Date theSimulatedActionDate = convertToDateFrom(onASpecificDate + SPACE_DELIMITER + atASpecificTime);
         when(centralSystemClock.getCurrentDateTime()).thenReturn(theSimulatedActionDate);
         return justLikeTwitterEngine.executeCommand(userTypedCommand);

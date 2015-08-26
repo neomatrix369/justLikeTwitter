@@ -8,6 +8,7 @@ import functionality.JustLikeTwitterEngine;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.text.ParseException;
 import java.util.Date;
 
 import static helper.ImplHelper.convertToDateFrom;
@@ -49,7 +50,7 @@ public class DisplayingUserWallUTest {
     }
 
     @Test
-    public void givenAliceAndCharliesHavePostsAndCharlieFollowsAlice_whenCharlieRequestsToSeeTheWall_thenBothAliceAndCharliesPostsAreShownInTheTimeLine() {
+    public void givenAliceAndCharliesHavePostsAndCharlieFollowsAlice_whenCharlieRequestsToSeeTheWall_thenBothAliceAndCharliesPostsAreShownInTheTimeLine() throws ParseException {
         // Given Charlie is at the JustLikeTwitter command prompt ">"
         // And Alice's timeline contains the required posts
         // And he enters "Charlie -> I'm in New York today! Anyone wants to have a coffee?" at the prompt
@@ -72,7 +73,7 @@ public class DisplayingUserWallUTest {
     }
 
     @Test
-    public void givenAliceBobAndCharliesHavePostsAndCharlieFollowsAliceAndBob_whenCharlieRequestsToSeeTheWall_thenAllTheirPostsAreShownInTheTimeLine() {
+    public void givenAliceBobAndCharliesHavePostsAndCharlieFollowsAliceAndBob_whenCharlieRequestsToSeeTheWall_thenAllTheirPostsAreShownInTheTimeLine() throws ParseException {
         // Given Charlie is at the JustLikeTwitter command prompt ">"
         // And Alice 's timeline contains the required posts
         // And Bob's timeline contains the required posts
@@ -104,7 +105,7 @@ public class DisplayingUserWallUTest {
     }
 
     @Test
-    public void givenBobAndCharliesHavePostsAndCharlieFollowsBob_whenCharlieRequestsToSeeTheWall_thenBothBobAndCharliesPostsAreShownInTheTimeLine() {
+    public void givenBobAndCharliesHavePostsAndCharlieFollowsBob_whenCharlieRequestsToSeeTheWall_thenBothBobAndCharliesPostsAreShownInTheTimeLine() throws ParseException {
         // Given Charlie is at the JustLikeTwitter command prompt ">"
         // And Bob's timeline contains the required posts
         // And he enters "Charlie -> I'm in New York today! Anyone wants to have a coffee?" at the prompt
@@ -131,7 +132,7 @@ public class DisplayingUserWallUTest {
 
     private String atThePrompt(UserTypedCommand theUserTypes,
                                String onASpecificDate,
-                               String atASpecificTime) {
+                               String atASpecificTime) throws ParseException {
         Date theSimulatedActionDate = convertToDateFrom(onASpecificDate + SPACE_DELIMITER + atASpecificTime);
         when(centralSystemClock.getCurrentDateTime()).thenReturn(theSimulatedActionDate);
         return justLikeTwitterEngine.executeCommand(theUserTypes);

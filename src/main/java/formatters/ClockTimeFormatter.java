@@ -8,8 +8,9 @@ import static helper.ImplHelper.DEFAULT_TOKEN;
 import static helper.ImplHelper.HOUR_TOKEN;
 import static helper.ImplHelper.MINUTE_TOKEN;
 import static helper.ImplHelper.SECOND_TOKEN;
-import static helper.ImplHelper.SIXTY_SECONDS;
-import static helper.ImplHelper.THOUSAND_MILLISECONDS;
+import static helper.ImplHelper.MINUTES_PER_HOUR;
+import static helper.ImplHelper.SECONDS_PER_MINUTE;
+import static helper.ImplHelper.MILLISECONDS_PER_SECOND;
 import static helper.ImplHelper.TIME_IN_WORDS_PATTERN;
 import static helper.ImplHelper.makePlural;
 
@@ -25,9 +26,9 @@ class ClockTimeFormatter {
         Date currentDate = centralSystemClock.getCurrentDateTime();
         long difference = currentDate.getTime() - anotherDate.getTime();
 
-        long diffHours = difference / (SIXTY_SECONDS  * SIXTY_SECONDS * THOUSAND_MILLISECONDS);
-        long diffMinutes = difference / (SIXTY_SECONDS * THOUSAND_MILLISECONDS);
-        long diffSeconds = difference / THOUSAND_MILLISECONDS;
+        long diffHours = difference / (MINUTES_PER_HOUR * SECONDS_PER_MINUTE * MILLISECONDS_PER_SECOND);
+        long diffMinutes = difference / (SECONDS_PER_MINUTE * MILLISECONDS_PER_SECOND);
+        long diffSeconds = difference / MILLISECONDS_PER_SECOND;
 
         return appropriateTimeDifferenceInWords(diffHours, diffMinutes, diffSeconds);
     }

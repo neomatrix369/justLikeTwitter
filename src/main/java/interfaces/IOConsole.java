@@ -11,7 +11,7 @@ import java.util.Scanner;
 import static helper.ImplHelper.COMMAND_PROMPT_INDICATOR;
 import static helper.ImplHelper.NOTHING;
 import static helper.ImplHelper.NO_OUTPUT_IS_AVAILABLE;
-import static helper.ImplHelper.UTF_8_STRING;
+import static helper.ImplHelper.STRING_ENCODING;
 
 public class IOConsole {
 
@@ -26,7 +26,7 @@ public class IOConsole {
         this.screen = screen;
         this.needLineFeedForEachLine = needLineFeedForEachLine;
 
-        scanner = new Scanner(keyBoard.toStream(), UTF_8_STRING);
+        scanner = new Scanner(keyBoard.toStream(), STRING_ENCODING);
     }
 
     public UserTypedCommand waitForUserAtThePrompt() throws IOException {
