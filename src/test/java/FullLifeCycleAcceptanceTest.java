@@ -1,13 +1,14 @@
 import clock.CentralSystemClock;
+import com.github.approval.Approvals;
 import domain.FollowsList;
 import domain.Keyboard;
 import domain.Screen;
 import domain.message.MessageStore;
 import functionality.JustLikeTwitterEngine;
-import userinterfaces.IOConsole;
-import userinterfaces.JustLikeTwitter;
 import org.junit.Before;
 import org.junit.Test;
+import userinterfaces.IOConsole;
+import userinterfaces.JustLikeTwitter;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -23,7 +24,6 @@ import static helper.FileIOHelper.getTheContentOf;
 import static helper.FileIOHelper.loadDatesFrom;
 import static helper.ImplHelper.EXTRA_LINEFEED_NEEDED;
 import static helper.TestHelper.ACTUAL_OUTPUT_FILE;
-import static helper.TestHelper.APPROVER;
 import static helper.TestHelper.EXPECTED_OUTPUT_FILE;
 import static helper.TestHelper.REPLAY_INPUT_FILE;
 import static org.mockito.AdditionalAnswers.returnsElementsOf;
@@ -66,6 +66,6 @@ public class FullLifeCycleAcceptanceTest {
 
         // then
         String actualOutputFileContent = convertListToStringWithLinefeed(getTheContentOf(ACTUAL_OUTPUT_FILE));
-        APPROVER.verify(actualOutputFileContent, getPathFor(getClass(), EXPECTED_OUTPUT_FILE));
+        Approvals.verify(actualOutputFileContent, getPathFor(getClass(), EXPECTED_OUTPUT_FILE));
     }
 }

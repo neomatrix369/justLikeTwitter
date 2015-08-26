@@ -1,4 +1,3 @@
-
 ---------------------------------------------------------------------------------------
 Running JustLikeTwitter console app
 Use Ctrl-C to exit the program.
@@ -57,3 +56,4 @@ Alice - I love the weather today (1 hour ago)
 
 > 
 Alice - I love the weather today (1 hour ago)
+
