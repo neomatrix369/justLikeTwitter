@@ -3,31 +3,31 @@ package domain;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Users {
-    private final List<User> usersList = new ArrayList<>();
+    private final Set<User> uniqueUsersList = new HashSet<>();
 
     public Users() {
         super();
     }
 
     public Users(User... user) {
-        usersList.addAll(Arrays.asList(user));
+        uniqueUsersList.addAll(Arrays.asList(user));
     }
 
     public Users(Users users) {
-        usersList.addAll(users.usersList);
+        uniqueUsersList.addAll(users.uniqueUsersList);
     }
 
     public boolean contains(User user) {
-        return usersList.contains(user);
+        return uniqueUsersList.contains(user);
     }
 
     public void add(User user) {
-        usersList.add(user);
+        uniqueUsersList.add(user);
     }
 
     @Override
@@ -43,14 +43,14 @@ public class Users {
         Users users = (Users) o;
 
         return new EqualsBuilder()
-                .append(usersList, users.usersList)
+                .append(uniqueUsersList, users.uniqueUsersList)
                 .isEquals();
     }
 
     @Override
     public int hashCode() {
         return new HashCodeBuilder(17, 37)
-                .append(usersList)
+                .append(uniqueUsersList)
                 .toHashCode();
     }
 }
