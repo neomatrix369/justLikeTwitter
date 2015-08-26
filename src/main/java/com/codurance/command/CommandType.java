@@ -6,19 +6,23 @@ import com.codurance.functionality.command.FollowUserCommand;
 import com.codurance.functionality.command.PostMessageCommand;
 import com.codurance.functionality.command.ReadPostCommand;
 
+import static com.codurance.command.Fields.FOLLOWS_USER_FIELD;
+import static com.codurance.command.Fields.MESSAGE_TEXT_FIELD;
+import static com.codurance.command.Fields.USER_FIELD;
+
 public enum CommandType {
 
     POST_MESSAGE(Constants.POST_COMMAND_PATTERN,
-            new PostMessageCommand(Constants.POST_COMMAND_PATTERN, new Fields("User", "MessageText"))),
+            new PostMessageCommand(Constants.POST_COMMAND_PATTERN, new Fields(USER_FIELD, MESSAGE_TEXT_FIELD))),
 
     READ_POST   (Constants.READ_POST_COMMAND_PATTERN,
-            new ReadPostCommand(Constants.READ_POST_COMMAND_PATTERN, new Fields("User"))),
+            new ReadPostCommand(Constants.READ_POST_COMMAND_PATTERN, new Fields(USER_FIELD))),
 
     FOLLOWS_USER(Constants.FOLLOW_USER_COMMAND_PATTERN,
-            new FollowUserCommand(Constants.FOLLOW_USER_COMMAND_PATTERN, new Fields("User", "OtherUser"))),
+            new FollowUserCommand(Constants.FOLLOW_USER_COMMAND_PATTERN, new Fields(USER_FIELD, FOLLOWS_USER_FIELD))),
 
     DISPLAY_WALL(Constants.DISPLAY_WALL_COMMAND_PATTERN,
-            new DisplayWallCommand(Constants.DISPLAY_WALL_COMMAND_PATTERN, new Fields("User")));
+            new DisplayWallCommand(Constants.DISPLAY_WALL_COMMAND_PATTERN, new Fields(USER_FIELD)));
 
     private final CommandPattern matchingPattern;
     private final CommandExecutor commandExecutor;

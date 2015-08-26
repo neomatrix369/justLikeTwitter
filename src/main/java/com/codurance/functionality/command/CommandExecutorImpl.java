@@ -1,15 +1,13 @@
 package com.codurance.functionality.command;
 
+import com.codurance.clock.CentralSystemClock;
 import com.codurance.command.CommandPattern;
 import com.codurance.command.CommandTokens;
-import com.codurance.domain.message.MessageStore;
-import com.codurance.domain.message.MessageText;
-import com.codurance.helper.ImplHelper;
-import com.codurance.clock.CentralSystemClock;
-import com.codurance.domain.FollowsList;
-import com.codurance.domain.User;
 import com.codurance.command.Fields;
 import com.codurance.command.UserTypedCommand;
+import com.codurance.domain.FollowsList;
+import com.codurance.domain.message.MessageStore;
+import com.codurance.helper.ImplHelper;
 
 public class CommandExecutorImpl implements CommandExecutor {
 
@@ -51,13 +49,5 @@ public class CommandExecutorImpl implements CommandExecutor {
     @Override
     public Fields getFields() {
         return fields;
-    }
-
-    User createNewUserFrom(CommandTokens commandTokens, String fieldName) {
-        return new User(commandTokens.getValueFor(fieldName));
-    }
-
-    MessageText createNewMessageTextFrom(CommandTokens commandTokens, String fieldName) {
-        return new MessageText(commandTokens.getValueFor(fieldName));
     }
 }

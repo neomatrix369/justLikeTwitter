@@ -1,11 +1,13 @@
 package com.codurance.functionality.command;
 
 import com.codurance.command.CommandPattern;
-import com.codurance.formatters.PersonalTimeLineFormatter;
-import com.codurance.helper.ImplHelper;
-import com.codurance.domain.User;
 import com.codurance.command.Fields;
 import com.codurance.command.UserTypedCommand;
+import com.codurance.domain.User;
+import com.codurance.formatters.PersonalTimeLineFormatter;
+
+import static com.codurance.command.CommandLineEntryParser.createNewUserFrom;
+import static com.codurance.command.Fields.USER_FIELD;
 
 public class ReadPostCommand extends CommandExecutorImpl {
 
@@ -17,7 +19,7 @@ public class ReadPostCommand extends CommandExecutorImpl {
     public String execute(UserTypedCommand userTypedCommand) {
         super.execute(userTypedCommand);
 
-        User user = createNewUserFrom(commandTokens, ImplHelper.USER_FIELD);
+        User user = createNewUserFrom(commandTokens, USER_FIELD);
         PersonalTimeLineFormatter personalTimeLineFormatter =
                 new PersonalTimeLineFormatter(centralSystemClock);
 

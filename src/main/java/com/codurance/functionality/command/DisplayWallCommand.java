@@ -7,7 +7,8 @@ import com.codurance.domain.User;
 import com.codurance.domain.Users;
 import com.codurance.formatters.WallTimeLineFormatter;
 
-import static com.codurance.helper.ImplHelper.USER_FIELD;
+import static com.codurance.command.CommandLineEntryParser.createNewUserFrom;
+import static com.codurance.command.Fields.USER_FIELD;
 
 public class DisplayWallCommand extends CommandExecutorImpl {
 
@@ -26,6 +27,7 @@ public class DisplayWallCommand extends CommandExecutorImpl {
 
     private String getWallFor(User user) {
         Users newFollowsList = addThisUserToFollowsList(user);
+
         WallTimeLineFormatter wallTimeLineFormatter = new WallTimeLineFormatter(centralSystemClock);
 
         return wallTimeLineFormatter.getMessagesFor(newFollowsList, messageStore);
