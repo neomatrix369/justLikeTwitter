@@ -26,7 +26,6 @@ public class PersonalTimeLineFormatter extends MessageFormatter {
     }
 
     private void buildTimeLine(StringBuilder result, MessagePosted messagePosted) {
-        result.append(getFormattedMessage(messagePosted))
-                .append(System.lineSeparator());
+        result.append(getFormattedMessage(messagePosted));
     }
 }
