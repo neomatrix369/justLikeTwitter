@@ -20,7 +20,7 @@ public class FollowUserCommand extends CommandExecutorImpl {
         super.execute(userTypedCommand);
 
         CommandLineEntry commandLineEntry = prepareCommandLineEntry();
-        followsList.addNewFollowOf(commandLineEntry.getUser(), commandLineEntry.getOtherUsersName());
+        followsList.addNewFollowTo(commandLineEntry.getUser(), commandLineEntry.getOtherUsersName());
 
         return NOTHING_FOR_THIS_COMMAND_EXECUTION;
     }
