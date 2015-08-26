@@ -1,4 +1,4 @@
-package com.codurance.userinterfaces;
+package com.codurance;
 
 import com.codurance.clock.CentralSystemClock;
 import com.codurance.command.UserTypedCommand;
@@ -9,6 +9,7 @@ import com.codurance.functionality.JustLikeTwitterEngine;
 import com.codurance.helper.FileIOHelper;
 import com.codurance.helper.ImplHelper;
 import com.codurance.domain.FollowsList;
+import com.codurance.userinterface.IOConsole;
 
 import java.io.IOException;
 import java.nio.file.Path;

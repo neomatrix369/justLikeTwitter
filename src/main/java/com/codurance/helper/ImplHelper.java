@@ -44,7 +44,7 @@ public final class ImplHelper {
 
     public static final String STRING_ENCODING = "UTF-8";
 
-    public static final String APP_USAGE_FILEPATH = "../../../AppUsage.txt";
+    public static final String APP_USAGE_FILEPATH = "../../AppUsage.txt";
 
     private static final String SUFFIX_S = "s";
 

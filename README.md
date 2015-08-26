@@ -16,12 +16,12 @@ Previously used [http://approval.readthedocs.org/en/latest/getting-started.html]
 
                 or
 
-    $ mvn exec:java -Dexec.mainClass="com.codurance.JustLikeTwitterustLikeTwitter"
+    $ mvn exec:java -Dexec.mainClass="com.codurance.JustLikeTwitter"
 
 
 Alternatively you can also run from within the IDE:
     
-Load the class ```com.codurance.JustLikeTwitterustLikeTwitter``` and run the ```main()``` function. Then wait for the app to load in the console tab of your IDE.
+Load the class ```com.codurance.JustLikeTwitter``` and run the ```main()``` function. Then wait for the app to load in the console tab of your IDE.
 
 ####Expected UI
 

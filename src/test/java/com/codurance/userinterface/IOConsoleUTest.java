@@ -1,4 +1,4 @@
-package com.codurance.userinterfaces;
+package com.codurance.userinterface;
 
 import com.codurance.domain.Keyboard;
 import com.codurance.domain.Screen;

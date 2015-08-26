@@ -1,4 +1,4 @@
-package com.codurance.userinterfaces;
+package com.codurance.userinterface;
 
 import com.codurance.command.UserTypedCommand;
 import com.codurance.domain.Keyboard;

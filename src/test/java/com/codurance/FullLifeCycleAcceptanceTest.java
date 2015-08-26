@@ -8,14 +8,13 @@ import com.codurance.functionality.JustLikeTwitterEngine;
 import com.codurance.helper.FileIOHelper;
 import com.codurance.helper.ImplHelper;
 import com.codurance.helper.TestHelper;
-import com.codurance.userinterfaces.JustLikeTwitter;
 import com.codurance.domain.FollowsList;
 import org.approvaltests.Approvals;
 import org.approvaltests.reporters.DiffReporter;
 import org.approvaltests.reporters.UseReporter;
 import org.junit.Before;
 import org.junit.Test;
-import com.codurance.userinterfaces.IOConsole;
+import com.codurance.userinterface.IOConsole;
 
 import java.io.IOException;
 import java.util.Date;
