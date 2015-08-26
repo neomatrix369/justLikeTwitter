@@ -4,11 +4,11 @@ import com.codurance.command.CommandLineEntryFollowsUser;
 import com.codurance.command.CommandPattern;
 import com.codurance.command.Fields;
 import com.codurance.command.UserTypedCommand;
-import com.codurance.helper.ImplHelper;
 
-import static com.codurance.command.FieldsFactory.createNewUserFrom;
 import static com.codurance.command.Fields.FOLLOWS_USER_FIELD;
 import static com.codurance.command.Fields.USER_FIELD;
+import static com.codurance.command.FieldsFactory.createNewUserFrom;
+import static com.codurance.helper.ImplHelper.NOTHING_FOR_THIS_COMMAND_EXECUTION;
 
 public class FollowUserCommand extends CommandExecutorImpl {
 
@@ -23,7 +23,7 @@ public class FollowUserCommand extends CommandExecutorImpl {
         CommandLineEntryFollowsUser commandLineEntry = prepareCommandLineEntry();
         followsList.addNewFollowTo(commandLineEntry.getUser(), commandLineEntry.getFollowsUser());
 
-        return ImplHelper.NOTHING_FOR_THIS_COMMAND_EXECUTION;
+        return NOTHING_FOR_THIS_COMMAND_EXECUTION;
     }
 
     private CommandLineEntryFollowsUser prepareCommandLineEntry() {

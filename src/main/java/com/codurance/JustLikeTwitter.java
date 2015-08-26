@@ -2,18 +2,24 @@ package com.codurance;
 
 import com.codurance.clock.CentralSystemClock;
 import com.codurance.command.UserTypedCommand;
+import com.codurance.domain.FollowsList;
 import com.codurance.domain.Keyboard;
 import com.codurance.domain.Screen;
 import com.codurance.domain.message.MessageStore;
 import com.codurance.functionality.JustLikeTwitterEngine;
-import com.codurance.helper.FileIOHelper;
-import com.codurance.helper.ImplHelper;
-import com.codurance.domain.FollowsList;
 import com.codurance.userinterface.IOConsole;
 
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
+
+import static com.codurance.helper.FileIOHelper.convertListToStringWithLinefeed;
+import static com.codurance.helper.FileIOHelper.getPathFor;
+import static com.codurance.helper.FileIOHelper.getTheContentOf;
+import static com.codurance.helper.ImplHelper.APP_USAGE_FILEPATH;
+import static com.codurance.helper.ImplHelper.EXTRA_LINEFEED_NOT_NEEDED;
+import static com.codurance.helper.ImplHelper.FOREVER;
+import static com.codurance.helper.ImplHelper.START_FROM_ONE;
 
 public class JustLikeTwitter {
     private final JustLikeTwitterEngine justLikeTwitterEngine;
@@ -28,7 +34,7 @@ public class JustLikeTwitter {
     public static void main(String[] args) throws IOException {
         JustLikeTwitter justLikeTwitter = setupJustLikeTwitter();
 
-        justLikeTwitter.run(ImplHelper.FOREVER);
+        justLikeTwitter.run(FOREVER);
     }
 
     private static JustLikeTwitter setupJustLikeTwitter() {
@@ -46,7 +52,7 @@ public class JustLikeTwitter {
         IOConsole ioConsole = new IOConsole(
                 new Keyboard(System.in),
                 new Screen(System.out),
-                ImplHelper.EXTRA_LINEFEED_NOT_NEEDED);
+                EXTRA_LINEFEED_NOT_NEEDED);
 
         return new JustLikeTwitter(ioConsole, justLikeTwitterEngine);
     }
@@ -57,13 +63,13 @@ public class JustLikeTwitter {
     }
 
     private void runNow(int maxTimesToRun) throws IOException {
-        int runCount = ImplHelper.START_FROM_ONE;
+        int runCount = START_FROM_ONE;
         do {
             UserTypedCommand userTypedCommand = ioConsole.waitForUserAtThePrompt();
             String result = justLikeTwitterEngine.executeCommand(userTypedCommand);
             ioConsole.display(result);
             runCount++;
-        } while ((maxTimesToRun == ImplHelper.FOREVER) || (runCount <= maxTimesToRun));
+        } while ((maxTimesToRun == FOREVER) || (runCount <= maxTimesToRun));
     }
 
     private void showUsageText() throws IOException {
@@ -72,8 +78,8 @@ public class JustLikeTwitter {
     }
 
     private String getUsageTextFromTheResources() throws IOException {
-        Path path = FileIOHelper.getPathFor(getClass(), ImplHelper.APP_USAGE_FILEPATH);
-        List<String> contentAsList = FileIOHelper.getTheContentOf(path.toString());
-        return FileIOHelper.convertListToStringWithLinefeed(contentAsList);
+        Path path = getPathFor(getClass(), APP_USAGE_FILEPATH);
+        List<String> contentAsList = getTheContentOf(path.toString());
+        return convertListToStringWithLinefeed(contentAsList);
     }
 }

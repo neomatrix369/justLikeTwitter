@@ -1,17 +1,17 @@
 package com.codurance.functionality.command;
 
+import com.codurance.clock.CentralSystemClock;
+import com.codurance.command.UserTypedCommand;
+import com.codurance.domain.FollowsList;
 import com.codurance.domain.message.MessageStore;
 import com.codurance.functionality.JustLikeTwitterEngine;
-import com.codurance.helper.ImplHelper;
-import com.codurance.clock.CentralSystemClock;
-import com.codurance.domain.FollowsList;
-import com.codurance.command.UserTypedCommand;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.text.ParseException;
 import java.util.Date;
 
+import static com.codurance.helper.ImplHelper.convertToDateFrom;
 import static com.codurance.helper.TestHelper.ALICE_POSTS_A_MESSAGE;
 import static com.codurance.helper.TestHelper.ALICE_READS_POSTS;
 import static com.codurance.helper.TestHelper.BOB_POSTS_TWO_MESSAGES;
@@ -111,7 +111,7 @@ public class ReadingUserTimeLineUTest {
     private String atThePrompt(UserTypedCommand userTypedCommand,
                                String onASpecificDate,
                                String atASpecificTime) throws ParseException {
-        Date theSimulatedActionDate = ImplHelper.convertToDateFrom(onASpecificDate + SPACE_DELIMITER + atASpecificTime);
+        Date theSimulatedActionDate = convertToDateFrom(onASpecificDate + SPACE_DELIMITER + atASpecificTime);
         when(centralSystemClock.getCurrentDateTime()).thenReturn(theSimulatedActionDate);
         return justLikeTwitterEngine.executeCommand(userTypedCommand);
     }

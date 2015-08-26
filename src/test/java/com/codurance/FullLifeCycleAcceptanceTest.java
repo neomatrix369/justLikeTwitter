@@ -1,25 +1,31 @@
 package com.codurance;
 
 import com.codurance.clock.CentralSystemClock;
+import com.codurance.domain.FollowsList;
 import com.codurance.domain.Keyboard;
 import com.codurance.domain.Screen;
 import com.codurance.domain.message.MessageStore;
 import com.codurance.functionality.JustLikeTwitterEngine;
-import com.codurance.helper.FileIOHelper;
-import com.codurance.helper.ImplHelper;
-import com.codurance.helper.TestHelper;
-import com.codurance.domain.FollowsList;
+import com.codurance.userinterface.IOConsole;
 import org.approvaltests.Approvals;
 import org.approvaltests.reporters.DiffReporter;
 import org.approvaltests.reporters.UseReporter;
 import org.junit.Before;
 import org.junit.Test;
-import com.codurance.userinterface.IOConsole;
 
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
+import static com.codurance.helper.FileIOHelper.convertListToStringWithLinefeed;
+import static com.codurance.helper.FileIOHelper.getFileToReadFrom;
+import static com.codurance.helper.FileIOHelper.getFileToWriteTo;
+import static com.codurance.helper.FileIOHelper.getNumberOfCommandsIn;
+import static com.codurance.helper.FileIOHelper.getTheContentOf;
+import static com.codurance.helper.FileIOHelper.loadDatesFrom;
+import static com.codurance.helper.ImplHelper.EXTRA_LINEFEED_NEEDED;
+import static com.codurance.helper.TestHelper.ACTUAL_OUTPUT_FILE;
+import static com.codurance.helper.TestHelper.REPLAY_INPUT_FILE;
 import static org.mockito.AdditionalAnswers.returnsElementsOf;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -42,9 +48,9 @@ public class FullLifeCycleAcceptanceTest {
         );
 
         IOConsole ioConsole = new IOConsole(
-                new Keyboard(FileIOHelper.getFileToReadFrom(getClass(), TestHelper.REPLAY_INPUT_FILE)),
-                new Screen(FileIOHelper.getFileToWriteTo(TestHelper.ACTUAL_OUTPUT_FILE)),
-                ImplHelper.EXTRA_LINEFEED_NEEDED);
+                new Keyboard(getFileToReadFrom(getClass(), REPLAY_INPUT_FILE)),
+                new Screen(getFileToWriteTo(ACTUAL_OUTPUT_FILE)),
+                EXTRA_LINEFEED_NEEDED);
 
         justLikeTwitter = new JustLikeTwitter(ioConsole, justLikeTwitterEngine);
     }
@@ -52,16 +58,15 @@ public class FullLifeCycleAcceptanceTest {
     @Test
     public void givenJustLikeTwitter_whenASeriesOfCommandsArePassedIn_thenResponsesForThemAreSeenInTheConsole() throws Exception {
         // given
-        final List<Date> dateTimeForMessages = FileIOHelper.loadDatesFrom(getClass(), TestHelper.REPLAY_INPUT_FILE);
-        when(centralSystemClockMock.getCurrentDateTime())
-                .thenAnswer(returnsElementsOf(dateTimeForMessages));
+        final List<Date> dateTimeForMessages = loadDatesFrom(getClass(), REPLAY_INPUT_FILE);
+        when(centralSystemClockMock.getCurrentDateTime()).thenAnswer(returnsElementsOf(dateTimeForMessages));
 
         // when
-        int numberOfCommands = FileIOHelper.getNumberOfCommandsIn(getClass(), TestHelper.REPLAY_INPUT_FILE);
+        int numberOfCommands = getNumberOfCommandsIn(getClass(), REPLAY_INPUT_FILE);
         justLikeTwitter.run(numberOfCommands);
 
         // then
-        String actualOutputFileContent = FileIOHelper.convertListToStringWithLinefeed(FileIOHelper.getTheContentOf(TestHelper.ACTUAL_OUTPUT_FILE));
+        String actualOutputFileContent = convertListToStringWithLinefeed(getTheContentOf(ACTUAL_OUTPUT_FILE));
         Approvals.verify(actualOutputFileContent);
     }
 }

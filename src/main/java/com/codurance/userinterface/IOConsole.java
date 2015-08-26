@@ -4,10 +4,13 @@ import com.codurance.command.UserTypedCommand;
 import com.codurance.domain.Keyboard;
 import com.codurance.domain.LineFeedToggle;
 import com.codurance.domain.Screen;
-import com.codurance.helper.ImplHelper;
 
 import java.io.IOException;
 import java.util.Scanner;
+
+import static com.codurance.helper.ImplHelper.COMMAND_PROMPT_INDICATOR;
+import static com.codurance.helper.ImplHelper.NOTHING;
+import static com.codurance.helper.ImplHelper.STRING_ENCODING;
 
 public class IOConsole {
 
@@ -22,7 +25,7 @@ public class IOConsole {
         this.screen = screen;
         this.needLineFeedForEachLine = needLineFeedForEachLine;
 
-        scanner = new Scanner(keyBoard.toStream(), ImplHelper.STRING_ENCODING);
+        scanner = new Scanner(keyBoard.toStream(), STRING_ENCODING);
     }
 
     public UserTypedCommand waitForUserAtThePrompt() throws IOException {
@@ -31,7 +34,7 @@ public class IOConsole {
     }
 
     private void printPromptIndicator(Screen screen) throws IOException {
-        String newCommandPrompt = ImplHelper.COMMAND_PROMPT_INDICATOR;
+        String newCommandPrompt = COMMAND_PROMPT_INDICATOR;
         newCommandPrompt = insertLineFeedInFrontOf(newCommandPrompt);
         screen.write(newCommandPrompt.getBytes());
     }
@@ -40,7 +43,7 @@ public class IOConsole {
         if (scanner.hasNextLine()) {
             return new UserTypedCommand(scanner.nextLine());
         }
-        return new UserTypedCommand(ImplHelper.NOTHING);
+        return new UserTypedCommand(NOTHING);
     }
 
     public void display(String outputToDisplay) throws IOException {

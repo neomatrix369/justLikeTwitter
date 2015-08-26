@@ -7,7 +7,8 @@ import com.codurance.command.Fields;
 import com.codurance.command.UserTypedCommand;
 import com.codurance.domain.FollowsList;
 import com.codurance.domain.message.MessageStore;
-import com.codurance.helper.ImplHelper;
+
+import static com.codurance.helper.ImplHelper.NOTHING_FOR_THIS_COMMAND_EXECUTION;
 
 public class CommandExecutorImpl implements CommandExecutor {
 
@@ -28,7 +29,7 @@ public class CommandExecutorImpl implements CommandExecutor {
     @Override
     public String execute(UserTypedCommand userTypedCommand) {
         commandTokens = userTypedCommand.parseUsing(commandPattern, fields);
-        return ImplHelper.NOTHING_FOR_THIS_COMMAND_EXECUTION;
+        return NOTHING_FOR_THIS_COMMAND_EXECUTION;
     }
 
     @Override

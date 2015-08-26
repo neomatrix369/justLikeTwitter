@@ -42,18 +42,9 @@ public final class ImplHelper {
 
     public static final String APP_USAGE_FILEPATH = "../../AppUsage.txt";
 
-    private static final String SUFFIX_S = "s";
-
     private static final String DD_MM_YYYY_HH_MM_SS = "dd/MM/yyyy hh:mm:ss";
 
     private ImplHelper() {
-    }
-
-    public static String makePlural(long duration, String timeUnit) {
-        if (duration > 1) {
-            return timeUnit + SUFFIX_S;
-        }
-        return timeUnit;
     }
 
     public static Date convertToDateFrom(String dateAsString) throws ParseException {

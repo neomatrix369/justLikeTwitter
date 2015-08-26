@@ -1,8 +1,9 @@
 package com.codurance.domain.message;
 
-import com.codurance.helper.ImplHelper;
 import com.codurance.clock.CentralSystemClock;
 import com.codurance.domain.User;
+
+import static com.codurance.helper.ImplHelper.MESSAGE_ON_TIMELINE_PATTERN;
 
 public final class MessagePosted {
 
@@ -23,7 +24,7 @@ public final class MessagePosted {
 
     @Override
     public String toString() {
-        return String.format(ImplHelper.MESSAGE_ON_TIMELINE_PATTERN, messageDate, messageText);
+        return String.format(MESSAGE_ON_TIMELINE_PATTERN, messageDate, messageText);
     }
 
     public User toUser() {
