@@ -44,7 +44,7 @@ public class FollowingUsersUTest {
         //  And Alice exists
         //  When he enters "Charlie follows Alice" at the prompt
         atThePrompt(justLikeTwitterEngine, CHARLIE_FOLLOWS_ALICE);
-        Users actualFollowsList = followsList.getFollowsFor(USER_CHARLIE);
+        Users actualFollowsList = followsList.getFollowsListFor(USER_CHARLIE);
 
                 // Then Alice is added to Charlie's follows list
         verifyThatTheFollowsListMatch(
@@ -65,7 +65,7 @@ public class FollowingUsersUTest {
         // And he enters "Charlie follows Bob" at the prompt
         atThePrompt(justLikeTwitterEngine, CHARLIE_FOLLOWS_ALICE);
         atThePrompt(justLikeTwitterEngine, CHARLIE_FOLLOWS_BOB);
-        Users actualFollowsList = followsList.getFollowsFor(USER_CHARLIE);
+        Users actualFollowsList = followsList.getFollowsListFor(USER_CHARLIE);
 
         // Then Alice and Bob are added to Charlie's follows list
         verifyThatTheFollowsListMatch(

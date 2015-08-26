@@ -2,7 +2,7 @@ package com.codurance.command;
 
 import com.codurance.functionality.command.CommandExecutor;
 import com.codurance.functionality.command.DisplayWallCommand;
-import com.codurance.functionality.command.FollowUserCommand;
+import com.codurance.functionality.command.FollowsUserCommand;
 import com.codurance.functionality.command.PostMessageCommand;
 import com.codurance.functionality.command.ReadPostCommand;
 
@@ -19,7 +19,7 @@ public enum CommandType {
             new ReadPostCommand(Constants.READ_POST_COMMAND_PATTERN, new Fields(USER_FIELD))),
 
     FOLLOWS_USER(Constants.FOLLOW_USER_COMMAND_PATTERN,
-            new FollowUserCommand(Constants.FOLLOW_USER_COMMAND_PATTERN, new Fields(USER_FIELD, FOLLOWS_USER_FIELD))),
+            new FollowsUserCommand(Constants.FOLLOW_USER_COMMAND_PATTERN, new Fields(USER_FIELD, FOLLOWS_USER_FIELD))),
 
     DISPLAY_WALL(Constants.DISPLAY_WALL_COMMAND_PATTERN,
             new DisplayWallCommand(Constants.DISPLAY_WALL_COMMAND_PATTERN, new Fields(USER_FIELD)));

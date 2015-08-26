@@ -34,7 +34,7 @@ public class DisplayWallCommand extends CommandExecutorImpl {
     }
 
     private Users addThisUserToFollowsList(User user) {
-        Users existingFollowsList = followsList.getFollowsFor(user);
+        Users existingFollowsList = followsList.getFollowsListFor(user);
         existingFollowsList.add(user);
 
         return existingFollowsList;

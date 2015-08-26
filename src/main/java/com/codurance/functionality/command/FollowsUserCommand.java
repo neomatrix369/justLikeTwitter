@@ -10,9 +10,9 @@ import static com.codurance.command.Fields.USER_FIELD;
 import static com.codurance.command.FieldsFactory.createNewUserFrom;
 import static com.codurance.helper.ImplHelper.NOTHING_FOR_THIS_COMMAND_EXECUTION;
 
-public class FollowUserCommand extends CommandExecutorImpl {
+public class FollowsUserCommand extends CommandExecutorImpl {
 
-    public FollowUserCommand(CommandPattern commandPattern, Fields fields) {
+    public FollowsUserCommand(CommandPattern commandPattern, Fields fields) {
         super(commandPattern, fields);
     }
 
@@ -21,7 +21,7 @@ public class FollowUserCommand extends CommandExecutorImpl {
         super.execute(userTypedCommand);
 
         CommandLineEntryFollowsUser commandLineEntry = prepareCommandLineEntry();
-        followsList.addNewFollowTo(commandLineEntry.getUser(), commandLineEntry.getFollowsUser());
+        followsList.addNewUserFollowed(commandLineEntry.getUser(), commandLineEntry.getFollowsUser());
 
         return NOTHING_FOR_THIS_COMMAND_EXECUTION;
     }
