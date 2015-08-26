@@ -65,5 +65,4 @@ public final class TestHelper {
     public static String on(String datePart) {
         return datePart;
     }
-
 }
