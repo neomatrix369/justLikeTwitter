@@ -7,7 +7,7 @@ import com.codurance.domain.User;
 import com.codurance.domain.Users;
 import com.codurance.formatters.WallTimeLineFormatter;
 
-import static com.codurance.command.FieldsFactory.createNewUserFrom;
+import static com.codurance.command.Fields.createNewUserFrom;
 import static com.codurance.command.Fields.USER_FIELD;
 
 public class DisplayWallCommand extends CommandExecutorImpl {

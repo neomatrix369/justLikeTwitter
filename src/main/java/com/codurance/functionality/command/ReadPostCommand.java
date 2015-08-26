@@ -6,7 +6,7 @@ import com.codurance.command.UserTypedCommand;
 import com.codurance.domain.User;
 import com.codurance.formatters.PersonalTimeLineFormatter;
 
-import static com.codurance.command.FieldsFactory.createNewUserFrom;
+import static com.codurance.command.Fields.createNewUserFrom;
 import static com.codurance.command.Fields.USER_FIELD;
 
 public class ReadPostCommand extends CommandExecutorImpl {
