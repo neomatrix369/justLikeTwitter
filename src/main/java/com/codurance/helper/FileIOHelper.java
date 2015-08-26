@@ -26,19 +26,14 @@ public class FileIOHelper {
     private FileIOHelper() {
     }
 
-    public static List<Date> loadDatesFrom(Class<?> aClass, String datesForInputFile) throws ParseException {
+    public static List<Date> loadDatesFrom(Class<?> aClass, String datesForInputFile) throws ParseException, IOException {
         List<Date> result = new ArrayList<>();
-        try {
-            List<String> lines = getTheContentOf(getPathFor(aClass, datesForInputFile).toString());
-            for (String eachLine: lines) {
-                String[] eachLineSplit = eachLine.split(COLUMN_SEPARATOR);
-                String eachDate = eachLineSplit[DATE_COL_INDEX];
-                result.add(convertToDateFrom(eachDate));
-            }
-        } catch (IOException e) {
-            System.err.println("Error loading input file with dates: " + e.getMessage());
+        List<String> lines = getTheContentOf(getPathFor(aClass, datesForInputFile).toString());
+        for (String eachLine: lines) {
+            String[] eachLineSplit = eachLine.split(COLUMN_SEPARATOR);
+            String eachDate = eachLineSplit[DATE_COL_INDEX];
+            result.add(convertToDateFrom(eachDate));
         }
-
         return result;
     }
 
