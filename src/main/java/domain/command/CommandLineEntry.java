@@ -6,9 +6,9 @@ import domain.message.MessageText;
 import domain.User;
 
 public class CommandLineEntry {
-    private User user;
-    private User otherUsersName;
-    private MessagePosted messagePosted;
+    private User user = new User("");
+    private User otherUsersName = new User("");
+    private MessagePosted messagePosted = new MessagePosted(new CentralSystemClock());
 
     private final CentralSystemClock centralSystemClock;
 
