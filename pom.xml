@@ -97,5 +97,11 @@
             <version>${approvals.version}</version>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>de.schauderhaft.degraph</groupId>
+            <artifactId>degraph-core</artifactId>
+            <version>0.1.2</version>
+        </dependency>
     </dependencies>
 </project>
