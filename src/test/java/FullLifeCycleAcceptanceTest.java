@@ -4,8 +4,8 @@ import domain.Keyboard;
 import domain.Screen;
 import domain.message.MessageStore;
 import functionality.JustLikeTwitterEngine;
-import interfaces.IOConsole;
-import interfaces.JustLikeTwitter;
+import userinterfaces.IOConsole;
+import userinterfaces.JustLikeTwitter;
 import org.junit.Before;
 import org.junit.Test;
 

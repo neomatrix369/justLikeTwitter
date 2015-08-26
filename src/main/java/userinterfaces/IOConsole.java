@@ -1,4 +1,4 @@
-package interfaces;
+package userinterfaces;
 
 import domain.Keyboard;
 import domain.LineFeedToggle;

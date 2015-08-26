@@ -1,4 +1,4 @@
-package interfaces;
+package userinterfaces;
 
 import clock.CentralSystemClock;
 import domain.FollowsList;
