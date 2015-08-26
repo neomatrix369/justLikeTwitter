@@ -10,6 +10,7 @@
         <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
         <sonar.jacoco.reportPath>${project.basedir}/target/jacoco.exec</sonar.jacoco.reportPath>
         <sonar.language>java</sonar.language>
+        <approvals.version>0.13</approvals.version>
     </properties>
     <build>
         <plugins>
@@ -23,6 +24,29 @@
                     <target>1.7</target>
                 </configuration>
             </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-install-plugin</artifactId>
+                <version>2.4</version>
+                <executions>
+                    <execution>
+                        <id>ApprovalTests</id>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>install-file</goal>
+                        </goals>
+                        <configuration>
+                            <file>${project.basedir}/lib/ApprovalTests.jar</file>
+                            <groupId>com.github.approvals</groupId>
+                            <artifactId>ApprovalTests</artifactId>
+                            <version>${approvals.version}</version>
+                            <packaging>jar</packaging>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
@@ -62,14 +86,16 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>com.github.nikolavp</groupId>
-            <artifactId>approval-core</artifactId>
-            <version>0.3</version>
-        </dependency>
-        <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
             <version>3.4</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.approvals</groupId>
+            <artifactId>ApprovalTests</artifactId>
+            <version>${approvals.version}</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 </project>

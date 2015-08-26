@@ -1,7 +1,5 @@
 package helper;
 
-import com.github.approval.Approval;
-import com.github.approval.reporters.Reporters;
 import domain.User;
 import domain.Users;
 import domain.command.UserTypedCommand;
@@ -9,12 +7,7 @@ import functionality.JustLikeTwitterEngine;
 
 public final class TestHelper {
     public static final String REPLAY_INPUT_FILE = "justLikeTwitterCommandsInputFile.txt";
-    public static final String EXPECTED_OUTPUT_FILE = "justLikeTwitterCommandsExpectedOutputFile.txt";
     public static final String ACTUAL_OUTPUT_FILE = "justLikeTwitterCommandsActualOutputFile.txt";
-
-    public static final Approval<String> APPROVER = Approval.of(String.class)
-            .withReporter(Reporters.console())
-            .build();
 
     public static final User USER_CHARLIE = new User("Charlie");
     public static final User USER_ALICE = new User("Alice");

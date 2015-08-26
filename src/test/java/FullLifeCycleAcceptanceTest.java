@@ -1,17 +1,18 @@
 import clock.CentralSystemClock;
-import com.github.approval.Approvals;
 import domain.FollowsList;
 import domain.Keyboard;
 import domain.Screen;
 import domain.message.MessageStore;
 import functionality.JustLikeTwitterEngine;
+import org.approvaltests.Approvals;
+import org.approvaltests.reporters.DiffReporter;
+import org.approvaltests.reporters.UseReporter;
 import org.junit.Before;
 import org.junit.Test;
 import userinterfaces.IOConsole;
 import userinterfaces.JustLikeTwitter;
 
 import java.io.IOException;
-import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 
@@ -19,17 +20,16 @@ import static helper.FileIOHelper.convertListToStringWithLinefeed;
 import static helper.FileIOHelper.getFileToReadFrom;
 import static helper.FileIOHelper.getFileToWriteTo;
 import static helper.FileIOHelper.getNumberOfCommandsIn;
-import static helper.FileIOHelper.getPathFor;
 import static helper.FileIOHelper.getTheContentOf;
 import static helper.FileIOHelper.loadDatesFrom;
 import static helper.ImplHelper.EXTRA_LINEFEED_NEEDED;
 import static helper.TestHelper.ACTUAL_OUTPUT_FILE;
-import static helper.TestHelper.EXPECTED_OUTPUT_FILE;
 import static helper.TestHelper.REPLAY_INPUT_FILE;
 import static org.mockito.AdditionalAnswers.returnsElementsOf;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+@UseReporter(DiffReporter.class)
 public class FullLifeCycleAcceptanceTest {
 
     private JustLikeTwitter justLikeTwitter;
@@ -54,7 +54,7 @@ public class FullLifeCycleAcceptanceTest {
     }
 
     @Test
-    public void givenJustLikeTwitter_whenASeriesOfCommandsArePassedIn_thenResponsesForThemAreSeenInTheConsole() throws IOException, ParseException {
+    public void givenJustLikeTwitter_whenASeriesOfCommandsArePassedIn_thenResponsesForThemAreSeenInTheConsole() throws Exception {
         // given
         final List<Date> dateTimeForMessages = loadDatesFrom(getClass(), REPLAY_INPUT_FILE);
         when(centralSystemClockMock.getCurrentDateTime())
@@ -66,6 +66,6 @@ public class FullLifeCycleAcceptanceTest {
 
         // then
         String actualOutputFileContent = convertListToStringWithLinefeed(getTheContentOf(ACTUAL_OUTPUT_FILE));
-        Approvals.verify(actualOutputFileContent, getPathFor(getClass(), EXPECTED_OUTPUT_FILE));
+        Approvals.verify(actualOutputFileContent);
     }
 }
