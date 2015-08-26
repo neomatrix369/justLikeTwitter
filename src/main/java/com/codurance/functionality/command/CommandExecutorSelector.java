@@ -32,9 +32,7 @@ public class CommandExecutorSelector {
             }
         }
 
-        CommandExecutor noCommandExecutorMatched =
-                new NoMatchingCommand(new CommandPattern(userTypedCommand.toString()), new Fields());
-        return noCommandExecutorMatched;
+        return new NoMatchingCommand(new CommandPattern(userTypedCommand.toString()), new Fields());
     }
 
     private CommandExecutor prepareCommandExecutor(CommandType commandType) {

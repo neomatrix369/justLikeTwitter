@@ -5,8 +5,8 @@ import com.codurance.command.CommandLineEntryPostMessage;
 import com.codurance.command.Fields;
 import com.codurance.command.UserTypedCommand;
 
-import static com.codurance.command.CommandLineEntryParser.createNewUserFrom;
-import static com.codurance.command.CommandLineEntryParser.createNewMessageTextFrom;
+import static com.codurance.command.FieldsFactory.createNewUserFrom;
+import static com.codurance.command.FieldsFactory.createNewMessageTextFrom;
 import static com.codurance.command.Fields.MESSAGE_TEXT_FIELD;
 import static com.codurance.command.Fields.USER_FIELD;
 import static com.codurance.helper.ImplHelper.NOTHING_FOR_THIS_COMMAND_EXECUTION;
@@ -28,12 +28,11 @@ public class PostMessageCommand extends CommandExecutorImpl {
     }
 
     private CommandLineEntryPostMessage prepareCommandLineEntry() {
-        CommandLineEntryPostMessage commandLineEntryPostMessage = new CommandLineEntryPostMessage(
+
+        return new CommandLineEntryPostMessage(
                 centralSystemClock,
                 createNewUserFrom(commandTokens, USER_FIELD),
                 createNewMessageTextFrom(commandTokens, MESSAGE_TEXT_FIELD)
         );
-
-        return commandLineEntryPostMessage;
     }
 }

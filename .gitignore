@@ -4,24 +4,11 @@
 ## Directory-based project format:
 .idea/
 
-## File-based project format:
-*.ipr
-*.iws
-
-# IntelliJ
-/out/
-
-# mpeltonen/sbt-idea plugin
-.idea_modules/
-
-# Java
-*.class
+# Java                git p
 /target/
 
 # Package Files #
 *.jar
-*.war
-*.ear
 
 # Excluding ignoring
 !/lib/ApprovalTests.jar

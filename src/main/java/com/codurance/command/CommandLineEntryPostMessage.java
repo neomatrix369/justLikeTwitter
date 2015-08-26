@@ -6,9 +6,9 @@ import com.codurance.domain.message.MessageText;
 import com.codurance.domain.User;
 
 public class CommandLineEntryPostMessage {
-    private User user;
+    private final CentralSystemClock centralSystemClock;
     private MessagePosted messagePosted;
-    private CentralSystemClock centralSystemClock;
+    private final User user;
 
     public CommandLineEntryPostMessage(CentralSystemClock centralSystemClock,
                                        User user,
@@ -18,19 +18,11 @@ public class CommandLineEntryPostMessage {
         setMessagePosted(messageText);
     }
 
-    public User getUser() {
-        return user;
-    }
-
     public MessagePosted getMessagePosted() {
         return messagePosted;
     }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public void setMessagePosted(MessageText messageText) {
+    private void setMessagePosted(MessageText messageText) {
         this.messagePosted = new MessagePosted(centralSystemClock);
         this.messagePosted.setUser(user);
         this.messagePosted.setMessageText(messageText);

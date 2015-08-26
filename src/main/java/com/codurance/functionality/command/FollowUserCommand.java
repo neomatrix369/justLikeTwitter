@@ -6,7 +6,7 @@ import com.codurance.command.Fields;
 import com.codurance.command.UserTypedCommand;
 import com.codurance.helper.ImplHelper;
 
-import static com.codurance.command.CommandLineEntryParser.createNewUserFrom;
+import static com.codurance.command.FieldsFactory.createNewUserFrom;
 import static com.codurance.command.Fields.FOLLOWS_USER_FIELD;
 import static com.codurance.command.Fields.USER_FIELD;
 
@@ -27,11 +27,9 @@ public class FollowUserCommand extends CommandExecutorImpl {
     }
 
     private CommandLineEntryFollowsUser prepareCommandLineEntry() {
-        CommandLineEntryFollowsUser commandLineEntry = new CommandLineEntryFollowsUser(
+        return new CommandLineEntryFollowsUser(
                 createNewUserFrom(commandTokens, USER_FIELD),
                 createNewUserFrom(commandTokens, FOLLOWS_USER_FIELD)
         );
-
-        return commandLineEntry;
     }
 }
