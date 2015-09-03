@@ -1,6 +1,9 @@
 package com.codurance.domain;
 
 import java.io.InputStream;
+import java.util.Scanner;
+
+import static com.codurance.helper.ImplHelper.STRING_ENCODING;
 
 public class Keyboard {
     private final InputStream inputStream;
@@ -9,7 +12,7 @@ public class Keyboard {
         this.inputStream = inputStream;
     }
 
-    public InputStream toStream() {
-        return inputStream;
+    public Scanner getScanner() {
+        return new Scanner(inputStream, STRING_ENCODING);
     }
 }

@@ -10,7 +10,6 @@ import java.util.Scanner;
 
 import static com.codurance.helper.ImplHelper.COMMAND_PROMPT_INDICATOR;
 import static com.codurance.helper.ImplHelper.NOTHING;
-import static com.codurance.helper.ImplHelper.STRING_ENCODING;
 
 public class IOConsole {
 
@@ -25,7 +24,7 @@ public class IOConsole {
         this.screen = screen;
         this.needLineFeedForEachLine = needLineFeedForEachLine;
 
-        scanner = new Scanner(keyBoard.toStream(), STRING_ENCODING);
+        scanner = keyBoard.getScanner();
     }
 
     public UserTypedCommand waitForUserAtThePrompt() throws IOException {
@@ -36,7 +35,7 @@ public class IOConsole {
     private void printPromptIndicator(Screen screen) throws IOException {
         String newCommandPrompt = COMMAND_PROMPT_INDICATOR;
         newCommandPrompt = insertLineFeedInFrontOf(newCommandPrompt);
-        screen.write(newCommandPrompt.getBytes());
+        screen.display(newCommandPrompt);
     }
 
     private UserTypedCommand gatherWhatTheUserTypesAtThePrompt() {
@@ -47,9 +46,9 @@ public class IOConsole {
     }
 
     public void display(String outputToDisplay) throws IOException {
-        String newOutputToDisplay = outputToDisplay;
-        newOutputToDisplay = insertLineFeedInFrontOf(newOutputToDisplay);
-        screen.get().write(newOutputToDisplay.getBytes());
+        String newOutput = outputToDisplay;
+        newOutput = insertLineFeedInFrontOf(newOutput);
+        screen.display(newOutput);
     }
 
     private String insertLineFeedInFrontOf(String value) {

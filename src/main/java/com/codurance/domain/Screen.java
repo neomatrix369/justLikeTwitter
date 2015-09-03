@@ -10,11 +10,7 @@ public class Screen {
         this.outputStream = outputStream;
     }
 
-    public OutputStream get() {
-        return outputStream;
-    }
-
-    public void write(byte[] bytes) throws IOException {
-        outputStream.write(bytes);
+    public void display(String output) throws IOException {
+        outputStream.write(output.getBytes());
     }
 }
