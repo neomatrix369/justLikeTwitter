@@ -45,7 +45,6 @@ public class DisplayingUserWallUTest {
     public void setUp() {
         MessageStore messageStore = new MessageStore();
         FollowsList followsList = new FollowsList();
-        justLikeTwitterEngine = mock(JustLikeTwitterEngine.class);
         justLikeTwitterEngine = new JustLikeTwitterEngine(centralSystemClock, messageStore, followsList);
     }
 
