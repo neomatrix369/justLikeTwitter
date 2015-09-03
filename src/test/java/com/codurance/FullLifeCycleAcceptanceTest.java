@@ -4,6 +4,8 @@ import com.codurance.clock.CentralSystemClock;
 import com.codurance.domain.FollowsList;
 import com.codurance.domain.Keyboard;
 import com.codurance.domain.Screen;
+import com.codurance.domain.UserInput;
+import com.codurance.domain.UserOutput;
 import com.codurance.domain.message.MessageStore;
 import com.codurance.functionality.JustLikeTwitterEngine;
 import com.codurance.userinterface.IOConsole;
@@ -13,7 +15,10 @@ import org.approvaltests.reporters.UseReporter;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.Date;
 import java.util.List;
 
@@ -48,11 +53,21 @@ public class FullLifeCycleAcceptanceTest {
         );
 
         IOConsole ioConsole = new IOConsole(
-                new Keyboard(getFileToReadFrom(getClass(), REPLAY_INPUT_FILE)),
-                new Screen(getFileToWriteTo(ACTUAL_OUTPUT_FILE)),
+                getUserInput(REPLAY_INPUT_FILE),
+                getUserOutput(ACTUAL_OUTPUT_FILE),
                 EXTRA_LINEFEED_NEEDED);
 
         justLikeTwitter = new JustLikeTwitter(ioConsole, justLikeTwitterEngine);
+    }
+
+    private UserInput getUserInput(String inputFileName) throws IOException {
+        InputStream fileAsInputStream = getFileToReadFrom(getClass(), inputFileName);
+        return new Keyboard(fileAsInputStream);
+    }
+
+    private UserOutput getUserOutput(String outputFileName) throws FileNotFoundException {
+        OutputStream fileAsOutputStream = getFileToWriteTo(outputFileName);
+        return new Screen(fileAsOutputStream);
     }
 
     @Test

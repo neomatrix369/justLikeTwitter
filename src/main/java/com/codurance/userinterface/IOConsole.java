@@ -1,9 +1,9 @@
 package com.codurance.userinterface;
 
 import com.codurance.command.UserTypedCommand;
-import com.codurance.domain.Keyboard;
 import com.codurance.domain.LineFeedToggle;
-import com.codurance.domain.Screen;
+import com.codurance.domain.UserInput;
+import com.codurance.domain.UserOutput;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -16,26 +16,26 @@ public class IOConsole {
     private final LineFeedToggle needLineFeedForEachLine;
     private final Scanner scanner;
 
-    private final Screen screen;
+    private final UserOutput userOutput;
 
-    public IOConsole(Keyboard keyBoard,
-                     Screen screen,
+    public IOConsole(UserInput userInput,
+                     UserOutput userOutput,
                      LineFeedToggle needLineFeedForEachLine) {
-        this.screen = screen;
+        this.userOutput = userOutput;
         this.needLineFeedForEachLine = needLineFeedForEachLine;
 
-        scanner = keyBoard.getScanner();
+        scanner = userInput.getScanner();
     }
 
     public UserTypedCommand waitForUserAtThePrompt() throws IOException {
-        printPromptIndicator(screen);
+        printPromptIndicator(userOutput);
         return gatherWhatTheUserTypesAtThePrompt();
     }
 
-    private void printPromptIndicator(Screen screen) throws IOException {
+    private void printPromptIndicator(UserOutput userOutput) throws IOException {
         String newCommandPrompt = COMMAND_PROMPT_INDICATOR;
         newCommandPrompt = insertLineFeedInFrontOf(newCommandPrompt);
-        screen.display(newCommandPrompt);
+        userOutput.display(newCommandPrompt);
     }
 
     private UserTypedCommand gatherWhatTheUserTypesAtThePrompt() {
@@ -48,7 +48,7 @@ public class IOConsole {
     public void display(String outputToDisplay) throws IOException {
         String newOutput = outputToDisplay;
         newOutput = insertLineFeedInFrontOf(newOutput);
-        screen.display(newOutput);
+        userOutput.display(newOutput);
     }
 
     private String insertLineFeedInFrontOf(String value) {

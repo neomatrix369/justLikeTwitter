@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
@@ -79,7 +80,7 @@ public class FileIOHelper {
         return new ByteArrayInputStream(inputString.toString().getBytes());
     }
 
-    public static FileOutputStream getFileToWriteTo(String fileName) throws FileNotFoundException {
+    public static OutputStream getFileToWriteTo(String fileName) throws FileNotFoundException {
         return new FileOutputStream(fileName);
     }
 }
