@@ -1,7 +1,7 @@
 package com.codurance.helper;
 
 import com.codurance.command.UserTypedCommand;
-import com.codurance.domain.UserInput;
+import com.codurance.domain.io.UserInput;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;

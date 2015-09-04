@@ -1,8 +1,8 @@
 package com.codurance.userinterface;
 
 import com.codurance.command.UserTypedCommand;
-import com.codurance.domain.UserInput;
-import com.codurance.domain.UserOutput;
+import com.codurance.domain.io.UserInput;
+import com.codurance.domain.io.UserOutput;
 
 import java.io.IOException;
 import java.util.Scanner;

@@ -2,8 +2,8 @@ package com.codurance;
 
 import com.codurance.clock.CentralSystemClock;
 import com.codurance.domain.FollowsList;
-import com.codurance.domain.UserInput;
-import com.codurance.domain.UserOutput;
+import com.codurance.domain.io.UserInput;
+import com.codurance.domain.io.UserOutput;
 import com.codurance.domain.message.MessageStore;
 import com.codurance.functionality.JustLikeTwitterEngine;
 import com.codurance.helper.FileAsInputStream;

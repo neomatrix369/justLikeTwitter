@@ -1,6 +1,6 @@
 package com.codurance.helper;
 
-import com.codurance.domain.UserInput;
+import com.codurance.domain.io.UserInput;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package com.codurance.domain;
+package com.codurance.domain.io;
 
 import java.io.IOException;
 

@@ -1,6 +1,6 @@
 package com.codurance.helper;
 
-import com.codurance.domain.UserOutput;
+import com.codurance.domain.io.UserOutput;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
