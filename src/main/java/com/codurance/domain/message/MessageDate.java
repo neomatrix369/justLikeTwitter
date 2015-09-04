@@ -16,4 +16,8 @@ public class MessageDate {
     public int compareTo(MessageDate messageDate) {
         return date.compareTo(messageDate.toDate());
     }
+
+    public long getTime() {
+        return date.getTime();
+    }
 }

@@ -22,7 +22,7 @@ class MessageFormatter {
         return String.format(
                 MESSAGE_TEXT_WHEN_POSTED_PATTERN,
                 messagePosted.getMessageText(),
-                clockTimeFormatter.whenMessageWasPosted(messageDate.toDate()),
+                clockTimeFormatter.whenMessageWasPosted(messageDate),
                 System.lineSeparator());
     }
 }

@@ -1,6 +1,7 @@
 package com.codurance.formatters;
 
 import com.codurance.clock.CentralSystemClock;
+import com.codurance.domain.message.MessageDate;
 import com.codurance.helper.ImplHelper;
 
 import java.util.Date;
@@ -23,7 +24,7 @@ class ClockTimeFormatter {
         this.centralSystemClock = centralSystemClock;
     }
 
-    public String whenMessageWasPosted(Date anotherDate) {
+    public String whenMessageWasPosted(MessageDate anotherDate) {
         Date currentDate = centralSystemClock.getCurrentDateTime();
         long difference = currentDate.getTime() - anotherDate.getTime();
 
