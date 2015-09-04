@@ -1,4 +1,4 @@
-package com.codurance.userinterface;
+package com.codurance.helper;
 
 import com.codurance.command.UserTypedCommand;
 import com.codurance.domain.UserInput;

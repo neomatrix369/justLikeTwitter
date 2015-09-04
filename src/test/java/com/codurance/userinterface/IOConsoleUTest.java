@@ -1,6 +1,8 @@
 package com.codurance.userinterface;
 
 import com.codurance.command.UserTypedCommand;
+import com.codurance.helper.ArrayAsInputStream;
+import com.codurance.helper.ArrayAsOutputStream;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
