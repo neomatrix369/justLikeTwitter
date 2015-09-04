@@ -2,12 +2,12 @@ package com.codurance;
 
 import com.codurance.clock.CentralSystemClock;
 import com.codurance.domain.FollowsList;
-import com.codurance.domain.Keyboard;
-import com.codurance.domain.Screen;
 import com.codurance.domain.UserInput;
 import com.codurance.domain.UserOutput;
 import com.codurance.domain.message.MessageStore;
 import com.codurance.functionality.JustLikeTwitterEngine;
+import com.codurance.helper.FileAsInputStream;
+import com.codurance.helper.FileAsOutputStream;
 import com.codurance.userinterface.IOConsole;
 import org.approvaltests.Approvals;
 import org.approvaltests.reporters.DiffReporter;
@@ -17,13 +17,11 @@ import org.junit.Test;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Date;
 import java.util.List;
 
 import static com.codurance.helper.FileIOHelper.convertListToStringWithLinefeed;
-import static com.codurance.helper.FileIOHelper.getFileToReadFrom;
 import static com.codurance.helper.FileIOHelper.getFileToWriteTo;
 import static com.codurance.helper.FileIOHelper.getNumberOfCommandsIn;
 import static com.codurance.helper.FileIOHelper.getTheContentOf;
@@ -61,13 +59,12 @@ public class FullLifeCycleAcceptanceTest {
     }
 
     private UserInput getUserInput(String inputFileName) throws IOException {
-        InputStream fileAsInputStream = getFileToReadFrom(getClass(), inputFileName);
-        return new Keyboard(fileAsInputStream);
+        return new FileAsInputStream(getClass(), inputFileName);
     }
 
     private UserOutput getUserOutput(String outputFileName) throws FileNotFoundException {
         OutputStream fileAsOutputStream = getFileToWriteTo(outputFileName);
-        return new Screen(fileAsOutputStream);
+        return new FileAsOutputStream(fileAsOutputStream);
     }
 
     @Test

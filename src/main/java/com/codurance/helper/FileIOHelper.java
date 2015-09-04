@@ -1,11 +1,9 @@
 package com.codurance.helper;
 
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
 import java.nio.charset.Charset;
@@ -19,7 +17,6 @@ import java.util.List;
 
 import static com.codurance.helper.ImplHelper.COLUMN_SEPARATOR;
 import static com.codurance.helper.ImplHelper.DATE_COL_INDEX;
-import static com.codurance.helper.ImplHelper.MESSAGE_COL_INDEX;
 import static com.codurance.helper.ImplHelper.convertToDateFrom;
 
 public class FileIOHelper {
@@ -64,20 +61,6 @@ public class FileIOHelper {
         Path filePath = getPathFor(aClass, inputFileName);
         List<String> lines = Files.readAllLines(filePath, Charset.defaultCharset());
         return lines.size();
-    }
-
-    public static InputStream getFileToReadFrom(Class<?> aClass, String fileName) throws IOException {
-        List<String> lines = getTheContentOf(getPathFor(aClass, fileName).toString());
-
-        StringBuilder inputString = new StringBuilder();
-        for (String eachLine: lines) {
-            String[] splitEachLine = eachLine.split(COLUMN_SEPARATOR);
-            inputString
-                    .append(splitEachLine[MESSAGE_COL_INDEX])
-                    .append(System.lineSeparator());
-        }
-
-        return new ByteArrayInputStream(inputString.toString().getBytes());
     }
 
     public static OutputStream getFileToWriteTo(String fileName) throws FileNotFoundException {

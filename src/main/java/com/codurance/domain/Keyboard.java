@@ -6,11 +6,7 @@ import java.util.Scanner;
 import static com.codurance.helper.ImplHelper.STRING_ENCODING;
 
 public class Keyboard implements UserInput {
-    private final InputStream inputStream;
-
-    public Keyboard(InputStream inputStream) {
-        this.inputStream = inputStream;
-    }
+    private final InputStream inputStream = System.in;
 
     @Override
     public Scanner getScanner() {

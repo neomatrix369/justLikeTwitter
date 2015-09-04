@@ -50,8 +50,8 @@ public class JustLikeTwitter {
                 );
 
         IOConsole ioConsole = new IOConsole(
-                new Keyboard(System.in),
-                new Screen(System.out),
+                new Keyboard(),
+                new Screen(),
                 EXTRA_LINEFEED_NOT_NEEDED);
 
         return new JustLikeTwitter(ioConsole, justLikeTwitterEngine);

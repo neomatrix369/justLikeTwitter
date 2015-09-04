@@ -1,46 +1,35 @@
 package com.codurance.userinterface;
 
-import com.codurance.domain.Keyboard;
-import com.codurance.domain.Screen;
 import com.codurance.command.UserTypedCommand;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.ArgumentCaptor;
 
-import java.io.BufferedInputStream;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.PrintStream;
 
-import static com.codurance.helper.ImplHelper.COMMAND_PROMPT_INDICATOR;
-import static com.codurance.helper.TestHelper.ALICE_POSTS_A_MESSAGE;
-import static com.codurance.helper.TestHelper.ANY_TEXT;
 import static com.codurance.helper.ImplHelper.EXTRA_LINEFEED_NOT_NEEDED;
+import static com.codurance.helper.TestHelper.ALICE_POSTS_A_MESSAGE;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 public class IOConsoleUTest {
 
+    private static final String NOTHING = "''";
     private IOConsole ioConsole;
-    private ByteArrayOutputStream outputStreamContent;
 
     @Before
-    public void setUp() {
-        ByteArrayInputStream inputInputStreamContent = new ByteArrayInputStream(ALICE_POSTS_A_MESSAGE.getBytes());
-        BufferedInputStream bufferedInputStream = new BufferedInputStream(inputInputStreamContent);
-
-        outputStreamContent = new ByteArrayOutputStream();
-        PrintStream printStreamAsOutputStream = new PrintStream(outputStreamContent);
-
+    public void setUp() throws IOException {
         ioConsole = new IOConsole(
-                new Keyboard(bufferedInputStream),
-                new Screen(printStreamAsOutputStream),
+                new ArrayAsInputStream(ALICE_POSTS_A_MESSAGE),
+                new ArrayAsOutputStream(),
                 EXTRA_LINEFEED_NOT_NEEDED);
     }
 
     @Test
-    public void givenConsoleIsLoadedWithBufferedInputStreamAndPrintStream_whenALineOfInputIsPassedIn_thenTheSameInputIsReturned() throws IOException {
+    public void givenConsoleIsArrayAsInputAndOutputStreams_whenALineOfInputIsPassedIn_thenTheSameInputIsReturned() throws IOException {
         // given
         // when
         UserTypedCommand actualUserTypedCommand = ioConsole.waitForUserAtThePrompt();
@@ -52,16 +41,35 @@ public class IOConsoleUTest {
     }
 
     @Test
-    public void givenConsoleIsLoadedWithBufferedInputStreamAndPrintStream_whenConsolesDisplayIsInvoked_thenItAppearsOnANewLine() throws IOException {
+    public void givenConsoleIsArrayAsInputAndOutputStreams_whenAnInputIsAlreadyReadAndPromptIsInvokedAgain_thenNothingIsReturned() throws IOException {
         // given
         // when
         ioConsole.waitForUserAtThePrompt();
-        ioConsole.display(ANY_TEXT);
-        String actualOutputString = outputStreamContent.toString();
+        UserTypedCommand actualUserTypedCommand = ioConsole.waitForUserAtThePrompt();
+
+                // then
+        assertThat("The expected line of input should have been returned.",
+                actualUserTypedCommand.toString(),
+                is(equalTo(NOTHING)));
+    }
+
+    @Test
+    public void givenConsoleIsSetup_whenDisplayIsInvokedWithText_thenConsoleDisplaysTheText() throws IOException {
+        // given
+        ArrayAsOutputStream arrayAsOutputStreamMock = mock(ArrayAsOutputStream.class);
+        ioConsole = new IOConsole(
+                new ArrayAsInputStream(ALICE_POSTS_A_MESSAGE),
+                arrayAsOutputStreamMock,
+                EXTRA_LINEFEED_NOT_NEEDED);
+        ArgumentCaptor<String> actualDisplayedText = ArgumentCaptor.forClass(String.class);
+
+        // when
+        ioConsole.display(ALICE_POSTS_A_MESSAGE.toString());
 
         // then
-        assertThat("The text displayed on the output stream should have been returned.",
-                actualOutputString,
-                is(equalTo(COMMAND_PROMPT_INDICATOR + ANY_TEXT)));
+        verify(arrayAsOutputStreamMock).display(actualDisplayedText.capture());
+        assertThat("Should have displayed the text",
+                actualDisplayedText.getValue(),
+                is(equalTo(ALICE_POSTS_A_MESSAGE.toString())));
     }
 }
