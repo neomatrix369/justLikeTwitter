@@ -25,7 +25,7 @@ public class WallTimeLineFormatter extends MessageFormatter {
     }
 
     private void buildTimeLine(StringBuilder result, MessagePosted messagePosted) {
-        result.append(messagePosted.toUser())
+        result.append(messagePosted.getUser())
                 .append(HYPHEN_SEPARATOR)
                 .append(getFormattedMessage(messagePosted));
     }

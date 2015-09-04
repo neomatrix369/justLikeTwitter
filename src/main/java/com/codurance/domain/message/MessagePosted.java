@@ -27,7 +27,7 @@ public final class MessagePosted {
         return String.format(MESSAGE_ON_TIMELINE_PATTERN, messageDate, messageText);
     }
 
-    public User toUser() {
+    public User getUser() {
         return user;
     }
 
