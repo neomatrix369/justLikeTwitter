@@ -17,7 +17,6 @@ import static com.codurance.helper.FileIOHelper.convertListToStringWithLinefeed;
 import static com.codurance.helper.FileIOHelper.getPathFor;
 import static com.codurance.helper.FileIOHelper.getTheContentOf;
 import static com.codurance.helper.ImplHelper.APP_USAGE_FILEPATH;
-import static com.codurance.helper.ImplHelper.EXTRA_LINEFEED_NOT_NEEDED;
 import static com.codurance.helper.ImplHelper.FOREVER;
 import static com.codurance.helper.ImplHelper.START_FROM_ONE;
 
@@ -51,8 +50,7 @@ public class JustLikeTwitter {
 
         IOConsole ioConsole = new IOConsole(
                 new Keyboard(),
-                new Screen(),
-                EXTRA_LINEFEED_NOT_NEEDED);
+                new Screen());
 
         return new JustLikeTwitter(ioConsole, justLikeTwitterEngine);
     }

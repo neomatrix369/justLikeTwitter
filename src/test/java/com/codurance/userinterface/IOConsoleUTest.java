@@ -7,7 +7,6 @@ import org.mockito.ArgumentCaptor;
 
 import java.io.IOException;
 
-import static com.codurance.helper.ImplHelper.EXTRA_LINEFEED_NOT_NEEDED;
 import static com.codurance.helper.TestHelper.ALICE_POSTS_A_MESSAGE;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
@@ -24,8 +23,7 @@ public class IOConsoleUTest {
     public void setUp() throws IOException {
         ioConsole = new IOConsole(
                 new ArrayAsInputStream(ALICE_POSTS_A_MESSAGE),
-                new ArrayAsOutputStream(),
-                EXTRA_LINEFEED_NOT_NEEDED);
+                new ArrayAsOutputStream());
     }
 
     @Test
@@ -59,8 +57,7 @@ public class IOConsoleUTest {
         ArrayAsOutputStream arrayAsOutputStreamMock = mock(ArrayAsOutputStream.class);
         ioConsole = new IOConsole(
                 new ArrayAsInputStream(ALICE_POSTS_A_MESSAGE),
-                arrayAsOutputStreamMock,
-                EXTRA_LINEFEED_NOT_NEEDED);
+                arrayAsOutputStreamMock);
         ArgumentCaptor<String> actualDisplayedText = ArgumentCaptor.forClass(String.class);
 
         // when

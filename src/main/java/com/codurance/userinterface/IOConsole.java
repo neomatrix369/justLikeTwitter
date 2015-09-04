@@ -1,7 +1,6 @@
 package com.codurance.userinterface;
 
 import com.codurance.command.UserTypedCommand;
-import com.codurance.domain.LineFeedToggle;
 import com.codurance.domain.UserInput;
 import com.codurance.domain.UserOutput;
 
@@ -13,17 +12,13 @@ import static com.codurance.helper.ImplHelper.NOTHING;
 
 public class IOConsole {
 
-    private final LineFeedToggle needLineFeedForEachLine;
     private final Scanner scanner;
 
     private final UserOutput userOutput;
 
     public IOConsole(UserInput userInput,
-                     UserOutput userOutput,
-                     LineFeedToggle needLineFeedForEachLine) {
+                     UserOutput userOutput) {
         this.userOutput = userOutput;
-        this.needLineFeedForEachLine = needLineFeedForEachLine;
-
         scanner = userInput.getScanner();
     }
 
@@ -34,7 +29,6 @@ public class IOConsole {
 
     private void printPromptIndicator(UserOutput userOutput) throws IOException {
         String newCommandPrompt = COMMAND_PROMPT_INDICATOR;
-        newCommandPrompt = insertLineFeedInFrontOf(newCommandPrompt);
         userOutput.display(newCommandPrompt);
     }
 
@@ -46,15 +40,7 @@ public class IOConsole {
     }
 
     public void display(String outputToDisplay) throws IOException {
-        String newOutput = outputToDisplay;
-        newOutput = insertLineFeedInFrontOf(newOutput);
-        userOutput.display(newOutput);
+        userOutput.display(outputToDisplay);
     }
 
-    private String insertLineFeedInFrontOf(String value) {
-        if (needLineFeedForEachLine.toBoolean()) {
-            return System.lineSeparator() + value;
-        }
-        return value;
-    }
 }

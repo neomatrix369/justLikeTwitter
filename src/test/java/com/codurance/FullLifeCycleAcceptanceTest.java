@@ -26,7 +26,6 @@ import static com.codurance.helper.FileIOHelper.getFileToWriteTo;
 import static com.codurance.helper.FileIOHelper.getNumberOfCommandsIn;
 import static com.codurance.helper.FileIOHelper.getTheContentOf;
 import static com.codurance.helper.FileIOHelper.loadDatesFrom;
-import static com.codurance.helper.ImplHelper.EXTRA_LINEFEED_NEEDED;
 import static com.codurance.helper.TestHelper.ACTUAL_OUTPUT_FILE;
 import static com.codurance.helper.TestHelper.REPLAY_INPUT_FILE;
 import static org.mockito.AdditionalAnswers.returnsElementsOf;
@@ -52,8 +51,7 @@ public class FullLifeCycleAcceptanceTest {
 
         IOConsole ioConsole = new IOConsole(
                 getUserInput(REPLAY_INPUT_FILE),
-                getUserOutput(ACTUAL_OUTPUT_FILE),
-                EXTRA_LINEFEED_NEEDED);
+                getUserOutput(ACTUAL_OUTPUT_FILE));
 
         justLikeTwitter = new JustLikeTwitter(ioConsole, justLikeTwitterEngine);
     }

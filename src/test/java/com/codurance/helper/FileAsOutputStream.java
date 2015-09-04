@@ -14,6 +14,7 @@ public class FileAsOutputStream implements UserOutput {
 
     @Override
     public void display(String output) throws IOException {
-        outputStream.write(output.getBytes());
+        String newOutput = System.lineSeparator() + output;
+        outputStream.write(newOutput.getBytes());
     }
 }
