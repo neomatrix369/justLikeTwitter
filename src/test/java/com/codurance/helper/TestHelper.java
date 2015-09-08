@@ -39,8 +39,8 @@ public final class TestHelper {
     public static final UserTypedCommand CHARLIE_REQUESTS_WALL = new UserTypedCommand("Charlie wall");
 
     public static final Users[] EXPECTED_FOLLOWS_LIST = {
-            new Users(USER_ALICE),
-            new Users(USER_ALICE, USER_BOB)
+            new Users(USER_CHARLIE, USER_ALICE),
+            new Users(USER_CHARLIE, USER_ALICE, USER_BOB)
     };
 
     private TestHelper() {

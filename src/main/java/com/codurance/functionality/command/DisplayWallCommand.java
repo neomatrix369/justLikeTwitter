@@ -26,17 +26,11 @@ public class DisplayWallCommand extends CommandExecutorImpl {
     }
 
     private String getWallFor(User user) {
-        Users newFollowsList = addThisUserToFollowsList(user);
+        Users users = followsList.getFollowsListFor(user);
 
         WallTimeLineFormatter wallTimeLineFormatter = new WallTimeLineFormatter(centralSystemClock);
 
-        return wallTimeLineFormatter.getMessagesFor(newFollowsList, messageStore);
+        return wallTimeLineFormatter.getMessagesFor(users, messageStore);
     }
 
-    private Users addThisUserToFollowsList(User user) {
-        Users existingFollowsList = followsList.getFollowsListFor(user);
-        existingFollowsList.add(user);
-
-        return existingFollowsList;
-    }
 }

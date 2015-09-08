@@ -48,6 +48,11 @@ public class Users {
     }
 
     @Override
+    public String toString() {
+        return uniqueUsersList.toString();
+    }
+
+    @Override
     public int hashCode() {
         return new HashCodeBuilder(17, 37)
                 .append(uniqueUsersList)

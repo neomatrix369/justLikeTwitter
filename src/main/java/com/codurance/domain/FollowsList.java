@@ -18,7 +18,7 @@ public class FollowsList {
     public Users getFollowsListFor(User user) {
         Users followsList = usersFollowedMapping.get(user);
         if (followsList == USER_DOES_NOT_FOLLOW_ANYONE) {
-            return new Users();
+            return new Users(user);
         }
         return followsList;
     }
