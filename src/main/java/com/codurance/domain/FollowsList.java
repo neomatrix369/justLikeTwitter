@@ -18,9 +18,13 @@ public class FollowsList {
     public Users getFollowsListFor(User user) {
         Users followsList = usersFollowedMapping.get(user);
         if (userHasAnEmpty(followsList)) {
-            return new Users(user);
+            return getFollowsListWith(user);
         }
         return followsList;
+    }
+
+    private Users getFollowsListWith(User user) {
+        return new Users(user);
     }
 
     private boolean userHasAnEmpty(Users followsList) {
