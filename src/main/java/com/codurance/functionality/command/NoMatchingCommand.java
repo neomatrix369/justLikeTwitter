@@ -4,9 +4,9 @@ import com.codurance.command.CommandPattern;
 import com.codurance.command.Fields;
 import com.codurance.command.UserTypedCommand;
 
-import static com.codurance.helper.ImplHelper.NOTHING;
-
 public class NoMatchingCommand extends CommandExecutorImpl {
+
+    public static final String NOTHING_AS_EXECUTION_RESULT = "";
 
     public NoMatchingCommand(CommandPattern commandPattern, Fields fields) {
         super(commandPattern, fields);
@@ -15,6 +15,6 @@ public class NoMatchingCommand extends CommandExecutorImpl {
     @Override
     public String execute(UserTypedCommand userTypedCommand) {
         super.execute(userTypedCommand);
-        return NOTHING;
+        return NOTHING_AS_EXECUTION_RESULT;
     }
 }

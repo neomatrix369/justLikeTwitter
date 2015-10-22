@@ -10,10 +10,12 @@ import java.util.Scanner;
 
 import static com.codurance.helper.FileIOHelper.getPathFor;
 import static com.codurance.helper.FileIOHelper.getTheContentOf;
-import static com.codurance.helper.ImplHelper.COLUMN_SEPARATOR;
-import static com.codurance.helper.ImplHelper.MESSAGE_COL_INDEX;
 
 public class FileAsInputStream implements UserInput {
+
+    private static final String COLUMN_SEPARATOR = ",";
+    private static final int MESSAGE_COL_INDEX = 1;
+
     private final InputStream inputStream;
 
     public FileAsInputStream(Class<?> aClass, String inputFileName) throws IOException {

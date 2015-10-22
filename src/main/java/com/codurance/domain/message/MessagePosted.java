@@ -3,9 +3,9 @@ package com.codurance.domain.message;
 import com.codurance.clock.CentralSystemClock;
 import com.codurance.domain.User;
 
-import static com.codurance.helper.ImplHelper.MESSAGE_ON_TIMELINE_PATTERN;
-
 public final class MessagePosted {
+
+    private static final String MESSAGE_ON_TIMELINE_PATTERN = "%s %s";
 
     private User user;
     private MessageDate messageDate;

@@ -2,21 +2,23 @@ package com.codurance.formatters;
 
 import com.codurance.clock.CentralSystemClock;
 import com.codurance.domain.message.MessageDate;
-import com.codurance.helper.ImplHelper;
 
 import java.util.Date;
-
-import static com.codurance.helper.ImplHelper.DEFAULT_TOKEN;
-import static com.codurance.helper.ImplHelper.HOUR_TOKEN;
-import static com.codurance.helper.ImplHelper.MILLISECONDS_PER_SECOND;
-import static com.codurance.helper.ImplHelper.MINUTE_TOKEN;
-import static com.codurance.helper.ImplHelper.SECONDS_PER_MINUTE;
-import static com.codurance.helper.ImplHelper.SECOND_TOKEN;
-import static com.codurance.helper.ImplHelper.TIME_IN_WORDS_PATTERN;
 
 class ClockTimeFormatter {
 
     private static final String SUFFIX_S = "s";
+
+    private static final int MINUTES_PER_HOUR = 60;
+    private static final int SECONDS_PER_MINUTE = 60;
+    private static final int MILLISECONDS_PER_SECOND = 1000;
+
+    private static final String HOUR_TOKEN = "hour";
+    private static final String MINUTE_TOKEN = "minute";
+    private static final String SECOND_TOKEN = "second";
+
+    private static final String TIME_IN_WORDS_PATTERN = "(%d %s ago)";
+    private static final String DEFAULT_TOKEN = "(just now)";
 
     private final CentralSystemClock centralSystemClock;
 
@@ -28,7 +30,7 @@ class ClockTimeFormatter {
         Date currentDate = centralSystemClock.getCurrentDateTime();
         long difference = currentDate.getTime() - anotherDate.getTime();
 
-        long diffHours = difference / (ImplHelper.MINUTES_PER_HOUR * SECONDS_PER_MINUTE * MILLISECONDS_PER_SECOND);
+        long diffHours = difference / (MINUTES_PER_HOUR * SECONDS_PER_MINUTE * MILLISECONDS_PER_SECOND);
         long diffMinutes = difference / (SECONDS_PER_MINUTE * MILLISECONDS_PER_SECOND);
         long diffSeconds = difference / MILLISECONDS_PER_SECOND;
 

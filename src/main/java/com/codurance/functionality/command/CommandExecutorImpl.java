@@ -8,9 +8,9 @@ import com.codurance.command.UserTypedCommand;
 import com.codurance.domain.Followees;
 import com.codurance.domain.message.MessageStore;
 
-import static com.codurance.helper.ImplHelper.NOTHING_FOR_THIS_COMMAND_EXECUTION;
-
 public class CommandExecutorImpl implements CommandExecutor {
+
+    protected static final String NOTHING_FOR_THIS_COMMAND_EXECUTION = "";
 
     private final CommandPattern commandPattern;
     private final Fields fields;

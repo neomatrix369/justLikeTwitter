@@ -8,7 +8,6 @@ import com.codurance.command.UserTypedCommand;
 import static com.codurance.command.Fields.FOLLOWS_USER_FIELD;
 import static com.codurance.command.Fields.USER_FIELD;
 import static com.codurance.command.Fields.createNewUserFrom;
-import static com.codurance.helper.ImplHelper.NOTHING_FOR_THIS_COMMAND_EXECUTION;
 
 public class FollowsUserCommand extends CommandExecutorImpl {
 

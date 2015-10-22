@@ -7,10 +7,11 @@ import com.codurance.domain.io.UserOutput;
 import java.io.IOException;
 import java.util.Scanner;
 
-import static com.codurance.helper.ImplHelper.COMMAND_PROMPT_INDICATOR;
-import static com.codurance.helper.ImplHelper.NOTHING;
+import static com.codurance.functionality.command.NoMatchingCommand.NOTHING_AS_EXECUTION_RESULT;
 
 public class IOConsole {
+
+    private static final String COMMAND_PROMPT_INDICATOR = "> ";
 
     private final Scanner scanner;
 
@@ -36,7 +37,7 @@ public class IOConsole {
         if (scanner.hasNextLine()) {
             return new UserTypedCommand(scanner.nextLine());
         }
-        return new UserTypedCommand(NOTHING);
+        return new UserTypedCommand(NOTHING_AS_EXECUTION_RESULT);
     }
 
     public void display(String outputToDisplay) throws IOException {

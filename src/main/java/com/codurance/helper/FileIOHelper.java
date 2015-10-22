@@ -15,11 +15,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import static com.codurance.helper.ImplHelper.COLUMN_SEPARATOR;
-import static com.codurance.helper.ImplHelper.DATE_COL_INDEX;
 import static com.codurance.helper.ImplHelper.convertToDateFrom;
 
 public class FileIOHelper {
+
+    private static final String COLUMN_SEPARATOR = ",";
+    private static final int DATE_COL_INDEX = 0;
 
     private FileIOHelper() {
     }

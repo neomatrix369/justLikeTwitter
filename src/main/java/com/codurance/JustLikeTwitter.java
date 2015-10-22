@@ -16,11 +16,12 @@ import java.util.List;
 import static com.codurance.helper.FileIOHelper.convertListToStringWithLinefeed;
 import static com.codurance.helper.FileIOHelper.getPathFor;
 import static com.codurance.helper.FileIOHelper.getTheContentOf;
-import static com.codurance.helper.ImplHelper.APP_USAGE_FILEPATH;
-import static com.codurance.helper.ImplHelper.FOREVER;
-import static com.codurance.helper.ImplHelper.START_FROM_ONE;
 
 public class JustLikeTwitter {
+    private static final int START_FROM_ONE = 1;
+    private static final String APP_USAGE_FILEPATH = "../../AppUsage.txt";
+    private static final int FOREVER = -1;
+
     private final JustLikeTwitterEngine justLikeTwitterEngine;
     private final IOConsole ioConsole;
 
@@ -33,7 +34,7 @@ public class JustLikeTwitter {
     public static void main(String[] args) throws IOException {
         JustLikeTwitter justLikeTwitter = setupJustLikeTwitter();
 
-        justLikeTwitter.run(FOREVER);
+        justLikeTwitter.run(-1);
     }
 
     private static JustLikeTwitter setupJustLikeTwitter() {
