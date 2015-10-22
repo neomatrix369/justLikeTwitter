@@ -3,7 +3,7 @@ package com.codurance.functionality.command;
 import com.codurance.clock.CentralSystemClock;
 import com.codurance.command.UserTypedCommand;
 import com.codurance.domain.message.MessageStore;
-import com.codurance.domain.FollowsList;
+import com.codurance.domain.Followees;
 import com.codurance.command.Fields;
 
 public interface CommandExecutor {
@@ -13,7 +13,7 @@ public interface CommandExecutor {
 
     void setCentralSystemClock(CentralSystemClock centralSystemClock);
 
-    void setFollowsList(FollowsList followsList);
+    void setFollowees(Followees followees);
 
     Fields getFields();
 }

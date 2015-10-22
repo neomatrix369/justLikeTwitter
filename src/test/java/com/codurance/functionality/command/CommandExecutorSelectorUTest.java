@@ -5,7 +5,7 @@ import com.codurance.command.CommandPattern;
 import com.codurance.command.CommandType;
 import com.codurance.command.Fields;
 import com.codurance.command.UserTypedCommand;
-import com.codurance.domain.FollowsList;
+import com.codurance.domain.Followees;
 import com.codurance.domain.message.MessageStore;
 import org.junit.Before;
 import org.junit.Test;
@@ -51,7 +51,7 @@ public class CommandExecutorSelectorUTest {
         commandExecutorSelector = new CommandExecutorSelector(
                 new CentralSystemClock(),
                 new MessageStore(),
-                new FollowsList());
+                new Followees());
     }
 
     public CommandExecutorSelectorUTest(UserTypedCommand userTypedCommand,

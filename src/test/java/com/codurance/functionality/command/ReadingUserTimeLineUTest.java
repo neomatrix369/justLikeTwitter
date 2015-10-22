@@ -2,7 +2,7 @@ package com.codurance.functionality.command;
 
 import com.codurance.clock.CentralSystemClock;
 import com.codurance.command.UserTypedCommand;
-import com.codurance.domain.FollowsList;
+import com.codurance.domain.Followees;
 import com.codurance.domain.message.MessageStore;
 import com.codurance.functionality.JustLikeTwitterEngine;
 import org.junit.Before;
@@ -37,8 +37,8 @@ public class ReadingUserTimeLineUTest {
     @Before
     public void setUp() {
         MessageStore messageStore = new MessageStore();
-        FollowsList followsList = new FollowsList();
-        justLikeTwitterEngine = new JustLikeTwitterEngine(centralSystemClock, messageStore, followsList);
+        Followees followees = new Followees();
+        justLikeTwitterEngine = new JustLikeTwitterEngine(centralSystemClock, messageStore, followees);
     }
 
     /********************************************************************************************

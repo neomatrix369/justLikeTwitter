@@ -5,7 +5,7 @@ import com.codurance.command.CommandPattern;
 import com.codurance.command.CommandTokens;
 import com.codurance.command.Fields;
 import com.codurance.command.UserTypedCommand;
-import com.codurance.domain.FollowsList;
+import com.codurance.domain.Followees;
 import com.codurance.domain.message.MessageStore;
 
 import static com.codurance.helper.ImplHelper.NOTHING_FOR_THIS_COMMAND_EXECUTION;
@@ -18,7 +18,7 @@ public class CommandExecutorImpl implements CommandExecutor {
     CentralSystemClock centralSystemClock;
 
     MessageStore messageStore;
-    FollowsList followsList;
+    Followees followees;
     CommandTokens commandTokens;
 
     CommandExecutorImpl(CommandPattern commandPattern, Fields fields) {
@@ -43,8 +43,8 @@ public class CommandExecutorImpl implements CommandExecutor {
     }
 
     @Override
-    public void setFollowsList(FollowsList followsList) {
-        this.followsList = followsList;
+    public void setFollowees(Followees followees) {
+        this.followees = followees;
     }
 
     @Override

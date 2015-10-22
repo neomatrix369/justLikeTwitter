@@ -1,7 +1,7 @@
 package com.codurance.functionality.command;
 
 import com.codurance.clock.CentralSystemClock;
-import com.codurance.domain.FollowsList;
+import com.codurance.domain.Followees;
 import com.codurance.domain.message.MessagePosted;
 import com.codurance.domain.message.MessageStore;
 import com.codurance.functionality.JustLikeTwitterEngine;
@@ -33,8 +33,8 @@ public class PostingMessagesUTest {
 
     @Before
     public void setUp() {
-        FollowsList followsList = new FollowsList();
-        justLikeTwitterEngine = new JustLikeTwitterEngine(centralSystemClock, messageStore, followsList);
+        Followees followees = new Followees();
+        justLikeTwitterEngine = new JustLikeTwitterEngine(centralSystemClock, messageStore, followees);
     }
 
     /**

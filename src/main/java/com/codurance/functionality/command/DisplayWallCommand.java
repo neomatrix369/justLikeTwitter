@@ -26,7 +26,7 @@ public class DisplayWallCommand extends CommandExecutorImpl {
     }
 
     private String getWallFor(User user) {
-        Users users = followsList.getFollowsListFor(user);
+        Users users = followees.getFolloweesFor(user);
 
         WallTimeLineFormatter wallTimeLineFormatter = new WallTimeLineFormatter(centralSystemClock);
 

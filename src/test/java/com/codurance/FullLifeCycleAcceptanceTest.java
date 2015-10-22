@@ -1,7 +1,7 @@
 package com.codurance;
 
 import com.codurance.clock.CentralSystemClock;
-import com.codurance.domain.FollowsList;
+import com.codurance.domain.Followees;
 import com.codurance.domain.io.UserInput;
 import com.codurance.domain.io.UserOutput;
 import com.codurance.domain.message.MessageStore;
@@ -41,12 +41,12 @@ public class FullLifeCycleAcceptanceTest {
     @Before
     public void setUp() throws IOException {
         MessageStore messageStore = new MessageStore();
-        FollowsList followsList = new FollowsList();
+        Followees followees = new Followees();
 
         JustLikeTwitterEngine justLikeTwitterEngine = new JustLikeTwitterEngine(
                 centralSystemClockMock,
                 messageStore,
-                followsList
+                followees
         );
 
         IOConsole ioConsole = new IOConsole(

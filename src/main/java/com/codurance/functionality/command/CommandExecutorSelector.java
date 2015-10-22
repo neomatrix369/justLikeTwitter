@@ -5,22 +5,22 @@ import com.codurance.command.CommandPattern;
 import com.codurance.command.CommandType;
 import com.codurance.command.Fields;
 import com.codurance.command.UserTypedCommand;
-import com.codurance.domain.FollowsList;
+import com.codurance.domain.Followees;
 import com.codurance.domain.message.MessageStore;
 
 public class CommandExecutorSelector {
 
     private final CentralSystemClock centralSystemClock;
     private final MessageStore messageStore;
-    private final FollowsList followsList;
+    private final Followees followees;
 
     public CommandExecutorSelector(CentralSystemClock centralSystemClock,
                                    MessageStore messageStore,
-                                   FollowsList followsList) {
+                                   Followees followees) {
 
         this.centralSystemClock = centralSystemClock;
         this.messageStore = messageStore;
-        this.followsList = followsList;
+        this.followees = followees;
     }
 
     public CommandExecutor getCommandExecutorFor(UserTypedCommand userTypedCommand) {
@@ -39,7 +39,7 @@ public class CommandExecutorSelector {
         CommandExecutor commandExecutor = commandType.getCommandExecutor();
         commandExecutor.setCentralSystemClock(centralSystemClock);
         commandExecutor.setMessageStore(messageStore);
-        commandExecutor.setFollowsList(followsList);
+        commandExecutor.setFollowees(followees);
         return commandExecutor;
     }
 }

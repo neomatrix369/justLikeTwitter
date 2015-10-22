@@ -2,7 +2,7 @@ package com.codurance;
 
 import com.codurance.clock.CentralSystemClock;
 import com.codurance.command.UserTypedCommand;
-import com.codurance.domain.FollowsList;
+import com.codurance.domain.Followees;
 import com.codurance.domain.io.Keyboard;
 import com.codurance.domain.io.Screen;
 import com.codurance.domain.message.MessageStore;
@@ -38,14 +38,14 @@ public class JustLikeTwitter {
 
     private static JustLikeTwitter setupJustLikeTwitter() {
         CentralSystemClock centralSystemClock = new CentralSystemClock();
-        FollowsList followsList = new FollowsList();
+        Followees followees = new Followees();
         MessageStore messageStore = new MessageStore();
 
         JustLikeTwitterEngine justLikeTwitterEngine =
                 new JustLikeTwitterEngine(
                         centralSystemClock,
                         messageStore,
-                        followsList
+                        followees
                 );
 
         IOConsole ioConsole = new IOConsole(

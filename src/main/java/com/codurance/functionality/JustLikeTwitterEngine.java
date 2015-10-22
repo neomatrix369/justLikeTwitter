@@ -1,7 +1,7 @@
 package com.codurance.functionality;
 
 import com.codurance.clock.CentralSystemClock;
-import com.codurance.domain.FollowsList;
+import com.codurance.domain.Followees;
 import com.codurance.command.UserTypedCommand;
 import com.codurance.domain.message.MessageStore;
 import com.codurance.functionality.command.CommandExecutor;
@@ -10,19 +10,19 @@ import com.codurance.functionality.command.CommandExecutorSelector;
 public class JustLikeTwitterEngine {
     private final CentralSystemClock centralSystemClock;
     private final MessageStore messageStore;
-    private final FollowsList followsList;
+    private final Followees followees;
 
     public JustLikeTwitterEngine(CentralSystemClock centralSystemClock,
                                  MessageStore messageStore,
-                                 FollowsList followsList) {
+                                 Followees followees) {
         this.centralSystemClock = centralSystemClock;
         this.messageStore = messageStore;
-        this.followsList = followsList;
+        this.followees = followees;
     }
 
     public String executeCommand(UserTypedCommand userTypedCommand) {
         CommandExecutorSelector commandExecutorSelector =
-                new CommandExecutorSelector(centralSystemClock, messageStore, followsList);
+                new CommandExecutorSelector(centralSystemClock, messageStore, followees);
 
         CommandExecutor commandExecutor = commandExecutorSelector.getCommandExecutorFor(userTypedCommand);
 
