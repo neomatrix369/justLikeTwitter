@@ -7,16 +7,16 @@ public class Followees {
 
     private static final Users USER_DOES_NOT_FOLLOW_ANYONE = null;
 
-    private final Map<User, Users> usersFollowedMapping = new HashMap<>();
+    private final Map<User, Users> usersToFollowees = new HashMap<>();
 
     public void addFollowee(User user, User newFollowee) {
         Users existingFollowees = getFolloweesFor(user);
         existingFollowees.add(newFollowee);
-        usersFollowedMapping.put(user, existingFollowees);
+        usersToFollowees.put(user, existingFollowees);
     }
 
     public Users getFolloweesFor(User user) {
-        Users followees = usersFollowedMapping.get(user);
+        Users followees = usersToFollowees.get(user);
         if (thisUserNeedsToBeAddedAsAFollowee(followees)) {
             return thisUserAsFollowee(user);
         }
