@@ -7,7 +7,7 @@ import com.codurance.domain.io.UserOutput;
 import java.io.IOException;
 import java.util.Scanner;
 
-import static com.codurance.functionality.command.NoMatchingCommand.NOTHING_AS_EXECUTION_RESULT;
+import static com.codurance.functionality.command.NoCommand.NOTHING_AS_EXECUTION_RESULT;
 
 public class IOConsole {
 

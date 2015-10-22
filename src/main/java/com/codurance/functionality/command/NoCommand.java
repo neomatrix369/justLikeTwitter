@@ -4,11 +4,11 @@ import com.codurance.command.CommandPattern;
 import com.codurance.command.Fields;
 import com.codurance.command.UserTypedCommand;
 
-public class NoMatchingCommand extends CommandExecutorImpl {
+public class NoCommand extends CommandExecutorImpl {
 
     public static final String NOTHING_AS_EXECUTION_RESULT = "";
 
-    public NoMatchingCommand(CommandPattern commandPattern, Fields fields) {
+    public NoCommand(CommandPattern commandPattern, Fields fields) {
         super(commandPattern, fields);
     }
 

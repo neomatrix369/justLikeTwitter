@@ -26,7 +26,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class CommandExecutorSelectorUTest {
     private static final String INVALID_COMMAND = "Invalid command";
     private static final CommandExecutor NO_COMMAND_EXECUTOR_MATCHED =
-            new NoMatchingCommand(new CommandPattern(INVALID_COMMAND), new Fields());
+            new NoCommand(new CommandPattern(INVALID_COMMAND), new Fields());
 
     private final UserTypedCommand userTypedCommand;
     private final CommandExecutor expectedCommandExecutor;
