@@ -1,13 +1,13 @@
 package com.codurance.domain.io;
 
 import java.io.IOException;
-import java.io.OutputStream;
+import java.io.PrintStream;
 
 public class Screen implements UserOutput {
-    private final OutputStream outputStream = System.out;
+    private final PrintStream outputStream = System.out;
 
     @Override
     public void display(String output) throws IOException {
-        outputStream.write(output.getBytes());
+        outputStream.println(output);
     }
 }
