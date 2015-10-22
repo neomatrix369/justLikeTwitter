@@ -1,16 +1,20 @@
 package com.codurance.domain.io;
 
-import java.io.InputStream;
 import java.util.Scanner;
 
 public class Keyboard implements UserInput {
 
     private static final String STRING_ENCODING = "UTF-8";
 
-    private final InputStream inputStream = System.in;
+    private final Scanner scanner = new Scanner(System.in, STRING_ENCODING);
 
     @Override
-    public Scanner getScanner() {
-        return new Scanner(inputStream, STRING_ENCODING);
+    public boolean hasNextLine() {
+        return scanner.hasNextLine();
+    }
+
+    @Override
+    public String nextLine() {
+        return scanner.nextLine();
     }
 }

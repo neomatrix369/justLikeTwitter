@@ -17,9 +17,11 @@ public class FileAsInputStream implements UserInput {
     private static final int MESSAGE_COL_INDEX = 1;
 
     private final InputStream inputStream;
+    private final Scanner scanner;
 
     public FileAsInputStream(Class<?> aClass, String inputFileName) throws IOException {
         this.inputStream = getFileToReadFrom(aClass, inputFileName);
+        scanner = new Scanner(inputStream);
     }
 
     private InputStream getFileToReadFrom(Class<?> aClass, String fileName) throws IOException {
@@ -37,7 +39,12 @@ public class FileAsInputStream implements UserInput {
     }
 
     @Override
-    public Scanner getScanner() {
-        return new Scanner(inputStream);
+    public boolean hasNextLine() {
+        return scanner.hasNextLine();
+    }
+
+    @Override
+    public String nextLine() {
+        return scanner.nextLine();
     }
 }

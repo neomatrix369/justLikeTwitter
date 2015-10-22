@@ -18,8 +18,8 @@ import static com.codurance.helper.FileIOHelper.getPathFor;
 import static com.codurance.helper.FileIOHelper.getTheContentOf;
 
 public class JustLikeTwitter {
-    private static final int START_FROM_ONE = 1;
     private static final String APP_USAGE_FILEPATH = "../../AppUsage.txt";
+    private static final int START_FROM_ONE = 1;
     private static final int FOREVER = -1;
 
     private final JustLikeTwitterEngine justLikeTwitterEngine;
